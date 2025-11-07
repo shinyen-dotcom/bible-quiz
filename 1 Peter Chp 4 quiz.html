@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彼得前书 第四章 40 题测验 (末世的儆醒与事奉)</title>
+    <style>
+        /* CSS 样式 */
+        body { font-family: "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f7f6; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        h1, h2 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 5px; margin-top: 35px; }
+        ol { padding-left: 20px; }
+        li { margin-bottom: 25px; border-bottom: 1px dashed #eee; padding-bottom: 15px; list-style: decimal; }
+        .question-item { display: flex; flex-direction: column; }
+        .question-text { font-weight: bold; margin-bottom: 10px; color: #333; }
+        .choices, .true-false { margin-bottom: 5px; display: flex; flex-wrap: wrap; }
+        .choices label, .true-false label { margin-right: 25px; cursor: pointer; display: inline-block; padding: 5px 0; }
+        .result-area { display: flex; align-items: flex-start; margin-top: 5px; min-height: 25px;}
+        .result { font-weight: bold; margin-right: 10px; min-width: 30px; text-align: left; font-size: 1.2em;}
+        .correct { color: #27ae60; }
+        .incorrect { color: #e74c3c; }
+        .answer-prompt { font-size: 0.95em; color: #555; background-color: #f9f9f9; padding: 5px; border-radius: 3px;}
+        /* Matching Table Styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { padding: 12px; text-align: left; border: 1px solid #ddd; vertical-align: top; font-size: 0.95em; }
+        th { background-color: #eaf2f8; color: #34495e; font-weight: bold; }
+        .matching-row td:nth-child(2) { font-weight: 500; }
+        select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; background-color: #fff; }
+        .matching-row td:nth-child(4) { width: 30%; }
+        .score-button { background-color: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; margin-top: 30px; display: block; width: 100%; transition: background-color 0.3s; }
+        .score-button:hover { background-color: #2980b9; }
+        #score-summary { margin-top: 30px; padding: 20px; border: 2px solid #2ecc71; background-color: #e8f8f5; border-radius: 5px; font-size: 1.3em; font-weight: bold; display: none; text-align: center;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📝 彼得前书 第四章：末世的儆醒与事奉 (40 题测验)</h1>
+
+    <form id="quiz-form">
+        
+        <h2>I. Multiple Choices (选择题) - 10 题</h2>
+        <ol id="mc-list"></ol>
+        
+        <h2>II. True/False (是非题) - 10 题</h2>
+        <ol id="tf-list"></ol>
+
+        <h2>III. Matching Concepts (概念配对) - 10 题</h2>
+        <p>请将左栏的经文概念与右栏的关键词或补充句配对。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文概念)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-1"></tbody>
+        </table>
+        
+        <h2>IV. Matching the Correct Scripture (经文拆分配对) - 10 题</h2>
+        <p>请将左栏的经文前半部分与右栏的经文后半部分配对，组成完整的经文。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文前半句)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-2"></tbody>
+        </table>
+
+        <button type="button" class="score-button" onclick="showFinalScore()">显示最终分数</button>
+    </form>
+
+    <div id="score-summary"></div>
+
+</div>
+
+<script>
+    // --- 答案键 & 数据结构 (基于上传文件内容) ---
+
+    // 1. Multiple Choice Data (10 题)
+    const mc_questions_data = [
+        { id: 'mc_1', text: '基督在肉体受苦,彼得劝勉信徒也要以什么为兵器?', answer: 'B', options: { A: '信心', B: '基督的心志', C: '圣洁', D: '祷告' } },
+        { id: 'mc_2', text: '基督徒既在肉体受苦,就与什么断绝了?', answer: 'D', options: { A: '属世的福乐', B: '属肉体的私欲', C: '属灵的骄傲', D: '罪' } },
+        { id: 'mc_3', text: '外邦人素来所行可耻的,不包括以下哪一项?', answer: 'C', options: { A: '淫乱、恶欲', B: '醉酒、荒宴', C: '贪婪、说谎', D: '群饮、可憎的拜偶像的事' } },
+        { id: 'mc_4', text: '论到那些不信者,他们看见信徒不再与他们一同奔跑放荡无度的生活,就作何反应?', answer: 'C', options: { A: '感到惊讶', B: '感到不解', C: '毁谤', D: '悔改' } },
+        { id: 'mc_5', text: '万物的结局近了,彼得劝勉信徒首先要怎样行?', answer: 'C', options: { A: '恒切祷告、彼此相爱', B: '专心事奉、传扬福音', C: '谨慎自守、儆醒祷告', D: '广行善事、保持圣洁' } },
+        { id: 'mc_6', text: '在一切事上,最要紧的是什么?', answer: 'B', options: { A: '尽心尽力事奉', B: '彼此切实相爱', C: '广传福音真理', D: '保持敬畏之心' } },
+        { id: 'mc_7', text: '信徒要互相款待,应当抱持什么样的态度?', answer: 'B', options: { A: '欢欢喜喜', B: '没有怨言', C: '热情大方', D: '真诚相待' } },
+        { id: 'mc_8', text: '若有人讲道,他要按什么讲?', answer: 'A', options: { A: '上帝的圣言', B: '自己的感动', C: '圣灵的恩赐', D: '先知的预言' } },
+        { id: 'mc_9', text: '信徒受苦若是因为作基督徒,就不必羞耻,反要因这名怎样?', answer: 'D', options: { A: '专心祷告', B: '行善忍耐', C: '高声赞美', D: '归荣耀给神' } },
+        { id: 'mc_10', text: '彼得说,审判要从哪里开始?', answer: 'C', options: { A: '世界各国', B: '不信者', C: '上帝的家', D: '耶路撒冷' } }
+    ];
+
+    // 2. True/False Data (10 题)
+    const tf_questions_data = [
+        { id: 'tf_1', text: '彼得说,人既在肉体受苦,就与罪断绝了,这是为了叫他们活着的余下光阴服从人的旨意。', answer: 'F', hint: '(是服从上帝的旨意)' },
+        { id: 'tf_2', text: '万物的结局近了,所以信徒当谨慎自守,儆醒祷告。', answer: 'T' },
+        { id: 'tf_3', text: '彼得劝勉信徒要彼此切实相爱,因为爱能遮掩许多的罪。', answer: 'T' },
+        { id: 'tf_4', text: '彼得吩咐信徒行善要大方,并且要发怨言。', answer: 'F', hint: '(是不可发怨言)' },
+        { id: 'tf_5', text: '上帝将各样的恩赐分给信徒,是叫信徒做神百般恩赐的好管家。', answer: 'T' },
+        { id: 'tf_6', text: '信徒若有人服事,当按着自己的力量服事。', answer: 'F', hint: '(当按着上帝所赐的力量服事)' },
+        { id: 'tf_7', text: '彼得劝勉信徒为基督的名受辱骂是可羞耻的事。', answer: 'F', hint: '(反要归荣耀给神)' },
+        { id: 'tf_8', text: '彼得认为,火炼的试验是奇怪的事。', answer: 'F', hint: '(不要以为奇怪)' },
+        { id: 'tf_9', text: '基督的荣耀显现时,信徒要和祂一同快乐。', answer: 'T' },
+        { id: 'tf_10', text: '彼得说,若义人仅仅得救,那不信从上帝福音的人,将有何等的结局呢?', answer: 'T' }
+    ];
+
+    // 3. Matching Concepts Options & Data (10 题)
+    const m1_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'A', text: 'A. 忠信的造化之主' }, 
+        { value: 'B', text: 'B. 不可发怨言' }, 
+        { value: 'C', text: 'C. 基督的心志' }, 
+        { value: 'D', text: 'D. 彼此切实相爱' }, 
+        { value: 'E', text: 'E. 毁谤你们' }, 
+        { value: 'F', text: 'F. 不要以为怪' }, 
+        { value: 'G', text: 'G. 谨慎自守,儆醒祷告' }, 
+        { value: 'H', text: 'H. 上帝的家' }, 
+        { value: 'I', text: 'I. 仅仅得救' }, 
+        { value: 'J', text: 'J. 只从上帝的旨意' }
+    ];
+    const m1_questions_data = [
+        { id: 'm1_1', concept: '基督徒要以什么为兵器', answer: 'C', options: m1_options },
+        { id: 'm1_2', concept: '信徒活着的其余光阴应服从谁', answer: 'J', options: m1_options },
+        { id: 'm1_3', concept: '末世的儆醒行动', answer: 'G', options: m1_options },
+        { id: 'm1_4', concept: '最要紧的事', answer: 'D', options: m1_options },
+        { id: 'm1_5', concept: '款待的方式', answer: 'B', options: m1_options }, 
+        { id: 'm1_6', concept: '外邦人对信徒的反应', answer: 'E', options: m1_options },
+        { id: 'm1_7', concept: '火炼的试验的态度', answer: 'F', options: m1_options },
+        { id: 'm1_8', concept: '审判开始的地方', answer: 'H', options: m1_options },
+        { id: 'm1_9', concept: '义人得救的难度', answer: 'I', options: m1_options },
+        { id: 'm1_10', concept: '受苦时灵魂的交托对象', answer: 'A', options: m1_options }
+    ];
+
+    // 4. Matching Scripture Options & Data (10 题)
+    const m2_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'A', text: 'A. 叫你们在他荣耀显现的时候,也可以欢喜快乐。' }, 
+        { value: 'B', text: 'B. 也要用爱心互相款待,不可发怨言。' },
+        { value: 'C', text: 'C. 你们就与罪断绝了,' },
+        { value: 'D', text: 'D. 审判要从上帝的家起首。' },
+        { value: 'E', text: 'E. 彼此切实相爱,因为爱能遮掩许多的罪。' },
+        { value: 'F', text: 'F. 你们也不与他们同奔那放荡无度的路,他们就以为怪,' },
+        { value: 'G', text: 'G. 都要谨慎自守,儆醒祷告。' },
+        { value: 'H', text: 'H. 惟有基督在肉体所受的苦难,你们也当用这样的心志作为兵器。' },
+        { value: 'I', text: 'I. 反倒要因作基督徒而归荣耀给神。' },
+        { value: 'J', text: 'J. 他要按着神所赐的力量服事,' }
+    ];
+    const m2_questions_data = [
+        { id: 'm2_1', concept: '基督既然在肉体受苦,', answer: 'H', options: m2_options },
+        { id: 'm2_2', concept: '人既在肉体受苦,', answer: 'C', options: m2_options },
+        { id: 'm2_3', concept: '他们在你们身上,就毁谤你们。', answer: 'F', options: m2_options },
+        { id: 'm2_4', concept: '万物的结局近了,所以', answer: 'G', options: m2_options },
+        { id: 'm2_5', concept: '在一切事上,你们要', answer: 'E', options: m2_options },
+        { id: 'm2_6', concept: '你们要', answer: 'B', options: m2_options },
+        { id: 'm2_7', concept: '若有服事人的,', answer: 'J', options: m2_options },
+        { id: 'm2_8', concept: '你们是与基督的苦难有分,倒要欢喜,', answer: 'A', options: m2_options },
+        { id: 'm2_9', concept: '倘若人为作基督徒而受苦,不要羞耻,', answer: 'I', options: m2_options },
+        { id: 'm2_10', concept: '因为时候到了,', answer: 'D', options: m2_options }
+    ];
+    
+    // --- 动态生成函数 (Initialization) ---
+
+    function generateMcQuestions() {
+        const list = document.getElementById('mc-list');
+        list.innerHTML = '';
+        mc_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="choices">
+                        ${Object.keys(q.options).map(key => `
+                            <input type="radio" id="${q.id}_${key}" name="${q.id}" value="${key}" onchange="checkMcQuestion('${q.id}')">
+                            <label for="${q.id}_${key}">${key}. ${q.options[key]}</label>
+                        `).join('')}
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateTfQuestions() {
+        const list = document.getElementById('tf-list');
+        list.innerHTML = '';
+        tf_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="true-false">
+                        <input type="radio" id="${q.id}_t" name="${q.id}" value="T" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_t">是 (T)</label>
+                        <input type="radio" id="${q.id}_f" name="${q.id}" value="F" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_f">非 (F)</label>
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateMatchingTables(data, tbodyId) {
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = '';
+        data.forEach((item, index) => {
+            const row = tbody.insertRow();
+            row.className = 'matching-row';
+
+            // 1. # Column
+            row.insertCell().textContent = index + 1;
+
+            // 2. Concept/Left Scripture Column
+            row.insertCell().textContent = item.concept;
+
+            // 3. Dropdown Column
+            const selectCell = row.insertCell();
+            const select = document.createElement('select');
+            select.name = item.id;
+            select.id = item.id;
+            select.onchange = function() { checkMatchingQuestion(item.id, data); };
+            
+            // Populate options
+            item.options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                select.appendChild(opt);
+            });
+            selectCell.appendChild(select);
+
+            // 4. Result Column (Result and Answer Prompt combined)
+            const resultCell = row.insertCell();
+            resultCell.innerHTML = '<span class="result" id="res_' + item.id + '"></span><div class="answer-prompt" id="ans_' + item.id + '"></div>';
+        });
+    }
+
+    // --- 核心即时评分函数 (Central On-the-fly Checking Logic) ---
+
+    function checkQuestion(questionId, data, isMatching = false) {
+        const question = data.find(q => q.id === questionId);
+        if (!question) return;
+        
+        const resultElement = document.getElementById(`res_${questionId}`);
+        const promptElement = document.getElementById(`ans_${questionId}`);
+        
+        let selectedValue;
+
+        if (isMatching) {
+            const select = document.getElementById(questionId);
+            selectedValue = select ? select.value : null;
+        } else {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            selectedValue = selected ? selected.value : null;
+        }
+
+        resultElement.textContent = '';
+        resultElement.className = 'result';
+        promptElement.innerHTML = '';
+        
+        if (!selectedValue || selectedValue === ' ') return;
+
+        // Check Answer
+        if (selectedValue === question.answer) {
+            resultElement.textContent = '✔';
+            resultElement.classList.add('correct');
+        } else {
+            resultElement.textContent = '✘';
+            resultElement.classList.add('incorrect');
+            
+            let correctAnswerText = '';
+
+            if (isMatching) {
+                const correctOption = question.options.find(opt => opt.value === question.answer);
+                correctAnswerText = correctOption ? correctOption.text : `(${question.answer})`;
+            } else if (question.options) { 
+                correctAnswerText = `${question.answer}. ${question.options[question.answer]}`;
+            } else { 
+                correctAnswerText = question.answer === 'T' ? '是 (T)' : '非 (F)';
+            }
+            
+            let prompt = `正确答案: ${correctAnswerText}`;
+            if (question.hint) { prompt += `<br>提示: ${question.hint}`; }
+            promptElement.innerHTML = prompt;
+        }
+    }
+
+    // Wrappers for clarity
+    function checkMcQuestion(questionId) { checkQuestion(questionId, mc_questions_data); }
+    function checkTfQuestion(questionId) { checkQuestion(questionId, tf_questions_data); }
+    function checkMatchingQuestion(questionId, data) { checkQuestion(questionId, data, true); }
+    
+    // --- 最终分数函数 (Final Score) ---
+
+    function showFinalScore() {
+        let correct_count = 0;
+        const all_data = [...mc_questions_data, ...tf_questions_data, ...m1_questions_data, ...m2_questions_data];
+        let total_questions = all_data.length;
+
+        // Check all questions
+        all_data.forEach(q => {
+            let selectedValue;
+            if (q.id.startsWith('mc_') || q.id.startsWith('tf_')) {
+                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+                selectedValue = selected ? selected.value : null;
+            } else { // Matching
+                const select = document.getElementById(q.id);
+                selectedValue = select ? select.value : null;
+            }
+
+            if (selectedValue === q.answer) {
+                correct_count++;
+            }
+        });
+
+        // Display score
+        const scoreSummary = document.getElementById('score-summary');
+        const scorePercentage = ((correct_count / total_questions) * 100).toFixed(1);
+        scoreSummary.innerHTML = `🎉 测验完成！总计 ${total_questions} 题。得分： <span style="color:#27ae60;">${correct_count}</span> / ${total_questions} (<b>${scorePercentage}%</b>)。`;
+        scoreSummary.style.display = 'block';
+        
+        // Scroll to result
+        scoreSummary.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Page Load: 确保在DOM完全加载后运行生成函数
+    document.addEventListener('DOMContentLoaded', () => {
+        generateMcQuestions();
+        generateTfQuestions();
+        generateMatchingTables(m1_questions_data, 'matching-body-1');
+        generateMatchingTables(m2_questions_data, 'matching-body-2');
+    });
+</script>
+</body>
+</html>
