@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彼得前书 第一章 40 题测验 (稳定即时评分)</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f7f6; }
+        .container { max-width: 1100px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        h1, h2 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 5px; margin-top: 35px; }
+        ol { padding-left: 20px; }
+        li { margin-bottom: 25px; border-bottom: 1px dashed #eee; padding-bottom: 15px; list-style: decimal; }
+        .question-item { display: flex; flex-direction: column; }
+        .question-text { font-weight: bold; margin-bottom: 10px; color: #333; }
+        .choices, .true-false { margin-bottom: 5px; display: flex; flex-wrap: wrap; }
+        .choices label, .true-false label { margin-right: 25px; cursor: pointer; display: inline-block; padding: 5px 0; }
+        .result-area { display: flex; align-items: flex-start; margin-top: 5px; min-height: 25px;}
+        .result { font-weight: bold; margin-right: 10px; min-width: 30px; text-align: left; font-size: 1.2em;}
+        .correct { color: #27ae60; }
+        .incorrect { color: #e74c3c; }
+        .answer-prompt { font-size: 0.95em; color: #555; background-color: #f9f9f9; padding: 5px; border-radius: 3px;}
+        /* Matching Table Styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { padding: 12px; text-align: left; border: 1px solid #ddd; vertical-align: top; font-size: 0.95em; }
+        th { background-color: #eaf2f8; color: #34495e; font-weight: bold; }
+        .matching-row td:nth-child(2) { font-weight: 500; }
+        select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; background-color: #fff; }
+        .matching-row td:nth-child(4) { width: 30%; }
+        .score-button { background-color: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; margin-top: 30px; display: block; width: 100%; transition: background-color 0.3s; }
+        .score-button:hover { background-color: #2980b9; }
+        #score-summary { margin-top: 30px; padding: 20px; border: 2px solid #2ecc71; background-color: #e8f8f5; border-radius: 5px; font-size: 1.3em; font-weight: bold; display: none; text-align: center;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📝 彼得前书 第一章：重生与圣洁的盼望 (40 题测验)</h1>
+
+    <form id="quiz-form">
+        
+        <h2>I. Multiple Choices (选择题) - 10 题</h2>
+        <ol id="mc-list"></ol>
+        
+        <h2>II. True/False (是非题) - 10 题</h2>
+        <ol id="tf-list"></ol>
+
+        <h2>III. Matching Concepts (概念配对) - 10 题</h2>
+        <p>请将左栏的经文概念与右栏的关键词或补充句配对。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文概念)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-1"></tbody>
+        </table>
+        
+        <h2>IV. Matching the Correct Scripture (经文拆分配对) - 10 题</h2>
+        <p>请将左栏的经文前半部分与右栏的经文后半部分配对，组成完整的经文。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文前半句)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-2"></tbody>
+        </table>
+
+        <button type="button" class="score-button" onclick="showFinalScore()">显示最终分数</button>
+    </form>
+
+    <div id="score-summary"></div>
+
+</div>
+
+<script>
+    // --- 答案键 & 数据结构 (基于上传文件内容) ---
+
+    // 1. Multiple Choice Data (10 题)
+    const mc_questions_data = [
+        { id: 'mc_1', text: '彼得写信给散居的信徒,是按父神的什么被拣选?', answer: 'B', options: { A: '大恩典', B: '预知', C: '慈爱', D: '公义' } },
+        { id: 'mc_2', text: '信徒所得的基业有什么特性,且是为他们存留的?', answer: 'C', options: { A: '荣耀、圣洁、丰富', B: '永恒、确实、丰盛', C: '不朽坏、不能玷污、不能衰残', D: '属灵、属天、属主' } },
+        { id: 'mc_3', text: '信徒得着救恩,是借着什么蒙神能力保守?', answer: 'C', options: { A: '盼望', B: '忍耐', C: '信心', D: '祷告' } },
+        { id: 'mc_4', text: '你们的信心经过试验,可以在耶稣基督显现的时候,得着哪三种回报?', answer: 'A', options: { A: '称赞、荣耀、尊贵', B: '祝福、平安、喜乐', C: '丰富、健康、尊荣', D: '圣洁、公义、怜悯' } },
+        { id: 'mc_5', text: '彼得说,古代的先知详细查考并指示了哪两个关于基督的重要主题?', answer: 'B', options: { A: '基督的降生和复活', B: '基督受苦和后来的荣耀', C: '基督的教导和神迹', D: '基督的审判和再来' } },
+        { id: 'mc_6', text: '彼得劝勉信徒要专心盼望的恩典是何时带给他们的?', answer: 'C', options: { A: '信主之时', B: '受洗之时', C: '基督再来显现的时候', D: '领受圣餐之时' } },
+        { id: 'mc_7', text: '信徒蒙救赎,不是凭着能坏的金银等物,而是凭着什么?', answer: 'B', options: { A: '神的应许', B: '基督的宝血,如同无瑕疵、无玷污的羔羊之血', C: '圣灵的洗礼', D: '使徒的见证' } },
+        { id: 'mc_8', text: '你们既称那不偏待人、按各人行为审判人的为父,就当存什么心,度在世寄居的日子?', answer: 'C', options: { A: '顺服的心', B: '谦卑的心', C: '敬畏的心', D: '警醒的心' } },
+        { id: 'mc_9', text: '彼得提到,人的生命和荣耀就像什么?', answer: 'C', options: { A: '天上的星星', B: '野地的百合花', C: '草和草上的花', D: '瞬间的云雾' } },
+        { id: 'mc_10', text: '信徒是借着神活泼常存的什么得了重生?', answer: 'B', options: { A: '恩典', B: '道', C: '灵', D: '爱' } }
+    ];
+
+    // 2. True/False Data (10 题)
+    const tf_questions_data = [
+        { id: 'tf_1', text: '彼得写信给散居在亚该亚和马其顿的信徒。', answer: 'F', hint: '(是写给本都、加拉太、加帕多家、亚细亚、庇推尼的信徒)' },
+        { id: 'tf_2', text: '你们的信心经过试验,比被火试验仍然能坏的金子更显宝贵。', answer: 'T' },
+        { id: 'tf_3', text: '信徒所得的基业是不朽坏、不能玷污、不能衰残的,且是为他们存留在天上的。', answer: 'T' },
+        { id: 'tf_4', text: '彼得劝勉信徒要专心盼望圣灵所赐的恩典。', answer: 'F', hint: '(是盼望耶稣基督显现时所带的恩典)' },
+        { id: 'tf_5', text: '你们要圣洁,因为神是圣洁的,这是对信徒的命令。', answer: 'T' },
+        { id: 'tf_6', text: '信徒得赎是凭着能坏的金银,不是凭着基督的宝血。', answer: 'F', hint: '(正好相反)' },
+        { id: 'tf_7', text: '神不偏待人,只按信徒的信心审判各人。', answer: 'F', hint: '(是“按各人行为审判人”)' },
+        { id: 'tf_8', text: '你们蒙了重生,是由于能朽坏的种子。', answer: 'F', hint: '(是“不能朽坏的种子”)' },
+        { id: 'tf_9', text: '彼得说,草必枯干,花必凋谢,惟有主的道是永存的。', answer: 'T' },
+        { id: 'tf_10', text: '彼得劝勉信徒要彼此相爱,是因他们是从能朽坏的种子重生的。', answer: 'F', hint: '(是因他们是从不能朽坏的种子重生的)' }
+    ];
+
+    // 3. Matching Concepts Options & Data
+    const m1_options = [
+        { value: ' ', text: '-- 请选择 --' }, { value: 'A', text: 'A. 他的荣美像草上的花' }, { value: 'B', text: 'B. 活泼的盼望' }, 
+        { value: 'C', text: 'C. 基督显现的时候' }, { value: 'D', text: 'D. 按各人行为审判' }, { value: 'E', text: 'E. 称赞、荣耀、尊贵' }, 
+        { value: 'F', text: 'F. 像无瑕疵的羔羊之血' }, { value: 'G', text: 'G. 传给他们的福音' }, { value: 'H', text: 'H. 你们要圣洁' }, 
+        { value: 'I', text: 'I. 满有荣耀的喜乐' }, { value: 'J', text: 'J. 比能坏的金子更显宝贵' }
+    ];
+    const m1_questions_data = [
+        { id: 'm1_1', concept: '重生所带来的盼望', answer: 'B', options: m1_options },
+        { id: 'm1_2', concept: '信心的试验', answer: 'J', options: m1_options },
+        { id: 'm1_3', concept: '信徒虽未见主', answer: 'I', options: m1_options },
+        { id: 'm1_4', concept: '专心盼望的恩典临到之时', answer: 'C', options: m1_options },
+        { id: 'm1_5', concept: '圣洁的命令', answer: 'H', options: m1_options }, 
+        { id: 'm1_6', concept: '审判的原则', answer: 'D', options: m1_options },
+        { id: 'm1_7', concept: '救赎的代价', answer: 'F', options: m1_options },
+        { id: 'm1_8', concept: '重生的媒介', answer: 'G', options: m1_options },
+        { id: 'm1_9', concept: '人的生命与神的话', answer: 'A', options: m1_options },
+        { id: 'm1_10', concept: '信心试验的结果', answer: 'E', options: m1_options }
+    ];
+
+    // 4. Matching Scripture Options & Data
+    const m2_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'A', text: 'A. 乃是凭着基督的宝血' }, 
+        { value: 'B', text: 'B. 他曾照自己的大怜悯,藉耶稣基督从死里复活,重生了我们' },
+        { value: 'C', text: 'C. 叫你们的信心既被试验' },
+        { value: 'D', text: 'D. 乃是由于不能朽坏的种子,是借着神活泼常存的道' },
+        { value: 'E', text: 'E. 专心盼望耶稣基督显现的时候所带给你们的恩典' },
+        { value: 'F', text: 'F. 惟有主的道是永存的。所传给你们的福音就是这道' },
+        { value: 'G', text: 'G. 如今虽不得看见,却因信他就有说不出来、满有荣光的大喜乐' },
+        { value: 'H', text: 'H. 就不要效法从前蒙昧无知的时候那放纵私欲的樣子' },
+        { value: 'I', text: 'I. 就当存敬畏的心,度你们在世寄居的日子' },
+        { value: 'J', text: 'J. 他的荣美,都像草上的花' }
+    ];
+    const m2_questions_data = [
+        { id: 'm2_1', concept: '愿颂赞归与我们主耶稣基督的父神!', answer: 'B', options: m2_options },
+        { id: 'm2_2', concept: '你们虽然在百般试炼中暂时忧愁,', answer: 'C', options: m2_options },
+        { id: 'm2_3', concept: '你们虽然没有见过他,却是爱他;', answer: 'G', options: m2_options },
+        { id: 'm2_4', concept: '你们既作顺命的儿女,', answer: 'H', options: m2_options },
+        { id: 'm2_5', concept: '你们既称那不偏待人、按各人行为审判人的为父,', answer: 'I', options: m2_options },
+        { id: 'm2_6', concept: '你们得赎,不是凭着能坏的金银等物,', answer: 'A', options: m2_options },
+        { id: 'm2_7', concept: '你们蒙了重生,不是由于能朽坏的种子,', answer: 'D', options: m2_options },
+        { id: 'm2_8', concept: '凡有血气的,尽都如草;', answer: 'J', options: m2_options },
+        { id: 'm2_9', concept: '草必枯干,花必凋谢;', answer: 'F', options: m2_options },
+        { id: 'm2_10', concept: '所以要约束你们的心,', answer: 'E', options: m2_options }
+    ];
+    
+    // --- 动态生成函数 (Initialization) ---
+
+    function generateMcQuestions() {
+        const list = document.getElementById('mc-list');
+        mc_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="choices">
+                        ${Object.keys(q.options).map(key => `
+                            <input type="radio" id="${q.id}_${key}" name="${q.id}" value="${key}" onchange="checkMcQuestion('${q.id}')">
+                            <label for="${q.id}_${key}">${key}. ${q.options[key]}</label>
+                        `).join('')}
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateTfQuestions() {
+        const list = document.getElementById('tf-list');
+        tf_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="true-false">
+                        <input type="radio" id="${q.id}_t" name="${q.id}" value="T" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_t">是 (T)</label>
+                        <input type="radio" id="${q.id}_f" name="${q.id}" value="F" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_f">非 (F)</label>
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateMatchingTables(data, tbodyId) {
+        const tbody = document.getElementById(tbodyId);
+        data.forEach((item, index) => {
+            const row = tbody.insertRow();
+            row.className = 'matching-row';
+
+            // 1. # Column
+            row.insertCell().textContent = index + 1;
+
+            // 2. Concept/Left Scripture Column
+            row.insertCell().textContent = item.concept;
+
+            // 3. Dropdown Column
+            const selectCell = row.insertCell();
+            const select = document.createElement('select');
+            select.name = item.id;
+            select.id = item.id;
+            select.onchange = function() { checkMatchingQuestion(item.id, data); };
+            
+            // Populate options
+            item.options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                select.appendChild(opt);
+            });
+            selectCell.appendChild(select);
+
+            // 4. Result Column (Result and Answer Prompt combined)
+            const resultCell = row.insertCell();
+            resultCell.innerHTML = '<span class="result" id="res_' + item.id + '"></span><div class="answer-prompt" id="ans_' + item.id + '"></div>';
+        });
+    }
+
+    // --- 核心即时评分函数 (Central On-the-fly Checking Logic) ---
+
+    function checkQuestion(questionId, data, isMatching = false) {
+        const question = data.find(q => q.id === questionId);
+        
+        // Target elements
+        const resultElement = document.getElementById(`res_${questionId}`);
+        const promptElement = document.getElementById(`ans_${questionId}`);
+        
+        let selectedValue;
+
+        if (isMatching) {
+            const select = document.getElementById(questionId);
+            selectedValue = select ? select.value : null;
+        } else {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            selectedValue = selected ? selected.value : null;
+        }
+
+        resultElement.textContent = '';
+        resultElement.className = 'result';
+        promptElement.innerHTML = '';
+        
+        if (!selectedValue || selectedValue === ' ') return;
+
+        // Check Answer
+        if (selectedValue === question.answer) {
+            resultElement.textContent = '✔';
+            resultElement.classList.add('correct');
+        } else {
+            resultElement.textContent = '✘';
+            resultElement.classList.add('incorrect');
+            
+            let correctAnswerText = '';
+
+            if (isMatching) {
+                // Find the full text of the correct option
+                const correctOption = question.options.find(opt => opt.value === question.answer);
+                correctAnswerText = correctOption ? correctOption.text : `(${question.answer})`;
+            } else if (question.options) { // Multiple Choice
+                correctAnswerText = `${question.answer}. ${question.options[question.answer]}`;
+            } else { // True/False
+                correctAnswerText = question.answer === 'T' ? '是 (T)' : '非 (F)';
+            }
+            
+            let prompt = `正确答案: ${correctAnswerText}`;
+            if (question.hint) { prompt += ` ${question.hint}`; }
+            promptElement.innerHTML = prompt;
+        }
+    }
+
+    // Wrappers for clarity
+    function checkMcQuestion(questionId) { checkQuestion(questionId, mc_questions_data); }
+    function checkTfQuestion(questionId) { checkQuestion(questionId, tf_questions_data); }
+    function checkMatchingQuestion(questionId, data) { checkQuestion(questionId, data, true); }
+    
+    // --- 最终分数函数 (Final Score) ---
+
+    function showFinalScore() {
+        let correct_count = 0;
+        const all_data = [...mc_questions_data, ...tf_questions_data, ...m1_questions_data, ...m2_questions_data];
+        let total_questions = all_data.length;
+
+        // Check all questions
+        all_data.forEach(q => {
+            let selectedValue;
+            if (q.id.startsWith('mc_') || q.id.startsWith('tf_')) {
+                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+                selectedValue = selected ? selected.value : null;
+            } else { // Matching
+                const select = document.getElementById(q.id);
+                selectedValue = select ? select.value : null;
+            }
+
+            if (selectedValue === q.answer) {
+                correct_count++;
+            }
+        });
+
+        // Display score
+        const scoreSummary = document.getElementById('score-summary');
+        const scorePercentage = ((correct_count / total_questions) * 100).toFixed(1);
+        scoreSummary.innerHTML = `🎉 测验完成！总计 ${total_questions} 题。得分： <span style="color:#27ae60;">${correct_count}</span> / ${total_questions} (<b>${scorePercentage}%</b>)。`;
+        scoreSummary.style.display = 'block';
+        
+        // Scroll to result
+        scoreSummary.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+        generateMcQuestions();
+        generateTfQuestions();
+        generateMatchingTables(m1_questions_data, 'matching-body-1');
+        generateMatchingTables(m2_questions_data, 'matching-body-2');
+    });
+</script>
+</body>
+</html>
