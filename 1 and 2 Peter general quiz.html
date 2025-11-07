@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彼得前后书特别之处互动测验卷 (和合本)</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+            background-color: #f7f7f7;
+        }
+        h1 {
+            color: #4a69bd;
+            text-align: center;
+            border-bottom: 3px double #4a69bd;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #3c9c99;
+            margin-top: 30px;
+            border-left: 5px solid #3c9c99;
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        .question-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        .options label {
+            display: block;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .options input[type="radio"]:disabled + span {
+            cursor: default;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: none; /* Hidden by default */
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        #result-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #fffae6;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+        }
+        #result-section p {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #856404;
+        }
+        #submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+        #submit-button:hover {
+            background-color: #218838;
+        }
+        .explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            padding: 5px;
+            border-left: 3px solid #6c757d;
+            display: none; /* Hidden by default */
+        }
+        .correct-highlight {
+            font-weight: bold;
+            color: #155724;
+            border: 1px dashed #155724;
+            padding: 3px;
+            border-radius: 3px;
+            background-color: #e2f9e7;
+        }
+        .percentage-score {
+            font-size: 1.5em;
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>《彼得前后书》特别之处互动测验卷 (和合本) 📝</h1>
+
+    <form id="quiz-form">
+        <input type="hidden" id="correct-count" value="0">
+
+        <h2>I. 选择题 (10 题)</h2>
+        <p><strong>请选择最符合《彼得前书》或《彼得后书》经文特征的选项。</strong></p>
+
+        <div class="question-section" id="mc-q1">
+            <div class="question">1. 《彼得前书》的写作地点，在经文的结语中被称为哪里？（出自：书信出处）</div>
+            <div class="options">
+                <label><input type="radio" name="mc1" value="A" onclick="checkAnswer('mc', 1, 'A')"> <span>A. 亚该亚</span></label>
+                <label><input type="radio" name="mc1" value="B" onclick="checkAnswer('mc', 1, 'B')"> <span>B. 巴比伦</span></label>
+                <label><input type="radio" name="mc1" value="C" onclick="checkAnswer('mc', 1, 'C')"> <span>C. 耶路撒冷</span></label>
+                <label><input type="radio" name="mc1" value="D" onclick="checkAnswer('mc', 1, 'D')"> <span>D. 以弗所</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc1"></div>
+        </div>
+
+        <div class="question-section" id="mc-q2">
+            <div class="question">2. 《彼得后书》的主要目的是什么？（出自：书信目的）</div>
+            <div class="options">
+                <label><input type="radio" name="mc2" value="A" onclick="checkAnswer('mc', 2, 'A')"> <span>A. 劝勉信徒顺服政权</span></label>
+                <label><input type="radio" name="mc2" value="B" onclick="checkAnswer('mc', 2, 'B')"> <span>B. 介绍圣灵的恩赐</span></label>
+                <label><input type="radio" name="mc2" value="C" onclick="checkAnswer('mc', 2, 'C')"> <span>C. 驳斥假师傅的异端</span></label>
+                <label><input type="radio" name="mc2" value="D" onclick="checkAnswer('mc', 2, 'D')"> <span>D. 解释旧约的律法</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc2"></div>
+        </div>
+        
+        <div class="question-section" id="mc-q3">
+            <div class="question">3. 在《彼得前书》中，哪一个词汇是劝勉信徒在逼迫中应当效法基督的榜样？（出自：重复关键词）</div>
+            <div class="options">
+                <label><input type="radio" name="mc3" value="A" onclick="checkAnswer('mc', 3, 'A')"> <span>A. 知识</span></label>
+                <label><input type="radio" name="mc3" value="B" onclick="checkAnswer('mc', 3, 'B')"> <span>B. 恩典</span></label>
+                <label><input type="radio" name="mc3" value="C" onclick="checkAnswer('mc', 3, 'C')"> <span>C. 受苦</span></label>
+                <label><input type="radio" name="mc3" value="D" onclick="checkAnswer('mc', 3, 'D')"> <span>D. 圣洁</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc3"></div>
+        </div>
+        
+        <div class="question-section" id="mc-q4">
+            <div class="question">4. 《彼得后书》独有列出的八项属灵品德清单中，劝勉信徒要在“恩典”上不断增加的另一项重要内容是什么？（出自：重复关键词）</div>
+            <div class="options">
+                <label><input type="radio" name="mc4" value="A" onclick="checkAnswer('mc', 4, 'A')"> <span>A. 信心</span></label>
+                <label><input type="radio" name="mc4" value="B" onclick="checkAnswer('mc', 4, 'B')"> <span>B. 知识</span></label>
+                <label><input type="radio" name="mc4" value="C" onclick="checkAnswer('mc', 4, 'C')"> <span>C. 盼望</span></label>
+                <label><input type="radio" name="mc4" value="D" onclick="checkAnswer('mc', 4, 'D')"> <span>D. 节制</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc4"></div>
+        </div>
+
+        <div class="question-section" id="mc-q5">
+            <div class="question">5. 彼得用哪一个物件来比喻自己短暂的身体或生命，预示自己离世的时间快到？（出自：物件）</div>
+            <div class="options">
+                <label><input type="radio" name="mc5" value="A" onclick="checkAnswer('mc', 5, 'A')"> <span>A. 瓦器</span></label>
+                <label><input type="radio" name="mc5" value="B" onclick="checkAnswer('mc', 5, 'B')"> <span>B. 帐棚</span></label>
+                <label><input type="radio" name="mc5" value="C" onclick="checkAnswer('mc', 5, 'C')"> <span>C. 草</span></label>
+                <label><input type="radio" name="mc5" value="D" onclick="checkAnswer('mc', 5, 'D')"> <span>D. 云雾</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc5"></div>
+        </div>
+
+        <div class="question-section" id="mc-q6">
+            <div class="question">6. 《彼得前书》特别强调信徒是“被拣选的族类”，其目的是要宣扬谁的美德？（出自：主题经文）</div>
+            <div class="options">
+                <label><input type="radio" name="mc6" value="A" onclick="checkAnswer('mc', 6, 'A')"> <span>A. 基督的爱</span></label>
+                <label><input type="radio" name="mc6" value="B" onclick="checkAnswer('mc', 6, 'B')"> <span>B. 使徒的权柄</span></label>
+                <label><input type="radio" name="mc6" value="C" onclick="checkAnswer('mc', 6, 'C')"> <span>C. 召他们出黑暗入奇妙光明者</span></label>
+                <label><input type="radio" name="mc6" value="D" onclick="checkAnswer('mc', 6, 'D')"> <span>D. 圣灵的恩赐</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc6"></div>
+        </div>
+
+        <div class="question-section" id="mc-q7">
+            <div class="question">7. 在《彼得后书》中，为了驳斥假师傅对主再来的讥诮，彼得特别指出主看一日如千年是为了显明祂的什么？（出自：驳斥重点）</div>
+            <div class="options">
+                <label><input type="radio" name="mc7" value="A" onclick="checkAnswer('mc', 7, 'A')"> <span>A. 公义</span></label>
+                <label><input type="radio" name="mc7" value="B" onclick="checkAnswer('mc', 7, 'B')"> <span>B. 全能</span></label>
+                <label><input type="radio" name="mc7" value="C" onclick="checkAnswer('mc', 7, 'C')"> <span>C. 宽容</span></label>
+                <label><input type="radio" name="mc7" value="D" onclick="checkAnswer('mc', 7, 'D')"> <span>D. 智慧</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc7"></div>
+        </div>
+
+        <div class="question-section" id="mc-q8">
+            <div class="question">8. 彼得在《彼得后书》中提到挪亚的时代时，特别称挪亚是传什么的使者？（出自：历史事件）</div>
+            <div class="options">
+                <label><input type="radio" name="mc8" value="A" onclick="checkAnswer('mc', 8, 'A')"> <span>A. 恩典之道</span></label>
+                <label><input type="radio" name="mc8" value="B" onclick="checkAnswer('mc', 8, 'B')"> <span>B. 审判之言</span></label>
+                <label><input type="radio" name="mc8" value="C" onclick="checkAnswer('mc', 8, 'C')"> <span>C. 义道</span></label>
+                <label><input type="radio" name="mc8" value="D" onclick="checkAnswer('mc', 8, 'D')"> <span>D. 盼望之信</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc8"></div>
+        </div>
+
+        <div class="question-section" id="mc-q9">
+            <div class="question">9. 在《彼得前书》中，彼得将“撒但”比作哪一种遍地游行、寻找可吞吃之人的动物？（出自：比喻）</div>
+            <div class="options">
+                <label><input type="radio" name="mc9" value="A" onclick="checkAnswer('mc', 9, 'A')"> <span>A. 狡猾的狐狸</span></label>
+                <label><input type="radio" name="mc9" value="B" onclick="checkAnswer('mc', 9, 'B')"> <span>B. 毒蛇</span></label>
+                <label><input type="radio" name="mc9" value="C" onclick="checkAnswer('mc', 9, 'C')"> <span>C. 吼叫的狮子</span></label>
+                <label><input type="radio" name="mc9" value="D" onclick="checkAnswer('mc', 9, 'D')"> <span>D. 被风吹散</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc9"></div>
+        </div>
+
+        <div class="question-section" id="mc-q10">
+            <div class="question">10. 彼得教导信徒蒙救赎，**不是**凭着能坏的金银等物，而是凭着哪一物件？（出自：物件）</div>
+            <div class="options">
+                <label><input type="radio" name="mc10" value="A" onclick="checkAnswer('mc', 10, 'A')"> <span>A. 圣灵的恩赐</span></label>
+                <label><input type="radio" name="mc10" value="B" onclick="checkAnswer('mc', 10, 'B')"> <span>B. 基督的宝血</span></label>
+                <label><input type="radio" name="mc10" value="C" onclick="checkAnswer('mc', 10, 'C')"> <span>C. 神的应许</span></label>
+                <label><input type="radio" name="mc10" value="D" onclick="checkAnswer('mc', 10, 'D')"> <span>D. 活泼的盼望</span></label>
+            </div>
+            <div class="feedback" id="feedback-mc10"></div>
+        </div> 
+        
+        <hr>
+
+        <h2>II. 是非题 (10 题)</h2>
+        <p><strong>请判断以下描述是否符合《彼得前书》和《彼得后书》的教导（是/对，非/错）。</strong></p>
+
+        <div class="question-section" id="tf-q1">
+            <div class="question">1. 《彼得前书》的主要写作对象是散居在亚细亚一带的信徒，目的是鼓励他们在患难中持守盼望。</div>
+            <div class="options">
+                <label><input type="radio" name="tf1" value="T" onclick="checkAnswer('tf', 1, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf1" value="F" onclick="checkAnswer('tf', 1, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf1"></div>
+        </div>
+
+        <div class="question-section" id="tf-q2">
+            <div class="question">2. 《彼得前书》明确将挪亚方舟中“借着水得救”的事件，比作基督徒接受洗礼的预表。</div>
+            <div class="options">
+                <label><input type="radio" name="tf2" value="T" onclick="checkAnswer('tf', 2, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf2" value="F" onclick="checkAnswer('tf', 2, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf2"></div>
+        </div>
+
+        <div class="question-section" id="tf-q3">
+            <div class="question">3. 《彼得后书》中提到，圣经的预言是人自己随便解说的。</div>
+            <div class="options">
+                <label><input type="radio" name="tf3" value="T" onclick="checkAnswer('tf', 3, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf3" value="F" onclick="checkAnswer('tf', 3, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf3"></div>
+        </div>
+
+        <div class="question-section" id="tf-q4">
+            <div class="question">4. 《彼得前书》教导信徒，要为那乖僻的（不善良的）主人服役，也是可喜爱的。</div>
+            <div class="options">
+                <label><input type="radio" name="tf4" value="T" onclick="checkAnswer('tf', 4, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf4" value="F" onclick="checkAnswer('tf', 4, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf4"></div>
+        </div>
+
+        <div class="question-section" id="tf-q5">
+            <div class="question">5. 《彼得后书》提到，假师傅必将那些**刚刚**脱离世上污秽的人，重新用肉体的情欲引诱他们。</div>
+            <div class="options">
+                <label><input type="radio" name="tf5" value="T" onclick="checkAnswer('tf', 5, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf5" value="F" onclick="checkAnswer('tf', 5, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf5"></div>
+        </div>
+
+        <div class="question-section" id="tf-q6">
+            <div class="question">6. 《彼得前书》教导作丈夫的，要按情理和妻子同住，因妻子比丈夫软弱，是与他一同承受“永远的生命”的恩典。</div>
+            <div class="options">
+                <label><input type="radio" name="tf6" value="T" onclick="checkAnswer('tf', 6, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf6" value="F" onclick="checkAnswer('tf', 6, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf6"></div>
+        </div>
+
+        <div class="question-section" id="tf-q7">
+            <div class="question">7. 《彼得后书》指出，主的日子来到好像贼一样，目的是让信徒保持警醒，并追求圣洁敬虔的生活。</div>
+            <div class="options">
+                <label><input type="radio" name="tf7" value="T" onclick="checkAnswer('tf', 7, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf7" value="F" onclick="checkAnswer('tf', 7, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf7"></div>
+        </div>
+
+        <div class="question-section" id="tf-q8">
+            <div class="question">8. 彼得在《彼得后书》中承认保罗书信中有些是难明白的，但警告不可强解。</div>
+            <div class="options">
+                <label><input type="radio" name="tf8" value="T" onclick="checkAnswer('tf', 8, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf8" value="F" onclick="checkAnswer('tf', 8, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf8"></div>
+        </div>
+
+        <div class="question-section" id="tf-q9">
+            <div class="question">9. 《彼得前书》教导信徒在一切事上最要紧的是谨慎自守，儆醒祷告。</div>
+            <div class="options">
+                <label><input type="radio" name="tf9" value="T" onclick="checkAnswer('tf', 9, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf9" value="F" onclick="checkAnswer('tf', 9, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf9"></div>
+        </div>
+
+        <div class="question-section" id="tf-q10">
+            <div class="question">10. 《彼得前书》提到，长老牧养群羊得到荣耀的冠冕后，若犯罪，仍有可能永远失去这冠冕。</div>
+            <div class="options">
+                <label><input type="radio" name="tf10" value="T" onclick="checkAnswer('tf', 10, 'T')"> <span>是 (对)</span></label>
+                <label><input type="radio" name="tf10" value="F" onclick="checkAnswer('tf', 10, 'F')"> <span>非 (错)</span></label>
+            </div>
+            <div class="feedback" id="feedback-tf10"></div>
+            <div class="explanation" id="explanation-tf10">**解释:** 彼前 5:4 提到得**不能衰残的荣耀冠冕**，但经文未提到“永远失去”的惩罚，而是强调正面鼓励。</div>
+        </div> 
+
+    </form>
+    
+    <button id="submit-button" onclick="calculateScore()">计算得分 💯</button>
+    
+    <div id="result-section">
+        <p>您已完成测验！</p>
+        <p>您答对 <span id="final-score-raw">0</span> 题，总共 20 题。</p>
+        <p>您的百分比得分是: <span class="percentage-score" id="final-score-percentage">0.0%</span></p>
+    </div>
+
+    <script>
+        // *** 注意: 完整功能的JS代码需要在这里补充。 ***
+        // 以下是用于运行测验的核心数据和逻辑的占位符/不完整代码段
+        
+        // 测验的总题数
+        const totalQuestions = 20;
+        // 存储正确答案的映射
+        const correctAnswers = {
+            'mc1': 'B', 'mc2': 'C', 'mc3': 'C', 'mc4': 'B', 'mc5': 'B', 
+            'mc6': 'C', 'mc7': 'C', 'mc8': 'C', 'mc9': 'C', 'mc10': 'B',
+            'tf1': 'T', 'tf2': 'T', 'tf3': 'F', 'tf4': 'T', 'tf5': 'T',
+            'tf6': 'F', 'tf7': 'T', 'tf8': 'T', 'tf9': 'F', 'tf10': 'F'
+        };
+        let correctCount = 0;
+        const scoredQuestions = {}; // 记录已评分的问题
+
+        // 即时检查答案的函数
+        function checkAnswer(prefix, number, selectedValue) {
+            const questionId = prefix + number;
+            const feedbackElement = document.getElementById('feedback-' + questionId);
+            const radioButtons = document.getElementsByName(questionId);
+            const isCorrect = (selectedValue === correctAnswers[questionId]);
+            const explanationElement = document.getElementById('explanation-' + questionId);
+
+            if (!scoredQuestions[questionId]) {
+                if (isCorrect) {
+                    feedbackElement.className = 'feedback correct';
+                    feedbackElement.innerHTML = '✔ 正确！';
+                    correctCount++;
+                } else {
+                    feedbackElement.className = 'feedback incorrect';
+                    let correctAnswerText = correctAnswers[questionId];
+                    // 补充是非题的文本
+                    if (prefix === 'tf') {
+                        correctAnswerText = (correctAnswerText === 'T') ? '是 (对)' : '非 (错)';
+                    }
+                    feedbackElement.innerHTML = `✘ 错误！正确答案是: <span class="correct-highlight">${correctAnswerText}</span>`;
+                }
+                feedbackElement.style.display = 'block';
+                if (explanationElement) {
+                    explanationElement.style.display = 'block';
+                }
+
+                // 禁用所有选项，并高亮用户选择的选项
+                radioButtons.forEach(radio => {
+                    radio.disabled = true; // 禁用后，防止重复点击
+                    // 高亮用户选择的选项
+                    if (radio.value === selectedValue) {
+                        radio.parentNode.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
+                    }
+                    // 高亮正确答案
+                    if (radio.value === correctAnswers[questionId]) {
+                         if (!isCorrect) { // 如果用户选错，单独高亮正确选项
+                             radio.parentNode.style.backgroundColor = '#d4edda';
+                         }
+                    }
+                });
+
+                scoredQuestions[questionId] = true;
+            }
+        }
+
+        // 计算总分和百分比
+        function calculateScore() {
+            const resultSection = document.getElementById('result-section');
+            const finalScoreRawElement = document.getElementById('final-score-raw');
+            const finalScorePercentageElement = document.getElementById('final-score-percentage');
+            
+            // 检查是否有未作答的题目
+            const answeredCount = Object.keys(scoredQuestions).length;
+            if (answeredCount < totalQuestions) {
+                alert(`您还有 ${totalQuestions - answeredCount} 题未作答！请全部作答完成后再计算得分。`);
+                return;
+            }
+
+            // 计算百分比
+            const percentage = ((correctCount / totalQuestions) * 100).toFixed(1);
+
+            finalScoreRawElement.textContent = correctCount;
+            finalScorePercentageElement.textContent = `${percentage}%`;
+            resultSection.style.display = 'block';
+            
+            // 滚动到结果部分
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+
+            // 禁用按钮以防重复计算
+            document.getElementById('submit-button').disabled = true;
+        }
+
+        // 确保页面加载时所有问题都可点击
+        document.addEventListener('DOMContentLoaded', () => {
+             // 此处可添加额外的初始化逻辑，例如确保所有反馈区都隐藏
+        });
+    </script>
+
+</body>
+</html>
