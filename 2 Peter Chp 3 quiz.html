@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彼得后书 第三章 40 题测验 (主的日子与新天新地)</title>
+    <style>
+        /* CSS 样式 */
+        body { font-family: "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f7f6; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        h1, h2 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 5px; margin-top: 35px; }
+        ol { padding-left: 20px; }
+        li { margin-bottom: 25px; border-bottom: 1px dashed #eee; padding-bottom: 15px; list-style: decimal; }
+        .question-item { display: flex; flex-direction: column; }
+        .question-text { font-weight: bold; margin-bottom: 10px; color: #333; }
+        .choices, .true-false { margin-bottom: 5px; display: flex; flex-wrap: wrap; }
+        .choices label, .true-false label { margin-right: 25px; cursor: pointer; display: inline-block; padding: 5px 0; }
+        .result-area { display: flex; align-items: flex-start; margin-top: 5px; min-height: 25px;}
+        .result { font-weight: bold; margin-right: 10px; min-width: 30px; text-align: left; font-size: 1.2em;}
+        .correct { color: #27ae60; }
+        .incorrect { color: #e74c3c; }
+        .answer-prompt { font-size: 0.95em; color: #555; background-color: #f9f9f9; padding: 5px; border-radius: 3px;}
+        /* Matching Table Styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { padding: 12px; text-align: left; border: 1px solid #ddd; vertical-align: top; font-size: 0.95em; }
+        th { background-color: #eaf2f8; color: #34495e; font-weight: bold; }
+        .matching-row td:nth-child(2) { font-weight: 500; }
+        select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; background-color: #fff; }
+        .matching-row td:nth-child(4) { width: 30%; }
+        .score-button { background-color: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; margin-top: 30px; display: block; width: 100%; transition: background-color 0.3s; }
+        .score-button:hover { background-color: #2980b9; }
+        #score-summary { margin-top: 30px; padding: 20px; border: 2px solid #2ecc71; background-color: #e8f8f5; border-radius: 5px; font-size: 1.3em; font-weight: bold; display: none; text-align: center;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📝 彼得后书 第三章：主的日子与新天新地 (40 题测验)</h1>
+
+    <form id="quiz-form">
+        
+        <h2>I. Multiple Choices (选择题) - 10 题</h2>
+        <ol id="mc-list"></ol>
+        
+        <h2>II. True/False (是非题) - 10 题</h2>
+        <ol id="tf-list"></ol>
+
+        <h2>III. Matching Concepts (概念配对) - 10 题</h2>
+        <p>请将左栏的经文概念与右栏的关键词或补充句配对。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文概念)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-1"></tbody>
+        </table>
+        
+        <h2>IV. Matching the Correct Scripture (经文拆分配对) - 10 题</h2>
+        <p>请将左栏的经文前半部分与右栏的经文后半部分配对，组成完整的经文。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文前半句)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-2"></tbody>
+        </table>
+
+        <button type="button" class="score-button" onclick="showFinalScore()">显示最终分数</button>
+    </form>
+
+    <div id="score-summary"></div>
+
+</div>
+
+<script>
+    // --- 答案键 & 数据结构 (基于上传文件内容) ---
+
+    // 1. Multiple Choice Data (10 题)
+    const mc_questions_data = [
+        { id: 'mc_1', text: '彼得写这封信的目的是什么?', answer: 'C', options: { A: '证实基督的复活', B: '提醒信徒上帝的审判', C: '提醒信徒,激发他们的诚实心', D: '驳斥假师傅的教训' } },
+        { id: 'mc_2', text: '彼得提醒信徒要记念哪两件事?', answer: 'B', options: { A: '圣灵的恩赐和使徒的教训', B: '圣先知预言的话和使徒所传主救主的命令', C: '基督的爱和上帝的恩典', D: '旧约的律法和新约的应许' } },
+        { id: 'mc_3', text: '在末世必有什么人出来?', answer: 'B', options: { A: '假先知', B: '好讥诮的人', C: '假弟兄', D: '假基督' } },
+        { id: 'mc_4', text: '好讥诮的人说:“主要降临的应许在哪里呢?因为从列祖睡了以来,万物与起初创造的时候仍是怎样?”', answer: 'C', options: { A: '一样', B: '没有改变', C: '照样', D: '毫无分别' } },
+        { id: 'mc_5', text: '好讥诮的人故意忘记哪一件事?', answer: 'B', options: { A: '基督再来的应许', B: '上帝曾用洪水毁灭世界', C: '天地是借着上帝的话造成的', D: '律法已不再有效' } },
+        { id: 'mc_6', text: '彼得说,天和地被现在的话存留,直留到什么日子?', answer: 'C', options: { A: '主再来的日子', B: '基督掌权的日子', C: '审判和有不敬虔之人灭亡的日子', D: '世界末了的日子' } },
+        { id: 'mc_7', text: '主看一日如千年,千年如一日,是为了显明祂的什么?', answer: 'A', options: { A: '宽容', B: '公义', C: '慈爱', D: '全能' } },
+        { id: 'mc_8', text: '主所应许的尚未成就,有人以为是耽延,其实主是为什么?', answer: 'A', options: { A: '是宽容你们', B: '等候悔改', C: '成全万事', D: '预备地方' } },
+        { id: 'mc_9', text: '主的日子来到,好像什么一样?', answer: 'B', options: { A: '闪电', B: '贼', C: '吼叫的狮子', D: '白昼' } },
+        { id: 'mc_10', text: '信徒切切等候主的日子,在这日子里,天被火烧就销化了,有形质的都要什么?', answer: 'C', options: { A: '融化', B: '归于无有', C: '熔化', D: '焚烧' } }
+    ];
+
+    // 2. True/False Data (10 题)
+    const tf_questions_data = [
+        { id: 'tf_1', text: '彼得写后书是为了提醒信徒要记念圣先知预言的话。', answer: 'T', hint: '(彼后3:2)' },
+        { id: 'tf_2', text: '好讥诮的人否认了上帝曾用洪水毁灭世界。', answer: 'F', hint: '(彼后3:5: 他们故意忘记上帝曾用洪水毁灭了当时的世界。)' },
+        { id: 'tf_3', text: '彼得认为,当时的天地是借着上帝的话存留的。', answer: 'T', hint: '(彼后3:7)' },
+        { id: 'tf_4', text: '上帝向人是宽容的,不愿有一人沉沦,乃愿人人都悔改。', answer: 'T', hint: '(彼后3:9)' },
+        { id: 'tf_5', text: '主所应许的尚未成就,有人以为是耽延,其实主不是耽延,乃是宽容我们。', answer: 'T', hint: '(彼后3:9)' },
+        { id: 'tf_6', text: '主的日子来到,好像贼一样。', answer: 'T', hint: '(彼后3:10)' },
+        { id: 'tf_7', text: '在主的日子,天被火烧就销化了,地和其中的有形质的都要熔化。', answer: 'T', hint: '(彼后3:10-12: 天被火烧就销化了,有形质的都要熔化)' },
+        { id: 'tf_8', text: '信徒应当有敬虔的行为和圣洁的生活,来迎候主的再来。', answer: 'T', hint: '(彼后3:11-12)' },
+        { id: 'tf_9', text: '保罗书信中有些难明白的,那没有学问和不坚固的人就强解,自取沉沦。', answer: 'T', hint: '(彼后3:16)' },
+        { id: 'tf_10', text: '信徒要防备恶人的错谬,恐怕自己也随从他们,从稳固的地步上堕落。', answer: 'T', hint: '(彼后3:17)' }
+    ];
+
+    // 3. Matching Concepts Options & Data (10 题)
+    // Options: A. 照样, B. 恩典和知识, C. 贼一样, D. 熔化, E. 提醒信徒,激发诚实心, F. 审判和有不敬虔之人灭亡的日子, G. 一日如千年,千年如一日, H. 从太古凭上帝的命有了天,并从水而出、借水而成的地, I. 有义居在其中, J. 圣先知预言的话和使徒所传主救主的命令
+    const m1_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'E', text: 'E. 提醒信徒,激发诚实心' }, 
+        { value: 'J', text: 'J. 圣先知预言的话和使徒所传主救主的命令' },
+        { value: 'B', text: 'B. 恩典和知识' }, 
+        { value: 'H', text: 'H. 从太古凭上帝的命有了天,并从水而出、借水而成的地' }, 
+        { value: 'A', text: 'A. 照样' }, 
+        { value: 'F', text: 'F. 审判和有不敬虔之人灭亡的日子' },
+        { value: 'G', text: 'G. 一日如千年,千年如一日' },
+        { value: 'C', text: 'C. 贼一样' },
+        { value: 'D', text: 'D. 熔化' }, 
+        { value: 'I', text: 'I. 有义居在其中' }
+    ];
+    const m1_questions_data = [
+        { id: 'm1_1', concept: '彼得写此信的目的', answer: 'E', options: m1_options },
+        { id: 'm1_2', concept: '彼得提醒信徒要记念的事', answer: 'J', options: m1_options },
+        { id: 'm1_3', concept: '讥诮者对万物的看法', answer: 'A', options: m1_options },
+        { id: 'm1_4', concept: '讥诮者故意忘记的事实', answer: 'H', options: m1_options },
+        { id: 'm1_5', concept: '天地存留的期限', answer: 'F', options: m1_options }, 
+        { id: 'm1_6', concept: '主看时间的对比', answer: 'G', options: m1_options },
+        { id: 'm1_7', concept: '主的日子来到,像', answer: 'C', options: m1_options },
+        { id: 'm1_8', concept: '有形质的将要怎样', answer: 'D', options: m1_options },
+        { id: 'm1_9', concept: '新天新地里的本质', answer: 'I', options: m1_options },
+        { id: 'm1_10', concept: '信徒要在哪两方面增长', answer: 'B', options: m1_options }
+    ];
+
+    // 4. Matching Scripture Options & Data (10 题)
+    // Options: A. 天被火烧就销化了,有形质的都要熔化, B. 乃是宽容你们,不愿有一人沉沦,乃愿人人都悔改, C. 从太古凭上帝的命有了天,并从水而出、借水而成的地, D. 你们就当怎样圣洁,怎样敬虔, E. 在我们主救主耶稣基督的恩典和知识上有增长, F. 却要记念圣先知预言的话和使徒所传主救主的命令, G. 万物与起初创造的时候仍是照样, H. 审判和有不敬虔之人灭亡的日子, I. 我们照着祂的应许,盼望新天新地, J. 必有好讥诮的人随从自己的私欲出来讥诮
+    const m2_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'A', text: 'A. 天被火烧就销化了,有形质的都要熔化' }, 
+        { value: 'B', text: 'B. 乃是宽容你们,不愿有一人沉沦,乃愿人人都悔改' },
+        { value: 'C', text: 'C. 从太古凭上帝的命有了天,并从水而出、借水而成的地' },
+        { value: 'D', text: 'D. 你们就当怎样圣洁,怎样敬虔' },
+        { value: 'E', text: 'E. 在我们主救主耶稣基督的恩典和知识上有增长' },
+        { value: 'F', text: 'F. 却要记念圣先知预言的话和使徒所传主救主的命令' },
+        { value: 'G', text: 'G. 万物与起初创造的时候仍是照样' },
+        { value: 'H', text: 'H. 审判和有不敬虔之人灭亡的日子' },
+        { value: 'I', text: 'I. 我们照着祂的应许,盼望新天新地' },
+        { value: 'J', text: 'J. 必有好讥诮的人随从自己的私欲出来讥诮' }
+    ];
+    const m2_questions_data = [
+        { id: 'm2_1', concept: '叫你们记念我从前所说的话,', answer: 'F', options: m2_options },
+        { id: 'm2_2', concept: '该知道在末世', answer: 'J', options: m2_options },
+        { id: 'm2_3', concept: '好讥诮的人说:主要降临的应许在哪里呢?因为从列祖睡了以来,', answer: 'G', options: m2_options },
+        { id: 'm2_4', concept: '他们故意忘记,', answer: 'C', options: m2_options },
+        { id: 'm2_5', concept: '现在的天地还是凭着那命存留,直留到', answer: 'H', options: m2_options },
+        { id: 'm2_6', concept: '主所应许的尚未成就,有人以为是耽延,其实主不是耽延,', answer: 'B', options: m2_options },
+        { id: 'm2_7', concept: '在那日,', answer: 'A', options: m2_options },
+        { id: 'm2_8', concept: '这一切既然都要如此销化,', answer: 'D', options: m2_options },
+        { id: 'm2_9', concept: '但', answer: 'I', options: m2_options },
+        { id: 'm2_10', concept: '总要', answer: 'E', options: m2_options }
+    ];
+    
+    // --- 动态生成函数 (Initialization) ---
+
+    function generateMcQuestions() {
+        const list = document.getElementById('mc-list');
+        list.innerHTML = '';
+        mc_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="choices">
+                        ${Object.keys(q.options).map(key => `
+                            <input type="radio" id="${q.id}_${key}" name="${q.id}" value="${key}" onchange="checkMcQuestion('${q.id}')">
+                            <label for="${q.id}_${key}">${key}. ${q.options[key]}</label>
+                        `).join('')}
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateTfQuestions() {
+        const list = document.getElementById('tf-list');
+        list.innerHTML = '';
+        tf_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="true-false">
+                        <input type="radio" id="${q.id}_t" name="${q.id}" value="T" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_t">是 (T / 对)</label>
+                        <input type="radio" id="${q.id}_f" name="${q.id}" value="F" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_f">非 (F / 错)</label>
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateMatchingTables(data, tbodyId) {
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = '';
+        data.forEach((item, index) => {
+            const row = tbody.insertRow();
+            row.className = 'matching-row';
+
+            // 1. # Column
+            row.insertCell().textContent = index + 1;
+
+            // 2. Concept/Left Scripture Column
+            row.insertCell().textContent = item.concept;
+
+            // 3. Dropdown Column
+            const selectCell = row.insertCell();
+            const select = document.createElement('select');
+            select.name = item.id;
+            select.id = item.id;
+            select.onchange = function() { checkMatchingQuestion(item.id, data); };
+            
+            // Populate options
+            item.options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                select.appendChild(opt);
+            });
+            selectCell.appendChild(select);
+
+            // 4. Result Column (Result and Answer Prompt combined)
+            const resultCell = row.insertCell();
+            resultCell.innerHTML = '<span class="result" id="res_' + item.id + '"></span><div class="answer-prompt" id="ans_' + item.id + '"></div>';
+        });
+    }
+
+    // --- 核心即时评分函数 (Central On-the-fly Checking Logic) ---
+
+    function checkQuestion(questionId, data, isMatching = false) {
+        const question = data.find(q => q.id === questionId);
+        if (!question) return;
+        
+        const resultElement = document.getElementById(`res_${questionId}`);
+        const promptElement = document.getElementById(`ans_${questionId}`);
+        
+        let selectedValue;
+
+        if (isMatching) {
+            const select = document.getElementById(questionId);
+            selectedValue = select ? select.value : null;
+        } else {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            selectedValue = selected ? selected.value : null;
+        }
+
+        resultElement.textContent = '';
+        resultElement.className = 'result';
+        promptElement.innerHTML = '';
+        
+        if (!selectedValue || selectedValue === ' ') return;
+
+        // Check Answer
+        if (selectedValue === question.answer || 
+            (selectedValue === 'T' && question.answer === 'Y') || 
+            (selectedValue === 'F' && question.answer === 'N')) {
+            resultElement.textContent = '✔';
+            resultElement.classList.add('correct');
+        } else {
+            resultElement.textContent = '✘';
+            resultElement.classList.add('incorrect');
+            
+            let correctAnswerText = '';
+
+            if (isMatching) {
+                const correctOption = question.options.find(opt => opt.value === question.answer);
+                correctAnswerText = correctOption ? correctOption.text : `(${question.answer})`;
+            } else if (question.options) { 
+                correctAnswerText = `${question.answer}. ${question.options[question.answer]}`;
+            } else { 
+                correctAnswerText = question.answer === 'T' || question.answer === 'Y' ? '是 (T / 对)' : '非 (F / 错)';
+            }
+            
+            let prompt = `正确答案: ${correctAnswerText}`;
+            if (question.hint) { prompt += `<br>提示: ${question.hint}`; }
+            promptElement.innerHTML = prompt;
+        }
+    }
+
+    // Wrappers for clarity
+    function checkMcQuestion(questionId) { checkQuestion(questionId, mc_questions_data); }
+    function checkTfQuestion(questionId) { checkQuestion(questionId, tf_questions_data); }
+    function checkMatchingQuestion(questionId, data) { checkQuestion(questionId, data, true); }
+    
+    // --- 最终分数函数 (Final Score) ---
+
+    function showFinalScore() {
+        let correct_count = 0;
+        const all_data = [...mc_questions_data, ...tf_questions_data, ...m1_questions_data, ...m2_questions_data];
+        let total_questions = all_data.length;
+
+        // Check all questions
+        all_data.forEach(q => {
+            let selectedValue;
+            if (q.id.startsWith('mc_') || q.id.startsWith('tf_')) {
+                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+                selectedValue = selected ? selected.value : null;
+            } else { // Matching
+                const select = document.getElementById(q.id);
+                selectedValue = select ? select.value : null;
+            }
+
+            // Normalize 'Y'/'N' to 'T'/'F' for checking if it's a True/False question
+            const expectedAnswer = q.answer === 'Y' ? 'T' : (q.answer === 'N' ? 'F' : q.answer);
+            
+            if (selectedValue === expectedAnswer) {
+                correct_count++;
+            }
+        });
+
+        // Display score
+        const scoreSummary = document.getElementById('score-summary');
+        const scorePercentage = ((correct_count / total_questions) * 100).toFixed(1);
+        scoreSummary.innerHTML = `🎉 测验完成！总计 ${total_questions} 题。得分： <span style="color:#27ae60;">${correct_count}</span> / ${total_questions} (<b>${scorePercentage}%</b>)。`;
+        scoreSummary.style.display = 'block';
+        
+        // Scroll to result
+        scoreSummary.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Page Load: 确保在DOM完全加载后运行生成函数
+    document.addEventListener('DOMContentLoaded', () => {
+        generateMcQuestions();
+        generateTfQuestions();
+        generateMatchingTables(m1_questions_data, 'matching-body-1');
+        generateMatchingTables(m2_questions_data, 'matching-body-2');
+    });
+</script>
+</body>
+</html>
