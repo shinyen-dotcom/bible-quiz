@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彼得后书 第二章 40 题测验 (假师傅与假教训的警戒)</title>
+    <style>
+        /* CSS 样式 */
+        body { font-family: "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f7f6; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        h1, h2 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 5px; margin-top: 35px; }
+        ol { padding-left: 20px; }
+        li { margin-bottom: 25px; border-bottom: 1px dashed #eee; padding-bottom: 15px; list-style: decimal; }
+        .question-item { display: flex; flex-direction: column; }
+        .question-text { font-weight: bold; margin-bottom: 10px; color: #333; }
+        .choices, .true-false { margin-bottom: 5px; display: flex; flex-wrap: wrap; }
+        .choices label, .true-false label { margin-right: 25px; cursor: pointer; display: inline-block; padding: 5px 0; }
+        .result-area { display: flex; align-items: flex-start; margin-top: 5px; min-height: 25px;}
+        .result { font-weight: bold; margin-right: 10px; min-width: 30px; text-align: left; font-size: 1.2em;}
+        .correct { color: #27ae60; }
+        .incorrect { color: #e74c3c; }
+        .answer-prompt { font-size: 0.95em; color: #555; background-color: #f9f9f9; padding: 5px; border-radius: 3px;}
+        /* Matching Table Styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { padding: 12px; text-align: left; border: 1px solid #ddd; vertical-align: top; font-size: 0.95em; }
+        th { background-color: #eaf2f8; color: #34495e; font-weight: bold; }
+        .matching-row td:nth-child(2) { font-weight: 500; }
+        select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; background-color: #fff; }
+        .matching-row td:nth-child(4) { width: 30%; }
+        .score-button { background-color: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; margin-top: 30px; display: block; width: 100%; transition: background-color 0.3s; }
+        .score-button:hover { background-color: #2980b9; }
+        #score-summary { margin-top: 30px; padding: 20px; border: 2px solid #2ecc71; background-color: #e8f8f5; border-radius: 5px; font-size: 1.3em; font-weight: bold; display: none; text-align: center;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📝 彼得后书 第二章：假师傅与假教训的警戒 (40 题测验)</h1>
+    <p>本测验内容完全根据您上传的文件生成，共 40 题，提供即时反馈。</p>
+
+    <form id="quiz-form">
+        
+        <h2>I. Multiple Choices (选择题) - 10 题</h2>
+        <ol id="mc-list"></ol>
+        
+        <h2>II. True/False (是非题) - 10 题</h2>
+        <ol id="tf-list"></ol>
+
+        <h2>III. Matching Concepts (概念配对) - 10 题</h2>
+        <p>请将左栏的经文概念与右栏的关键词或补充句配对。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文概念)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-1"></tbody>
+        </table>
+        
+        <h2>IV. Matching the Correct Scripture (经文拆分配对) - 10 题</h2>
+        <p>请将左栏的经文前半部分与右栏的经文后半部分配对，组成完整的经文。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文前半句)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-2"></tbody>
+        </table>
+
+        <button type="button" class="score-button" onclick="showFinalScore()">显示最终分数</button>
+    </form>
+
+    <div id="score-summary"></div>
+
+</div>
+
+<script>
+    // --- 答案键 & 数据结构 (基于上传文件内容) ---
+
+    // 1. Multiple Choice Data (10 题)
+    const mc_questions_data = [
+        { id: 'mc_1', text: '彼得警告说,将来在信徒中间会出现什么样的人?', answer: 'C', options: { A: '假先知和假弟兄', B: '假教师和假使徒', C: '假先知和假师傅', D: '假基督和假神' } },
+        { id: 'mc_2', text: '假师傅私自引进陷害人的异端,甚至不认什么?', answer: 'C', options: { A: '圣灵的宝贵恩赐', B: '基督的复活与再来', C: '买他们的主', D: '唯一的上帝' } },
+        { id: 'mc_3', text: '许多人会随从这些假师傅的邪淫,就使什么被毁谤?', answer: 'C', options: { A: '圣经的真理', B: '基督的教会', C: '真道', D: '使徒的教训' } },
+        { id: 'mc_4', text: '假师傅为了贪婪,会用什么言语在信徒身上取利?', answer: 'B', options: { A: '欺骗的言语', B: '捏造的言语', C: '奉承的言语', D: '恶毒的言语' } },
+        { id: 'mc_5', text: '彼得用哪些历史事件来警告假师傅的结局?', answer: 'C', options: { A: '审判挪亚时代、所多玛蛾摩拉、以色列人出埃及', B: '审判挪亚时代、所多玛蛾摩拉、亚伯拉罕献以撒', C: '审判挪亚时代、所多玛蛾摩拉、天使犯罪', D: '审判挪亚时代、天使犯罪、巴别塔' } },
+        { id: 'mc_6', text: '上帝没有宽容犯罪的天使,把他们丢在地狱里,交在什么中?', answer: 'B', options: { A: '永远的火湖', B: '黑暗的坑', C: '硫磺的深渊', D: '永恒的烈火' } },
+        { id: 'mc_7', text: '上帝曾搭救哪一位传义道的人,使他与七人得救?', answer: 'A', options: { A: '挪亚', B: '亚伯拉罕', C: '罗得', D: '以诺' } },
+        { id: 'mc_8', text: '上帝定所多玛、蛾摩拉为罪,将城烧成灰烬,目的是什么?', answer: 'D', options: { A: '要惩罚他们的罪恶', B: '要显明上帝的公义', C: '要建立公义的典范', D: '作为后世不敬虔人的鉴戒' } },
+        { id: 'mc_9', text: '假师傅的结局是什么?A.他们的定罪从古以来并不迟延,他们的灭亡也必速速来到B.他们的惩罚如同挪亚时代,被洪水毁灭C.他们将被交给天使,进入黑暗的坑中D.他们的结局如同所多玛蛾摩拉,被火烧毁', answer: 'A', options: { A: '他们的定罪从古以来并不迟延,他们的灭亡也必速速来到', B: '他们的惩罚如同挪亚时代,被洪水毁灭', C: '他们将被交给天使,进入黑暗的坑中', D: '他们的结局如同所多玛蛾摩拉,被火烧毁' } },
+        { id: 'mc_10', text: '假师傅所教导的都是虚妄的,他们应许人什么,自己却作败坏的奴仆?', answer: 'C', options: { A: '知识', B: '财富', C: '自由', D: '健康' } }
+    ];
+
+    // 2. True/False Data (10 题)
+    const tf_questions_data = [
+        { id: 'tf_1', text: '彼得说,从前在百姓中有假先知,将来在信徒中也必有假师傅。', answer: 'T', hint: '(彼后2:1)' },
+        { id: 'tf_2', text: '假师傅引进陷害人的异端,许多人会因为他们的邪淫,就使真道被称赞。', answer: 'F', hint: '(彼后2:2: 使真道被毁谤)' },
+        { id: 'tf_3', text: '上帝惩罚了犯罪的天使、洪水前的世界和所多玛蛾摩拉,却搭救了罗得。这表明祂知道搭救敬虔的人脱离试探。', answer: 'T', hint: '(彼后2:9: 主知道搭救敬虔的人脱离试探)' },
+        { id: 'tf_4', text: '假师傅贪行污秽,他们藐视主治之者,并且亵渎有荣耀的。', answer: 'T', hint: '(彼后2:10: 他们贪行污秽,又藐视主治之者,胆大任性,毫不畏惧,毁谤在尊位的)' },
+        { id: 'tf_5', text: '假师傅是无水的井,是狂风催逼的雾气,有墨黑的幽暗为他们存留。', answer: 'T', hint: '(彼后2:17)' },
+        { id: 'tf_6', text: '假师傅用肉体的情欲和邪淫的事引诱那些刚脱离妄行的人,应许他们自由。', answer: 'T', hint: '(彼后2:18-19: 应许人自由,自己却作败坏的奴仆)' },
+        { id: 'tf_7', text: '假师傅是为他们自己存留的墨黑的幽暗。', answer: 'T', hint: '(彼后2:17)' },
+        { id: 'tf_8', text: '假师傅是像巴兰一样,贪爱不义之工价。', answer: 'T', hint: '(彼后2:15)' },
+        { id: 'tf_9', text: '比起当初他们所受的惩罚,假师傅最后的境况更不好了。', answer: 'T', hint: '(彼后2:20: 后来所遭遇的,就比先前更不好了)' },
+        { id: 'tf_10', text: '他们若认识了主和救主耶稣基督,就得以脱离世上的污秽。', answer: 'T', hint: '(彼后2:20)' }
+    ];
+
+    // 3. Matching Concepts Options & Data (10 题)
+    // Options: A. 黑暗的坑,留待审判, B. 烧成灰烬,作为鉴戒, C. 邪淫, D. 像无水的井,狂风催逼的雾气, E. 买他们的主, F. 义人, G. 贪婪,用捏造的言语, H. 肉体的情欲和邪淫, I. 随从他们的邪淫, J. 他们的定罪并不迟延
+    const m1_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'A', text: 'A. 黑暗的坑,留待审判' }, 
+        { value: 'B', text: 'B. 烧成灰烬,作为鉴戒' }, 
+        { value: 'C', text: 'C. 邪淫' }, 
+        { value: 'D', text: 'D. 像无水的井,狂风催逼的雾气' }, 
+        { value: 'E', text: 'E. 买他们的主' }, 
+        { value: 'F', text: 'F. 义人' }, 
+        { value: 'G', text: 'G. 贪婪,用捏造的言语' }, 
+        { value: 'H', text: 'H. 肉体的情欲和邪淫' }, 
+        { value: 'I', text: 'I. 随从他们的邪淫' }, 
+        { value: 'J', text: 'J. 他们的定罪并不迟延' }
+    ];
+    const m1_questions_data = [
+        { id: 'm1_1', concept: '假师傅不认的对象', answer: 'E', options: m1_options },
+        { id: 'm1_2', concept: '使真道被毁谤的原因', answer: 'I', options: m1_options },
+        { id: 'm1_3', concept: '假师傅取利的手段', answer: 'G', options: m1_options },
+        { id: 'm1_4', concept: '犯罪天使的结局', answer: 'A', options: m1_options },
+        { id: 'm1_5', concept: '上帝对待所多玛蛾摩拉的方式', answer: 'B', options: m1_options }, 
+        { id: 'm1_6', concept: '挪亚被称为', answer: 'F', options: m1_options },
+        { id: 'm1_7', concept: '假师傅所随从的污秽', answer: 'C', options: m1_options },
+        { id: 'm1_8', concept: '假师傅引诱人的方式', answer: 'H', options: m1_options },
+        { id: 'm1_9', concept: '假师傅的比喻', answer: 'D', options: m1_options },
+        { id: 'm1_10', concept: '假师傅的结局', answer: 'J', options: m1_options }
+    ];
+
+    // 4. Matching Scripture Options & Data (10 题)
+    // Options: A. 用肉体的情欲和邪淫的事引诱那些刚才脱离妄行的人, B. 甚至不认买他们的主, C. 像无水的井,是狂风催逼的雾气, D. 后来所遭遇的,就比先前更不好了, E. 就使真道因他们的缘故被毁谤, F. 却作败坏的奴仆, G. 就交在幽暗的坑中,等候审判, H. 不迟延,他们的灭亡也必速速来到, I. 知道搭救敬虔的人脱离试探, J. 他们的定罪,从古以来
+    const m2_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'A', text: 'A. 用肉体的情欲和邪淫的事引诱那些刚才脱离妄行的人' }, 
+        { value: 'B', text: 'B. 甚至不认买他们的主' },
+        { value: 'C', text: 'C. 像无水的井,是狂风催逼的雾气' },
+        { value: 'D', text: 'D. 后来所遭遇的,就比先前更不好了' },
+        { value: 'E', text: 'E. 就使真道因他们的缘故被毁谤' },
+        { value: 'F', text: 'F. 却作败坏的奴仆' },
+        { value: 'G', text: 'G. 就交在幽暗的坑中,等候审判' },
+        { value: 'H', text: 'H. 不迟延,他们的灭亡也必速速来到' },
+        { value: 'I', text: 'I. 知道搭救敬虔的人脱离试探' },
+        { value: 'J', text: 'J. 他们的定罪,从古以来' }
+    ];
+    const m2_questions_data = [
+        { id: 'm2_1', concept: '他们私自引进陷害人的异端,', answer: 'B', options: m2_options },
+        { id: 'm2_2', concept: '许多人将随从他们邪淫的行为,', answer: 'E', options: m2_options },
+        { id: 'm2_3', concept: '上帝既然没有宽容犯罪的天使,把他们丢在地狱里,', answer: 'G', options: m2_options },
+        { id: 'm2_4', concept: '又定所多玛、蛾摩拉为罪,烧成灰烬,...', answer: 'I', options: m2_options },
+        { id: 'm2_5', concept: '主', answer: 'H', options: m2_options },
+        { id: 'm2_6', concept: '假师傅所说的是虚妄夸大的话,', answer: 'A', options: m2_options },
+        { id: 'm2_7', concept: '他们应许人自由,自己', answer: 'F', options: m2_options },
+        { id: 'm2_8', concept: '他们是', answer: 'C', options: m2_options },
+        { id: 'm2_9', concept: '倘若他们认识了主和救主耶稣基督,就得以脱离世上的污秽,后来又被污秽缠住制伏,', answer: 'D', options: m2_options },
+        { id: 'm2_10', concept: '他们有祸了!因为走了该隐的道路,又为利往巴兰的错谬里直奔,并在可拉的背叛中灭亡了。', answer: 'J', options: m2_options }
+    ];
+    
+    // --- 动态生成函数 (Initialization) ---
+
+    function generateMcQuestions() {
+        const list = document.getElementById('mc-list');
+        list.innerHTML = '';
+        mc_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="choices">
+                        ${Object.keys(q.options).map(key => `
+                            <input type="radio" id="${q.id}_${key}" name="${q.id}" value="${key}" onchange="checkMcQuestion('${q.id}')">
+                            <label for="${q.id}_${key}">${key}. ${q.options[key]}</label>
+                        `).join('')}
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateTfQuestions() {
+        const list = document.getElementById('tf-list');
+        list.innerHTML = '';
+        tf_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="true-false">
+                        <input type="radio" id="${q.id}_t" name="${q.id}" value="T" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_t">是 (T / 对)</label>
+                        <input type="radio" id="${q.id}_f" name="${q.id}" value="F" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_f">非 (F / 错)</label>
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateMatchingTables(data, tbodyId) {
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = '';
+        data.forEach((item, index) => {
+            const row = tbody.insertRow();
+            row.className = 'matching-row';
+
+            // 1. # Column
+            row.insertCell().textContent = index + 1;
+
+            // 2. Concept/Left Scripture Column
+            row.insertCell().textContent = item.concept;
+
+            // 3. Dropdown Column
+            const selectCell = row.insertCell();
+            const select = document.createElement('select');
+            select.name = item.id;
+            select.id = item.id;
+            select.onchange = function() { checkMatchingQuestion(item.id, data); };
+            
+            // Populate options
+            item.options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                select.appendChild(opt);
+            });
+            selectCell.appendChild(select);
+
+            // 4. Result Column (Result and Answer Prompt combined)
+            const resultCell = row.insertCell();
+            resultCell.innerHTML = '<span class="result" id="res_' + item.id + '"></span><div class="answer-prompt" id="ans_' + item.id + '"></div>';
+        });
+    }
+
+    // --- 核心即时评分函数 (Central On-the-fly Checking Logic) ---
+
+    function checkQuestion(questionId, data, isMatching = false) {
+        const question = data.find(q => q.id === questionId);
+        if (!question) return;
+        
+        const resultElement = document.getElementById(`res_${questionId}`);
+        const promptElement = document.getElementById(`ans_${questionId}`);
+        
+        let selectedValue;
+
+        if (isMatching) {
+            const select = document.getElementById(questionId);
+            selectedValue = select ? select.value : null;
+        } else {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            selectedValue = selected ? selected.value : null;
+        }
+
+        resultElement.textContent = '';
+        resultElement.className = 'result';
+        promptElement.innerHTML = '';
+        
+        if (!selectedValue || selectedValue === ' ') return;
+
+        // Check Answer
+        if (selectedValue === question.answer || 
+            (selectedValue === 'T' && question.answer === 'Y') || 
+            (selectedValue === 'F' && question.answer === 'N')) {
+            resultElement.textContent = '✔';
+            resultElement.classList.add('correct');
+        } else {
+            resultElement.textContent = '✘';
+            resultElement.classList.add('incorrect');
+            
+            let correctAnswerText = '';
+
+            if (isMatching) {
+                const correctOption = question.options.find(opt => opt.value === question.answer);
+                correctAnswerText = correctOption ? correctOption.text : `(${question.answer})`;
+            } else if (question.options) { 
+                correctAnswerText = `${question.answer}. ${question.options[question.answer]}`;
+            } else { 
+                correctAnswerText = question.answer === 'T' || question.answer === 'Y' ? '是 (T / 对)' : '非 (F / 错)';
+            }
+            
+            let prompt = `正确答案: ${correctAnswerText}`;
+            if (question.hint) { prompt += `<br>提示: ${question.hint}`; }
+            promptElement.innerHTML = prompt;
+        }
+    }
+
+    // Wrappers for clarity
+    function checkMcQuestion(questionId) { checkQuestion(questionId, mc_questions_data); }
+    function checkTfQuestion(questionId) { checkQuestion(questionId, tf_questions_data); }
+    function checkMatchingQuestion(questionId, data) { checkQuestion(questionId, data, true); }
+    
+    // --- 最终分数函数 (Final Score) ---
+
+    function showFinalScore() {
+        let correct_count = 0;
+        const all_data = [...mc_questions_data, ...tf_questions_data, ...m1_questions_data, ...m2_questions_data];
+        let total_questions = all_data.length;
+
+        // Check all questions
+        all_data.forEach(q => {
+            let selectedValue;
+            if (q.id.startsWith('mc_') || q.id.startsWith('tf_')) {
+                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+                selectedValue = selected ? selected.value : null;
+            } else { // Matching
+                const select = document.getElementById(q.id);
+                selectedValue = select ? select.value : null;
+            }
+
+            // Normalize 'Y'/'N' to 'T'/'F' for checking if it's a True/False question
+            const expectedAnswer = q.answer === 'Y' ? 'T' : (q.answer === 'N' ? 'F' : q.answer);
+            
+            if (selectedValue === expectedAnswer) {
+                correct_count++;
+            }
+        });
+
+        // Display score
+        const scoreSummary = document.getElementById('score-summary');
+        const scorePercentage = ((correct_count / total_questions) * 100).toFixed(1);
+        scoreSummary.innerHTML = `🎉 测验完成！总计 ${total_questions} 题。得分： <span style="color:#27ae60;">${correct_count}</span> / ${total_questions} (<b>${scorePercentage}%</b>)。`;
+        scoreSummary.style.display = 'block';
+        
+        // Scroll to result
+        scoreSummary.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Page Load: 确保在DOM完全加载后运行生成函数
+    document.addEventListener('DOMContentLoaded', () => {
+        generateMcQuestions();
+        generateTfQuestions();
+        generateMatchingTables(m1_questions_data, 'matching-body-1');
+        generateMatchingTables(m2_questions_data, 'matching-body-2');
+    });
+</script>
+</body>
+</html>
