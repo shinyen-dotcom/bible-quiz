@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彼得后书 第一章 40 题测验 (神圣的能力与确切的应许)</title>
+    <style>
+        /* CSS 样式 */
+        body { font-family: "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f7f6; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        h1, h2 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 5px; margin-top: 35px; }
+        ol { padding-left: 20px; }
+        li { margin-bottom: 25px; border-bottom: 1px dashed #eee; padding-bottom: 15px; list-style: decimal; }
+        .question-item { display: flex; flex-direction: column; }
+        .question-text { font-weight: bold; margin-bottom: 10px; color: #333; }
+        .choices, .true-false { margin-bottom: 5px; display: flex; flex-wrap: wrap; }
+        .choices label, .true-false label { margin-right: 25px; cursor: pointer; display: inline-block; padding: 5px 0; }
+        .result-area { display: flex; align-items: flex-start; margin-top: 5px; min-height: 25px;}
+        .result { font-weight: bold; margin-right: 10px; min-width: 30px; text-align: left; font-size: 1.2em;}
+        .correct { color: #27ae60; }
+        .incorrect { color: #e74c3c; }
+        .answer-prompt { font-size: 0.95em; color: #555; background-color: #f9f9f9; padding: 5px; border-radius: 3px;}
+        /* Matching Table Styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { padding: 12px; text-align: left; border: 1px solid #ddd; vertical-align: top; font-size: 0.95em; }
+        th { background-color: #eaf2f8; color: #34495e; font-weight: bold; }
+        .matching-row td:nth-child(2) { font-weight: 500; }
+        select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; background-color: #fff; }
+        .matching-row td:nth-child(4) { width: 30%; }
+        .score-button { background-color: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; margin-top: 30px; display: block; width: 100%; transition: background-color 0.3s; }
+        .score-button:hover { background-color: #2980b9; }
+        #score-summary { margin-top: 30px; padding: 20px; border: 2px solid #2ecc71; background-color: #e8f8f5; border-radius: 5px; font-size: 1.3em; font-weight: bold; display: none; text-align: center;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📝 彼得后书 第一章：神圣的能力与确切的应许 (40 题测验)</h1>
+
+    <form id="quiz-form">
+        
+        <h2>I. Multiple Choices (选择题) - 10 题</h2>
+        <ol id="mc-list"></ol>
+        
+        <h2>II. True/False (是非题) - 10 题</h2>
+        <ol id="tf-list"></ol>
+
+        <h2>III. Matching Concepts (概念配对) - 10 题</h2>
+        <p>请将左栏的经文概念与右栏的关键词或补充句配对。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文概念)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-1"></tbody>
+        </table>
+        
+        <h2>IV. Matching the Correct Scripture (经文拆分配对) - 10 题</h2>
+        <p>请将左栏的经文前半部分与右栏的经文后半部分配对，组成完整的经文。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 35%;">左栏 (经文前半句)</th>
+                    <th style="width: 30%;">选择配对</th>
+                    <th style="width: 30%;">评分 & 正确答案</th>
+                </tr>
+            </thead>
+            <tbody id="matching-body-2"></tbody>
+        </table>
+
+        <button type="button" class="score-button" onclick="showFinalScore()">显示最终分数</button>
+    </form>
+
+    <div id="score-summary"></div>
+
+</div>
+
+<script>
+    // --- 答案键 & 数据结构 (基于上传文件内容) ---
+
+    // 1. Multiple Choice Data (10 题)
+    const mc_questions_data = [
+        { id: 'mc_1', text: '彼得后书的开头,西门彼得以什么身份称呼自己?', answer: 'B', options: { A: '作使徒的', B: '作耶稣基督仆人和使徒的', C: '作耶稣基督仆人的', D: '作长老和见证的' } },
+        { id: 'mc_2', text: '信徒所得到的信心,是因什么得到的?', answer: 'C', options: { A: '自己的努力', B: '耶稣基督的功劳', C: '上帝和救主耶稣基督的义', D: '使徒的传讲' } },
+        { id: 'mc_3', text: '上帝的神能已将一切关乎生命和虔敬的事赐给信徒,是借着什么?', answer: 'B', options: { A: '圣灵的恩膏', B: '认识那用自己的荣耀和德行召我们的主', C: '圣经的教导', D: '基督的宝血' } },
+        { id: 'mc_4', text: '彼得说,我们已经得着又宝贵又极大的应许,为要叫我们借此得以脱离什么?', answer: 'C', options: { A: '律法的咒诅', B: '道德上的败坏', C: '世上从情欲来的败坏', D: '永恒的死亡' } },
+        { id: 'mc_5', text: '彼得劝勉信徒既然有上帝的应许,就要分外的殷勤,在信心上依次加上七样品格。下列哪一组是错误的顺序或品格?', answer: 'D', options: { A: '德行→知识', B: '忍耐→虔敬', C: '虔敬→爱弟兄的心', D: '节制→ 爱弟兄的心' } },
+        { id: 'mc_6', text: '信徒若充充足足的有这几样,就能使他们在什么事上不至于闲懒不结果子?', answer: 'C', options: { A: '传福音的事上', B: '教会的事奉上', C: '认识我们的主耶稣基督上', D: '圣洁的生活上' } },
+        { id: 'mc_7', text: '人若没有这几样,就是什么?', answer: 'A', options: { A: '瞎眼,只看近处的', B: '骄傲,只顾自己', C: '愚昧,不能分辨是非', D: '软弱,轻易跌倒' } },
+        { id: 'mc_8', text: '彼得说,他以为应当趁着这什么的时候,提醒信徒,激发信徒?', answer: 'B', options: { A: '白昼', B: '活着', C: '基督再来', D: '患难' } },
+        { id: 'mc_9', text: '彼得知道自己脱离这帐棚的时候快到了,好像谁所指示的?', answer: 'C', options: { A: '众使徒', B: '圣灵', C: '主耶稣基督', D: '众长老' } },
+        { id: 'mc_10', text: '彼得说,我们从前将我们主耶稣基督的大能和祂降临的事告诉你们,不是随从乖巧捏造的虚言,乃是亲眼见过祂的什么?', answer: 'B', options: { A: '受难', B: '威荣', C: '神迹', D: '权柄' } }
+    ];
+
+    // 2. True/False Data (10 题)
+    const tf_questions_data = [
+        { id: 'tf_1', text: '愿恩惠平安,因你们认识上帝和我们主耶稣,多多的加给你们。', answer: 'T', hint: '(彼后1:2: 愿恩惠平安,因你们认识上帝和我们主耶稣,多多的加给你们。)' },
+        { id: 'tf_2', text: '上帝已将又宝贵又极大的应许赐给我们,叫我们得以脱离世上的罪恶。', answer: 'F', hint: '(彼后1:4: 应许叫我们得以脱离世上从情欲来的败坏)' },
+        { id: 'tf_3', text: '信徒既然蒙召,就要更加殷勤,使所蒙的恩召和拣选坚定不移。', answer: 'T', hint: '(彼后1:10: 应当更加殷勤,使所蒙的恩召和拣选坚定不移)' },
+        { id: 'tf_4', text: '人若有了这几样,就必永不失脚。', answer: 'T', hint: '(彼后1:10: 务要如此行,就永不失脚)' },
+        { id: 'tf_5', text: '彼得劝勉信徒,要常常記念这些事,使他死后,信徒也能自己思想。', answer: 'T', hint: '(彼后1:15: 使你们在我死后,常能記念这些事)' },
+        { id: 'tf_6', text: '彼得说,当趁着自己还活着的时候,多提醒信徒。', answer: 'T', hint: '(彼后1:13: 应当趁着我还在这帐棚的时候,提醒你们)' },
+        { id: 'tf_7', text: '彼得知道自己脱离这帐棚的时候快到了,这是他自己的预感。', answer: 'F', hint: '(彼后1:14: 是主耶稣基督已经指示我的)' },
+        { id: 'tf_8', text: '彼得所说的基督的大能和降临,是根据他亲眼见过基督的荣光。', answer: 'T', hint: '(彼后1:16: 乃是亲眼见过祂的威荣)' },
+        { id: 'tf_9', text: '我们从天上来的声音,亲耳听见说:“这是我的爱子,我所喜悦的。”', answer: 'T', hint: '(彼后1:17-18: 这是我的爱子,我所喜悦的...亲自听见这声音从天上出来)' },
+        { id: 'tf_10', text: '先知的预言,如同灯照在暗处,信徒应当留意,直到天发亮,晨星在信徒心里出现。', answer: 'T', hint: '(彼后1:19: 如同灯照在暗处,应当留意,直到天发亮,晨星在你们心里出现。)' }
+    ];
+
+    // 3. Matching Concepts Options & Data (10 题)
+    // Options: A. 耶稣基督的义, B. 认识主, C. 天发亮,晨星出现, D. 荣耀和德行, E. 闲懒不结果子, F. 爱弟兄的心,爱众人的心, G. 忘记他旧日的罪已经得了洁净, H. 荣耀、尊贵的声音, I. 生命和虔敬的事, J. 趁着这帐棚还在的时候
+    const m1_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'A', text: 'A. 耶稣基督的义' }, 
+        { value: 'B', text: 'B. 认识主' }, 
+        { value: 'C', text: 'C. 天发亮,晨星出现' }, 
+        { value: 'D', text: 'D. 荣耀和德行' }, 
+        { value: 'E', text: 'E. 闲懒不结果子' }, 
+        { value: 'F', text: 'F. 爱弟兄的心,爱众人的心' }, 
+        { value: 'G', text: 'G. 忘记他旧日的罪已经得了洁净' }, 
+        { value: 'H', text: 'H. 荣耀、尊贵的声音' }, 
+        { value: 'I', text: 'I. 生命和虔敬的事' }, 
+        { value: 'J', text: 'J. 趁着这帐棚还在的时候' }
+    ];
+    const m1_questions_data = [
+        { id: 'm1_1', concept: '信徒信心的根基', answer: 'A', options: m1_options },
+        { id: 'm1_2', concept: '上帝神能所赐之物', answer: 'I', options: m1_options },
+        { id: 'm1_3', concept: '得以脱离败坏的方式', answer: 'B', options: m1_options },
+        { id: 'm1_4', concept: '召我们主所用的德行', answer: 'D', options: m1_options },
+        { id: 'm1_5', concept: '彼得劝勉信徒的行动时机', answer: 'J', options: m1_options }, 
+        { id: 'm1_6', concept: '基督徒品格的末尾两样', answer: 'F', options: m1_options },
+        { id: 'm1_7', concept: '你们若没有这几样,就必使你们', answer: 'E', options: m1_options },
+        { id: 'm1_8', concept: '瞎眼、只看近处的人', answer: 'G', options: m1_options },
+        { id: 'm1_9', concept: '预言被应验的记号', answer: 'C', options: m1_options },
+        { id: 'm1_10', concept: '基督在山上所得的', answer: 'H', options: m1_options }
+    ];
+
+    // 4. Matching Scripture Options & Data (10 题)
+    // Options: A. 我们主耶稣基督已经指示我的, B. 多多的加给你们, C. 直等到天发亮、晨星在你们心里出现的时候,才是好的。, D. 你们务要如此行,就永不失脚, E. 激发你们。, F. 得以与上帝的性情有分, G. 又要加上虔敬;有了虔敬,又要加上爱弟兄的心;有了爱弟兄的心,又要加上爱众人的心, H. 就必不至于闲懒不结果子, I. 从极大荣光之中有声音出来, J. 没有可随私意解说的.
+    const m2_options = [
+        { value: ' ', text: '-- 请选择 --' }, 
+        { value: 'A', text: 'A. 我们主耶稣基督已经指示我的' }, 
+        { value: 'B', text: 'B. 多多的加给你们' },
+        { value: 'C', text: 'C. 直等到天发亮、晨星在你们心里出现的时候,才是好的。' },
+        { value: 'D', text: 'D. 你们务要如此行,就永不失脚' },
+        { value: 'E', text: 'E. 激发你们。' },
+        { value: 'F', text: 'F. 得以与上帝的性情有分' },
+        { value: 'G', text: 'G. 又要加上虔敬;有了虔敬,又要加上爱弟兄的心;有了爱弟兄的心,又要加上爱众人的心' },
+        { value: 'H', text: 'H. 就必不至于闲懒不结果子' },
+        { value: 'I', text: 'I. 从极大荣光之中有声音出来' },
+        { value: 'J', text: 'J. 没有可随私意解说的' }
+    ];
+    const m2_questions_data = [
+        { id: 'm2_1', concept: '愿恩惠平安,因你们认识上帝和我们主耶稣,', answer: 'B', options: m2_options },
+        { id: 'm2_2', concept: '得以脱离世上从情欲来的败坏,', answer: 'F', options: m2_options },
+        { id: 'm2_3', concept: '你们就要分外的殷勤;有了信心,又要加上德行;有了德行,又要加上知识;有了知识,又要加上节制;...', answer: 'G', options: m2_options },
+        { id: 'm2_4', concept: '你们若充充足足的有这几样,就必使你们在认识我们主耶稣基督上,', answer: 'H', options: m2_options },
+        { id: 'm2_5', concept: '所以弟兄们,应当更加殷勤,使你们所蒙的恩召和拣选坚定不移。', answer: 'D', options: m2_options },
+        { id: 'm2_6', concept: '我以为应当趁着我还在这帐棚的时候,提醒你们,', answer: 'E', options: m2_options },
+        { id: 'm2_7', concept: '我知道我脱离这帐棚的时候快到了,正如', answer: 'A', options: m2_options },
+        { id: 'm2_8', concept: '我们亲眼见过祂的威荣。祂从父上帝得尊贵荣耀的时候,', answer: 'I', options: m2_options },
+        { id: 'm2_9', concept: '我们并有先知更确的预言,如同灯照在暗处。你们在这预言上留意,', answer: 'C', options: m2_options },
+        { id: 'm2_10', concept: '知道经上所有的预言,', answer: 'J', options: m2_options }
+    ];
+    
+    // --- 动态生成函数 (Initialization) ---
+
+    function generateMcQuestions() {
+        const list = document.getElementById('mc-list');
+        list.innerHTML = '';
+        mc_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="choices">
+                        ${Object.keys(q.options).map(key => `
+                            <input type="radio" id="${q.id}_${key}" name="${q.id}" value="${key}" onchange="checkMcQuestion('${q.id}')">
+                            <label for="${q.id}_${key}">${key}. ${q.options[key]}</label>
+                        `).join('')}
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateTfQuestions() {
+        const list = document.getElementById('tf-list');
+        list.innerHTML = '';
+        tf_questions_data.forEach(q => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="question-item">
+                    <span class="question-text">${q.text}</span>
+                    <div class="true-false">
+                        <input type="radio" id="${q.id}_t" name="${q.id}" value="T" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_t">是 (T / 对)</label>
+                        <input type="radio" id="${q.id}_f" name="${q.id}" value="F" onchange="checkTfQuestion('${q.id}')"><label for="${q.id}_f">非 (F / 错)</label>
+                    </div>
+                    <div class="result-area">
+                        <span class="result" id="res_${q.id}"></span>
+                        <div class="answer-prompt" id="ans_${q.id}"></div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function generateMatchingTables(data, tbodyId) {
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = '';
+        data.forEach((item, index) => {
+            const row = tbody.insertRow();
+            row.className = 'matching-row';
+
+            // 1. # Column
+            row.insertCell().textContent = index + 1;
+
+            // 2. Concept/Left Scripture Column
+            row.insertCell().textContent = item.concept;
+
+            // 3. Dropdown Column
+            const selectCell = row.insertCell();
+            const select = document.createElement('select');
+            select.name = item.id;
+            select.id = item.id;
+            select.onchange = function() { checkMatchingQuestion(item.id, data); };
+            
+            // Populate options
+            item.options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                select.appendChild(opt);
+            });
+            selectCell.appendChild(select);
+
+            // 4. Result Column (Result and Answer Prompt combined)
+            const resultCell = row.insertCell();
+            resultCell.innerHTML = '<span class="result" id="res_' + item.id + '"></span><div class="answer-prompt" id="ans_' + item.id + '"></div>';
+        });
+    }
+
+    // --- 核心即时评分函数 (Central On-the-fly Checking Logic) ---
+
+    function checkQuestion(questionId, data, isMatching = false) {
+        const question = data.find(q => q.id === questionId);
+        if (!question) return;
+        
+        const resultElement = document.getElementById(`res_${questionId}`);
+        const promptElement = document.getElementById(`ans_${questionId}`);
+        
+        let selectedValue;
+
+        if (isMatching) {
+            const select = document.getElementById(questionId);
+            selectedValue = select ? select.value : null;
+        } else {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            selectedValue = selected ? selected.value : null;
+        }
+
+        resultElement.textContent = '';
+        resultElement.className = 'result';
+        promptElement.innerHTML = '';
+        
+        if (!selectedValue || selectedValue === ' ') return;
+
+        // Check Answer
+        if (selectedValue === question.answer || 
+            (selectedValue === 'T' && question.answer === 'Y') || 
+            (selectedValue === 'F' && question.answer === 'N')) {
+            resultElement.textContent = '✔';
+            resultElement.classList.add('correct');
+        } else {
+            resultElement.textContent = '✘';
+            resultElement.classList.add('incorrect');
+            
+            let correctAnswerText = '';
+
+            if (isMatching) {
+                const correctOption = question.options.find(opt => opt.value === question.answer);
+                correctAnswerText = correctOption ? correctOption.text : `(${question.answer})`;
+            } else if (question.options) { 
+                correctAnswerText = `${question.answer}. ${question.options[question.answer]}`;
+            } else { 
+                correctAnswerText = question.answer === 'T' || question.answer === 'Y' ? '是 (T / 对)' : '非 (F / 错)';
+            }
+            
+            let prompt = `正确答案: ${correctAnswerText}`;
+            if (question.hint) { prompt += `<br>提示: ${question.hint}`; }
+            promptElement.innerHTML = prompt;
+        }
+    }
+
+    // Wrappers for clarity
+    function checkMcQuestion(questionId) { checkQuestion(questionId, mc_questions_data); }
+    function checkTfQuestion(questionId) { checkQuestion(questionId, tf_questions_data); }
+    function checkMatchingQuestion(questionId, data) { checkQuestion(questionId, data, true); }
+    
+    // --- 最终分数函数 (Final Score) ---
+
+    function showFinalScore() {
+        let correct_count = 0;
+        const all_data = [...mc_questions_data, ...tf_questions_data, ...m1_questions_data, ...m2_questions_data];
+        let total_questions = all_data.length;
+
+        // Check all questions
+        all_data.forEach(q => {
+            let selectedValue;
+            if (q.id.startsWith('mc_') || q.id.startsWith('tf_')) {
+                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+                selectedValue = selected ? selected.value : null;
+            } else { // Matching
+                const select = document.getElementById(q.id);
+                selectedValue = select ? select.value : null;
+            }
+
+            // Normalize 'Y'/'N' to 'T'/'F' for checking if it's a True/False question
+            const expectedAnswer = q.answer === 'Y' ? 'T' : (q.answer === 'N' ? 'F' : q.answer);
+            
+            if (selectedValue === expectedAnswer) {
+                correct_count++;
+            }
+        });
+
+        // Display score
+        const scoreSummary = document.getElementById('score-summary');
+        const scorePercentage = ((correct_count / total_questions) * 100).toFixed(1);
+        scoreSummary.innerHTML = `🎉 测验完成！总计 ${total_questions} 题。得分： <span style="color:#27ae60;">${correct_count}</span> / ${total_questions} (<b>${scorePercentage}%</b>)。`;
+        scoreSummary.style.display = 'block';
+        
+        // Scroll to result
+        scoreSummary.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Page Load: 确保在DOM完全加载后运行生成函数
+    document.addEventListener('DOMContentLoaded', () => {
+        generateMcQuestions();
+        generateTfQuestions();
+        generateMatchingTables(m1_questions_data, 'matching-body-1');
+        generateMatchingTables(m2_questions_data, 'matching-body-2');
+    });
+</script>
+</body>
+</html>
