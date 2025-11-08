@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彼得前后书 互动测验卷 (80 题)</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            color: #333;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px double #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #3c9c99;
+            margin-top: 40px;
+            border-left: 6px solid #f39c12;
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+        ol {
+            padding-left: 0;
+            list-style: none;
+            counter-reset: question-counter;
+        }
+        li {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #ffffff;
+            counter-increment: question-counter;
+            position: relative;
+        }
+        li::before {
+            content: counter(question-counter) ". ";
+            font-weight: bold;
+            color: #3498db;
+            margin-right: 10px;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            display: inline-block;
+        }
+        .choices label {
+            display: block;
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid #ccc;
+        }
+        .choices label:hover {
+            background-color: #ecf0f1;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            display: none;
+            line-height: 1.6;
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .justification {
+            font-size: 0.9em;
+            margin-top: 5px;
+            border-top: 1px dashed #c0c0c0;
+            padding-top: 5px;
+        }
+        .result-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #e6f3ff;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            display: none;
+        }
+        .score-button {
+            display: block;
+            width: 80%;
+            margin: 30px auto 0;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .score-button:hover {
+            background-color: #27ae60;
+        }
+        .score-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🔥 彼得前后书 互动测验卷 (共 80 题)</h1>
+
+        <div id="quiz-container">
+            </div>
+
+        <button class="score-button" id="submit-button" onclick="calculateTotalScore()">计算总得分</button>
+
+        <div class="result-section" id="result-section">
+            <h2>🎉 测验结果</h2>
+            <p>总得分：<span class="score-value" id="final-score-raw">0</span> / 80 题</p>
+            <p>正确率：<span class="score-value" id="final-score-percentage">0.0%</span></p>
+            <p style="font-size:0.9em; color:#777;">请注意：只有完成所有题目后，最终得分才准确。</p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 1. QUIZ DATA ---
+        const questions_data = [
+            // I. 选择题 (40 题)
+            { id: 'mc1', type: 'mc', question: '彼得写信给散居的信徒时，是按父神的什么被拣选?', options: { A: '大慈爱和丰盛的恩典', B: '预知，借着圣灵得成圣洁', C: '怜悯和全知', D: '公义和主权' }, answer: 'B', justification: '经文原话：“照父神的预知，借着圣灵得成圣洁，以致顺服耶稣基督...”', reference: '彼前 1:2' },
+            { id: 'mc2', type: 'mc', question: '信徒所得的基业的完整特性是什么?', options: { A: '永远长存、不至于羞愧、不被世俗玷污', B: '荣耀、圣洁、丰富，为基督的见证人存留', C: '不朽坏、不能玷污、不能衰残', D: '属灵、属天、不改变的恩典' }, answer: 'C', justification: '强调基业是“不能朽坏、不能玷污、不能衰残”的。', reference: '彼前 1:4' },
+            { id: 'mc3', type: 'mc', question: '信徒因着信靠主耶稣，所得的身份是哪四重称谓?', options: { A: '圣洁的子民、大能的勇士、温柔的牧者、世上的光', B: '被拣选的族类、君尊的祭司、圣洁的国度、属神的子民', C: '基督的肢体、福音的使者、光明的儿女、主的仆人', D: '蒙恩的罪人、属灵的活石、忠信的见证人、荣耀的后嗣' }, answer: 'B', justification: '经文原话：“惟有你们是被拣选的族类，是有君尊的祭司，是圣洁的国度，是属神的子民”', reference: '彼前 2:9' },
+            { id: 'mc4', type: 'mc', question: '彼得劝勉信徒要脱去各种恶行，包括哪五项?', options: { A: '奸淫、邪淫、恶毒、嫉妒、诡诈', B: '淫乱、恶欲、醉酒、荒宴、毁谤', C: '狂傲、贪婪、捏造的言语、邪淫、好讥诮', D: '一切的恶毒、诡诈、假善、嫉妒和一切毁谤的话' }, answer: 'D', justification: '经文原话：“所以，你们既除去一切的恶毒、诡诈、假善、嫉妒和一切毁谤的话”', reference: '彼前 2:1' },
+            { id: 'mc5', type: 'mc', question: '信徒在教外人中应当有什么样的品行，目的是什么?', options: { A: '端正的品行，使他们因看见善行在查验的日子归荣耀给神', B: '智慧谦卑，使他们因你的学识而被感化过来', C: '诚实守信，使他们因你的忠心不再毁谤真道', D: '勇敢无畏，使他们因惧怕而不敢敌对福音' }, answer: 'A', justification: '目的是使不信的人因看见信徒的善行，在鉴察（查验）的日子归荣耀给神。', reference: '彼前 2:12' },
+            { id: 'mc6', type: 'mc', question: '仆人受苦，若是因为行善而忍耐，在神看来是怎样的?', options: { A: '是应当的', B: '可称赞的', C: '有福气的', D: '可喜爱的' }, answer: 'D', justification: '经文用词是“可喜爱的”，而非“可称赞的”或“有福气的”。', reference: '彼前 2:20' },
+            { id: 'mc7', type: 'mc', question: '作妻子的若无须用言语，是因丈夫看见了什么而顺服真道?', options: { A: '妻子的美貌和虔诚', B: '妻子温柔的劝导和勤劳持家', C: '妻子贞洁的品行和敬畏的心', D: '妻子纯净的灵和长久的忍耐' }, answer: 'C', justification: '丈夫被感化，是因看见妻子贞洁的品行和敬畏的心。', reference: '彼前 3:1-2' },
+            { id: 'mc8', type: 'mc', question: '彼得提到，作妻子的不当以外面的装饰，而是以什么为装饰?', options: { A: '纯金、珍珠和整齐的衣裳', B: '里面存着长久温柔、安静的心', C: '谦卑受教的灵和圣洁的生活', D: '贤德的品行和对丈夫的顺服' }, answer: 'B', justification: '经文强调内在的装饰：“里面存着长久温柔、安静的心”。', reference: '彼前 3:3-4' },
+            { id: 'mc9', type: 'mc', question: '丈夫当敬重妻子，按情理和她同住，因为妻子比你软弱，且是与你一同承受什么的人?', options: { A: '生命之恩', B: '圣灵的恩赐', C: '永恒的荣耀', D: '基督的慈爱' }, answer: 'A', justification: '经文明确指出妻子是与丈夫一同承受生命之恩的。', reference: '彼前 3:7' },
+            { id: 'mc10', type: 'mc', question: '你们总要同心，彼此体恤，相爱如弟兄，存慈怜、谦卑的心。这是向谁发出的劝勉?', options: { A: '仅向长老发出', B: '仅向作仆人的信徒发出', C: '向所有信徒发出（你们总要）', D: '仅向作夫妻的信徒发出' }, answer: 'C', justification: '“你们总要同心...”，这个“你们”是指前面提到所有信徒，是普世性的劝勉。', reference: '彼前 3:8' },
+            { id: 'mc11', type: 'mc', question: '彼得说，基督在十字架上亲自担当了我们的罪，目的是什么?', options: { A: '叫我们摆脱疾病，得着属灵知识', B: '叫我们得享平安，远离世上私欲', C: '叫我们蒙恩典，行在光明中', D: '叫我们既向罪死，就得以向义活' }, answer: 'D', justification: '基督受死的救赎目的：“使我们既然在罪上死，就得以在义上活。”', reference: '彼前 2:24' },
+            { id: 'mc12', type: 'mc', question: '基督曾被治死，肉体受害，但祂是借着什么得以复活?', options: { A: '父神的旨意', B: '圣灵', C: '祂的神性', D: '祂的大能' }, answer: 'B', justification: '基督肉体被治死，却是“被圣灵（原文作灵）称活了”。', reference: '彼前 3:18' },
+            { id: 'mc13', type: 'mc', question: '万物的结局近了，彼得劝勉信徒首先要怎样行?', options: { A: '谨慎自守，儆醒祷告', B: '彼此切实相爱，因为爱能遮掩许多的罪', C: '尽心尽力，作神百般恩赐的好管家', D: '谦卑，因为神阻挡骄傲的人' }, answer: 'A', justification: '面对万物的结局，首先的行动是：“所以你们要谨慎自守，儆醒祷告”。', reference: '彼前 4:7' },
+            { id: 'mc14', type: 'mc', question: '在一切事上，最要紧的是什么?', options: { A: '谨慎自守，儆醒祷告', B: '尽心尽力事奉', C: '广传福音真理', D: '彼此切实相爱，因为爱能遮掩许多的罪' }, answer: 'D', justification: '最要紧的事是：“彼此切实相爱，因为爱能遮掩许多的罪。”', reference: '彼前 4:8' },
+            { id: 'mc15', type: 'mc', question: '审判要从哪里起首?', options: { A: '从不信的世人开始', B: '从假师傅开始', C: '从上帝的家起首', D: '从外邦的君王开始' }, answer: 'C', justification: '经文明确指出：“因为时候到了，审判要从神的家起首。”', reference: '彼前 4:17' },
+            { id: 'mc16', type: 'mc', question: '彼得写信给众长老时，自称具有哪两种身份?', options: { A: '作使徒的，和将要显现之荣耀的分享者', B: '作长老的，并为基督受苦作见证的', C: '作耶稣基督的仆人，和为真道竭力争辩的', D: '作牧师的，和治理教会的' }, answer: 'B', justification: '彼得自称是“作长老的，并为基督受苦作见证的”。', reference: '彼前 5:1' },
+            { id: 'mc17', type: 'mc', question: '彼得劝勉众长老牧养群羊，**不**应当出于哪三种动机?', options: { A: '勉强，贪财，辖制所托付的', B: '勉强，乐意，贪财', C: '勉强，贪财，辖制群羊的', D: '乐意，甘心，贪财' }, answer: 'A', justification: '牧养不可出于勉强（彼前5:2），不可因为贪财（彼前5:2），也不可辖制所托付的（彼前5:3）。', reference: '彼前 5:2' },
+            { id: 'mc18', type: 'mc', question: '彼得教导所有的信徒彼此之间应当如何?', options: { A: '要以谦卑束腰，彼此顺服', B: '要用爱心遮盖，彼此体恤', C: '要用信心坚固，彼此帮助', D: '要用圣洁装饰，彼此勉励' }, answer: 'A', justification: '经文原话：“你们众人，也都要以谦卑束腰，彼此顺服”。', reference: '彼前 5:5' },
+            { id: 'mc19', type: 'mc', question: '你们要将一切的忧虑卸给神，因为祂顾念你们。这里的“一切忧虑”是指?', options: { A: '仅指受苦的忧虑', B: '仅指生活中的重担', C: '泛指信徒所有的忧虑', D: '仅指对未来的惧怕' }, answer: 'C', justification: '经文用“一切的忧虑”，指信徒所有的忧虑重担。', reference: '彼前 5:7' },
+            { id: 'mc20', type: 'mc', question: '魔鬼如同吼叫的狮子，遍地游行，寻找可吞吃的人。信徒应当如何做?', options: { A: '穿着上帝所赐的全副军装抵挡他', B: '用坚固的信心抵挡他', C: '用谦卑的心和不住的祷告抵挡他', D: '存慈怜谦卑的心抵挡他' }, answer: 'B', justification: '抵挡魔鬼的行动是：“用坚固的信心抵挡他”。', reference: '彼前 5:9' },
+            { id: 'mc21', type: 'mc', question: '彼得在后书开头称呼自己是“作耶稣基督的仆人”，并加上了哪个身份?', options: { A: '传道人', B: '长老', C: '使徒', D: '见证人' }, answer: 'C', justification: '彼得后书开头，彼得自称：“作耶稣基督仆人和使徒的西门彼得”。', reference: '彼后 1:1' },
+            { id: 'mc22', type: 'mc', question: '恩惠平安，是因信徒认识上帝和我们主耶稣，以什么方式加给他们的?', options: { A: '丰丰富富地', B: '多多地', C: '充足地', D: '常常地' }, answer: 'B', justification: '经文原话：“愿恩惠、平安，因你们认识上帝和我们主耶稣，多多地加给你们。”', reference: '彼后 1:2' },
+            { id: 'mc23', type: 'mc', question: '上帝的神能已将一切关乎生命和虔敬的事赐给信徒，是借着什么?', options: { A: '认识那用自己的荣耀和德行召我们的主', B: '圣灵的恩膏和教导', C: '圣经的教导和使徒的传讲', D: '基督的宝血和公义' }, answer: 'A', justification: '神能赐给一切关乎生命和虔敬的事，是借着“认识那用自己的荣耀和德行召我们的主”。', reference: '彼后 1:3' },
+            { id: 'mc24', type: 'mc', question: '彼得说，我们已经得着又宝贵又极大的应许，为要叫我们借此得以脱离什么?', options: { A: '律法的咒诅，成为天国的国民', B: '道德上的败坏，进入光明国度', C: '永远的沉沦，得着永生', D: '世上从情欲来的败坏' }, answer: 'D', justification: '极大的应许是为了叫我们“脱离世上从情欲来的败坏”。', reference: '彼后 1:4' },
+            { id: 'mc25', type: 'mc', question: '彼得劝勉信徒分外殷勤，在信心上依次加上七样品格。下列哪一项是这七样品格中的**前三项**?', options: { A: '德行、知识、节制', B: '知识、节制、忍耐', C: '德行、知识、虔敬', D: '信心、德行、忍耐' }, answer: 'A', justification: '信心上依次加上的是：德行、知识、节制、忍耐、虔敬、爱弟兄的心、爱众人的心。', reference: '彼后 1:5-6' },
+            { id: 'mc26', type: 'mc', question: '信徒若充充足足地有七样品格，就能使他们在什么事上不至于闲懒不结果子?', options: { A: '传福音的事上', B: '认识我们的主耶稣基督上', C: '教会的事奉上', D: '属灵的追求上' }, answer: 'B', justification: '拥有这些品格，使信徒在“认识我们的主耶稣基督上不至于闲懒不结果子”。', reference: '彼后 1:8' },
+            { id: 'mc27', type: 'mc', question: '凡没有这七样品格的，就是瞎眼，只看近处的，忘记了他旧日得了洁净的是什么?', options: { A: '身体', B: '污秽', C: '罪', D: '败坏' }, answer: 'C', justification: '没有这些品格的人是“忘记了他旧日的罪已经得了洁净”。', reference: '彼后 1:9' },
+            { id: 'mc28', type: 'mc', question: '圣经的预言是从来没有出于人意的，乃是人被什么感动，说出上帝的话来?', options: { A: '荣耀的光', B: '圣灵', C: '极大的亮光', D: '上帝的能力' }, answer: 'B', justification: '预言是“人被圣灵感动，说出上帝的话来”。', reference: '彼后 1:21' },
+            { id: 'mc29', type: 'mc', question: '假师傅私自引进陷害人的异端，甚至不认什么?', options: { A: '买他们的主', B: '基督的道成肉身', C: '圣灵的恩赐', D: '基督的复活与再来' }, answer: 'A', justification: '假师傅的严重罪行：“甚至不认买他们的主”。', reference: '彼后 2:1' },
+            { id: 'mc30', type: 'mc', question: '许多人会随从这些假师傅的邪淫，就使什么被毁谤?', options: { A: '圣经的真理', B: '基督的教会', C: '使徒的教训', D: '真道' }, answer: 'D', justification: '随从邪淫的结果是使“真道”被毁谤。', reference: '彼后 2:2' },
+            { id: 'mc31', type: 'mc', question: '彼得用哪些历史事件来警告假师傅的结局?', options: { A: '审判挪亚时代、所多玛蛾摩拉、以色列人出埃及', B: '审判挪亚时代、所多玛蛾摩拉、亚伯拉罕献以撒', C: '审判挪亚时代、所多玛蛾摩拉、犯罪的天使', D: '审判挪亚时代、天使犯罪、巴别塔' }, answer: 'C', justification: '彼得用三个历史事件（天使犯罪、挪亚时代、所多玛蛾摩拉）作警戒。', reference: '彼后 2:4-6' },
+            { id: 'mc32', type: 'mc', question: '上帝没有宽容犯罪的天使，把他们丢在地狱里，交在什么中?', options: { A: '永远的火湖和硫磺的深渊', B: '幽暗的绳索里（或作：黑暗的坑）', C: '永恒的烈火和无底的深渊', D: '审判的坑和永远的捆绑' }, answer: 'B', justification: '犯罪的天使被丢在“地狱”，交在“幽暗的绳索里（黑暗的坑）”。', reference: '彼后 2:4' },
+            { id: 'mc33', type: 'mc', question: '假师傅引诱人的方式是什么?', options: { A: '用花言巧语和虚假的应许', B: '用捏造的言语和欺骗的手段', C: '用肉体的情欲和邪淫的事', D: '用属世的智慧和哲理' }, answer: 'C', justification: '假师傅用“肉体的情欲和邪淫的事”引诱人。', reference: '彼后 2:18' },
+            { id: 'mc34', type: 'mc', question: '假师傅最终的景况被比喻成什么?', options: { A: '狗转过来吃牠所吐的，猪洗净了又回到泥里去辊', B: '狂风催逼的雾气和无水的井', C: '绊脚的石头和跌人的磐石', D: '枯干的草和凋谢的花' }, answer: 'A', justification: '比喻他们重蹈覆辙，回到污秽的生活中。', reference: '彼后 2:22' },
+            { id: 'mc35', type: 'mc', question: '彼得写后书的目的是什么?', options: { A: '证实基督的复活', B: '提醒信徒上帝的审判', C: '驳斥假师傅的教训', D: '提醒信徒，激发他们的诚实心' }, answer: 'D', justification: '彼得写这信的目的是要“提醒你们，激发你们的诚实心”。', reference: '彼后 3:1' },
+            { id: 'mc36', type: 'mc', question: '好讥诮的人说：“主要降临的应许在哪里呢?因为从列祖睡了以来，万物与起初创造的时候仍是怎样?”', options: { A: '照常', B: '一样', C: '照样', D: '毫无分别' }, answer: 'B', justification: '好讥诮的人认为万物与起初创造的时候仍是“一样”。', reference: '彼后 3:4' },
+            { id: 'mc37', type: 'mc', question: '彼得说，天和地被现在的话存留，直留到什么日子?', options: { A: '审判和有不敬虔之人灭亡的日子', B: '基督掌权审判世人的日子', C: '主再来建立国度的日子', D: '世界末了，新天新地降临的日子' }, answer: 'A', justification: '天地存留的期限是“直留到不敬虔之人受审判遭沉沦的日子”。', reference: '彼后 3:7' },
+            { id: 'mc38', type: 'mc', question: '主看一日如千年，千年如一日，是为了显明祂的什么?', options: { A: '公义，因祂必照所定的日子审判世界', B: '全能，因时间在祂手中', C: '慈爱，为要使人预备自己', D: '宽容，不愿有一人沉沦' }, answer: 'D', justification: '主看时间长久是为了显明祂的“宽容，不愿有一人沉沦”。', reference: '彼后 3:9' },
+            { id: 'mc39', type: 'mc', question: '信徒切切等候主的日子，在这日子里，天被火烧就销化了，有形质的都要什么？', options: { A: '融化', B: '归于无有', C: '熔化', D: '焚烧殆尽' }, answer: 'C', justification: '有形质的都将“熔化” (和合本用词)。', reference: '彼后 3:12' },
+            { id: 'mc40', type: 'mc', question: '信徒既然等候新天新地，就当用什么样的品行，竭力使自己没有玷污，无可指摘，安然见主?', options: { A: '圣洁和虔敬的品行', B: '谦卑和忍耐的品行', C: '信心和爱心的品行', D: '知识和节制的品行' }, answer: 'A', justification: '信徒就当有“圣洁和虔敬的品行”，以没有玷污，无可指摘的状态安然见主。', reference: '彼后 3:11, 14' },
+
+            // II. 是非题 (40 题)
+            { id: 'tf1', type: 'tf', question: '彼得写信给散居在亚该亚和马其顿的信徒。', answer: 'N', justification: '彼得写信给散居在本都、加拉太、加帕多家、亚细亚、庇推尼的信徒。', reference: '彼前 1:1' },
+            { id: 'tf2', type: 'tf', question: '信徒得着救恩，是借着盼望蒙神能力保守。', answer: 'N', justification: '信徒得救恩是因信蒙神能力保守。', reference: '彼前 1:5' },
+            { id: 'tf3', type: 'tf', question: '你们的信心经过试验，比被火试验仍然能坏的金子更显宝贵。', answer: 'Y', justification: '经文原意：信心的宝贵程度比能坏的金子更高。', reference: '彼前 1:7' },
+            { id: 'tf4', type: 'tf', question: '彼得劝勉信徒要圣洁，是因为神满有慈爱。', answer: 'N', justification: '彼得劝勉信徒要圣洁，是因为神是圣洁的。', reference: '彼前 1:15-16' },
+            { id: 'tf5', type: 'tf', question: '信徒蒙了重生，是由于能朽坏的种子。', answer: 'N', justification: '是由于不能朽坏的种子，就是神活泼常存的道。', reference: '彼前 1:23' },
+            { id: 'tf6', type: 'tf', question: '信徒应该像才生的婴孩爱慕纯净的灵奶，目的是快快长大，得着救恩。', answer: 'Y', justification: '经文原话：“叫你们因此渐长，以至得救。”', reference: '彼前 2:2' },
+            { id: 'tf7', type: 'tf', question: '对那不信的人来说，基督是绊脚的石头和审判的石头。', answer: 'N', justification: '基督是绊脚的石头和跌人的磐石，审判是后来的结果。', reference: '彼前 2:8' },
+            { id: 'tf8', type: 'tf', question: '信徒是“被拣选的族类”，目的是要宣扬那召他们出黑暗、入奇妙光明者的荣耀。', answer: 'N', justification: '目的是宣扬祂的**美德**，而非“荣耀”。', reference: '彼前 2:9' },
+            { id: 'tf9', type: 'tf', question: '信徒作主的仆人，可以利用自由作为遮盖恶毒的藉口，但须适度。', answer: 'N', justification: '经文明确指出：不可借着自由**遮盖恶毒**。', reference: '彼前 2:16' },
+            { id: 'tf10', type: 'tf', question: '彼得教导仆人只要服从善良温和的主人，不必服从那乖僻的。', answer: 'N', justification: '仆人应当服从一切的主人，不单是善良温和的，也包括乖僻的。', reference: '彼前 2:18' },
+            { id: 'tf11', type: 'tf', question: '基督在十字架上亲身担当我们的罪，使我们向罪死，向义活。', answer: 'Y', justification: '经文原话，概括了基督受死的目的。', reference: '彼前 2:24' },
+            { id: 'tf12', type: 'tf', question: '挪亚方舟中“借着水得救”的事件，是预表基督徒接受圣餐。', answer: 'N', justification: '是预表**洗礼**。', reference: '彼前 3:20-21' },
+            { id: 'tf13', type: 'tf', question: '你们作丈夫的，也要按情理和妻子同住，因她比你软弱，与你一同承受永远的福气。', answer: 'N', justification: '丈夫与妻子一同承受的是**生命之恩**，不是永远的福气。', reference: '彼前 3:7' },
+            { id: 'tf14', type: 'tf', question: '基督徒既在肉体受苦，彼得说他就与世上的私欲断绝了。', answer: 'N', justification: '彼得说他就与**罪**断绝了。', reference: '彼前 4:1' },
+            { id: 'tf15', type: 'tf', question: '万物的结局近了，所以信徒要彼此切实相爱，以遮盖许多的罪。', answer: 'N', justification: '**首先**是谨慎自守，儆醒祷告；然后是彼此切实相爱。', reference: '彼前 4:7-8' },
+            { id: 'tf16', type: 'tf', question: '若有人讲道，他要按着自己的感动讲；若有人服事，他要按着自己的能力服事。', answer: 'N', justification: '讲道要按着**上帝的圣言**；服事要按着**神所赐的力量**。', reference: '彼前 4:11' },
+            { id: 'tf17', type: 'tf', question: '你们不要把火炼的试验当作奇怪的事，好像遭遇非常的事一样。', answer: 'Y', justification: '经文原话，劝信徒要有正确的受苦心态。', reference: '彼前 4:12' },
+            { id: 'tf18', type: 'tf', question: '义人得救是仅仅得救。', answer: 'Y', justification: '经文原话：“若是义人仅仅得救...”', reference: '彼前 4:18' },
+            { id: 'tf19', type: 'tf', question: '长老牧养上帝的羊群，是为了作群羊的监督。', answer: 'N', justification: '长老牧养群羊是为了作群羊的**榜样**，而不是辖制。', reference: '彼前 5:3' },
+            { id: 'tf20', type: 'tf', question: '你们要将一切的忧虑卸给神，因为祂知道你们的软弱。', answer: 'N', justification: '忧虑卸给神，是因**祂顾念你们**。', reference: '彼前 5:7' },
+            { id: 'tf21', type: 'tf', question: '圣经的预言是人被圣灵感动，说出上帝的话来，并非出于人意。', answer: 'Y', justification: '经文原话。', reference: '彼后 1:21' },
+            { id: 'tf22', type: 'tf', question: '彼得提醒信徒要记念旧约律法的话和使徒所传主救主的命令。', answer: 'N', justification: '是记念**圣先知预言的话**和使徒所传主救主的命令。', reference: '彼后 3:2' },
+            { id: 'tf23', type: 'tf', question: '凡没有七样品格的，就是瞎眼，只看近处的，忘记他旧日的罪已经得了赦免。', answer: 'N', justification: '是忘记他旧日的**罪已经得了洁净**。', reference: '彼后 1:9' },
+            { id: 'tf24', type: 'tf', question: '彼得提到他将离世，称自己的身体是尘土。', answer: 'N', justification: '彼得称自己的身体是**帐棚**。', reference: '彼后 1:13-14' },
+            { id: 'tf25', type: 'tf', question: '假师傅私自引进陷害人的异端，且否认基督会再来。', answer: 'N', justification: '假师傅是**不认买他们的主**。', reference: '彼后 2:1' },
+            { id: 'tf26', type: 'tf', question: '假师傅的结局，如同狗所吐的又转过来吃，是比喻他们最终会悔改。', answer: 'N', justification: '比喻他们**重蹈覆辙**，回到污秽的生活中。', reference: '彼后 2:22' },
+            { id: 'tf27', type: 'tf', question: '假师傅在信徒身上取利是因有贪心，且用智慧的言语迷惑人。', answer: 'N', justification: '是用**捏造的言语**取利。', reference: '彼后 2:3' },
+            { id: 'tf28', type: 'tf', question: '罗得因看见所多玛人的邪淫，天天为他们忧伤。', answer: 'N', justification: '罗得是**为恶人的淫行忧伤**，不是为他们。', reference: '彼后 2:7-8' },
+            { id: 'tf29', type: 'tf', question: '上帝对待所多玛、蛾摩拉，是将城烧成灰烬，作为后世不敬虔人的警戒。', answer: 'Y', justification: '经文原话是“鉴戒”（或作警戒）。', reference: '彼后 2:6' },
+            { id: 'tf30', type: 'tf', question: '假师傅引诱那些已经完全脱离世上污秽的人，使他们再次跌倒。', answer: 'N', justification: '引诱的是那些**刚才脱离妄行**的人。', reference: '彼后 2:18' },
+            { id: 'tf31', type: 'tf', question: '假师傅被比喻为无水的井和狂风催逼的乌云。', answer: 'N', justification: '是**无水的井**和**狂风催逼的雾气**。', reference: '彼后 2:17' },
+            { id: 'tf32', type: 'tf', question: '彼得提醒信徒要记念圣先知预言的话和使徒所传主救主的命令。', answer: 'Y', justification: '经文原话。', reference: '彼后 3:2' },
+            { id: 'tf33', type: 'tf', question: '好讥诮的人故意忘记上帝曾用洪水毁灭世界的事实。', answer: 'Y', justification: '经文原话：“他们故意忘记...地被水淹没就消灭了。”', reference: '彼后 3:5' },
+            { id: 'tf34', type: 'tf', question: '现在的天地是借着上帝的爱存留的，直留到主再来的日子。', answer: 'N', justification: '是借着**那命存留**存留，直留到**审判和有不敬虔之人灭亡的日子**。', reference: '彼后 3:7' },
+            { id: 'tf35', type: 'tf', question: '主的日子来到，好像闪电一样。', answer: 'N', justification: '主的日子来到，好像**贼一样**。', reference: '彼后 3:10' },
+            { id: 'tf36', type: 'tf', question: '主看一日如千年，千年如一日，是为了提醒信徒要常常警醒祷告。', answer: 'N', justification: '是为了显明祂的**宽容，不愿有一人沉沦**。', reference: '彼后 3:9' },
+            { id: 'tf37', type: 'tf', question: '信徒切切等候主的日子，在这日子里，有形质的都要融化。', answer: 'N', justification: '有形质的都要**熔化**。', reference: '彼后 3:12' },
+            { id: 'tf38', type: 'tf', question: '信徒所等候的新天新地里，有公义居在其中。', answer: 'Y', justification: '经文原话：“但我们照他的应许，盼望新天新地，有义居在其中。”', reference: '彼后 3:13' },
+            { id: 'tf39', type: 'tf', question: '彼得教导信徒要在恩典和知识上增长，且要将荣耀归给基督。', answer: 'Y', justification: '经文原话：“总要在我们主救主耶稣基督的恩典和知识上有增长。愿荣耀归给他，从今直到永远。”', reference: '彼后 3:18' },
+            { id: 'tf40', type: 'tf', question: '彼得说，保罗在书信中论到这些事（指主的日子），有些难明白的，那强解的人就自取沉沦。', answer: 'Y', justification: '彼得指出保罗书信中有些论述是难明白的。', reference: '彼后 3:15-16' },
+        ];
+
+        let correctCount = 0;
+        let totalQuestions = questions_data.length;
+        // Keep track of answered questions to prevent double scoring
+        const scoredQuestions = {};
+
+        // --- 2. JAVASCRIPT LOGIC ---
+
+        /**
+         * Renders all questions to the HTML page.
+         */
+        function renderQuestions() {
+            const quizContainer = document.getElementById('quiz-container');
+            let mcHtml = '<h2>I. 选择题 (40 题)</h2><ol>';
+            let tfHtml = '<h2>II. 是非题 (40 题)</h2><ol>';
+
+            questions_data.forEach((q, index) => {
+                let questionHtml = '';
+                const questionNumber = index + 1;
+
+                if (q.type === 'mc') {
+                    // For multiple choice questions
+                    questionHtml = `
+                        <li id="q-${q.id}">
+                            <div class="question-text">${q.question}</div>
+                            <div class="choices">
+                                ${Object.keys(q.options).map(key => `
+                                    <label>
+                                        <input type="radio" name="${q.id}" value="${key}" onclick="checkAnswer('${q.id}', true)">
+                                        **${key}**: ${q.options[key]}
+                                    </label>
+                                `).join('')}
+                            </div>
+                            <div id="feedback-${q.id}" class="feedback"></div>
+                        </li>
+                    `;
+                    mcHtml += questionHtml;
+                } else if (q.type === 'tf') {
+                    // For true/false questions
+                    questionHtml = `
+                        <li id="q-${q.id}">
+                            <div class="question-text">${q.question}</div>
+                            <div class="choices">
+                                <label>
+                                    <input type="radio" name="${q.id}" value="Y" onclick="checkAnswer('${q.id}', false)">
+                                    **是** (Y)
+                                </label>
+                                <label>
+                                    <input type="radio" name="${q.id}" value="N" onclick="checkAnswer('${q.id}', false)">
+                                    **否** (N)
+                                </label>
+                            </div>
+                            <div id="feedback-${q.id}" class="feedback"></div>
+                        </li>
+                    `;
+                    tfHtml += questionHtml;
+                }
+            });
+
+            mcHtml += '</ol>';
+            tfHtml += '</ol>';
+
+            quizContainer.innerHTML = mcHtml + tfHtml;
+        }
+
+        /**
+         * Checks the answer for a single question and provides instant feedback.
+         * @param {string} questionId The ID of the question.
+         * @param {boolean} isMC True if it's a multiple choice question.
+         */
+        function checkAnswer(questionId, isMC) {
+            const questionData = questions_data.find(q => q.id === questionId);
+            const feedbackElement = document.getElementById(`feedback-${questionId}`);
+            const questionItem = document.getElementById(`q-${questionId}`);
+            let selectedValue = null;
+
+            if (isMC) {
+                const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+                selectedValue = selected ? selected.value : null;
+            } else {
+                const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+                selectedValue = selected ? selected.value : null;
+            }
+            
+            if (!selectedValue) return;
+
+            // Only score the question once
+            if (!scoredQuestions[questionId]) {
+                const isCorrect = selectedValue === questionData.answer;
+
+                if (isCorrect) {
+                    correctCount++;
+                    feedbackElement.className = 'feedback correct';
+                    feedbackElement.innerHTML = `**✅ 正确！**`;
+                } else {
+                    feedbackElement.className = 'feedback incorrect';
+                    
+                    let correctAnswerDisplay = questionData.answer;
+                    if (questionData.type === 'tf') {
+                        correctAnswerDisplay = questionData.answer === 'Y' ? '是 (Y)' : '否 (N)';
+                    } else if (questionData.type === 'mc') {
+                        correctAnswerDisplay = `${questionData.answer} (${questionData.options[questionData.answer]})`;
+                    }
+
+                    feedbackElement.innerHTML = `
+                        **❌ 错误。**
+                        <p>正确答案是: **${correctAnswerDisplay}**</p>
+                    `;
+                }
+
+                // Append detailed justification
+                feedbackElement.innerHTML += `
+                    <div class="justification">
+                        **💡 解释/出处：** ${questionData.justification} (${questionData.reference})
+                    </div>
+                `;
+                feedbackElement.style.display = 'block';
+
+                // Disable all options for this question after the first attempt
+                const radioButtons = questionItem.querySelectorAll('input[type="radio"]');
+                radioButtons.forEach(radio => {
+                    radio.disabled = true;
+                    if (radio.value === questionData.answer) {
+                        radio.parentNode.style.backgroundColor = '#d4edda'; // Highlight correct answer (greenish)
+                    } else if (radio.value === selectedValue && !isCorrect) {
+                        radio.parentNode.style.backgroundColor = '#f8d7da'; // Highlight incorrect selection (reddish)
+                    }
+                });
+                
+                // Mark as scored
+                scoredQuestions[questionId] = true;
+            }
+            
+        }
+
+        /**
+         * Calculates and displays the final total score.
+         */
+        function calculateTotalScore() {
+            const answeredCount = Object.keys(scoredQuestions).length;
+            const resultSection = document.getElementById('result-section');
+            const finalScoreRawElement = document.getElementById('final-score-raw');
+            const finalScorePercentageElement = document.getElementById('final-score-percentage');
+
+            // Optional: Alert if not all questions are answered
+            if (answeredCount < totalQuestions) {
+                const confirmScore = confirm(`您还有 ${totalQuestions - answeredCount} 题未作答。您确定要计算最终得分吗？(未作答题目将计为 0 分)`);
+                if (!confirmScore) {
+                    return;
+                }
+            }
+
+            // Calculate percentage
+            const percentage = ((correctCount / totalQuestions) * 100).toFixed(1);
+
+            // Display result
+            finalScoreRawElement.textContent = correctCount;
+            finalScorePercentageElement.textContent = `${percentage}%`;
+            resultSection.style.display = 'block';
+
+            // Scroll to the result section
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+
+            // Disable the final submission button
+            document.getElementById('submit-button').disabled = true;
+            document.getElementById('submit-button').textContent = "得分已计算";
+        }
+
+        // Initialize the quiz on page load
+        document.addEventListener('DOMContentLoaded', renderQuestions);
+    </script>
+
+</body>
+</html>
