@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第一章 互动测验（手机版）</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f1f5f9;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.55;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  /* 严格固定为手机比例容器（最大430px） */
+  .mobile-container {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    background-color: #f8fafc;
+    box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    padding: 14px 12px 60px 12px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 16px 14px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .header h1 { margin: 0 0 4px 0; font-size: 18px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.9; font-size: 12px; }
+
+  /* 悬浮顶部计分条 */
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 8px;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
+  .stat-group { display: flex; gap: 14px; }
+  .stat-box { text-align: center; }
+  .stat-val { font-size: 16px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 10px; color: var(--text-muted); }
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    margin-left: 4px;
+    cursor: pointer;
+  }
+
+  .section-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 14px 12px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+  }
+  .section-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 3px solid var(--accent);
+    padding-left: 8px;
+    margin: 0 0 4px 0;
+  }
+  .section-desc { color: var(--text-muted); font-size: 11.5px; margin-bottom: 12px; }
+
+  /* 手机三栏配对表 */
+  .match-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .match-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    background: white;
+  }
+  .match-table th {
+    background: #f1f5f9;
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    white-space: nowrap;
+  }
+  .match-table td {
+    padding: 8px 5px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  .col-num { width: 44%; }
+  .col-input { width: 14%; text-align: center; background: #f8fafc; vertical-align: middle !important; }
+  .col-alpha { width: 42%; }
+  .match-select {
+    width: 44px;
+    height: 32px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    background: white;
+  }
+
+  /* 填空题样式（防止iOS缩放保持16px） */
+  .fill-card {
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #ffffff;
+  }
+  .fill-text { font-size: 13.5px; line-height: 2.3; word-break: break-word; }
+  .blank-input {
+    border: none;
+    border-bottom: 2px solid #64748b;
+    background: #f1f5f9;
+    padding: 1px 4px;
+    font-size: 16px; /* 规避iPhone聚焦放大 */
+    font-weight: bold;
+    color: #0f172a;
+    text-align: center;
+    margin: 0 2px;
+    border-radius: 4px 4px 0 0;
+  }
+  .blank-input:focus { outline: none; border-color: var(--accent); background: #eff6ff; }
+  .char-hint { font-size: 11px; color: #7c3aed; font-weight: normal; margin-left: 2px; white-space: nowrap; }
+
+  /* 单选/多选/是非题样式 */
+  .q-item { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #e2e8f0; }
+  .q-item:last-child { border-bottom: none; }
+  .q-title { font-size: 13.5px; font-weight: 600; margin-bottom: 8px; line-height: 1.5; }
+  .opt-group { display: flex; flex-direction: column; gap: 6px; }
+  .opt-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.35;
+    background: #ffffff;
+  }
+  .opt-label input { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* 提示信息卡 */
+  .feedback {
+    display: none;
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+</style>
+</head>
+<body>
+
+<div class="mobile-container">
+  <div class="header">
+    <h1>《马可福音》第一章 测验</h1>
+    <p>45 题完整题库（手机优化版）</p>
+  </div>
+
+  <div class="dashboard">
+    <div class="stat-group">
+      <div class="stat-box">
+        <div class="stat-val" id="total-score">0 / 45</div>
+        <div class="stat-lbl">答对题数</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="accuracy-rate">0%</div>
+        <div class="stat-lbl">正确率</div>
+      </div>
+    </div>
+    <div>
+      <button class="btn-submit" onclick="gradeAll()">核对答案</button>
+      <button class="btn-reset" onclick="location.reload()">重置</button>
+    </div>
+  </div>
+
+  <!-- 1. 左右配对表格 -->
+  <div class="section-card">
+    <div class="section-title">第一部分：配对题（共 7 题）</div>
+    <div class="section-desc">在中间下拉框选择与前半句配对的字母：</div>
+    <div class="match-table-wrap">
+      <table class="match-table">
+        <thead>
+          <tr>
+            <th class="col-num">序号与前半段</th>
+            <th class="col-input">填入</th>
+            <th class="col-alpha">选项（A - G）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-num"><strong>1.</strong> 耶稣责备他说：“不要作声，从这人身上出来吧！”</td>
+            <td class="col-input">
+              <select class="match-select" id="m1" data-ans="C">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>A.</strong> 众人很希奇他的教训，因为他教训他们，正像有权柄的人，不像文士。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>2.</strong> 有一个长大麻风的来求耶稣，向他跪下，说：“你若肯，必能叫我洁净了。”</td>
+            <td class="col-input">
+              <select class="match-select" id="m2" data-ans="G">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>B.</strong> 说：“日期满了，神的国近了！你们当悔改，信福音。”</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>3.</strong> 他传道说：“有一位在我以后来的，能力比我更大，我就是弯腰给他解鞋带也是不配的。</td>
+            <td class="col-input">
+              <select class="match-select" id="m3" data-ans="E">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>C.</strong> 污鬼叫那人抽了一阵风，大声喊叫，就出来了。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>4.</strong> 照这话，约翰来了，在旷野施洗，传悔改的洗礼，使罪得赦。</td>
+            <td class="col-input">
+              <select class="match-select" id="m4" data-ans="F">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>D.</strong> 又有声音从天上来，说：“你是我的爱子，我喜悦你！”</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>5.</strong> 到了迦百农，耶稣就在安息日进了会堂教训人。</td>
+            <td class="col-input">
+              <select class="match-select" id="m5" data-ans="A">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>E.</strong> 我是用水给你们施洗，他却要用圣灵给你们施洗。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>6.</strong> 他从水里一上来，就看见天裂开了，圣灵仿佛鸽子降在他身上。</td>
+            <td class="col-input">
+              <select class="match-select" id="m6" data-ans="D">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>F.</strong> 犹太全地和耶路撒冷的人都出去到约翰那里，承认他们的罪，在约旦河里受他的洗。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>7.</strong> 约翰下监以后，耶稣来到加利利，宣传神的福音，</td>
+            <td class="col-input">
+              <select class="match-select" id="m7" data-ans="B">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>G.</strong> 耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="fb-match" class="feedback"></div>
+  </div>
+
+  <!-- 2. 纯填空题 -->
+  <div class="section-card">
+    <div class="section-title">第二部分：填充题（共 10 题）</div>
+    <div class="section-desc">请根据标注的字数，在横线直接键盘输入答案：</div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        1. 根据马可福音第一章，污鬼称耶稣是 <input type="text" class="blank-input" id="f1_1" data-ans="神的圣者" style="width: 78px;"><span class="char-hint">（4字）</span>。
+      </div>
+      <div class="feedback" id="fb-f1"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        2. 耶稣来到 <input type="text" class="blank-input" id="f2_1" data-ans="加利利" style="width: 66px;"><span class="char-hint">（3字）</span>，宣讲神的福音，说：“日期满了，神的 <input type="text" class="blank-input" id="f2_2" data-ans="国" style="width: 36px;"><span class="char-hint">（1字）</span>近了。你们当 <input type="text" class="blank-input" id="f2_3" data-ans="悔改" style="width: 52px;"><span class="char-hint">（2字）</span>，信福音！”
+      </div>
+      <div class="feedback" id="fb-f2"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        3. 耶稣严严地嘱咐他，就打发他走，对他说：“你要 <input type="text" class="blank-input" id="f3_1" data-ans="谨慎" style="width: 50px;"><span class="char-hint">（2字）</span>，什么话都不可告诉人，只要去把 <input type="text" class="blank-input" id="f3_2" data-ans="身体" style="width: 50px;"><span class="char-hint">（2字）</span>给 <input type="text" class="blank-input" id="f3_3" data-ans="祭司" style="width: 50px;"><span class="char-hint">（2字）</span>察看，又因你洁净了，献上 <input type="text" class="blank-input" id="f3_4" data-ans="摩西" style="width: 50px;"><span class="char-hint">（2字）</span>所吩咐的礼物，对众人作证据。”
+      </div>
+      <div class="feedback" id="fb-f3"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        4. 在旷野有人声喊着说：“预备 <input type="text" class="blank-input" id="f4_1" data-ans="主" style="width: 36px;"><span class="char-hint">（1字）</span>的道，修直他 <input type="text" class="blank-input" id="f4_2" data-ans="的路" style="width: 50px;"><span class="char-hint">（2字）</span>。”
+      </div>
+      <div class="feedback" id="fb-f4"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        5. 到了 <input type="text" class="blank-input" id="f5_1" data-ans="迦百农" style="width: 66px;"><span class="char-hint">（3字）</span>，耶稣就在安息日进入 <input type="text" class="blank-input" id="f5_2" data-ans="会堂" style="width: 50px;"><span class="char-hint">（2字）</span>教训人。众人很希奇他的教训；因为他教训他们，正像有权柄的人，不像文士。
+      </div>
+      <div class="feedback" id="fb-f5"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        6. 在来到施洗约翰那里受洗之前，耶稣在哪里？ <input type="text" class="blank-input" id="f6_1" data-ans="加利利的拿撒勒|拿撒勒" style="width: 120px;"><span class="char-hint">（加利利的拿撒勒 或 拿撒勒）</span>。
+      </div>
+      <div class="feedback" id="fb-f6"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        7. 照这话，约翰来了，在旷野施洗，传 <input type="text" class="blank-input" id="f7_1" data-ans="悔改" style="width: 50px;"><span class="char-hint">（2字）</span>的洗礼，使 <input type="text" class="blank-input" id="f7_2" data-ans="罪得赦" style="width: 66px;"><span class="char-hint">（3字）</span>。
+      </div>
+      <div class="feedback" id="fb-f7"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        8. 耶稣对他们说：“来跟从我，我要叫你们得人如得鱼一样。” 他们指的是 <input type="text" class="blank-input" id="f8_1" data-ans="西门和安得烈|西门、安得烈|西门和他的兄弟安得烈" style="width: 130px;"><span class="char-hint">（西门和安得烈）</span>。
+      </div>
+      <div class="feedback" id="fb-f8"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        9. 众人都惊讶，以致彼此对问说：“这是什么事？是个新道理啊！他用 <input type="text" class="blank-input" id="f9_1" data-ans="权柄" style="width: 50px;"><span class="char-hint">（2字）</span>吩咐污鬼，连污鬼也听从了他。”
+      </div>
+      <div class="feedback" id="fb-f9"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        10. 耶稣受洗从水里一上来，就看见 <input type="text" class="blank-input" id="f10_1" data-ans="天" style="width: 36px;"><span class="char-hint">（1字）</span>裂开了， <input type="text" class="blank-input" id="f10_2" data-ans="圣灵" style="width: 50px;"><span class="char-hint">（2字）</span>仿佛鸽子降在他身上。又有声音从天上来，说：“你是我的 <input type="text" class="blank-input" id="f10_3" data-ans="爱子" style="width: 50px;"><span class="char-hint">（2字）</span>，我喜悦你。”
+      </div>
+      <div class="feedback" id="fb-f10"></div>
+    </div>
+  </div>
+
+  <!-- 3. 选择题 -->
+  <div class="section-card">
+    <div class="section-title">第三部分：选择题（共 15 题）</div>
+    <div class="section-desc">单选或多选题，请直接点按选项：</div>
+
+    <div class="q-item">
+      <div class="q-title">1. 耶稣对谁说“来跟从我，我要叫你们得人如得鱼一样。”？（多选）</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="checkbox" name="c1" value="a"> a. 西门</label>
+        <label class="opt-label"><input type="checkbox" name="c1" value="b"> b. 约翰</label>
+        <label class="opt-label"><input type="checkbox" name="c1" value="c"> c. 雅各</label>
+        <label class="opt-label"><input type="checkbox" name="c1" value="d"> d. 安得烈</label>
+      </div>
+      <div class="feedback" id="fb-c1"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">2. 下面哪一件事不记载在马可福音第一章中？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c2" value="a"> a. 耶稣医治被鬼附的人</label>
+        <label class="opt-label"><input type="radio" name="c2" value="b"> b. 耶稣医治瘫痪的人</label>
+        <label class="opt-label"><input type="radio" name="c2" value="c"> c. 耶稣医治西门的岳母</label>
+        <label class="opt-label"><input type="radio" name="c2" value="d"> d. 耶稣医治得大麻风的人</label>
+      </div>
+      <div class="feedback" id="fb-c2"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">3. 马可福音的写作对象是谁？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c3" value="a"> a. 罗马人</label>
+        <label class="opt-label"><input type="radio" name="c3" value="b"> b. 中国人</label>
+        <label class="opt-label"><input type="radio" name="c3" value="c"> c. 犹太人</label>
+        <label class="opt-label"><input type="radio" name="c3" value="d"> d. 希腊人</label>
+      </div>
+      <div class="feedback" id="fb-c3"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">4. 根据马可福音第一章，鬼魔称耶稣是什么？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c4" value="a"> a. 他们说他是神的儿子</label>
+        <label class="opt-label"><input type="radio" name="c4" value="b"> b. 他们说他是神的圣者</label>
+        <label class="opt-label"><input type="radio" name="c4" value="c"> c. 他们说他是世界的救主</label>
+        <label class="opt-label"><input type="radio" name="c4" value="d"> d. 他们说他是弥赛亚</label>
+      </div>
+      <div class="feedback" id="fb-c4"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">5. 根据马可福音第一章，耶稣是在谁的家中医治彼得的岳母？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c5" value="a"> a. 彼得岳母的家</label>
+        <label class="opt-label"><input type="radio" name="c5" value="b"> b. 雅各的家</label>
+        <label class="opt-label"><input type="radio" name="c5" value="c"> c. 约翰和雅各的家</label>
+        <label class="opt-label"><input type="radio" name="c5" value="d"> d. 西门和安得烈的家</label>
+      </div>
+      <div class="feedback" id="fb-c5"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">6. 耶稣是在哪里受了谁的洗礼？随后又被谁催促到旷野受试探多少天？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c6" value="a"> a. 加利利海；约翰；魔鬼；四十二天</label>
+        <label class="opt-label"><input type="radio" name="c6" value="b"> b. 约旦河；约翰；圣灵；四十天</label>
+        <label class="opt-label"><input type="radio" name="c6" value="c"> c. 加利利海；先知以赛亚；圣灵；四十二天</label>
+        <label class="opt-label"><input type="radio" name="c6" value="d"> d. 约旦河；先知以赛亚；撒旦；四十天</label>
+      </div>
+      <div class="feedback" id="fb-c6"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">7. 耶稣在加利利传道时，呼召的第一批门徒，原本的职业是什么？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c7" value="a"> a. 税吏</label>
+        <label class="opt-label"><input type="radio" name="c7" value="b"> b. 铁匠</label>
+        <label class="opt-label"><input type="radio" name="c7" value="c"> c. 法利赛人</label>
+        <label class="opt-label"><input type="radio" name="c7" value="d"> d. 渔夫</label>
+      </div>
+      <div class="feedback" id="fb-c7"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">8. 在马可福音1章中，耶稣受洗的时候都有谁在场？（多选）</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="checkbox" name="c8" value="a"> a. 圣父</label>
+        <label class="opt-label"><input type="checkbox" name="c8" value="b"> b. 圣灵</label>
+        <label class="opt-label"><input type="checkbox" name="c8" value="c"> c. 先知以赛亚</label>
+        <label class="opt-label"><input type="checkbox" name="c8" value="d"> d. 施洗约翰</label>
+      </div>
+      <div class="feedback" id="fb-c8"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">9. 在马可福音1章1节中，耶稣基督被称为是谁的儿子？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c9" value="a"> a. 人子</label>
+        <label class="opt-label"><input type="radio" name="c9" value="b"> b. 神的儿子</label>
+        <label class="opt-label"><input type="radio" name="c9" value="c"> c. 大卫的儿子</label>
+        <label class="opt-label"><input type="radio" name="c9" value="d"> d. 约瑟的儿子</label>
+      </div>
+      <div class="feedback" id="fb-c9"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">10. 施洗约翰穿什么衣服，吃什么食物？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c10" value="a"> a. 穿细麻衣，吃陈设饼</label>
+        <label class="opt-label"><input type="radio" name="c10" value="b"> b. 穿细绵羊毛的衣服，腰束皮带，吃无酵饼</label>
+        <label class="opt-label"><input type="radio" name="c10" value="c"> c. 穿骆驼毛的衣服，腰束皮带，吃蝗虫与野蜜</label>
+        <label class="opt-label"><input type="radio" name="c10" value="d"> d. 穿普通的麻布长衫，吃五谷杂粮</label>
+      </div>
+      <div class="feedback" id="fb-c10"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">11. 哪个门徒作为耶稣的亲密伙伴在《马可福音》中扮演了重要角色？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c11" value="a"> a. 安得烈</label>
+        <label class="opt-label"><input type="radio" name="c11" value="b"> b. 加略人犹大</label>
+        <label class="opt-label"><input type="radio" name="c11" value="c"> c. 托马斯</label>
+        <label class="opt-label"><input type="radio" name="c11" value="d"> d. 彼得</label>
+      </div>
+      <div class="feedback" id="fb-c11"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">12. 马可福音很可能是在何时何地写成的？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c12" value="a"> a. 主后60-65年，罗马</label>
+        <label class="opt-label"><input type="radio" name="c12" value="b"> b. 主后66-68年，罗马</label>
+        <label class="opt-label"><input type="radio" name="c12" value="c"> c. 主后58-59年，耶路撒冷</label>
+        <label class="opt-label"><input type="radio" name="c12" value="d"> d. 主后56-57年，迦百农</label>
+      </div>
+      <div class="feedback" id="fb-c12"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">13. 是谁在旷野考验耶稣？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c13" value="a"> a. 施洗约翰</label>
+        <label class="opt-label"><input type="radio" name="c13" value="b"> b. 法利赛人</label>
+        <label class="opt-label"><input type="radio" name="c13" value="c"> c. 撒旦</label>
+        <label class="opt-label"><input type="radio" name="c13" value="d"> d. 圣灵</label>
+      </div>
+      <div class="feedback" id="fb-c13"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">14. 马可福音共有多少章？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c14" value="a"> a. 20</label>
+        <label class="opt-label"><input type="radio" name="c14" value="b"> b. 16</label>
+        <label class="opt-label"><input type="radio" name="c14" value="c"> c. 24</label>
+        <label class="opt-label"><input type="radio" name="c14" value="d"> d. 13</label>
+      </div>
+      <div class="feedback" id="fb-c14"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">15. 耶稣洁净了大麻风病人之后，对他说了什么？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c15" value="a"> a. 你要谨慎，什么话都不可告诉人，只要去把身体给祭司察看。</label>
+        <label class="opt-label"><input type="radio" name="c15" value="b"> b. 你要警醒，什么都不可让人知道，只要得别处去，到邻近的乡村。</label>
+        <label class="opt-label"><input type="radio" name="c15" value="c"> c. 你要来跟从我，什么都不要作声，只要献上摩西所吩咐的礼物。</label>
+        <label class="opt-label"><input type="radio" name="c15" value="d"> d. 你要洁净了，什么都不可说，只要信，你的罪也赦了。</label>
+      </div>
+      <div class="feedback" id="fb-c15"></div>
+    </div>
+  </div>
+
+  <!-- 4. 是非题 -->
+  <div class="section-card">
+    <div class="section-title">第四部分：是非题（共 13 题）</div>
+    <div class="section-desc">判断正误（√ 正确，× 错误）：</div>
+
+    <div class="q-item">
+      <div class="q-title">1. 耶稣稍往前走，又见西庇太的儿子雅各和雅各的兄弟约翰在岸上补网。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf1" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf1" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf1"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">2. 有一个长大麻风的来求耶稣，向他跪下，说：“你若肯，必能叫我洁净了。”耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf2" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf2" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf2"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">3. 约翰下监以后，耶稣来到迦百农，宣传神的福音，说：“日期满了，神的国近了。你们当悔改，信福音！”</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf3" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf3" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf3"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">4. 耶稣从水里一上来，就看见天裂开了，圣灵仿佛鸽子降在他身上。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf4" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf4" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf4"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">5. 那时，耶稣从加利利的拿撒勒来，在加利利这河里受了约翰的洗。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf5" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf5" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf5"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">6. 次日早晨天未亮的时候，耶稣起来，到旷野地方去，在那里祷告。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf6" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf6" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf6"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">7. 撒旦就把耶稣催到旷野里去。他在旷野四十天，受撒旦的试探，并与野兽同在一处。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf7" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf7" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf7"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">8. 我是用水给你们施洗，他却要用圣水给你们施洗。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf8" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf8" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf8"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">9. 马可福音是四福音书中，最迟写成的并且也是最短的一卷。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf9" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf9" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf9"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">10. 他喊叫说：“拿撒勒人耶稣，我们与你有什么相干？你来灭我们吗？我知道你是谁，乃是神的爱子。”</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf10" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf10" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf10"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">11. 马可福音的笔录者——马可，正是耶稣所召的十二使徒中的一位。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf11" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf11" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf11"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">12. 耶稣对洁净了的大麻风病人说：你要谨慎，什么话都不可告诉人，只要去把身体给祭司察看，又因为你洁净了，献上摩西所吩咐的礼物，对众人作证据。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf12" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf12" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf12"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">13. 正如先知以赛亚书上记着说：看哪，我要差遣我的使者在你前面，预备道路。以上经文引自以赛亚书。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf13" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf13" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf13"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function clean(s) {
+  return (s || '').replace(/[\s，。、“”！？：；]/g, '').trim();
+}
+
+function gradeAll() {
+  let score = 0;
+  const total = 45;
+
+  // 1. 配对题
+  const matchAns = { m1: 'C', m2: 'G', m3: 'E', m4: 'F', m5: 'A', m6: 'D', m7: 'B' };
+  let mOk = 0;
+  let mErr = [];
+  for (let i = 1; i <= 7; i++) {
+    const el = document.getElementById('m' + i);
+    const v = (el.value || '').toUpperCase();
+    const correct = matchAns['m' + i];
+    if (v === correct) {
+      mOk++;
+      score++;
+      el.style.borderColor = '#16a34a';
+      el.style.background = '#dcfce7';
+    } else {
+      el.style.borderColor = '#dc2626';
+      el.style.background = '#fee2e2';
+      mErr.push(`第${i}题为: ${correct}`);
+    }
+  }
+  const fbM = document.getElementById('fb-match');
+  if (mOk === 7) {
+    fbM.className = 'feedback is-correct';
+    fbM.innerHTML = '配对题全部正确！';
+  } else {
+    fbM.className = 'feedback is-wrong';
+    fbM.innerHTML = `配对题答对 ${mOk} / 7 题。错误提示：${mErr.join('； ')}`;
+  }
+
+  // 2. 填空题
+  const fRules = [
+    { id: 1, ins: ['f1_1'], exp: '神的圣者', desc: '可1:24 污鬼称“乃是神的圣者”' },
+    { id: 2, ins: ['f2_1', 'f2_2', 'f2_3'], exp: '加利利 / 国 / 悔改', desc: '可1:14-15 耶稣来到加利利，宣传神的福音...' },
+    { id: 3, ins: ['f3_1', 'f3_2', 'f3_3', 'f3_4'], exp: '谨慎 / 身体 / 祭司 / 摩西', desc: '可1:44 你要谨慎...把身体给祭司察看...献上摩西所吩咐的' },
+    { id: 4, ins: ['f4_1', 'f4_2'], exp: '主 / 的路', desc: '可1:3 预备主的道，修直他的路' },
+    { id: 5, ins: ['f5_1', 'f5_2'], exp: '迦百农 / 会堂', desc: '可1:21 到了迦百农，耶稣就在安息日进了会堂教训人' },
+    { id: 6, ins: ['f6_1'], exp: '加利利的拿撒勒（或 拿撒勒）', desc: '可1:9 耶稣从加利利的拿撒勒来' },
+    { id: 7, ins: ['f7_1', 'f7_2'], exp: '悔改 / 罪得赦', desc: '可1:4 传悔改的洗礼，使罪得赦' },
+    { id: 8, ins: ['f8_1'], exp: '西门和安得烈', desc: '可1:16-17 见西门和安得烈在海里撒网...' },
+    { id: 9, ins: ['f9_1'], exp: '权柄', desc: '可1:27 他用权柄吩咐污鬼，连污鬼也听从了他' },
+    { id: 10, ins: ['f10_1', 'f10_2', 'f10_3'], exp: '天 / 圣灵 / 爱子', desc: '可1:10-11 看见天裂开了，圣灵仿佛鸽子降在他身上，说你是我的爱子' }
+  ];
+
+  fRules.forEach(r => {
+    let allOk = true;
+    r.ins.forEach(id => {
+      const el = document.getElementById(id);
+      const val = clean(el.value);
+      const al = el.getAttribute('data-ans').split('|').map(s => clean(s));
+      if (al.includes(val)) {
+        el.style.borderBottomColor = '#16a34a';
+        el.style.background = '#dcfce7';
+      } else {
+        allOk = false;
+        el.style.borderBottomColor = '#dc2626';
+        el.style.background = '#fee2e2';
+      }
+    });
+    const fb = document.getElementById('fb-f' + r.id);
+    if (allOk) {
+      score++;
+      fb.className = 'feedback is-correct';
+      fb.innerHTML = `正确！出处：${r.desc}`;
+    } else {
+      fb.className = 'feedback is-wrong';
+      fb.innerHTML = `答案：【${r.exp}】。解析：${r.desc}`;
+    }
+  });
+
+  // 3. 选择题
+  const cRules = {
+    c1: { t: 'check', ans: ['a', 'd'], exp: 'a. 西门, d. 安得烈', desc: '可1:16-17 见西门和兄弟安得烈在海里撒网...' },
+    c2: { t: 'radio', ans: 'b', exp: 'b. 耶稣医治瘫痪的人', desc: '医治瘫子在第2章。第1章医治了大麻风、污鬼与热病。' },
+    c3: { t: 'radio', ans: 'a', exp: 'a. 罗马人', desc: '着重行动与仆人权柄，针对罗马人。' },
+    c4: { t: 'radio', ans: 'b', exp: 'b. 他们说他是神的圣者', desc: '可1:24 污鬼称“乃是神的圣者”。' },
+    c5: { t: 'radio', ans: 'd', exp: 'd. 西门和安得烈的家', desc: '可1:29 进了西门和安得烈的家。' },
+    c6: { t: 'radio', ans: 'b', exp: 'b. 约旦河；约翰；圣灵；四十天', desc: '可1:9-13 在约旦河受约翰的洗，圣灵催促他到旷野受试探四十天。' },
+    c7: { t: 'radio', ans: 'd', exp: 'd. 渔夫', desc: '可1:16 他们本是打鱼的。' },
+    c8: { t: 'check', ans: ['a', 'b', 'd'], exp: 'a. 圣父, b. 圣灵, d. 施洗约翰', desc: '可1:9-11 圣父天上有声音、圣灵如鸽、施洗约翰施洗。' },
+    c9: { t: 'radio', ans: 'b', exp: 'b. 神的儿子', desc: '可1:1 神的儿子，耶稣基督福音的起头。' },
+    c10: { t: 'radio', ans: 'c', exp: 'c. 穿骆驼毛的衣服，腰束皮带，吃蝗虫与野蜜', desc: '可1:6 原文细节。' },
+    c11: { t: 'radio', ans: 'd', exp: 'd. 彼得', desc: '马可是彼得属灵之子，记录了彼得的亲历口述。' },
+    c12: { t: 'radio', ans: 'a', exp: 'a. 主后60-65年，罗马', desc: '公认为主后60年代初在罗马写成。' },
+    c13: { t: 'radio', ans: 'c', exp: 'c. 撒旦', desc: '可1:13 受撒旦的试探。圣灵是“催促者”。' },
+    c14: { t: 'radio', ans: 'b', exp: 'b. 16', desc: '马可福音全书共16章。' },
+    c15: { t: 'radio', ans: 'a', exp: 'a. 你要谨慎，什么话都不可告诉人，只要去把身体给祭司察看。', desc: '可1:44 原文细节。' }
+  };
+
+  for (let i = 1; i <= 15; i++) {
+    const k = 'c' + i;
+    const r = cRules[k];
+    const fb = document.getElementById('fb-' + k);
+    let ok = false;
+    if (r.t === 'radio') {
+      const s = document.querySelector(`input[name="${k}"]:checked`);
+      if (s && s.value === r.ans) ok = true;
+    } else {
+      const arr = Array.from(document.querySelectorAll(`input[name="${k}"]:checked`)).map(e => e.value);
+      if (arr.length === r.ans.length && r.ans.every(v => arr.includes(v))) ok = true;
+    }
+    if (ok) {
+      score++;
+      fb.className = 'feedback is-correct';
+      fb.innerHTML = `正确！解析：${r.desc}`;
+    } else {
+      fb.className = 'feedback is-wrong';
+      fb.innerHTML = `错误。答案：【${r.exp}】。解析：${r.desc}`;
+    }
+  }
+
+  // 4. 是非题
+  const tfRules = {
+    tf1: { a: 'F', exp: '× 错误', desc: '可1:19 是在“船上补网”，不是岸上。' },
+    tf2: { a: 'T', exp: '√ 正确', desc: '可1:40-41 原文完全一致。' },
+    tf3: { a: 'F', exp: '× 错误', desc: '可1:14 是来到“加利利”，非迦百农。' },
+    tf4: { a: 'T', exp: '√ 正确', desc: '可1:10 原文完全一致。' },
+    tf5: { a: 'F', exp: '× 错误', desc: '可1:9 是在“约旦河”，没有加利利河。' },
+    tf6: { a: 'T', exp: '√ 正确', desc: '可1:35 原文完全一致。' },
+    tf7: { a: 'F', exp: '× 错误', desc: '可1:12 是“圣灵”催促耶稣到旷野，非撒旦。' },
+    tf8: { a: 'F', exp: '× 错误', desc: '可1:8 是“用圣灵给你们施洗”，非圣水。' },
+    tf9: { a: 'F', exp: '× 错误', desc: '马可福音是四福音中“最早写成”且最短的一卷。' },
+    tf10: { a: 'F', exp: '× 错误', desc: '可1:24 污鬼称“乃是神的圣者”，非神的爱子。' },
+    tf11: { a: 'F', exp: '× 错误', desc: '马可并非十二使徒之一，他是彼得的属灵儿子。' },
+    tf12: { a: 'T', exp: '√ 正确', desc: '可1:44 原文完全一致。' },
+    tf13: { a: 'F', exp: '× 错误', desc: '“差遣使者在前...”引自《玛拉基书》3:1。' }
+  };
+
+  for (let i = 1; i <= 13; i++) {
+    const k = 'tf' + i;
+    const r = tfRules[k];
+    const fb = document.getElementById('fb-' + k);
+    const s = document.querySelector(`input[name="${k}"]:checked`);
+    if (s && s.value === r.a) {
+      score++;
+      fb.className = 'feedback is-correct';
+      fb.innerHTML = `正确！解析：${r.desc}`;
+    } else {
+      fb.className = 'feedback is-wrong';
+      fb.innerHTML = `错误。答案：【${r.exp}】。解析：${r.desc}`;
+    }
+  }
+
+  // 更新分数并平滑回顶
+  document.getElementById('total-score').innerText = `${score} / ${total}`;
+  document.getElementById('accuracy-rate').innerText = `${Math.round((score / total) * 100)}%`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
