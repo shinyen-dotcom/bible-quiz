@@ -57,7 +57,7 @@
     background: white;
     padding: 10px 14px;
     border-radius: 10px;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     border: 1px solid var(--border);
     position: sticky;
     top: 8px;
@@ -88,6 +88,15 @@
     border-radius: 6px;
     margin-left: 4px;
     cursor: pointer;
+  }
+
+  .save-status {
+    font-size: 11px;
+    color: #16a34a;
+    text-align: right;
+    margin-top: -4px;
+    margin-bottom: 12px;
+    padding-right: 4px;
   }
 
   .section-card {
@@ -208,7 +217,7 @@
 <div class="mobile-container">
   <div class="header">
     <h1>《马可福音》第一章 测验</h1>
-    <p>45 题完整题库（手机优化版）</p>
+    <p>45 题完整题库（自动保存进度版）</p>
   </div>
 
   <div class="dashboard">
@@ -224,9 +233,10 @@
     </div>
     <div>
       <button class="btn-submit" onclick="gradeAll()">核对答案</button>
-      <button class="btn-reset" onclick="location.reload()">重置</button>
+      <button class="btn-reset" onclick="resetQuiz()">重置</button>
     </div>
   </div>
+  <div class="save-status" id="save-status">● 答案已实时保存在本机</div>
 
   <!-- 1. 左右配对表格 -->
   <div class="section-card">
@@ -690,11 +700,109 @@
 </div>
 
 <script>
+const STORAGE_KEY = 'mark_chapter_1_quiz_data';
+
 function clean(s) {
   return (s || '').replace(/[\s，。、“”！？：；]/g, '').trim();
 }
 
+// 自动保存至 LocalStorage
+function saveProgress() {
+  const data = {
+    matches: {},
+    fills: {},
+    choices: {},
+    tfs: {}
+  };
+
+  // 1. 配对题
+  for (let i = 1; i <= 7; i++) {
+    const el = document.getElementById('m' + i);
+    if (el) data.matches['m' + i] = el.value;
+  }
+
+  // 2. 填空题
+  const fillInputs = document.querySelectorAll('.blank-input');
+  fillInputs.forEach(input => {
+    data.fills[input.id] = input.value;
+  });
+
+  // 3. 选择题
+  for (let i = 1; i <= 15; i++) {
+    const name = 'c' + i;
+    const checked = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+    if (checked.length > 0) data.choices[name] = checked;
+  }
+
+  // 4. 是非题
+  for (let i = 1; i <= 13; i++) {
+    const name = 'tf' + i;
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    if (checked) data.tfs[name] = checked.value;
+  }
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const st = document.getElementById('save-status');
+  if (st) {
+    st.innerText = '● 答案已自动保存至本机（' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'}) + '）';
+  }
+}
+
+// 从 LocalStorage 恢复已存答案
+function restoreProgress() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (!saved) return;
+  try {
+    const data = JSON.parse(saved);
+
+    // 恢复配对题
+    if (data.matches) {
+      for (const [k, v] of Object.entries(data.matches)) {
+        const el = document.getElementById(k);
+        if (el) el.value = v;
+      }
+    }
+
+    // 恢复填空题
+    if (data.fills) {
+      for (const [k, v] of Object.entries(data.fills)) {
+        const el = document.getElementById(k);
+        if (el) el.value = v;
+      }
+    }
+
+    // 恢复选择题
+    if (data.choices) {
+      for (const [name, arr] of Object.entries(data.choices)) {
+        arr.forEach(val => {
+          const input = document.querySelector(`input[name="${name}"][value="${val}"]`);
+          if (input) input.checked = true;
+        });
+      }
+    }
+
+    // 恢复是非题
+    if (data.tfs) {
+      for (const [name, val] of Object.entries(data.tfs)) {
+        const input = document.querySelector(`input[name="${name}"][value="${val}"]`);
+        if (input) input.checked = true;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to restore progress', e);
+  }
+}
+
+// 重置测验与清除缓存
+function resetQuiz() {
+  if (confirm('确定要清空已填写的答案并重新开始吗？')) {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+}
+
 function gradeAll() {
+  saveProgress();
   let score = 0;
   const total = 45;
 
@@ -844,6 +952,13 @@ function gradeAll() {
   document.getElementById('accuracy-rate').innerText = `${Math.round((score / total) * 100)}%`;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// 页面载入时恢复保存项，并绑定实时输入/选择监听
+window.addEventListener('DOMContentLoaded', () => {
+  restoreProgress();
+  document.addEventListener('input', saveProgress);
+  document.addEventListener('change', saveProgress);
+});
 </script>
 
 </body>
