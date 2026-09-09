@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第二章 互动测验（手机版）</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f1f5f9;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.55;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .mobile-container {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    background-color: #f8fafc;
+    box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    padding: 14px 12px 60px 12px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    padding: 16px 14px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .header h1 { margin: 0 0 4px 0; font-size: 18px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.9; font-size: 12px; }
+
+  /* 悬浮顶部计分条 */
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 8px;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
+  .stat-group { display: flex; gap: 14px; }
+  .stat-box { text-align: center; }
+  .stat-val { font-size: 16px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 10px; color: var(--text-muted); }
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 13px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    margin-left: 4px;
+    cursor: pointer;
+  }
+
+  .save-status {
+    font-size: 11px;
+    color: #16a34a;
+    text-align: right;
+    margin-top: -6px;
+    margin-bottom: 10px;
+    padding-right: 4px;
+  }
+
+  .section-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 14px 12px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+  }
+  .section-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 3px solid var(--accent);
+    padding-left: 8px;
+    margin: 0 0 4px 0;
+  }
+  .section-desc { color: var(--text-muted); font-size: 11.5px; margin-bottom: 12px; }
+
+  /* 手机三栏配对表 */
+  .match-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .match-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    background: white;
+  }
+  .match-table th {
+    background: #f1f5f9;
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    white-space: nowrap;
+  }
+  .match-table td {
+    padding: 8px 5px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  .col-num { width: 44%; }
+  .col-input { width: 14%; text-align: center; background: #f8fafc; vertical-align: middle !important; }
+  .col-alpha { width: 42%; }
+  .match-select {
+    width: 44px;
+    height: 32px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    background: white;
+  }
+
+  /* 填空题样式 */
+  .fill-card {
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #ffffff;
+  }
+  .fill-text { font-size: 13.5px; line-height: 2.3; word-break: break-word; }
+  .blank-input {
+    border: none;
+    border-bottom: 2px solid #64748b;
+    background: #f1f5f9;
+    padding: 1px 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0f172a;
+    text-align: center;
+    margin: 0 2px;
+    border-radius: 4px 4px 0 0;
+  }
+  .blank-input:focus { outline: none; border-color: var(--accent); background: #eff6ff; }
+  .char-hint { font-size: 11px; color: #7c3aed; font-weight: normal; margin-left: 2px; white-space: nowrap; }
+
+  /* 题目项通用 */
+  .q-item { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #e2e8f0; }
+  .q-item:last-child { border-bottom: none; }
+  .q-title { font-size: 13.5px; font-weight: 600; margin-bottom: 8px; line-height: 1.5; }
+  .opt-group { display: flex; flex-direction: column; gap: 6px; }
+  .opt-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.35;
+    background: #ffffff;
+  }
+  .opt-label input { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* 提示信息卡 */
+  .feedback {
+    display: none;
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+</style>
+</head>
+<body>
+
+<div class="mobile-container">
+  <div class="header">
+    <h1>《马可福音》第二章 测验</h1>
+    <p>37 题完整题库（自动保存进度版）</p>
+  </div>
+
+  <div class="dashboard">
+    <div class="stat-group">
+      <div class="stat-box">
+        <div class="stat-val" id="total-score">0 / 37</div>
+        <div class="stat-lbl">答对题数</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="accuracy-rate">0%</div>
+        <div class="stat-lbl">正确率</div>
+      </div>
+    </div>
+    <div>
+      <button class="btn-submit" onclick="gradeAll()">核对答案</button>
+      <button class="btn-reset" onclick="resetQuiz()">重置</button>
+    </div>
+  </div>
+  <div class="save-status" id="save-status">● 答案已实时保存在本机</div>
+
+  <!-- 1. 左右配对表格 -->
+  <div class="section-card">
+    <div class="section-title">第一部分：配对题（共 7 题）</div>
+    <div class="section-desc">在中间下拉框选择与前半句配对的选项字母：</div>
+    <div class="match-table-wrap">
+      <table class="match-table">
+        <thead>
+          <tr>
+            <th class="col-num">序号与前半段</th>
+            <th class="col-input">填入</th>
+            <th class="col-alpha">选项（A - G）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-num"><strong>1.</strong> 『没有人把新布缝在旧衣服上，恐怕所补上的新布带坏了旧衣服，破的就更大了；</td>
+            <td class="col-input">
+              <select class="match-select" id="m1" data-ans="F">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>A.</strong> 就有许多人聚集，甚至连门前都没有空地；耶稣就对他们讲道。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>2.</strong> 因为人多，不得近前，就把耶稣所在的房子拆了房顶，既拆通了，就把瘫子连所躺卧的褥子都缒下来。</td>
+            <td class="col-input">
+              <select class="match-select" id="m2" data-ans="E">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>B.</strong> 耶稣对他们说：新郎和陪伴之人同在的时候，陪伴之人岂能禁食呢？新郎还同在，他们不能禁食。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>3.</strong> 又对他们说：『安息日是为人设立的，人不是为安息日设立的。</td>
+            <td class="col-input">
+              <select class="match-select" id="m3" data-ans="G">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>C.</strong> 耶稣对他们说：经上记着大卫和跟从他的人缺乏、饥饿之时所做的事，你们没有念过吗？</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>4.</strong> 过了些日子，耶稣又进了迦百农，人听见他在房子里，</td>
+            <td class="col-input">
+              <select class="match-select" id="m4" data-ans="A">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>D.</strong> 耶稣在利未家里坐席的时候，有好些税吏和罪人与耶稣并门徒一同坐席；因为这样的人多，他们也跟随耶稣。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>5.</strong> 当下，约翰的门徒和法利赛人禁食，他们来问耶稣说：『约翰的门徒和法利赛人的门徒禁食，你的门徒倒不禁食，这是为什么呢？』</td>
+            <td class="col-input">
+              <select class="match-select" id="m5" data-ans="B">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>E.</strong> 耶稣见他们的信心，就对瘫子说：小子，你的罪赦了。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>6.</strong> 耶稣经过的时候，看见亚勒腓的儿子利未坐在税关上，就对他说：你跟从我来。他就起来，跟从了耶稣。</td>
+            <td class="col-input">
+              <select class="match-select" id="m6" data-ans="D">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>F.</strong> 也没有人把新酒装在旧皮袋里，恐怕酒把皮袋裂开，酒和皮袋就都坏了；唯有把新酒装在新皮袋里。</td>
+          </tr>
+          <tr>
+            <td class="col-num"><strong>7.</strong> 法利赛人对耶稣说：看哪，他们在安息日为什么做不可做的事呢？</td>
+            <td class="col-input">
+              <select class="match-select" id="m7" data-ans="C">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha"><strong>G.</strong> 所以人子也是安息日的主。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="fb-match" class="feedback"></div>
+  </div>
+
+  <!-- 2. 填充题 -->
+  <div class="section-card">
+    <div class="section-title">第二部分：填充题（共 6 题）</div>
+    <div class="section-desc">请根据标注的字数，在横线输入正确词句：</div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        1. 耶稣当 <input type="text" class="blank-input" id="f1_1" data-ans="安息日" style="width: 66px;"><span class="char-hint">（3字）</span>从麦地经过，他门徒行路的时候，<input type="text" class="blank-input" id="f1_2" data-ans="掐了|掐" style="width: 52px;"><span class="char-hint">（掐了 或 掐）</span>麦穗。（2:23）
+      </div>
+      <div class="feedback" id="fb-f1"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        2. 或对瘫子说：『你的 <input type="text" class="blank-input" id="f2_1" data-ans="罪赦了" style="width: 66px;"><span class="char-hint">（3字）</span>』，或说：『起来，拿你的 <input type="text" class="blank-input" id="f2_2" data-ans="褥子" style="width: 52px;"><span class="char-hint">（2字）</span>行走』，那一样容易呢？但要叫你们知道，<input type="text" class="blank-input" id="f2_3" data-ans="人子" style="width: 52px;"><span class="char-hint">（2字）</span>在地上有 <input type="text" class="blank-input" id="f2_4" data-ans="赦罪" style="width: 52px;"><span class="char-hint">（2字）</span>的权柄。（2:9~10）
+      </div>
+      <div class="feedback" id="fb-f2"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        3. 耶稣对他们说：『 <input type="text" class="blank-input" id="f3_1" data-ans="新郎" style="width: 52px;"><span class="char-hint">（2字）</span>和陪伴之人同在的时候，陪伴之人岂能 <input type="text" class="blank-input" id="f3_2" data-ans="禁食" style="width: 52px;"><span class="char-hint">（2字）</span>呢？<input type="text" class="blank-input" id="f3_3" data-ans="新郎" style="width: 52px;"><span class="char-hint">（2字）</span>还同在，他们不能 <input type="text" class="blank-input" id="f3_4" data-ans="禁食" style="width: 52px;"><span class="char-hint">（2字）</span>。但日子将到，<input type="text" class="blank-input" id="f3_5" data-ans="新郎" style="width: 52px;"><span class="char-hint">（2字）</span>要离开他们，那日他们就要 <input type="text" class="blank-input" id="f3_6" data-ans="禁食" style="width: 52px;"><span class="char-hint">（2字）</span>。（2:19-20）
+      </div>
+      <div class="feedback" id="fb-f3"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        4. 有几个文士坐在那里，心里议论，说：『这个人为什么这样说呢？他说 <input type="text" class="blank-input" id="f4_1" data-ans="僭妄" style="width: 52px;"><span class="char-hint">（2字）</span>的话了！除了 <input type="text" class="blank-input" id="f4_2" data-ans="神一位|神" style="width: 66px;"><span class="char-hint">（神一位 或 神）</span>以外，谁能赦罪呢？』（2:6-7）
+      </div>
+      <div class="feedback" id="fb-f4"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        5. 耶稣对他们说：『经上记着 <input type="text" class="blank-input" id="f5_1" data-ans="大卫" style="width: 52px;"><span class="char-hint">（2字）</span>和跟从他的人缺乏饥饿之时所作的事，你们没有念过么？他当 <input type="text" class="blank-input" id="f5_2" data-ans="亚比亚他" style="width: 78px;"><span class="char-hint">（4字）</span>作大祭司的时候，怎么进了 <input type="text" class="blank-input" id="f5_3" data-ans="神" style="width: 36px;"><span class="char-hint">（1字）</span>的殿，吃了 <input type="text" class="blank-input" id="f5_4" data-ans="陈设饼" style="width: 66px;"><span class="char-hint">（3字）</span>，又给 <input type="text" class="blank-input" id="f5_5" data-ans="跟从他的人|跟从的人" style="width: 90px;"><span class="char-hint">（跟从他的人）</span>吃；这饼除了 <input type="text" class="blank-input" id="f5_6" data-ans="祭司" style="width: 52px;"><span class="char-hint">（2字）</span>以外，人都不可吃。』（2:25-26）
+      </div>
+      <div class="feedback" id="fb-f5"></div>
+    </div>
+
+    <div class="fill-card">
+      <div class="fill-text">
+        6. 耶稣听见，就对他们说：『 <input type="text" class="blank-input" id="f6_1" data-ans="康健" style="width: 52px;"><span class="char-hint">（2字）</span>的人用不着医生，<input type="text" class="blank-input" id="f6_2" data-ans="有病" style="width: 52px;"><span class="char-hint">（2字）</span>的人才用得着；我来本不是召 <input type="text" class="blank-input" id="f6_3" data-ans="义人" style="width: 52px;"><span class="char-hint">（2字）</span>，乃是召 <input type="text" class="blank-input" id="f6_4" data-ans="罪人" style="width: 52px;"><span class="char-hint">（2字）</span>。』（2:17）
+      </div>
+      <div class="feedback" id="fb-f6"></div>
+    </div>
+  </div>
+
+  <!-- 3. 选择题 -->
+  <div class="section-card">
+    <div class="section-title">第三部分：选择题（共 14 题）</div>
+    <div class="section-desc">单选或多选题，请直接点按选项：</div>
+
+    <div class="q-item">
+      <div class="q-title">1. 在马可福音第二章中，耶稣对法利赛人说了有关大卫和跟从他的人缺乏、饥饿之时所作的事，这段比喻出自哪里？（可 2:25–26）</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c1" value="A"> A. 撒母耳记上（21:1–6）</label>
+        <label class="opt-label"><input type="radio" name="c1" value="B"> B. 玛拉基书（3:1）</label>
+        <label class="opt-label"><input type="radio" name="c1" value="C"> C. 出埃及记（20:8–11）</label>
+        <label class="opt-label"><input type="radio" name="c1" value="D"> D. 以赛亚书（40:3）</label>
+      </div>
+      <div class="feedback" id="fb-c1"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">2. 以下哪件事并没有记载在马可福音第二章中？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c2" value="A"> A. 耶稣的门徒在安息日掐了麦穗</label>
+        <label class="opt-label"><input type="radio" name="c2" value="B"> B. 耶稣说了新布和新酒的比喻</label>
+        <label class="opt-label"><input type="radio" name="c2" value="C"> C. 耶稣医治了一个由三个人抬来的瘫子</label>
+        <label class="opt-label"><input type="radio" name="c2" value="D"> D. 耶稣回答了有关他的门徒不禁食的提问</label>
+      </div>
+      <div class="feedback" id="fb-c2"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">3. 耶稣对利未说了什么，使他成为祂的门徒？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c3" value="A"> A. 祂说：“现在来吧！”</label>
+        <label class="opt-label"><input type="radio" name="c3" value="B"> B. 祂说：“你跟从我来。”</label>
+        <label class="opt-label"><input type="radio" name="c3" value="C"> C. 祂说：“起来，跟从我。”</label>
+        <label class="opt-label"><input type="radio" name="c3" value="D"> D. 祂说：“你愿意作我的门徒吗？”</label>
+      </div>
+      <div class="feedback" id="fb-c3"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">4. 为了向文士证明“人子在地上有赦罪的权柄”，耶稣对瘫子说了什么实际的行动命令？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c4" value="A"> A. 去吧，你的家人已经在门口等你了！</label>
+        <label class="opt-label"><input type="radio" name="c4" value="B"> B. 到祭司那里去献上洁净的礼物</label>
+        <label class="opt-label"><input type="radio" name="c4" value="C"> C. 我吩咐你，起来，拿你的褥子回家去吧！</label>
+        <label class="opt-label"><input type="radio" name="c4" value="D"> D. 站起来向在场的众人作见证</label>
+      </div>
+      <div class="feedback" id="fb-c4"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">5. 关于新酒与皮袋的比喻，耶稣指出若把新酒装在哪一种容器里，会导致酒裂开皮袋、酒和皮袋都坏了？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c5" value="A"> A. 新皮袋</label>
+        <label class="opt-label"><input type="radio" name="c5" value="B"> B. 陶制瓦罐</label>
+        <label class="opt-label"><input type="radio" name="c5" value="C"> C. 木桶子</label>
+        <label class="opt-label"><input type="radio" name="c5" value="D"> D. 旧皮袋</label>
+      </div>
+      <div class="feedback" id="fb-c5"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">6. 耶稣以旧约历史大卫的例子回应法利赛人。请问大卫在饥饿时进入神的殿，吃了哪一种本来只有谁才可以吃的饼？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c6" value="A"> A. 祭司、陈设饼</label>
+        <label class="opt-label"><input type="radio" name="c6" value="B"> B. 文士、逾越节饼</label>
+        <label class="opt-label"><input type="radio" name="c6" value="C"> C. 亚比亚他、大麦饼</label>
+        <label class="opt-label"><input type="radio" name="c6" value="D"> D. 祭司、无酵饼</label>
+      </div>
+      <div class="feedback" id="fb-c6"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">7. 耶稣在海边教导群众后，看见亚勒腓的儿子利未正在哪里？并呼召他跟从自己？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c7" value="A"> A. 在船上补网</label>
+        <label class="opt-label"><input type="radio" name="c7" value="B"> B. 坐在税关上</label>
+        <label class="opt-label"><input type="radio" name="c7" value="C"> C. 在会堂内</label>
+        <label class="opt-label"><input type="radio" name="c7" value="D"> D. 在麦地的一侧</label>
+      </div>
+      <div class="feedback" id="fb-c7"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">8. 法利赛人中的文士看见耶稣和谁一同在利未的家里一同吃喝？（多选）</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="checkbox" name="c8" value="A"> A. 罪人</label>
+        <label class="opt-label"><input type="checkbox" name="c8" value="B"> B. 税吏</label>
+        <label class="opt-label"><input type="checkbox" name="c8" value="C"> C. 医生</label>
+        <label class="opt-label"><input type="checkbox" name="c8" value="D"> D. 新郎</label>
+      </div>
+      <div class="feedback" id="fb-c8"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">9. 当耶稣对那个瘫痪的人说话时，有几个文士在那里听见了。他们指控耶稣犯了什么罪？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c9" value="A"> A. 虚假</label>
+        <label class="opt-label"><input type="radio" name="c9" value="B"> B. 癫狂</label>
+        <label class="opt-label"><input type="radio" name="c9" value="C"> C. 不敬</label>
+        <label class="opt-label"><input type="radio" name="c9" value="D"> D. 说僭妄的话</label>
+      </div>
+      <div class="feedback" id="fb-c9"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">10. 约翰的门徒和法利赛人常常禁食，但耶稣的门徒却不禁食。耶稣说谁在场时，陪伴之人不能禁食呢？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c10" value="A"> A. 君王</label>
+        <label class="opt-label"><input type="radio" name="c10" value="B"> B. 新郎</label>
+        <label class="opt-label"><input type="radio" name="c10" value="C"> C. 主人</label>
+        <label class="opt-label"><input type="radio" name="c10" value="D"> D. 至高神的儿子</label>
+      </div>
+      <div class="feedback" id="fb-c10"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">11. 在安息日那天，耶稣的门徒路过麦地，掐了麦穗来吃。法利赛人见状便对耶稣提出什么质问？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c11" value="A"> A. 他的门徒为何在安息日生火煮东西吃？</label>
+        <label class="opt-label"><input type="radio" name="c11" value="B"> B. 看哪，他们在安息日为什么作不可作的事呢？</label>
+        <label class="opt-label"><input type="radio" name="c11" value="C"> C. 他和税吏并罪人在安息日吃喝么？</label>
+        <label class="opt-label"><input type="radio" name="c11" value="D"> D. 这些人为什么在安息日不洗手就吃餐？</label>
+      </div>
+      <div class="feedback" id="fb-c11"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">12. 有谁来抱怨耶稣的门徒不禁食？（多选）</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="checkbox" name="c12" value="A"> A. 施洗约翰的门徒</label>
+        <label class="opt-label"><input type="checkbox" name="c12" value="B"> B. 法利赛人的门徒</label>
+        <label class="opt-label"><input type="checkbox" name="c12" value="C"> C. 文士的门徒</label>
+        <label class="opt-label"><input type="checkbox" name="c12" value="D"> D. 撒都该人的门徒</label>
+      </div>
+      <div class="feedback" id="fb-c12"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">13. 在马可福音中，耶稣所行的第一个神迹是在什么日子并在哪里施行的？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c13" value="A"> A. 安息日，迦百农</label>
+        <label class="opt-label"><input type="radio" name="c13" value="B"> B. 除酵节，推罗</label>
+        <label class="opt-label"><input type="radio" name="c13" value="C"> C. 逾越节，拿撒勒</label>
+        <label class="opt-label"><input type="radio" name="c13" value="D"> D. 那天晚上，海边</label>
+      </div>
+      <div class="feedback" id="fb-c13"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">14. （2:1–12）在耶稣治好瘫子的故事中，耶稣为何对瘫子说：“小子，你的罪赦了”？</div>
+      <div class="opt-group">
+        <label class="opt-label"><input type="radio" name="c14" value="A"> A. 祂看见他们的信心</label>
+        <label class="opt-label"><input type="radio" name="c14" value="B"> B. 表达祂在地上有赦罪的权柄</label>
+        <label class="opt-label"><input type="radio" name="c14" value="C"> C. 藉由几个文士的议论，暗示祂就是神（『除了神以外，谁能赦罪呢！』）</label>
+        <label class="opt-label"><input type="radio" name="c14" value="D"> D. 以上皆是</label>
+      </div>
+      <div class="feedback" id="fb-c14"></div>
+    </div>
+  </div>
+
+  <!-- 4. 是非题 -->
+  <div class="section-card">
+    <div class="section-title">第四部分：是非题（共 10 题）</div>
+    <div class="section-desc">判断正误（√ 正确，× 错误）：</div>
+
+    <div class="q-item">
+      <div class="q-title">1. 耶稣召亚勒腓的儿子利未起来跟从他，利未就起来，坐在税关上继续收税。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf1" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf1" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf1"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">2. 耶稣看见他们的信心，就对瘫子说：“小子，你的信救了你。”</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf2" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf2" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf2"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">3. 在加利利，有一个瘫子被人从屋顶缒下来，带到耶稣面前。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf3" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf3" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf3"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">4. 耶稣听见就对他们说：“康健的人用不着医生，有罪的人才用得着。我来本不是召义人，乃是召罪人。”</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf4" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf4" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf4"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">5. 耶稣在利未家里坐席时，有好些税吏和罪人并门徒一起，再没有其他人。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf5" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf5" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf5"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">6. 人是为安息日设立的，安息日不是为人设立的。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf6" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf6" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf6"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">7. 在马可福音第二章中，在医治瘫子前，耶稣正在给许多人治病。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf7" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf7" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf7"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">8. 在关于禁食的比喻中，耶稣说新郎和陪伴之人同在的时候，陪伴之人可以禁食。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf8" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf8" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf8"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">9. 耶稣的门徒，雅各和约翰的父亲是亚勒腓。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf9" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf9" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf9"></div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-title">10. 在《可》第二章中，耶稣为了回应质疑祂的文士（质疑耶稣和税吏并罪人一同吃喝），祂用了“祭司”的身份来比喻自己的角色。</div>
+      <div class="opt-group" style="flex-direction: row;">
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf10" value="T"> √ 正确</label>
+        <label class="opt-label" style="flex: 1;"><input type="radio" name="tf10" value="F"> × 错误</label>
+      </div>
+      <div class="feedback" id="fb-tf10"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'mark_chapter_2_quiz_data';
+
+function clean(s) {
+  return (s || '').replace(/[\s，。、“”！？：；『』~]/g, '').trim();
+}
+
+// 自动保存至 LocalStorage
+function saveProgress() {
+  const data = {
+    matches: {},
+    fills: {},
+    choices: {},
+    tfs: {}
+  };
+
+  // 配对题
+  for (let i = 1; i <= 7; i++) {
+    const el = document.getElementById('m' + i);
+    if (el) data.matches['m' + i] = el.value;
+  }
+
+  // 填空题
+  const fillInputs = document.querySelectorAll('.blank-input');
+  fillInputs.forEach(input => {
+    data.fills[input.id] = input.value;
+  });
+
+  // 选择题
+  for (let i = 1; i <= 14; i++) {
+    const name = 'c' + i;
+    const checked = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+    if (checked.length > 0) data.choices[name] = checked;
+  }
+
+  // 是非题
+  for (let i = 1; i <= 10; i++) {
+    const name = 'tf' + i;
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    if (checked) data.tfs[name] = checked.value;
+  }
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const st = document.getElementById('save-status');
+  if (st) {
+    st.innerText = '● 答案已自动保存至本机（' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'}) + '）';
+  }
+}
+
+// 从 LocalStorage 恢复答案
+function restoreProgress() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (!saved) return;
+  try {
+    const data = JSON.parse(saved);
+
+    // 恢复配对题
+    if (data.matches) {
+      for (const [k, v] of Object.entries(data.matches)) {
+        const el = document.getElementById(k);
+        if (el) el.value = v;
+      }
+    }
+
+    // 恢复填空题
+    if (data.fills) {
+      for (const [k, v] of Object.entries(data.fills)) {
+        const el = document.getElementById(k);
+        if (el) el.value = v;
+      }
+    }
+
+    // 恢复选择题
+    if (data.choices) {
+      for (const [name, arr] of Object.entries(data.choices)) {
+        arr.forEach(val => {
+          const input = document.querySelector(`input[name="${name}"][value="${val}"]`);
+          if (input) input.checked = true;
+        });
+      }
+    }
+
+    // 恢复是非题
+    if (data.tfs) {
+      for (const [name, val] of Object.entries(data.tfs)) {
+        const input = document.querySelector(`input[name="${name}"][value="${val}"]`);
+        if (input) input.checked = true;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to restore progress', e);
+  }
+}
+
+// 重置测验与清空缓存
+function resetQuiz() {
+  if (confirm('确定要清空所有答案并重新开始吗？')) {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+}
+
+// 评分函数
+function gradeAll() {
+  saveProgress();
+  let score = 0;
+  const total = 37;
+
+  // 1. 配对题评分 (7题)
+  const matchAns = { m1: 'F', m2: 'E', m3: 'G', m4: 'A', m5: 'B', m6: 'D', m7: 'C' };
+  let mOk = 0;
+  let mErr = [];
+  for (let i = 1; i <= 7; i++) {
+    const el = document.getElementById('m' + i);
+    const v = (el.value || '').toUpperCase();
+    const correct = matchAns['m' + i];
+    if (v === correct) {
+      mOk++;
+      score++;
+      el.style.borderColor = '#16a34a';
+      el.style.background = '#dcfce7';
+    } else {
+      el.style.borderColor = '#dc2626';
+      el.style.background = '#fee2e2';
+      mErr.push(`第${i}题为: ${correct}`);
+    }
+  }
+  const fbM = document.getElementById('fb-match');
+  if (mOk === 7) {
+    fbM.className = 'feedback is-correct';
+    fbM.innerHTML = '配对题全部正确！';
+  } else {
+    fbM.className = 'feedback is-wrong';
+    fbM.innerHTML = `配对题答对 ${mOk} / 7 题。正确答案：${mErr.join('； ')}`;
+  }
+
+  // 2. 填空题评分 (6题)
+  const fRules = [
+    { id: 1, ins: ['f1_1', 'f1_2'], exp: '安息日 / 掐了（或 掐）', desc: '可 2:23 耶稣当安息日从麦地经过，他门徒行路的时候，掐了麦穗。' },
+    { id: 2, ins: ['f2_1', 'f2_2', 'f2_3', 'f2_4'], exp: '罪赦了 / 褥子 / 人子 / 赦罪', desc: '可 2:9-10 或说你的罪赦了...但要叫你们知道人子在地上有赦罪的权柄。' },
+    { id: 3, ins: ['f3_1', 'f3_2', 'f3_3', 'f3_4', 'f3_5', 'f3_6'], exp: '新郎 / 禁食 / 新郎 / 禁食 / 新郎 / 禁食', desc: '可 2:19-20 新郎和陪伴之人同在的时候，陪伴之人岂能禁食呢？' },
+    { id: 4, ins: ['f4_1', 'f4_2'], exp: '僭妄 / 神一位（或 神）', desc: '可 2:7 他说僭妄的话了！除了神一位以外，谁能赦罪呢？' },
+    { id: 5, ins: ['f5_1', 'f5_2', 'f5_3', 'f5_4', 'f5_5', 'f5_6'], exp: '大卫 / 亚比亚他 / 神 / 陈设饼 / 跟从他的人 / 祭司', desc: '可 2:25-26 大卫在亚比亚他作大祭司时吃了陈设饼。' },
+    { id: 6, ins: ['f6_1', 'f6_2', 'f6_3', 'f6_4'], exp: '康健 / 有病 / 义人 / 罪人', desc: '可 2:17 康健的人用不着医生，有病的人才用得着；我来本不是召义人，乃是召罪人。' }
+  ];
+
+  fRules.forEach(r => {
+    let allOk = true;
+    r.ins.forEach(id => {
+      const el = document.getElementById(id);
+      const val = clean(el.value);
+      const al = el.getAttribute('data-ans').split('|').map(s => clean(s));
+      if (al.includes(val)) {
+        el.style.borderBottomColor = '#16a34a';
+        el.style.background = '#dcfce7';
+      } else {
+        allOk = false;
+        el.style.borderBottomColor = '#dc2626';
+        el.style.background = '#fee2e2';
+      }
+    });
+    const fb = document.getElementById('fb-f' + r.id);
+    if (allOk) {
+      score++;
+      fb.className = 'feedback is-correct';
+      fb.innerHTML = `正确！出处：${r.desc}`;
+    } else {
+      fb.className = 'feedback is-wrong';
+      fb.innerHTML = `答案：【${r.exp}】。解析：${r.desc}`;
+    }
+  });
+
+  // 3. 选择题评分 (14题)
+  const cRules = {
+    c1: { t: 'radio', ans: 'A', exp: 'A. 撒母耳记上（21:1–6）', desc: '可 2:25-26 引用了大卫逃避扫罗时在大祭司处求饼的历史（撒上 21:1-6）。' },
+    c2: { t: 'radio', ans: 'C', exp: 'C. 耶稣医治了一个由三个人抬来的瘫子', desc: '可 2:3 明确记载瘫子是由“四个人”抬来的，并非三个人。' },
+    c3: { t: 'radio', ans: 'B', exp: 'B. 祂说：“你跟从我来。”', desc: '可 2:14 耶稣对利未说：“你跟从我来。”他就起来，跟从了耶稣。' },
+    c4: { t: 'radio', ans: 'C', exp: 'C. 我吩咐你，起来，拿你的褥子回家去吧！', desc: '可 2:11 耶稣对瘫子说：“我吩咐你，起来，拿你的褥子回家去吧！”' },
+    c5: { t: 'radio', ans: 'D', exp: 'D. 旧皮袋', desc: '可 2:22 新酒装在旧皮袋里，发酵会把旧皮袋胀破，导致酒和皮袋都坏了。' },
+    c6: { t: 'radio', ans: 'A', exp: 'A. 祭司、陈设饼', desc: '可 2:26 “这饼除了祭司以外，人都不可吃。”大卫吃了陈设饼。' },
+    c7: { t: 'radio', ans: 'B', exp: 'B. 坐在税关上', desc: '可 2:14 耶稣看见亚勒腓的儿子利未坐在税关上。' },
+    c8: { t: 'check', ans: ['A', 'B'], exp: 'A. 罪人, B. 税吏', desc: '可 2:15-16 文士指控耶稣“和税吏并罪人一同吃喝”。' },
+    c9: { t: 'radio', ans: 'D', exp: 'D. 说僭妄的话', desc: '可 2:7 文士心里议论：“这个人为什么这样说呢？他说僭妄的话了！”' },
+    c10: { t: 'radio', ans: 'B', exp: 'B. 新郎', desc: '可 2:19 新郎和陪伴之人同在的时候，陪伴之人岂能禁食呢？' },
+    c11: { t: 'radio', ans: 'B', exp: 'B. 看哪，他们在安息日为什么作不可作的事呢？', desc: '可 2:24 原文法利赛人的质问。' },
+    c12: { t: 'check', ans: ['A', 'B'], exp: 'A. 施洗约翰的门徒, B. 法利赛人的门徒', desc: '可 2:18 当下，约翰的门徒和法利赛人禁食，来问耶稣。' },
+    c13: { t: 'radio', ans: 'A', exp: 'A. 安息日，迦百农', desc: '可 1:21-26 马可福音记载耶稣所行的第一个神迹是在迦百农会堂赶出污鬼，当天是安息日。' },
+    c14: { t: 'radio', ans: 'D', exp: 'D. 以上皆是', desc: '可 2:5-10 耶稣看他们信心、显明人子赦罪权柄，并以神迹证实神性。' }
+  };
+
+  for (let i = 1; i <= 14; i++) {
+    const k = 'c' + i;
+    const r = cRules[k];
+    const fb = document.getElementById('fb-' + k);
+    let ok = false;
+    if (r.t === 'radio') {
+      const s = document.querySelector(`input[name="${k}"]:checked`);
+      if (s && s.value === r.ans) ok = true;
+    } else {
+      const arr = Array.from(document.querySelectorAll(`input[name="${k}"]:checked`)).map(e => e.value);
+      if (arr.length === r.ans.length && r.ans.every(v => arr.includes(v))) ok = true;
+    }
+    if (ok) {
+      score++;
+      fb.className = 'feedback is-correct';
+      fb.innerHTML = `正确！解析：${r.desc}`;
+    } else {
+      fb.className = 'feedback is-wrong';
+      fb.innerHTML = `错误。答案：【${r.exp}】。解析：${r.desc}`;
+    }
+  }
+
+  // 4. 是非题评分 (10题)
+  const tfRules = {
+    tf1: { a: 'F', exp: '× 错误', desc: '可 2:14 利未就起来，“跟从了耶稣”，而不是继续收税。' },
+    tf2: { a: 'F', exp: '× 错误', desc: '可 2:5 耶稣对瘫子说的是：“小子，你的罪赦了”，并非你的信救了你。' },
+    tf3: { a: 'F', exp: '× 错误', desc: '可 2:1 发生地点在“迦百农”（虽然迦百农在加利利省内，但经文特指迦百农房子里，四个人缒下）。' },
+    tf4: { a: 'F', exp: '× 错误', desc: '可 2:17 原文是“康健的人用不着医生，有病的人才用得着”，题干偷换成了“有罪的人”。' },
+    tf5: { a: 'F', exp: '× 错误', desc: '可 2:16 还有法利赛人中的文士也在场旁观质问，并非“再没有其他人”。' },
+    tf6: { a: 'F', exp: '× 错误', desc: '可 2:27 原文是“安息日是为人设立的，人不是为安息日设立的”，题干颠倒了因果。' },
+    tf7: { a: 'F', exp: '× 错误', desc: '可 2:2 记载许多人聚集，耶稣就对他们“讲道”，并非正在给许多人治病。' },
+    tf8: { a: 'F', exp: '× 错误', desc: '可 2:19 新郎同在的时候，陪伴之人“不能禁食”，题干偷换为“可以禁食”。' },
+    tf9: { a: 'F', exp: '× 错误', desc: '雅各和约翰的父亲是“西庇太”（可 1:19）；亚勒腓是利未（马太）的父亲（可 2:14）。' },
+    tf10: { a: 'F', exp: '× 错误', desc: '可 2:17 耶稣用的是“医生”的身份来比喻自己（康健的人用不着医生，有病的人才用得着），并非祭司。' }
+  };
+
+  for (let i = 1; i <= 10; i++) {
+    const k = 'tf' + i;
+    const r = tfRules[k];
+    const fb = document.getElementById('fb-' + k);
+    const s = document.querySelector(`input[name="${k}"]:checked`);
+    if (s && s.value === r.a) {
+      score++;
+      fb.className = 'feedback is-correct';
+      fb.innerHTML = `正确！解析：${r.desc}`;
+    } else {
+      fb.className = 'feedback is-wrong';
+      fb.innerHTML = `错误。答案：【${r.exp}】。解析：${r.desc}`;
+    }
+  }
+
+  // 顶部计分统计与回滚
+  document.getElementById('total-score').innerText = `${score} / ${total}`;
+  document.getElementById('accuracy-rate').innerText = `${Math.round((score / total) * 100)}%`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// 页面加载完成后恢复答案并监听自动保存
+window.addEventListener('DOMContentLoaded', () => {
+  restoreProgress();
+  document.addEventListener('input', saveProgress);
+  document.addEventListener('change', saveProgress);
+});
+</script>
+
+</body>
+</html>
