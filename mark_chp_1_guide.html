@@ -917,8 +917,10 @@ function renderQuizUI() {
           const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
           fillText = fillText.replace("_____", inputHtml);
         });
-        html = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span></div>
-                <div style="font-size:15px; line-height:2.4; word-break:break-word;">${fillText}</div>`;
+        // ✅ 题号与题目文字合并在同一容器内
+        html = `<div style="font-size:15px; line-height:2.4; word-break:break-word;">
+                  <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+                </div>`;
       }
 
       html += `<div class="feedback" id="fb-${q.id}"></div>`;
