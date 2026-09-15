@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>马可福音第一章 全景备战指南与点选填空测验</title>
+<title>马可福音第一章 全景备战指南与打乱词库测验</title>
 <style>
   :root {
     --primary: #1e3a8a;
@@ -28,10 +28,9 @@
     padding: 0;
     display: flex;
     justify-content: center;
-    font-size: 15px; /* 全局放大字号 */
+    font-size: 15px;
   }
 
-  /* 电脑端最大1000px自适应，手机端自适应 */
   .adaptive-container {
     width: 100%;
     max-width: 1000px;
@@ -56,7 +55,6 @@
   .header h1 { margin: 0 0 6px 0; font-size: 22px; font-weight: 700; }
   .header p { margin: 0; opacity: 0.95; font-size: 14px; }
 
-  /* Tab 导航栏 */
   .nav-tabs {
     display: flex;
     background: #e2e8f0;
@@ -84,7 +82,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
-  /* 悬浮计分条与状态 */
   .dashboard {
     display: flex;
     justify-content: space-between;
@@ -142,7 +139,7 @@
     margin: 0 0 12px 0;
   }
 
-  /* 顶部点选答案词霸库样式 */
+  /* 词霸库 */
   .word-bank-box {
     background: #f1f5f9;
     border: 2px dashed #93c5fd;
@@ -183,7 +180,6 @@
     transform: translateY(-1px);
   }
 
-  /* 时间轴 */
   .timeline-item {
     position: relative;
     padding-left: 22px;
@@ -237,7 +233,6 @@
   }
   .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
 
-  /* 填空题样式 (选中时高亮) */
   .fill-card {
     padding: 12px 14px;
     border: 1px solid #e2e8f0;
@@ -267,7 +262,6 @@
   }
   .char-hint { font-size: 12px; color: #7c3aed; font-weight: normal; margin-left: 3px; }
 
-  /* 选择题与是非题 */
   .q-item { margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px dashed #e2e8f0; }
   .q-item:last-child { border-bottom: none; }
   .q-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
@@ -305,7 +299,7 @@
 <div class="adaptive-container">
   <div class="header">
     <h1>《马可福音》第一章 全景备战指南</h1>
-    <p>17 大核心章节剖析 + 点选免打字填空测验（支持本地自动保存）</p>
+    <p>17 大核心章节剖析 + 打乱词库点选填空测验（支持本地自动保存）</p>
   </div>
 
   <div class="nav-tabs">
@@ -538,28 +532,28 @@
       </div>
     </div>
 
-    <!-- 1. 填空题 (含顶部点击词霸库) -->
+    <!-- 1. 填空题 (含打乱排列的词霸库) -->
     <div class="card">
-      <div class="card-title">第一部分：核心经文与细节填空（点击下方词条直接填入）</div>
+      <div class="card-title">第一部分：核心经文与细节填空（点击下方乱序词条填入）</div>
 
-      <!-- 💡 点击点选词霸库 -->
+      <!-- 💡 打乱顺序的词霸库容器 -->
       <div class="word-bank-box">
         <div class="word-bank-title">
-          <span>💡 填空答案词库（点击词条快速填入所选空格）：</span>
+          <span>💡 答案词库（已随机打乱，点击选择）：</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:2px 8px; font-size:12px; cursor:pointer;" onclick="shuffleWordBank()">🔀 重新打乱</button>
         </div>
         <div class="word-chips" id="word-chips-container">
-          <!-- JS 动态渲染或直接罗列 -->
-          <span class="word-chip" onclick="insertWord('耶稣基督')">耶稣基督</span>
-          <span class="word-chip" onclick="insertWord('骆驼毛')">骆驼毛</span>
+          <span class="word-chip" onclick="insertWord('天未亮')">天未亮</span>
           <span class="word-chip" onclick="insertWord('皮带')">皮带</span>
-          <span class="word-chip" onclick="insertWord('蝗虫')">蝗虫</span>
+          <span class="word-chip" onclick="insertWord('伸手摸他')">伸手摸他</span>
+          <span class="word-chip" onclick="insertWord('耶稣基督')">耶稣基督</span>
           <span class="word-chip" onclick="insertWord('野蜜')">野蜜</span>
           <span class="word-chip" onclick="insertWord('悔改')">悔改</span>
-          <span class="word-chip" onclick="insertWord('福音')">福音</span>
-          <span class="word-chip" onclick="insertWord('天未亮')">天未亮</span>
-          <span class="word-chip" onclick="insertWord('旷野')">旷野</span>
-          <span class="word-chip" onclick="insertWord('伸手摸他')">伸手摸他</span>
+          <span class="word-chip" onclick="insertWord('骆驼毛')">骆驼毛</span>
           <span class="word-chip" onclick="insertWord('肯')">肯</span>
+          <span class="word-chip" onclick="insertWord('旷野')">旷野</span>
+          <span class="word-chip" onclick="insertWord('福音')">福音</span>
+          <span class="word-chip" onclick="insertWord('蝗虫')">蝗虫</span>
         </div>
       </div>
       
@@ -694,7 +688,7 @@
       <div class="q-item">
         <div class="q-title">14. 当西门和同伴找到正在祷告的耶稣并说“众人都找你”时，耶稣如何回应？（可 1:38）</div>
         <div class="opt-group">
-          <label class="opt-label"><input type="radio" name="c14" value="a"> A. “皮刻带我回迦百农医治他们”</label>
+          <label class="opt-label"><input type="radio" name="c14" value="a"> A. “立刻带我回迦百农医治他们”</label>
           <label class="opt-label"><input type="radio" name="c14" value="b"> B. “我们可以往别处去，到邻近的乡村，我也好在那里传道”</label>
           <label class="opt-label"><input type="radio" name="c14" value="c"> C. “叫他们在门前等候，我随后就来”</label>
           <label class="opt-label"><input type="radio" name="c14" value="d"> D. “我只被差遣到以色列家失丧的羊那里”</label>
@@ -767,10 +761,19 @@
 </div>
 
 <script>
-// 当前激活聚焦的填空框ID
 let activeBlankId = null;
 
-// Tab 切换逻辑
+// Fisher-Yates 随机打乱词霸库
+function shuffleWordBank() {
+  const container = document.getElementById('word-chips-container');
+  if (!container) return;
+  const chips = Array.from(container.children);
+  for (let i = chips.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    container.appendChild(chips[j]);
+  }
+}
+
 function switchTab(tabId) {
   document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -779,14 +782,12 @@ function switchTab(tabId) {
   document.getElementById('tab-' + tabId).classList.add('active');
 }
 
-// 点选词霸库答案填入逻辑
 function insertWord(word) {
   let target = null;
   if (activeBlankId) {
     target = document.getElementById(activeBlankId);
   }
   
-  // 如果当前没聚焦或当前聚焦框已有值，则自动找第一个为空的填空框
   if (!target || target.value) {
     const inputs = Array.from(document.querySelectorAll('.blank-input'));
     const emptyInput = inputs.find(i => !i.value);
@@ -797,7 +798,6 @@ function insertWord(word) {
     target.value = word;
     saveAnswers();
     
-    // 寻找下一个为空的框自动高亮，提升连续点选体验
     const inputs = Array.from(document.querySelectorAll('.blank-input'));
     const nextEmpty = inputs.find(i => !i.value);
     
@@ -812,8 +812,7 @@ function insertWord(word) {
   }
 }
 
-// 自动保存逻辑 (localStorage)
-const STORAGE_KEY = 'mark_ch1_full_quiz_answers_v3';
+const STORAGE_KEY = 'mark_ch1_full_quiz_answers_v4';
 
 function saveAnswers() {
   const state = {};
@@ -858,7 +857,7 @@ function loadAnswers() {
 }
 
 function resetProgress() {
-  if (confirm('确定要重置答题记录吗？')) {
+  if (confirm('确定要重置答题记录与打乱顺序吗？')) {
     localStorage.removeItem(STORAGE_KEY);
     location.reload();
   }
@@ -866,12 +865,10 @@ function resetProgress() {
 
 function clean(s) { return (s || '').replace(/[\s，。、“”！？：；]/g, '').trim(); }
 
-// 核对答案逻辑
 function gradeAll() {
   let score = 0;
   const total = 20;
 
-  // 1. 填空题
   const fills = [
     { id: 1, ins: ['f1_1'], ans: ['耶稣基督'], exp: '耶稣基督', desc: '可1:1“神的儿子，耶稣基督福音的起头。”' },
     { id: 2, ins: ['f2_1', 'f2_2', 'f2_3', 'f2_4'], ans: ['骆驼毛', '皮带', '蝗虫', '野蜜'], exp: '骆驼毛 / 皮带 / 蝗虫 / 野蜜', desc: '可1:6 约翰的衣着与饮食考点。' },
@@ -899,7 +896,6 @@ function gradeAll() {
     }
   });
 
-  // 2. 选择题
   const choices = [
     { id: 'c6', type: 'radio', ans: 'c', exp: 'C', desc: '可1:1 马可直接进入约翰与耶稣，无家谱与出生记载。' },
     { id: 'c7', type: 'radio', ans: 'b', exp: 'B. 圣灵', desc: '可1:8 约翰用水施洗，耶稣用圣灵施洗。' },
@@ -930,7 +926,6 @@ function gradeAll() {
     }
   });
 
-  // 3. 是非题
   const tfs = [
     { id: 'tf16', ans: 'F', exp: '× 错误', desc: '马可福音未记录详细三次试探内容（马太与路加有写）。' },
     { id: 'tf17', ans: 'T', exp: '√ 正确', desc: '可1:16-19 最先呼召四人顺序：西门 → 安得烈 → 雅各 → 约翰。' },
@@ -954,7 +949,6 @@ function gradeAll() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// 绑定填空框点击/聚焦事件
 function bindFillEvents() {
   document.querySelectorAll('.blank-input').forEach(input => {
     input.addEventListener('focus', function() {
@@ -970,8 +964,8 @@ function bindFillEvents() {
   });
 }
 
-// 初始化
 window.addEventListener('DOMContentLoaded', () => {
+  shuffleWordBank(); // 页面加载时自动打乱词条顺序
   loadAnswers();
   bindFillEvents();
   document.getElementById('tab-quiz').addEventListener('input', saveAnswers);
