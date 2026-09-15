@@ -11,7 +11,7 @@
     --border: #cbd5e1;
     --text: #0f172a;
     --text-muted: #64748b;
-    --bg-page: #f1f5f9;
+    --bg-page: #f8fafc;
     --card-bg: #ffffff;
     --correct: #15803d;
     --correct-bg: #dcfce7;
@@ -21,57 +21,69 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--text);
     background-color: var(--bg-page);
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
+    font-size: 15px; /* 全局字号调大 */
   }
-  .mobile-container {
+
+  /* 响应式自适应容器：电脑端最大1000px，手机端自适应 */
+  .adaptive-container {
     width: 100%;
-    max-width: 480px;
+    max-width: 1000px;
     min-height: 100vh;
-    background-color: #f8fafc;
-    box-shadow: 0 0 20px rgba(0,0,0,0.08);
-    padding: 14px 12px 60px 12px;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
   }
+  @media (max-width: 768px) {
+    .adaptive-container {
+      padding: 12px 10px 50px 10px;
+    }
+  }
+
   .header {
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
     color: white;
-    padding: 18px 14px;
-    border-radius: 12px;
+    padding: 22px 18px;
+    border-radius: 14px;
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
-  .header h1 { margin: 0 0 4px 0; font-size: 19px; font-weight: 700; }
-  .header p { margin: 0; opacity: 0.9; font-size: 12px; }
+  .header h1 { margin: 0 0 6px 0; font-size: 22px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14px; }
 
   /* Tab 导航栏 */
   .nav-tabs {
     display: flex;
     background: #e2e8f0;
-    padding: 3px;
-    border-radius: 10px;
-    margin-bottom: 14px;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    gap: 4px;
   }
   .tab-btn {
     flex: 1;
     border: none;
     background: transparent;
-    padding: 8px 2px;
-    font-size: 11.5px;
+    padding: 10px 4px;
+    font-size: 14px;
     font-weight: 600;
     color: #475569;
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
+    transition: all 0.2s ease;
   }
   .tab-btn.active {
     background: white;
     color: var(--primary);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
   /* 悬浮计分条与状态 */
@@ -80,152 +92,162 @@
     justify-content: space-between;
     align-items: center;
     background: white;
-    padding: 10px 12px;
-    border-radius: 10px;
-    margin-bottom: 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 18px;
     border: 1px solid var(--border);
     position: sticky;
-    top: 8px;
+    top: 10px;
     z-index: 100;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   }
-  .stat-group { display: flex; gap: 12px; align-items: center; }
-  .stat-val { font-size: 15px; font-weight: bold; color: var(--accent); }
-  .stat-lbl { font-size: 10px; color: var(--text-muted); }
-  .save-status { font-size: 10px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  .stat-group { display: flex; gap: 16px; align-items: center; }
+  .stat-val { font-size: 17px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
   
   .btn-submit {
     background: var(--accent);
     color: white;
     border: none;
-    padding: 8px 12px;
-    font-size: 13px;
+    padding: 9px 16px;
+    font-size: 14px;
     font-weight: 600;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
   }
   .btn-reset {
     background: #e2e8f0;
     color: #475569;
     border: none;
-    padding: 8px 10px;
-    font-size: 13px;
+    padding: 9px 12px;
+    font-size: 14px;
     font-weight: 600;
-    border-radius: 6px;
-    margin-left: 4px;
+    border-radius: 8px;
+    margin-left: 6px;
     cursor: pointer;
   }
 
   .card {
     background: var(--card-bg);
-    border-radius: 10px;
-    padding: 14px 12px;
-    margin-bottom: 14px;
+    border-radius: 12px;
+    padding: 18px 16px;
+    margin-bottom: 18px;
     border: 1px solid var(--border);
   }
   .card-title {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: bold;
     color: var(--primary);
-    border-left: 3px solid var(--accent);
-    padding-left: 8px;
-    margin: 0 0 8px 0;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    margin: 0 0 12px 0;
   }
 
   /* 时间轴 / 大地图 */
   .timeline-item {
     position: relative;
-    padding-left: 20px;
-    margin-bottom: 12px;
+    padding-left: 22px;
+    margin-bottom: 16px;
     border-left: 2px solid #cbd5e1;
   }
   .timeline-item::before {
     content: '';
     position: absolute;
-    left: -5px;
-    top: 4px;
-    width: 8px;
-    height: 8px;
+    left: -6px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: var(--accent);
   }
-  .timeline-verse { font-size: 11px; font-weight: bold; color: var(--accent); }
-  .timeline-title { font-size: 13.5px; font-weight: 700; margin: 2px 0; }
-  .timeline-desc { font-size: 12px; color: #475569; line-height: 1.45; }
+  .timeline-verse { font-size: 13px; font-weight: bold; color: var(--accent); }
+  .timeline-title { font-size: 15.5px; font-weight: 700; margin: 2px 0 4px 0; }
+  .timeline-desc { font-size: 14px; color: #334155; line-height: 1.55; }
 
-  /* 陷阱卡片与对比表格 */
+  /* 易混淆人物与陷阱卡片 */
   .trap-box {
     background: #fffbe6;
     border: 1px solid #ffe58f;
-    border-radius: 6px;
-    padding: 8px 10px;
-    margin-bottom: 8px;
-    font-size: 12px;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    font-size: 14px;
   }
-  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 10px; padding: 1px 5px; border-radius: 3px; font-weight: bold; margin-right: 4px; }
+  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
+
+  .notice-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #991b1b;
+  }
   
   .info-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 12px;
-    margin-top: 6px;
+    font-size: 14px;
+    margin-top: 8px;
   }
   .info-table th, .info-table td {
     border: 1px solid var(--border);
-    padding: 6px 8px;
+    padding: 8px 10px;
     text-align: left;
   }
-  .info-table th { background: #f1f5f9; font-weight: bold; }
+  .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
 
-  /* 填空题样式 (16px防缩放) */
+  /* 填空题样式 (输入框16px防缩放) */
   .fill-card {
-    padding: 10px 12px;
+    padding: 12px 14px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     background: #ffffff;
   }
-  .fill-text { font-size: 13.5px; line-height: 2.3; word-break: break-word; }
+  .fill-text { font-size: 15px; line-height: 2.3; word-break: break-word; }
   .blank-input {
     border: none;
     border-bottom: 2px solid #64748b;
     background: #f1f5f9;
-    padding: 1px 4px;
+    padding: 2px 6px;
     font-size: 16px;
     font-weight: bold;
     color: #0f172a;
     text-align: center;
-    margin: 0 2px;
+    margin: 0 3px;
     border-radius: 4px 4px 0 0;
   }
   .blank-input:focus { outline: none; border-color: var(--accent); background: #eff6ff; }
-  .char-hint { font-size: 11px; color: #7c3aed; font-weight: normal; margin-left: 2px; }
+  .char-hint { font-size: 12px; color: #7c3aed; font-weight: normal; margin-left: 3px; }
 
   /* 选择题/是非题卡片 */
-  .q-item { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #e2e8f0; }
+  .q-item { margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px dashed #e2e8f0; }
   .q-item:last-child { border-bottom: none; }
-  .q-title { font-size: 13.5px; font-weight: 600; margin-bottom: 8px; line-height: 1.5; }
-  .opt-group { display: flex; flex-direction: column; gap: 6px; }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
   .opt-label {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 10px;
+    gap: 10px;
+    padding: 10px 12px;
     border: 1px solid #e2e8f0;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14.5px;
     background: #ffffff;
   }
-  .opt-label input { width: 16px; height: 16px; flex-shrink: 0; }
+  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
 
   .feedback {
     display: none;
-    margin-top: 8px;
-    padding: 8px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    line-height: 1.45;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    line-height: 1.5;
   }
   .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
   .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
@@ -236,15 +258,15 @@
 </head>
 <body>
 
-<div class="mobile-container">
+<div class="adaptive-container">
   <div class="header">
-    <h1>《马可福音》第一章 备战指南</h1>
-    <p>17 大核心章节剖析 + 互动全真测验（支持本地自动保存）</p>
+    <h1>《马可福音》第一章 全景备战指南</h1>
+    <p>17 大核心章节剖析 + 易混淆人物矩阵 + 互动全真测验（支持本地自动保存）</p>
   </div>
 
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('map')">🗺️ 17大事件</button>
-    <button class="tab-btn" onclick="switchTab('traps')">⚠️ 考点陷阱</button>
+    <button class="tab-btn" onclick="switchTab('traps')">⚠️ 易混人物与陷阱</button>
     <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文</button>
     <button class="tab-btn" onclick="switchTab('quiz')">✍️ 全真测验</button>
   </div>
@@ -328,8 +350,40 @@
     </div>
   </div>
 
-  <!-- TAB 2: 高频考点与陷阱 -->
+  <!-- TAB 2: 易混淆人物与考点陷阱 -->
   <div id="tab-traps" class="tab-content">
+    
+    <!-- 补全：第一章最容易混淆的「人物」 -->
+    <div class="card">
+      <div class="card-title">🧠 第一章最容易混淆的「人物」</div>
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th style="width: 30%;">人物</th>
+            <th style="width: 70%;">身份 / 动作特征</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>施洗约翰</strong></td><td>预备主的道路、水施洗、骆驼毛衣皮带、吃蝗虫野蜜。</td></tr>
+          <tr><td><strong>西门（彼得）</strong></td><td>门徒、打鱼的、安得烈的兄弟（在海边撒网）。</td></tr>
+          <tr><td><strong>安得烈</strong></td><td>门徒、西门的兄弟（在海边撒网）。</td></tr>
+          <tr><td><strong>雅各</strong></td><td>门徒、西庇太的儿子、约翰的兄弟（在船上补网）。</td></tr>
+          <tr><td><strong>约翰</strong></td><td>门徒、雅各的兄弟、西庇太的儿子（在船上补网）。</td></tr>
+          <tr><td><strong>西庇太</strong></td><td>雅各、约翰的父亲（同在船上与雇工补网）。</td></tr>
+          <tr><td><strong>西门岳母</strong></td><td>发热（患热病），被耶稣拉手扶起后立刻服事他们。</td></tr>
+          <tr><td><strong>污鬼</strong></td><td>在迦百农会堂喊叫，称耶稣为“神的圣者”。</td></tr>
+          <tr><td><strong>长大麻风者</strong></td><td>向耶稣跪下求“你若肯，必能叫我洁净了”，后广传此事。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="notice-box">
+        <strong>⚠️ 特别注意高频错题：</strong><br>
+        <strong>西门 ≠ 西庇太</strong><br>
+        • <strong>西门</strong>是：安得烈的兄弟。<br>
+        • 雅各、约翰的父亲是：<strong>西庇太</strong>。
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-title">比赛极易扣分对比陷阱</div>
 
@@ -362,7 +416,7 @@
         • 导致结果：耶稣不得再明明进城，只能在外边<strong>旷野地方</strong>。
       </div>
 
-      <p style="font-size:12.5px; font-weight:bold; margin:10px 0 4px 0;">🔥 第一章 3 大重复出现的关键词：</p>
+      <p style="font-size:14px; font-weight:bold; margin:12px 0 6px 0;">🔥 第一章 3 大重复出现的关键词：</p>
       <table class="info-table">
         <tr><th>关键词</th><th>出现场景 / 含义</th></tr>
         <tr><td><strong>「随即 / 立刻」</strong></td><td>马可福音核心特色，体现福音节奏紧凑推进（如受洗后随即被催入旷野）。</td></tr>
@@ -370,7 +424,7 @@
         <tr><td><strong>「旷野」</strong></td><td>约翰旷野传道 → 耶稣旷野受试探 → 耶稣天未亮旷野祷告 → 医治麻风后退居旷野。</td></tr>
       </table>
 
-      <p style="font-size:12.5px; font-weight:bold; margin:12px 0 4px 0;">⏰ 第一章 3 大时间考点：</p>
+      <p style="font-size:14px; font-weight:bold; margin:14px 0 6px 0;">⏰ 第一章 3 大时间考点：</p>
       <table class="info-table">
         <tr><th>时间点</th><th>发生事件</th></tr>
         <tr><td><strong>四十天</strong></td><td>耶稣在旷野受撒但试探。</td></tr>
@@ -385,37 +439,37 @@
     <div class="card">
       <div class="card-title">第一章 8 处必背经文</div>
 
-      <p style="font-size:12px; color:#475569; margin-bottom:6px;"><strong>🥇 Level 1：核心高频必背</strong></p>
-      <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
+      <p style="font-size:13px; color:#475569; margin-bottom:8px;"><strong>🥇 Level 1：核心高频必背</strong></p>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; font-size:14px; margin-bottom:8px;">
         <strong>1. 可 1:1</strong> 神的儿子，耶稣基督福音的起头。
       </div>
-      <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; font-size:14px; margin-bottom:8px;">
         <strong>2. 可 1:3</strong> 在旷野有人声喊着说：预备主的道，修直他的路。
       </div>
-      <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; font-size:14px; margin-bottom:8px;">
         <strong>3. 可 1:8</strong> 我是用水给你们施洗，他却要用圣灵给你们施洗。
       </div>
-      <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; font-size:14px; margin-bottom:8px;">
         <strong>4. 可 1:11</strong> 你是我的爱子，我喜悦你。
       </div>
-      <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:12px;">
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; font-size:14px; margin-bottom:14px;">
         <strong>5. 可 1:15</strong> 日期满了，神的国近了。你们当悔改，信福音！
       </div>
 
-      <p style="font-size:12px; color:#475569; margin-bottom:6px;"><strong>🥈 Level 2：重点进阶背诵</strong></p>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
+      <p style="font-size:13px; color:#475569; margin-bottom:8px;"><strong>🥈 Level 2：重点进阶背诵</strong></p>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; font-size:14px; margin-bottom:8px;">
         <strong>6. 可 1:17</strong> 来跟从我，我要叫你们得人如得鱼一样。
       </div>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; font-size:14px; margin-bottom:8px;">
         <strong>7. 可 1:35</strong> 次日早晨，天未亮的时候，耶稣起来，到旷野地方去，在那里祷告。
       </div>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:14px;">
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; font-size:14px; margin-bottom:16px;">
         <strong>8. 可 1:41</strong> 耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”
       </div>
 
-      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:10px; border-radius:8px;">
-        <p style="font-size:13px; font-weight:bold; color:#166534; margin:0 0 4px 0;">🎯 马可福音第 1 章速记总复习口诀：</p>
-        <p style="font-size:12px; color:#15803d; margin:0; line-height:1.5;">
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px; border-radius:10px;">
+        <p style="font-size:14px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 马可福音第 1 章速记总复习口诀：</p>
+        <p style="font-size:13.5px; color:#15803d; margin:0; line-height:1.6;">
           约翰旷野传悔改，骆驼毛衣蝗虫蜜；耶稣约旦受洗，圣灵如鸽天声；四十日旷野受试探；加利利海召四门徒；迦百农会堂显权柄；西门岳母退热病；日落医病赶鬼；天未亮旷野祷告；麻风病人跪求洁净；耶稣动慈心伸手摸，叫他见祭司。
         </p>
       </div>
@@ -448,35 +502,35 @@
       
       <div class="fill-card">
         <div class="fill-text">
-          1. 马可福音1:1“神的儿子，<input type="text" class="blank-input" id="f1_1" data-ans="耶稣基督" style="width:72px;"><span class="char-hint">（4字）</span>福音的起头。”
+          1. 马可福音1:1“神的儿子，<input type="text" class="blank-input" id="f1_1" data-ans="耶稣基督" style="width:80px;"><span class="char-hint">（4字）</span>福音的起头。”
         </div>
         <div class="feedback" id="fb-f1"></div>
       </div>
 
       <div class="fill-card">
         <div class="fill-text">
-          2. 施洗约翰穿<input type="text" class="blank-input" id="f2_1" data-ans="骆驼毛" style="width:60px;"><span class="char-hint">（3字）</span>的衣服，腰间束<input type="text" class="blank-input" id="f2_2" data-ans="皮带" style="width:44px;"><span class="char-hint">（2字）</span>，吃的是<input type="text" class="blank-input" id="f2_3" data-ans="蝗虫" style="width:44px;"><span class="char-hint">（2字）</span>和<input type="text" class="blank-input" id="f2_4" data-ans="野蜜" style="width:44px;"><span class="char-hint">（2字）</span>。（1:6）
+          2. 施洗约翰穿<input type="text" class="blank-input" id="f2_1" data-ans="骆驼毛" style="width:66px;"><span class="char-hint">（3字）</span>的衣服，腰间束<input type="text" class="blank-input" id="f2_2" data-ans="皮带" style="width:50px;"><span class="char-hint">（2字）</span>，吃的是<input type="text" class="blank-input" id="f2_3" data-ans="蝗虫" style="width:50px;"><span class="char-hint">（2字）</span>和<input type="text" class="blank-input" id="f2_4" data-ans="野蜜" style="width:50px;"><span class="char-hint">（2字）</span>。（1:6）
         </div>
         <div class="feedback" id="fb-f2"></div>
       </div>
 
       <div class="fill-card">
         <div class="fill-text">
-          3. 耶稣说：“日期满了，神的国近了。你们当<input type="text" class="blank-input" id="f3_1" data-ans="悔改" style="width:44px;"><span class="char-hint">（2字）</span>，信<input type="text" class="blank-input" id="f3_2" data-ans="福音" style="width:44px;"><span class="char-hint">（2字）</span>！”（1:15）
+          3. 耶稣说：“日期满了，神的国近了。你们当<input type="text" class="blank-input" id="f3_1" data-ans="悔改" style="width:50px;"><span class="char-hint">（2字）</span>，信<input type="text" class="blank-input" id="f3_2" data-ans="福音" style="width:50px;"><span class="char-hint">（2字）</span>！”（1:15）
         </div>
         <div class="feedback" id="fb-f3"></div>
       </div>
 
       <div class="fill-card">
         <div class="fill-text">
-          4. 次日早晨，<input type="text" class="blank-input" id="f4_1" data-ans="天未亮" style="width:60px;"><span class="char-hint">（3字）</span>的时候，耶稣起来，到<input type="text" class="blank-input" id="f4_2" data-ans="旷野" style="width:44px;"><span class="char-hint">（2字）</span>地方去，在那里祷告。（1:35）
+          4. 次日早晨，<input type="text" class="blank-input" id="f4_1" data-ans="天未亮" style="width:66px;"><span class="char-hint">（3字）</span>的时候，耶稣起来，到<input type="text" class="blank-input" id="f4_2" data-ans="旷野" style="width:50px;"><span class="char-hint">（2字）</span>地方去，在那里祷告。（1:35）
         </div>
         <div class="feedback" id="fb-f4"></div>
       </div>
 
       <div class="fill-card">
         <div class="fill-text">
-          5. 大麻风患者跪下求耶稣：“你若<input type="text" class="blank-input" id="f5_1" data-ans="肯" style="width:30px;"><span class="char-hint">（1字）</span>，必能叫我洁净了。”耶稣动了慈心，就<input type="text" class="blank-input" id="f5_2" data-ans="伸手摸他" style="width:72px;"><span class="char-hint">（4字）</span>，说：“我<input type="text" class="blank-input" id="f5_3" data-ans="肯" style="width:30px;"><span class="char-hint">（1字）</span>，你洁净了吧！”（1:40-41）
+          5. 大麻风患者跪下求耶稣：“你若<input type="text" class="blank-input" id="f5_1" data-ans="肯" style="width:36px;"><span class="char-hint">（1字）</span>，必能叫我洁净了。”耶稣动了慈心，就<input type="text" class="blank-input" id="f5_2" data-ans="伸手摸他" style="width:80px;"><span class="char-hint">（4字）</span>，说：“我<input type="text" class="blank-input" id="f5_3" data-ans="肯" style="width:36px;"><span class="char-hint">（1字）</span>，你洁净了吧！”（1:40-41）
         </div>
         <div class="feedback" id="fb-f5"></div>
       </div>
@@ -660,7 +714,7 @@ function switchTab(tabId) {
 }
 
 // 自动保存逻辑 (localStorage)
-const STORAGE_KEY = 'mark_ch1_full_quiz_answers';
+const STORAGE_KEY = 'mark_ch1_full_quiz_answers_v2';
 
 function saveAnswers() {
   const state = {};
