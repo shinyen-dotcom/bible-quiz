@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>马可福音第一章 全景备战指南与全真测验</title>
+<title>马可福音第一章 全景备战指南与点选填空测验</title>
 <style>
   :root {
     --primary: #1e3a8a;
@@ -28,10 +28,10 @@
     padding: 0;
     display: flex;
     justify-content: center;
-    font-size: 15px; /* 全局字号调大 */
+    font-size: 15px; /* 全局放大字号 */
   }
 
-  /* 响应式自适应容器：电脑端最大1000px，手机端自适应 */
+  /* 电脑端最大1000px自适应，手机端自适应 */
   .adaptive-container {
     width: 100%;
     max-width: 1000px;
@@ -42,9 +42,7 @@
     margin: 0 auto;
   }
   @media (max-width: 768px) {
-    .adaptive-container {
-      padding: 12px 10px 50px 10px;
-    }
+    .adaptive-container { padding: 12px 10px 50px 10px; }
   }
 
   .header {
@@ -144,7 +142,48 @@
     margin: 0 0 12px 0;
   }
 
-  /* 时间轴 / 大地图 */
+  /* 顶部点选答案词霸库样式 */
+  .word-bank-box {
+    background: #f1f5f9;
+    border: 2px dashed #93c5fd;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+  .word-bank-title {
+    font-size: 13.5px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .word-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .word-chip {
+    background: #ffffff;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .word-chip:hover, .word-chip:active {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  /* 时间轴 */
   .timeline-item {
     position: relative;
     padding-left: 22px;
@@ -165,7 +204,6 @@
   .timeline-title { font-size: 15.5px; font-weight: 700; margin: 2px 0 4px 0; }
   .timeline-desc { font-size: 14px; color: #334155; line-height: 1.55; }
 
-  /* 易混淆人物与陷阱卡片 */
   .trap-box {
     background: #fffbe6;
     border: 1px solid #ffe58f;
@@ -199,7 +237,7 @@
   }
   .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
 
-  /* 填空题样式 (输入框16px防缩放) */
+  /* 填空题样式 (选中时高亮) */
   .fill-card {
     padding: 12px 14px;
     border: 1px solid #e2e8f0;
@@ -210,7 +248,7 @@
   .fill-text { font-size: 15px; line-height: 2.3; word-break: break-word; }
   .blank-input {
     border: none;
-    border-bottom: 2px solid #64748b;
+    border-bottom: 2.5px solid #64748b;
     background: #f1f5f9;
     padding: 2px 6px;
     font-size: 16px;
@@ -219,11 +257,17 @@
     text-align: center;
     margin: 0 3px;
     border-radius: 4px 4px 0 0;
+    transition: all 0.2s ease;
   }
-  .blank-input:focus { outline: none; border-color: var(--accent); background: #eff6ff; }
+  .blank-input:focus, .blank-input.active-blank {
+    outline: none;
+    border-bottom-color: var(--accent);
+    background: #dbeafe;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+  }
   .char-hint { font-size: 12px; color: #7c3aed; font-weight: normal; margin-left: 3px; }
 
-  /* 选择题/是非题卡片 */
+  /* 选择题与是非题 */
   .q-item { margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px dashed #e2e8f0; }
   .q-item:last-child { border-bottom: none; }
   .q-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
@@ -261,7 +305,7 @@
 <div class="adaptive-container">
   <div class="header">
     <h1>《马可福音》第一章 全景备战指南</h1>
-    <p>17 大核心章节剖析 + 易混淆人物矩阵 + 互动全真测验（支持本地自动保存）</p>
+    <p>17 大核心章节剖析 + 点选免打字填空测验（支持本地自动保存）</p>
   </div>
 
   <div class="nav-tabs">
@@ -271,7 +315,7 @@
     <button class="tab-btn" onclick="switchTab('quiz')">✍️ 全真测验</button>
   </div>
 
-  <!-- TAB 1: 考点大地图 (17大板块) -->
+  <!-- TAB 1: 考点大地图 -->
   <div id="tab-map" class="tab-content active">
     <div class="card">
       <div class="card-title">第一章 7 大主线与 17 节点大地图</div>
@@ -352,8 +396,6 @@
 
   <!-- TAB 2: 易混淆人物与考点陷阱 -->
   <div id="tab-traps" class="tab-content">
-    
-    <!-- 补全：第一章最容易混淆的「人物」 -->
     <div class="card">
       <div class="card-title">🧠 第一章最容易混淆的「人物」</div>
       <table class="info-table">
@@ -496,20 +538,41 @@
       </div>
     </div>
 
-    <!-- 1. 填空题 -->
+    <!-- 1. 填空题 (含顶部点击词霸库) -->
     <div class="card">
-      <div class="card-title">第一部分：核心经文与细节填空</div>
+      <div class="card-title">第一部分：核心经文与细节填空（点击下方词条直接填入）</div>
+
+      <!-- 💡 点击点选词霸库 -->
+      <div class="word-bank-box">
+        <div class="word-bank-title">
+          <span>💡 填空答案词库（点击词条快速填入所选空格）：</span>
+        </div>
+        <div class="word-chips" id="word-chips-container">
+          <!-- JS 动态渲染或直接罗列 -->
+          <span class="word-chip" onclick="insertWord('耶稣基督')">耶稣基督</span>
+          <span class="word-chip" onclick="insertWord('骆驼毛')">骆驼毛</span>
+          <span class="word-chip" onclick="insertWord('皮带')">皮带</span>
+          <span class="word-chip" onclick="insertWord('蝗虫')">蝗虫</span>
+          <span class="word-chip" onclick="insertWord('野蜜')">野蜜</span>
+          <span class="word-chip" onclick="insertWord('悔改')">悔改</span>
+          <span class="word-chip" onclick="insertWord('福音')">福音</span>
+          <span class="word-chip" onclick="insertWord('天未亮')">天未亮</span>
+          <span class="word-chip" onclick="insertWord('旷野')">旷野</span>
+          <span class="word-chip" onclick="insertWord('伸手摸他')">伸手摸他</span>
+          <span class="word-chip" onclick="insertWord('肯')">肯</span>
+        </div>
+      </div>
       
       <div class="fill-card">
         <div class="fill-text">
-          1. 马可福音1:1“神的儿子，<input type="text" class="blank-input" id="f1_1" data-ans="耶稣基督" style="width:80px;"><span class="char-hint">（4字）</span>福音的起头。”
+          1. 马可福音1:1“神的儿子，<input type="text" class="blank-input" id="f1_1" data-ans="耶稣基督" style="width:84px;"><span class="char-hint">（4字）</span>福音的起头。”
         </div>
         <div class="feedback" id="fb-f1"></div>
       </div>
 
       <div class="fill-card">
         <div class="fill-text">
-          2. 施洗约翰穿<input type="text" class="blank-input" id="f2_1" data-ans="骆驼毛" style="width:66px;"><span class="char-hint">（3字）</span>的衣服，腰间束<input type="text" class="blank-input" id="f2_2" data-ans="皮带" style="width:50px;"><span class="char-hint">（2字）</span>，吃的是<input type="text" class="blank-input" id="f2_3" data-ans="蝗虫" style="width:50px;"><span class="char-hint">（2字）</span>和<input type="text" class="blank-input" id="f2_4" data-ans="野蜜" style="width:50px;"><span class="char-hint">（2字）</span>。（1:6）
+          2. 施洗约翰穿<input type="text" class="blank-input" id="f2_1" data-ans="骆驼毛" style="width:70px;"><span class="char-hint">（3字）</span>的衣服，腰间束<input type="text" class="blank-input" id="f2_2" data-ans="皮带" style="width:50px;"><span class="char-hint">（2字）</span>，吃的是<input type="text" class="blank-input" id="f2_3" data-ans="蝗虫" style="width:50px;"><span class="char-hint">（2字）</span>和<input type="text" class="blank-input" id="f2_4" data-ans="野蜜" style="width:50px;"><span class="char-hint">（2字）</span>。（1:6）
         </div>
         <div class="feedback" id="fb-f2"></div>
       </div>
@@ -523,14 +586,14 @@
 
       <div class="fill-card">
         <div class="fill-text">
-          4. 次日早晨，<input type="text" class="blank-input" id="f4_1" data-ans="天未亮" style="width:66px;"><span class="char-hint">（3字）</span>的时候，耶稣起来，到<input type="text" class="blank-input" id="f4_2" data-ans="旷野" style="width:50px;"><span class="char-hint">（2字）</span>地方去，在那里祷告。（1:35）
+          4. 次日早晨，<input type="text" class="blank-input" id="f4_1" data-ans="天未亮" style="width:70px;"><span class="char-hint">（3字）</span>的时候，耶稣起来，到<input type="text" class="blank-input" id="f4_2" data-ans="旷野" style="width:50px;"><span class="char-hint">（2字）</span>地方去，在那里祷告。（1:35）
         </div>
         <div class="feedback" id="fb-f4"></div>
       </div>
 
       <div class="fill-card">
         <div class="fill-text">
-          5. 大麻风患者跪下求耶稣：“你若<input type="text" class="blank-input" id="f5_1" data-ans="肯" style="width:36px;"><span class="char-hint">（1字）</span>，必能叫我洁净了。”耶稣动了慈心，就<input type="text" class="blank-input" id="f5_2" data-ans="伸手摸他" style="width:80px;"><span class="char-hint">（4字）</span>，说：“我<input type="text" class="blank-input" id="f5_3" data-ans="肯" style="width:36px;"><span class="char-hint">（1字）</span>，你洁净了吧！”（1:40-41）
+          5. 大麻风患者跪下求耶稣：“你若<input type="text" class="blank-input" id="f5_1" data-ans="肯" style="width:36px;"><span class="char-hint">（1字）</span>，必能叫我洁净了。”耶稣动了慈心，就<input type="text" class="blank-input" id="f5_2" data-ans="伸手摸他" style="width:84px;"><span class="char-hint">（4字）</span>，说：“我<input type="text" class="blank-input" id="f5_3" data-ans="肯" style="width:36px;"><span class="char-hint">（1字）</span>，你洁净了吧！”（1:40-41）
         </div>
         <div class="feedback" id="fb-f5"></div>
       </div>
@@ -631,7 +694,7 @@
       <div class="q-item">
         <div class="q-title">14. 当西门和同伴找到正在祷告的耶稣并说“众人都找你”时，耶稣如何回应？（可 1:38）</div>
         <div class="opt-group">
-          <label class="opt-label"><input type="radio" name="c14" value="a"> A. “立刻带我回迦百农医治他们”</label>
+          <label class="opt-label"><input type="radio" name="c14" value="a"> A. “皮刻带我回迦百农医治他们”</label>
           <label class="opt-label"><input type="radio" name="c14" value="b"> B. “我们可以往别处去，到邻近的乡村，我也好在那里传道”</label>
           <label class="opt-label"><input type="radio" name="c14" value="c"> C. “叫他们在门前等候，我随后就来”</label>
           <label class="opt-label"><input type="radio" name="c14" value="d"> D. “我只被差遣到以色列家失丧的羊那里”</label>
@@ -704,6 +767,9 @@
 </div>
 
 <script>
+// 当前激活聚焦的填空框ID
+let activeBlankId = null;
+
 // Tab 切换逻辑
 function switchTab(tabId) {
   document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -713,8 +779,41 @@ function switchTab(tabId) {
   document.getElementById('tab-' + tabId).classList.add('active');
 }
 
+// 点选词霸库答案填入逻辑
+function insertWord(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  
+  // 如果当前没聚焦或当前聚焦框已有值，则自动找第一个为空的填空框
+  if (!target || target.value) {
+    const inputs = Array.from(document.querySelectorAll('.blank-input'));
+    const emptyInput = inputs.find(i => !i.value);
+    if (emptyInput) target = emptyInput;
+  }
+  
+  if (target) {
+    target.value = word;
+    saveAnswers();
+    
+    // 寻找下一个为空的框自动高亮，提升连续点选体验
+    const inputs = Array.from(document.querySelectorAll('.blank-input'));
+    const nextEmpty = inputs.find(i => !i.value);
+    
+    inputs.forEach(b => b.classList.remove('active-blank'));
+    if (nextEmpty) {
+      nextEmpty.classList.add('active-blank');
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add('active-blank');
+    }
+  }
+}
+
 // 自动保存逻辑 (localStorage)
-const STORAGE_KEY = 'mark_ch1_full_quiz_answers_v2';
+const STORAGE_KEY = 'mark_ch1_full_quiz_answers_v3';
 
 function saveAnswers() {
   const state = {};
@@ -855,9 +954,26 @@ function gradeAll() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// 事件监听与初始化
+// 绑定填空框点击/聚焦事件
+function bindFillEvents() {
+  document.querySelectorAll('.blank-input').forEach(input => {
+    input.addEventListener('focus', function() {
+      document.querySelectorAll('.blank-input').forEach(b => b.classList.remove('active-blank'));
+      this.classList.add('active-blank');
+      activeBlankId = this.id;
+    });
+    input.addEventListener('click', function() {
+      document.querySelectorAll('.blank-input').forEach(b => b.classList.remove('active-blank'));
+      this.classList.add('active-blank');
+      activeBlankId = this.id;
+    });
+  });
+}
+
+// 初始化
 window.addEventListener('DOMContentLoaded', () => {
   loadAnswers();
+  bindFillEvents();
   document.getElementById('tab-quiz').addEventListener('input', saveAnswers);
   document.getElementById('tab-quiz').addEventListener('change', saveAnswers);
 });
