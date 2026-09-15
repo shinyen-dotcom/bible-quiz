@@ -28,7 +28,7 @@
     padding: 0;
     display: flex;
     justify-content: center;
-    font-size: 15px; /* 全局字号自适应放大 */
+    font-size: 15px;
   }
 
   .adaptive-container {
@@ -205,6 +205,40 @@
   }
   .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
 
+  /* 配对表格样式 */
+  .match-table-wrap { width: 100%; overflow-x: auto; margin-top: 10px; }
+  .match-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: white;
+  }
+  .match-table th {
+    background: #f1f5f9;
+    padding: 9px 8px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .match-table td {
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    vertical-align: middle;
+    line-height: 1.45;
+  }
+  .col-num { width: 44%; }
+  .col-input { width: 12%; text-align: center; background: #f8fafc; }
+  .col-alpha { width: 44%; }
+  .match-select {
+    width: 48px;
+    height: 32px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: white;
+  }
+
   /* 填空题词霸库 */
   .word-bank-box {
     background: #eff6ff;
@@ -227,9 +261,9 @@
     background: #ffffff;
     border: 1.5px solid var(--accent);
     color: var(--accent);
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
@@ -250,22 +284,22 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 12px;
+    padding: 9px 12px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14.5px;
+    font-size: 14px;
     background: #ffffff;
   }
   .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
 
-  /* 填空输入框 (点击已填项可反选清空) */
+  /* 填空输入框 */
   .blank-input {
     border: none;
     border-bottom: 2.5px solid #64748b;
     background: #f1f5f9;
     padding: 2px 8px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     color: #0f172a;
     text-align: center;
@@ -309,11 +343,12 @@
     <p>原汁原味 17 大核心章节讲义 ＋ 全真 50 题随机抽测验</p>
   </div>
 
+  <!-- 导航栏：50题随机测验已移至最右侧 -->
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('guide')">📖 原本备战指南 (17小节)</button>
-    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
     <button class="tab-btn" onclick="switchTab('traps')">🧠 易混人物与矩阵</button>
     <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
   </div>
 
   <!-- TAB 1: 17大章节原汁原味备战指南 -->
@@ -453,41 +488,7 @@
     </div>
   </div>
 
-  <!-- TAB 2: 50 题随机测验 (交互界面) -->
-  <div id="tab-quiz" class="tab-content">
-    <div class="dashboard">
-      <div class="stat-group">
-        <div class="stat-box">
-          <div class="stat-val" id="total-score">0 / 50</div>
-          <div class="stat-lbl">答对题数</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-val" id="accuracy-rate">0%</div>
-          <div class="stat-lbl">正确率</div>
-        </div>
-      </div>
-      <div>
-        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
-        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
-        <span class="save-status" id="save-status">💾 进度已自动保存</span>
-      </div>
-    </div>
-
-    <!-- 填空题词霸库 -->
-    <div class="card" id="fill-word-bank-card" style="display:none;">
-      <div class="word-bank-box">
-        <div class="word-bank-title">
-          <span>💡 本次填空题答案词库（点击填入；点击已填框可反选清空）：</span>
-          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
-        </div>
-        <div class="word-chips" id="word-chips-container"></div>
-      </div>
-    </div>
-
-    <div id="quiz-questions-container"></div>
-  </div>
-
-  <!-- TAB 3: 易混人物与矩阵 -->
+  <!-- TAB 2: 易混人物与矩阵 -->
   <div id="tab-traps" class="tab-content">
     <div class="card">
       <div class="card-title">🧠 第一章最容易混淆的「人物」</div>
@@ -526,7 +527,7 @@
     </div>
   </div>
 
-  <!-- TAB 4: 必背经文与口诀 -->
+  <!-- TAB 3: 必背经文与口诀 -->
   <div id="tab-verses" class="tab-content">
     <div class="card">
       <div class="card-title">第一章 8 处必背经文</div>
@@ -545,7 +546,7 @@
       <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
         <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 马可福音第 1 章速记总复习口诀：</p>
         <p style="font-size:14px; color:#15803d; margin:0; line-height:1.6;">
-          约翰旷野传悔改，骆驼毛衣蝗虫蜜；耶稣约旦受洗，圣灵如鸽天声；四十日旷野受试探；加利利海召四门徒；迦百农会堂显权柄；西门岳母退热病；日落医病赶鬼；天未亮旷野祷告；麻风病人跪求洁净；耶稣动慈心伸手摸，叫他见祭司。
+          约翰旷野传悔改，骆驼毛衣蝗虫蜜；耶稣约旦河受洗，圣灵如鸽天发声；四十日旷野受试探；加利利海召四门徒；迦百农会堂显权柄；西门岳母退热病；日落医病赶鬼；天未亮旷野祷告；麻风病人跪求洁净；耶稣动慈心伸手摸，叫他见祭司。
         </p>
       </div>
 
@@ -557,56 +558,129 @@
       </div>
     </div>
   </div>
+
+  <!-- TAB 4: 50 题随机测验 (移到最右侧标签) -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="dashboard">
+      <div class="stat-group">
+        <div class="stat-box">
+          <div class="stat-val" id="total-score">0 / 50</div>
+          <div class="stat-lbl">答对题数</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="accuracy-rate">0%</div>
+          <div class="stat-lbl">正确率</div>
+        </div>
+      </div>
+      <div>
+        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+      </div>
+    </div>
+
+    <!-- 填空题词库 (Answer Pool) -->
+    <div class="card" id="fill-word-bank-card" style="display:none;">
+      <div class="word-bank-box">
+        <div class="word-bank-title">
+          <span>💡 填空题备选词库 (Answer Pool)：点击填入空白，点击已填框可清空反选</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      </div>
+    </div>
+
+    <div id="quiz-questions-container"></div>
+  </div>
 </div>
 
 <script>
-// 全量题库 MASTER POOL
+// 全量主题库 MASTER QUESTION POOL (整合全部来源，包括新增的填空、选择、判断及配对题)
 const MASTER_QUESTION_POOL = [
-  { id: "q1", type: "radio", cat: "选择题", title: "马可福音 1:1 称耶稣是什么？", opts: [{v:"a",t:"A. 大卫的子孙"},{v:"b",t:"B. 神的儿子，耶稣基督"},{v:"c",t:"C. 先知"},{v:"d",t:"D. 神的仆人"}], ans: "b", desc: "可 1:1『神的儿子，耶稣基督福音的起头。』" },
-  { id: "q2", type: "radio", cat: "选择题", title: "施洗约翰在哪里传道与施洗？", opts: [{v:"a",t:"A. 耶路撒冷"},{v:"b",t:"B. 加利利"},{v:"c",t:"C. 旷野"},{v:"d",t:"D. 伯利恒"}], ans: "c", desc: "可 1:4 约翰在旷野施洗，传悔改的洗礼。" },
-  { id: "q3", type: "radio", cat: "选择题", title: "施洗约翰穿什么衣服，吃什么食物？", opts: [{v:"a",t:"A. 穿羊毛衣，吃饼和鱼"},{v:"b",t:"B. 穿骆驼毛衣服，腰束皮带，吃蝗虫和野蜜"},{v:"c",t:"C. 穿麻布衣，吃无花果"},{v:"d",t:"D. 穿细麻衣，吃陈设饼"}], ans: "b", desc: "可 1:6 约翰穿骆驼毛衣，束皮带，吃蝗虫野蜜。" },
-  { id: "q4", type: "radio", cat: "选择题", title: "约翰说，他给人施洗是用：", opts: [{v:"a",t:"A. 圣灵"},{v:"b",t:"B. 圣水"},{v:"c",t:"C. 水"},{v:"d",t:"D. 油"}], ans: "c", desc: "可 1:8『我是用水给你们施洗，他却要用圣灵给你们施洗。』" },
-  { id: "q5", type: "radio", cat: "选择题", title: "圣灵降在受洗的耶稣身上时，形状仿佛什么？", opts: [{v:"a",t:"A. 火焰"},{v:"b",t:"B. 云彩"},{v:"c",t:"C. 鸽子"},{v:"d",t:"D. 雄鹰"}], ans: "c", desc: "可 1:10 圣灵仿佛鸽子降在他身上。" },
-  { id: "q6", type: "radio", cat: "选择题", title: "耶稣在旷野受撒但试探一共持续了多久？", opts: [{v:"a",t:"A. 7天"},{v:"b",t:"B. 30天"},{v:"c",t:"C. 40天"},{v:"d",t:"D. 70天"}], ans: "c", desc: "可 1:13 在旷野四十天受撒但的试探。" },
-  { id: "q7", type: "radio", cat: "选择题", title: "耶稣呼召西门和安得烈时，他们正在做何事？", opts: [{v:"a",t:"A. 修理船"},{v:"b",t:"B. 在船上补网"},{v:"c",t:"C. 在海边撒网"},{v:"d",t:"D. 售卖鱼类"}], ans: "c", desc: "可 1:16 西门和安得烈在加利利海边撒网（打鱼的）。" },
-  { id: "q8", type: "radio", cat: "选择题", title: "雅各和约翰被呼召时，正与谁在船上补网？（多选）", opts: [{v:"a",t:"A. 父亲西庇太"},{v:"b",t:"B. 雇工"},{v:"c",t:"C. 亚勒腓"},{v:"d",t:"D. 法利赛人"}], ans: ["a","b"], desc: "可 1:19-20 与父亲西庇太和雇工在船上补网。" },
-  { id: "q9", type: "radio", cat: "选择题", title: "在迦百农会堂里，被污鬼附的人称耶稣为什么？", opts: [{v:"a",t:"A. 神的儿子"},{v:"b",t:"B. 神的圣者"},{v:"c",t:"C. 大卫的子孙"},{v:"d",t:"D. 犹太人的王"}], ans: "b", desc: "可 1:24 污鬼喊：『我知道你是谁，乃是神的圣者。』" },
-  { id: "q10", type: "radio", cat: "选择题", title: "耶稣医治西门的岳母退热之后，她立刻做什么？", opts: [{v:"a",t:"A. 出去宣讲耶稣"},{v:"b",t:"B. 服事他们"},{v:"c",t:"C. 进会堂献祭"},{v:"d",t:"D. 告诫同胞"}], ans: "b", desc: "可 1:31 热就退了，她就服事他们。" },
-  { id: "q11", type: "radio", cat: "选择题", title: "马可福音的写作主要针对哪类读者对象？", opts: [{v:"a",t:"A. 罗马人"},{v:"b",t:"B. 犹太人"},{v:"c",t:"C. 希腊人"},{v:"d",t:"D. 埃及人"}], ans: "a", desc: "马可福音写作对象主要是罗马读者。" },
-  { id: "q12", type: "radio", cat: "选择题", title: "耶稣在何处受约翰的洗礼？", opts: [{v:"a",t:"A. 加利利海"},{v:"b",t:"B. 约旦河"},{v:"c",t:"C. 迦百农"},{v:"d",t:"D. 伯赛大"}], ans: "b", desc: "可 1:9 在约旦河受了约翰的洗。" },
-  { id: "q13", type: "radio", cat: "选择题", title: "【时间考点】「天未亮的时候」，耶稣做了什么？", opts: [{v:"a",t:"A. 医治众人"},{v:"b",t:"B. 赶出污鬼"},{v:"c",t:"C. 到旷野地方祷告"},{v:"d",t:"D. 渡海往别处"}], ans: "c", desc: "可 1:35 次日早晨，天未亮的时候...去旷野祷告。" },
-  { id: "q14", type: "radio", cat: "选择题", title: "【陷阱题】洁净长大麻风者后，耶稣吩咐他把身体给谁察看？", opts: [{v:"a",t:"A. 门徒"},{v:"b",t:"B. 祭司"},{v:"c",t:"C. 管会堂的人"},{v:"d",t:"D. 官长"}], ans: "b", desc: "可 1:44 只要去把身体给祭司察看。" },
-  { id: "q15", type: "radio", cat: "选择题", title: "【情感动作】耶稣说「我肯，你洁净了吧」之前，经文记载祂：", opts: [{v:"a",t:"A. 动了慈心，伸手摸他"},{v:"b",t:"B. 动了怒气"},{v:"c",t:"C. 默默祷告"},{v:"d",t:"D. 退避一旁"}], ans: "a", desc: "可 1:41 耶稣动了慈心，就伸手摸他。" },
-  { id: "q16", type: "radio", cat: "选择题", title: "长大麻风的人被医治之后，他做了什么？", opts: [{v:"a",t:"A. 完全守秘密"},{v:"b",t:"B. 出去倒说许多话，把这件事传扬开了"},{v:"c",t:"C. 立刻去拿撒勒"},{v:"d",t:"D. 留在西门家"}], ans: "b", desc: "可 1:45 那人出去，倒说许多话，把这件事传扬开了。" },
+  // --- 选择题库 ---
+  { id: "mc1", type: "radio", cat: "选择题", title: "马可福音 1:1 称耶稣基督是谁的儿子？", opts: [{v:"a",t:"a. 人子"},{v:"b",t:"b. 神的儿子"},{v:"c",t:"c. 大卫的儿子"},{v:"d",t:"d. 约瑟的儿子"}], ans: "b", desc: "可 1:1『神的儿子，耶稣基督福音的起头。』" },
+  { id: "mc2", type: "radio", cat: "选择题", title: "施洗约翰在哪里传道与施洗？", opts: [{v:"a",t:"a. 耶路撒冷"},{v:"b",t:"b. 加利利"},{v:"c",t:"c. 旷野"},{v:"d",t:"d. 伯利恒"}], ans: "c", desc: "可 1:4『照这话，约翰来了，在旷野施洗，传悔改的洗礼...』" },
+  { id: "mc3", type: "radio", cat: "选择题", title: "施洗约翰穿什么衣服，吃什么食物？", opts: [{v:"a",t:"a. 穿细麻衣，吃陈设饼"},{v:"b",t:"b. 穿细绵羊毛的衣服，腰束皮带，吃无酵饼"},{v:"c",t:"c. 穿骆驼毛的衣服，腰束皮带，吃蝗虫与野蜜"},{v:"d",t:"d. 穿普通的麻布长衫，吃五谷杂粮"}], ans: "c", desc: "可 1:6 约翰穿骆驼毛的衣服，腰束皮带，吃蝗虫与野蜜。" },
+  { id: "mc4", type: "radio", cat: "选择题", title: "约翰说，他给人施洗是用什么？", opts: [{v:"a",t:"a. 圣灵"},{v:"b",t:"b. 圣水"},{v:"c",t:"c. 水"},{v:"d",t:"d. 油"}], ans: "c", desc: "可 1:8『我是用水给你们施洗，他却要用圣灵给你们施洗。』" },
+  { id: "mc5", type: "radio", cat: "选择题", title: "圣灵降在受洗的耶稣身上时，形状仿佛什么？", opts: [{v:"a",t:"a. 火焰"},{v:"b",t:"b. 云彩"},{v:"c",t:"c. 鸽子"},{v:"d",t:"d. 雄鹰"}], ans: "c", desc: "可 1:10 圣灵仿佛鸽子降在他身上。" },
+  { id: "mc6", type: "radio", cat: "选择题", title: "耶稣在旷野受撒但试探一共持续了多久？", opts: [{v:"a",t:"a. 7天"},{v:"b",t:"b. 30天"},{v:"c",t:"c. 40天"},{v:"d",t:"d. 70天"}], ans: "c", desc: "可 1:13 在旷野四十天受撒旦的试探。" },
+  { id: "mc7", type: "radio", cat: "选择题", title: "耶稣在加利利传道时，呼召的第一批门徒原本的职业是什么？", opts: [{v:"a",t:"a. 税吏"},{v:"b",t:"b. 铁匠"},{v:"c",t:"c. 法利赛人"},{v:"d",t:"d. 渔夫"}], ans: "d", desc: "可 1:16 他们本是打鱼的（渔夫）。" },
+  { id: "mc8", type: "radio", cat: "选择题", title: "耶稣对谁说“来跟从我，我要叫你们得人如得鱼一样。”？（多选）", opts: [{v:"a",t:"a. 西门"},{v:"b",t:"b. 约翰"},{v:"c",t:"c. 雅各"},{v:"d",t:"d. 安得烈"}], ans: ["a","d"], desc: "可 1:16-17 见西门和安得烈在海里撒网，耶稣呼召他们得人如得鱼。" },
+  { id: "mc9", type: "radio", cat: "选择题", title: "下面哪一件事不记载在马可福音第一章中？", opts: [{v:"a",t:"a. 耶稣医治被鬼附的人"},{v:"b",t:"b. 耶稣医治瘫痪的人"},{v:"c",t:"c. 耶稣医治西门的岳母"},{v:"d",t:"d. 耶稣医治得大麻风的人"}], ans: "b", desc: "医治瘫痪的人记载在马可福音第 2 章。" },
+  { id: "mc10", type: "radio", cat: "选择题", title: "马可福音的写作对象主要针对谁？", opts: [{v:"a",t:"a. 罗马人"},{v:"b",t:"b. 中国人"},{v:"c",t:"c. 犹太人"},{v:"d",t:"d. 希腊人"}], ans: "a", desc: "马可福音着重行动与仆人的权柄，写作主要面向罗马人。" },
+  { id: "mc11", type: "radio", cat: "选择题", title: "在迦百农会堂里，污鬼称耶稣是什么？", opts: [{v:"a",t:"a. 他们说他是神的儿子"},{v:"b",t:"b. 他们说他是神的圣者"},{v:"c",t:"c. 他们说他是世界的救主"},{v:"d",t:"d. 他们说他是弥赛亚"}], ans: "b", desc: "可 1:24 污鬼喊：『我知道你是谁，乃是神的圣者。』" },
+  { id: "mc12", type: "radio", cat: "选择题", title: "根据马可福音第一章，耶稣是在谁的家中医治彼得的岳母？", opts: [{v:"a",t:"a. 彼得岳母的家"},{v:"b",t:"b. 雅各的家"},{v:"c",t:"c. 约翰和雅各的家"},{v:"d",t:"d. 西门和安得烈的家"}], ans: "d", desc: "可 1:29『出了会堂，就同着雅各、约翰，进了西门和安得烈的家。』" },
+  { id: "mc13", type: "radio", cat: "选择题", title: "耶稣是在哪里受了谁的洗礼？随后又被谁催促到旷野受试探多少天？", opts: [{v:"a",t:"a. 加利利海；约翰；魔鬼；四十二天"},{v:"b",t:"b. 约旦河；约翰；圣灵；四十天"},{v:"c",t:"c. 加利利海；先知以赛亚；圣灵；四十二天"},{v:"d",t:"d. 约旦河；先知以赛亚；撒旦；四十天"}], ans: "b", desc: "可 1:9-13 耶稣在约旦河受约翰的洗，圣灵随即把祂催到旷野，受试探四十天。" },
+  { id: "mc14", type: "radio", cat: "选择题", title: "在马可福音1章中，耶稣受洗的时候都有谁在场？（多选）", opts: [{v:"a",t:"a. 圣父（天上发声）"},{v:"b",t:"b. 圣灵（如鸽降下）"},{v:"c",t:"c. 先知以赛亚"},{v:"d",t:"d. 施洗约翰"}], ans: ["a","b","d"], desc: "可 1:9-11 圣父、圣灵与施洗约翰在场；以赛亚是旧约先知未在现场。" },
+  { id: "mc15", type: "radio", cat: "选择题", title: "哪个门徒作为耶稣的亲密伙伴在《马可福音》写作中扮演了重要见证角色？", opts: [{v:"a",t:"a. 安得烈"},{v:"b",t:"b. 加略人犹大"},{v:"c",t:"c. 托马斯"},{v:"d",t:"d. 彼得"}], ans: "d", desc: "马可是彼得属灵的儿子，本书多记录彼得的第一手见证。" },
+  { id: "mc16", type: "radio", cat: "选择题", title: "马可福音很可能是在何时何地写成的？", opts: [{v:"a",t:"a. 主后60-65年，罗马"},{v:"b",t:"b. 主后66-68年，罗马"},{v:"c",t:"c. 主后58-59年，耶路撒冷"},{v:"d",t:"d. 主后56-57年，迦百农"}], ans: "a", desc: "历史与学术公认马可福音写于主后60-65年间的罗马。" },
+  { id: "mc17", type: "radio", cat: "选择题", title: "是谁在旷野考验（试探）耶稣？", opts: [{v:"a",t:"a. 施洗约翰"},{v:"b",t:"b. 法利赛人"},{v:"c",t:"c. 撒旦"},{v:"d",t:"d. 圣灵"}], ans: "c", desc: "可 1:13 受撒旦的试探；圣灵是“催促者”，不是试探者。" },
+  { id: "mc18", type: "radio", cat: "选择题", title: "马可福音全卷书共有多少章？", opts: [{v:"a",t:"a. 20"},{v:"b",t:"b. 16"},{v:"c",t:"c. 24"},{v:"d",t:"d. 13"}], ans: "b", desc: "马可福音共有16章。" },
+  { id: "mc19", type: "radio", cat: "选择题", title: "耶稣洁净了大麻风病人之后，对他说了什么？", opts: [{v:"a",t:"a. 你要谨慎，什么话都不可告诉人，只要去把身体给祭司察看。"},{v:"b",t:"b. 你要警醒，什么都不可让人知道，只要得别处去。"},{v:"c",t:"c. 你要来跟从我，什么都不要作声，只要献上礼物。"},{v:"d",t:"d. 你要洁净了，什么都不可说，你的罪也赦了。"}], ans: "a", desc: "可 1:44『你要谨慎，什么话都不可告诉人，只要去把身体给祭司察看...』" },
+  { id: "mc20", type: "radio", cat: "选择题", title: "耶稣医治西门的岳母退热之后，她立刻做什么？", opts: [{v:"a",t:"a. 出去宣讲耶稣"},{v:"b",t:"b. 服事他们"},{v:"c",t:"c. 进会堂献祭"},{v:"d",t:"d. 告诫同胞"}], ans: "b", desc: "可 1:31 热就退了，她就服事他们。" },
+  { id: "mc21", type: "radio", cat: "选择题", title: "次日早晨天未亮的时候，耶稣做了什么？", opts: [{v:"a",t:"a. 医治众人"},{v:"b",t:"b. 赶出污鬼"},{v:"c",t:"c. 到旷野地方祷告"},{v:"d",t:"d. 渡海往别处"}], ans: "c", desc: "可 1:35 次日早晨，天未亮的时候...去旷野祷告。" },
+  { id: "mc22", type: "radio", cat: "选择题", title: "长大麻风的人被医治之后，他做了什么？", opts: [{v:"a",t:"a. 完全守秘密"},{v:"b",t:"b. 出去倒说许多话，把这件事传扬开了"},{v:"c",t:"c. 立刻去拿撒勒"},{v:"d",t:"d. 留在西门家"}], ans: "b", desc: "可 1:45 那人出去，倒说许多话，把这件事传扬开了。" },
 
-  // 判断题
-  { id: "q17", type: "tf", cat: "判断题", title: "马可福音第一章中详细记载了撒但在旷野对耶稣进行的三次具体试探内容。", ans: "F", desc: "错。马可福音仅简记受试探四十天，未详细记录三次试探内容。" },
-  { id: "q18", type: "tf", cat: "判断题", title: "最先被呼召的四位门徒顺序依次为：西门、安得烈、雅各、约翰。", ans: "T", desc: "对。可 1:16-19 顺序确为西门、安得烈、雅各、约翰。" },
-  { id: "q19", type: "tf", cat: "判断题", title: "天晚日落的时候，合城的人带病人来，耶稣允许鬼说话为其作见证。", ans: "F", desc: "错。可 1:34 耶稣『不许鬼说话，因为鬼认识他』。" },
-  { id: "q20", type: "tf", cat: "判断题", title: "雅各和约翰的父亲是西门。", ans: "F", desc: "错。雅各和约翰的父亲是西庇太；西门是安得烈的兄弟。" },
-  { id: "q21", type: "tf", cat: "判断题", title: "大麻风患者被洁净后广传此事，导致耶稣以后不得再明明进城，只能在外边旷野地方。", ans: "T", desc: "对。可 1:45 记载耶稣以后不得再明明进城，只能在外边旷野地方。" },
-  { id: "q22", type: "tf", cat: "判断题", title: "耶稣给施洗约翰施洗。", ans: "F", desc: "错。是施洗约翰在约旦河给耶稣施洗。" },
-  { id: "q23", type: "tf", cat: "判断题", title: "西门和安得烈被呼召时正在船上与父亲补网。", ans: "F", desc: "错。西门和安得烈是在海边『撒网』；雅各和约翰才是与父亲补网。" },
+  // --- 判断题库 (True/False) ---
+  { id: "tf1", type: "tf", cat: "判断题", title: "耶稣稍往前走，又见西庇太的儿子雅各和雅各的兄弟约翰在岸上补网。", ans: "F", desc: "错。可 1:19 明确记载是在『船上补网』，并非岸上。" },
+  { id: "tf2", type: "tf", cat: "判断题", title: "长大麻风的向耶稣跪下求洁净，耶稣动了慈心，就伸手摸他说：“我肯，你洁净了吧！”", ans: "T", desc: "对。可 1:40-41 细节完全准确。" },
+  { id: "tf3", type: "tf", cat: "判断题", title: "约翰下监以后，耶稣来到迦百农，宣传神的福音，说：“日期满了，神的国近了。你们当悔改，信福音！”", ans: "F", desc: "错。可 1:14 是来到『加利利』宣讲神的福音，不是迦百农。" },
+  { id: "tf4", type: "tf", cat: "判断题", title: "耶稣从水里一上来，就看见天裂开了，圣灵仿佛鸽子降在他身上。", ans: "T", desc: "对。可 1:10 经文完全吻合。" },
+  { id: "tf5", type: "tf", cat: "判断题", title: "那时，耶稣从加利利的拿撒勒来，在加利利这河里受了约翰的洗。", ans: "F", desc: "错。可 1:9 耶稣是在『约旦河』受洗，没有加利利河。" },
+  { id: "tf6", type: "tf", cat: "判断题", title: "次日早晨天未亮的时候，耶稣起来，到旷野地方去，在那里祷告。", ans: "T", desc: "对。可 1:35 经文完全吻合。" },
+  { id: "tf7", type: "tf", cat: "判断题", title: "撒旦就把耶稣催到旷野里去。他在旷野四十天，受撒旦的试探，并与野兽同在一处。", ans: "F", desc: "错。可 1:12 是『圣灵』把耶稣催到旷野，而非撒旦。" },
+  { id: "tf8", type: "tf", cat: "判断题", title: "约翰对百姓说：我是用水给你们施洗，他却要用圣水给你们施洗。", ans: "F", desc: "错。可 1:8 是『用圣灵给你们施洗』，不是圣水。" },
+  { id: "tf9", type: "tf", cat: "判断题", title: "马可福音是四福音书中，最迟写成的并且也是最短的一卷。", ans: "F", desc: "错。马可福音普遍公认为四福音中『最早写成』的一卷。" },
+  { id: "tf10", type: "tf", cat: "判断题", title: "污鬼喊叫说：“拿撒勒人耶稣，我们与你有什么相干？我知道你是谁，乃是神的爱子。”", ans: "F", desc: "错。可 1:24 污鬼称『乃是神的圣者』，并非神的爱子。" },
+  { id: "tf11", type: "tf", cat: "判断题", title: "马可福音的笔录者——马可，正是耶稣所召的十二使徒中的一位。", ans: "F", desc: "错。马可不是十二使徒之一，他是保罗与彼得的同工，彼得的属灵儿子。" },
+  { id: "tf12", type: "tf", cat: "判断题", title: "耶稣对大麻风病人说：你要谨慎，什么话都不可告诉人，去把身体给祭司察看，献摩西吩咐的礼物。", ans: "T", desc: "对。可 1:44 经文完全吻合。" },
+  { id: "tf13", type: "tf", cat: "判断题", title: "正如先知以赛亚书上记着说：看哪，我要差遣我的使者在你前面，预备道路。以上经文引自以赛亚书。", ans: "F", desc: "错。『差遣我的使者在你前面』出自《玛拉基书》3:1。" },
+  { id: "tf14", type: "tf", cat: "判断题", title: "天晚日落的时候，合城的人带病人来，耶稣允许鬼说话为其作见证。", ans: "F", desc: "错。可 1:34 耶稣『不许鬼说话，因为鬼认识他』。" },
+  { id: "tf15", type: "tf", cat: "判断题", title: "雅各和约翰的父亲是西门。", ans: "F", desc: "错。雅各和约翰的父亲是西庇太；西门是安得烈的兄弟。" },
 
-  // 填空题
-  { id: "q24", type: "fill", cat: "填空题", title: "马可福音 1:1『神的儿子，_____福音的起头。』", blanks: [{id:"fb24_1", ans:"耶稣基督"}], desc: "可 1:1 核心经文。" },
-  { id: "q25", type: "fill", cat: "填空题", title: "施洗约翰穿_____的衣服，腰间束_____，吃的是_____和_____。", blanks: [{id:"fb25_1", ans:"骆驼毛"},{id:"fb25_2", ans:"皮带"},{id:"fb25_3", ans:"蝗虫"},{id:"fb25_4", ans:"野蜜"}], desc: "可 1:6 约翰衣食细节。" },
-  { id: "q26", type: "fill", cat: "填空题", title: "耶稣说：『日期满了，神的国近了。你们当_____，信_____！』", blanks: [{id:"fb26_1", ans:"悔改"},{id:"fb26_2", ans:"福音"}], desc: "可 1:15 传道金句。" },
-  { id: "q27", type: "fill", cat: "填空题", title: "次日早晨，_____的时候，耶稣起来，到_____地方去，在那里祷告。", blanks: [{id:"fb27_1", ans:"天未亮"},{id:"fb27_2", ans:"旷野"}], desc: "可 1:35 灵修动作。" },
-  { id: "q28", type: "fill", cat: "填空题", title: "大麻风患者跪求：『你若_____，必能叫我洁净了。』耶稣动了慈心，就_____，说：『我_____，你洁净了吧！』", blanks: [{id:"fb28_1", ans:"肯"},{id:"fb28_2", ans:"伸手摸他"},{id:"fb28_3", ans:"肯"}], desc: "可 1:40-41 医治大麻风。" },
-  { id: "q29", type: "fill", cat: "填空题", title: "约翰用水施洗，耶稣却要用_____给你们施洗。", blanks: [{id:"fb29_1", ans:"圣灵"}], desc: "可 1:8 洗礼对比。" },
-  { id: "q30", type: "fill", cat: "填空题", title: "耶稣受洗从水里一上来，就看见天_____了，圣灵仿佛鸽子降在他身上。", blanks: [{id:"fb30_1", ans:"裂开"}], desc: "可 1:10 受洗神迹。" },
-  { id: "q31", type: "fill", cat: "填空题", title: "从天上有声音说：『你是我的_____，我喜悦你。』", blanks: [{id:"fb31_1", ans:"爱子"}], desc: "可 1:11 天上声音。" },
-  { id: "q32", type: "fill", cat: "填空题", title: "耶稣对西门和安得烈说：『来跟从我，我要叫你们_____。』", blanks: [{id:"fb32_1", ans:"得人如得鱼"}], desc: "可 1:17 呼召金句。" },
-  { id: "q33", type: "fill", cat: "填空题", title: "耶稣进入迦百农的_____教训人，众人希奇因为祂正像有_____的人。", blanks: [{id:"fb33_1", ans:"会堂"},{id:"fb33_2", ans:"权柄"}], desc: "可 1:21-22 迦百农教训。" },
-  { id: "q34", type: "fill", cat: "填空题", title: "污鬼在迦百农会堂喊叫，称耶稣为『神的_____』。", blanks: [{id:"fb34_1", ans:"圣者"}], desc: "可 1:24 污鬼称呼。" }
+  // --- 填空题库 (带词库联动交互) ---
+  { id: "fb1", type: "fill", cat: "填空题", title: "根据马可福音第一章，污鬼称耶稣是_____。", blanks: [{id:"f1_1", ans:"神的圣者"}], desc: "可 1:24 乃是神的圣者。" },
+  { id: "fb2", type: "fill", cat: "填空题", title: "耶稣来到_____，宣讲神的福音，说：“日期满了，神的_____近了。你们当_____，信福音！”", blanks: [{id:"f2_1", ans:"加利利"},{id:"f2_2", ans:"国"},{id:"f2_3", ans:"悔改"}], desc: "可 1:14-15 传道宣讲要道。" },
+  { id: "fb3", type: "fill", cat: "填空题", title: "耶稣严严地嘱咐他：“你要_____，什么话都不可告诉人，只要去把_____给_____察看，献上_____所吩咐的礼物。”", blanks: [{id:"f3_1", ans:"谨慎"},{id:"f3_2", ans:"身体"},{id:"f3_3", ans:"祭司"},{id:"f3_4", ans:"摩西"}], desc: "可 1:44 洁净麻风后的吩咐。" },
+  { id: "fb4", type: "fill", cat: "填空题", title: "在旷野有人声喊着说：“预备_____的道，修直他_____。”", blanks: [{id:"f4_1", ans:"主"},{id:"f4_2", ans:"的路"}], desc: "可 1:3 预备主的道，修直他的路。" },
+  { id: "fb5", type: "fill", cat: "填空题", title: "到了_____，耶稣就在安息日进入_____教训人。众人很希奇他的教训；因为他教训他们，正像有权柄的人。", blanks: [{id:"f5_1", ans:"迦百农"},{id:"f5_2", ans:"会堂"}], desc: "可 1:21 迦百农会堂教训。" },
+  { id: "fb6", type: "fill", cat: "填空题", title: "在来到施洗约翰那里受洗之前，耶稣是从_____来。", blanks: [{id:"f6_1", ans:"加利利的拿撒勒"}], desc: "可 1:9 那时，耶稣从加利利的拿撒勒来。" },
+  { id: "fb7", type: "fill", cat: "填空题", title: "照这话，约翰来了，在旷野施洗，传_____的洗礼，使_____。", blanks: [{id:"f7_1", ans:"悔改"},{id:"f7_2", ans:"罪得赦"}], desc: "可 1:4 传悔改的洗礼，使罪得赦。" },
+  { id: "fb8", type: "fill", cat: "填空题", title: "耶稣对他们说：“来跟从我，我要叫你们得人如得鱼一样。” 他们指的是_____。", blanks: [{id:"f8_1", ans:"西门和安得烈"}], desc: "可 1:16-17 呼召西门和安得烈。" },
+  { id: "fb9", type: "fill", cat: "填空题", title: "众人都惊讶：“这是什么事？是个新道理啊！他用_____吩咐污鬼，连污鬼也听从了他。”", blanks: [{id:"f9_1", ans:"权柄"}], desc: "可 1:27 他用权柄吩咐污鬼。" },
+  { id: "fb10", type: "fill", cat: "填空题", title: "耶稣受洗从水里一上来，就看见_____裂开了，_____仿佛鸽子降在他身上。天上发声说：“你是我的_____，我喜悦你。”", blanks: [{id:"f10_1", ans:"天"},{id:"f10_2", ans:"圣灵"},{id:"f10_3", ans:"爱子"}], desc: "可 1:10-11 三一显现与天父爱子。" },
+  { id: "fb11", type: "fill", cat: "填空题", title: "施洗约翰穿_____的衣服，腰间束_____，吃的是_____和_____。", blanks: [{id:"f11_1", ans:"骆驼毛"},{id:"f11_2", ans:"皮带"},{id:"f11_3", ans:"蝗虫"},{id:"f11_4", ans:"野蜜"}], desc: "可 1:6 约翰的衣食特征。" },
+  { id: "fb12", type: "fill", cat: "填空题", title: "次日早晨，_____的时候，耶稣起来，到_____地方去，在那里祷告。", blanks: [{id:"f12_1", ans:"天未亮"},{id:"f12_2", ans:"旷野"}], desc: "可 1:35 耶稣清晨旷野祷告。" },
+
+  // --- 配对题库 (左右配对表格题型) ---
+  {
+    id: "match1",
+    type: "matching",
+    cat: "配对题",
+    title: "第一章经文前半句与后半句配对（请在中间下拉框选填对应字母 A-G）：",
+    desc: "1-C, 2-G, 3-E, 4-F, 5-A, 6-D, 7-B",
+    rows: [
+      { id: "m1", left: "1. 耶稣责备他说：“不要作声，从这人身上出来吧！”", ans: "C", right: "A. 众人很希奇他的教训，因为他教训他们，正像有权柄的人，不像文士。" },
+      { id: "m2", left: "2. 有一个长大麻风的来求耶稣，向他跪下，说：“你若肯，必能叫我洁净了。”", ans: "G", right: "B. 说：“日期满了，神的国近了！你们当悔改，信福音。”" },
+      { id: "m3", left: "3. 他传道说：“有一位在我以后来的，能力比我更大，我就是弯腰给他解鞋带也是不配的。", ans: "E", right: "C. 污鬼叫那人抽了一阵风，大声喊叫，就出来了。" },
+      { id: "m4", left: "4. 照这话，约翰来了，在旷野施洗，传悔改的洗礼，使罪得赦。", ans: "F", right: "D. 又有声音从天上来，说：“你是我的爱子，我喜悦你！”" },
+      { id: "m5", left: "5. 到了迦百农，耶稣就在安息日进了会堂教训人。", ans: "A", right: "E. 我是用水给你们施洗，他却要用圣灵给你们施洗。" },
+      { id: "m6", left: "6. 他从水里一上来，就看见天裂开了，圣灵仿佛鸽子降在他身上。", ans: "D", right: "F. 犹太全地和耶路撒冷的人都出去到约翰那里，承认他们的罪，在约旦河里受他的洗。" },
+      { id: "m7", left: "7. 约翰下监以后，耶稣来到加利利，宣传神的福音，", ans: "B", right: "G. 耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”" }
+    ]
+  }
 ];
 
-const ALL_WORD_POOL = ["耶稣基督", "骆驼毛", "皮带", "蝗虫", "野蜜", "悔改", "福音", "天未亮", "旷野", "肯", "伸手摸他", "圣灵", "裂开", "爱子", "得人如得鱼", "会堂", "权柄", "圣者", "约翰", "西庇太"];
+// 供填空题 Answer Pool 使用的备选词霸库
+const ALL_WORD_POOL = [
+  "神的圣者", "加利利", "国", "悔改", "谨慎", "身体", "祭司", "摩西", 
+  "主", "的路", "迦百农", "会堂", "加利利的拿撒勒", "罪得赦", "西门和安得烈", 
+  "权柄", "天", "圣灵", "爱子", "骆驼毛", "皮带", "蝗虫", "野蜜", "天未亮", "旷野", "福音"
+];
 
 let activeQuestionSet = [];
 let activeBlankId = null;
-const STORAGE_KEY = "mark_ch1_full_guide_quiz_v6";
+const STORAGE_KEY = "mark_ch1_full_guide_quiz_v7";
 
 function shuffleArray(arr) {
   const array = [...arr];
@@ -629,14 +703,24 @@ function initQuiz(forceRegenerate = false) {
     } catch(e) { console.error(e); }
   }
 
-  const shuffledMaster = shuffleArray(MASTER_QUESTION_POOL);
-  activeQuestionSet = shuffledMaster.slice(0, Math.min(50, shuffledMaster.length));
+  // 保证配对大题必然呈现，其余题目随机抽选组合并分类排序
+  const matchQuestions = MASTER_QUESTION_POOL.filter(q => q.type === "matching");
+  const otherQuestions = shuffleArray(MASTER_QUESTION_POOL.filter(q => q.type !== "matching"));
+  
+  // 组装抽选题目（配对题计为7小项，整体控制抽样题量）
+  let poolCombined = [...matchQuestions, ...otherQuestions.slice(0, 43)];
+  
+  // 按题型排序：配对题 -> 填空题 -> 选择题 -> 判断题
+  const typeOrder = { "matching": 1, "fill": 2, "radio": 3, "tf": 4 };
+  poolCombined.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+  activeQuestionSet = poolCombined;
+
   saveQuizState({});
   renderQuizUI();
 }
 
 function regenerateQuiz() {
-  if (confirm("确定要重新随机抽取 50 道题目并清空当前答题记录吗？")) {
+  if (confirm("确定要重新随机抽取测验并清空当前作答记录吗？")) {
     localStorage.removeItem(STORAGE_KEY);
     initQuiz(true);
   }
@@ -655,10 +739,38 @@ function renderQuizUI() {
 
     let html = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${qNum}. [${q.cat}]</span> ${q.title}</div>`;
 
-    if (q.type === "radio") {
+    if (q.type === "matching") {
+      html += `
+        <div class="match-table-wrap">
+          <table class="match-table">
+            <thead>
+              <tr>
+                <th class="col-num">前半段</th>
+                <th class="col-input">填入字母</th>
+                <th class="col-alpha">备选项（A - G）</th>
+              </tr>
+            </thead>
+            <tbody>`;
+      q.rows.forEach(r => {
+        html += `
+          <tr>
+            <td class="col-num">${r.left}</td>
+            <td class="col-input">
+              <select class="match-select" id="${r.id}" data-ans="${r.ans}" onchange="onUserAnswerChange()">
+                <option value="">-</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+            <td class="col-alpha">${r.right}</td>
+          </tr>`;
+      });
+      html += `</tbody></table></div>`;
+    } else if (q.type === "radio") {
+      const isMulti = Array.isArray(q.ans);
       html += `<div class="opt-group">`;
       q.opts.forEach(opt => {
-        html += `<label class="opt-label"><input type="radio" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        const inputType = isMulti ? "checkbox" : "radio";
+        html += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
       });
       html += `</div>`;
     } else if (q.type === "tf") {
@@ -674,7 +786,7 @@ function renderQuizUI() {
         fillText = fillText.replace("_____", inputHtml);
       });
       html = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${qNum}. [${q.cat}]</span></div>
-              <div style="font-size:15.5px; line-height:2.3; word-break:break-word;">${fillText}</div>`;
+              <div style="font-size:15px; line-height:2.4; word-break:break-word;">${fillText}</div>`;
     }
 
     html += `<div class="feedback" id="fb-${q.id}"></div>`;
@@ -690,8 +802,7 @@ function renderQuizUI() {
     wordBankCard.style.display = "none";
   }
 
-  document.getElementById("total-score").innerText = `0 / ${activeQuestionSet.length}`;
-  document.getElementById("accuracy-rate").innerText = `0%`;
+  calculateAndUpdateTotals(0);
 }
 
 function renderWordBank() {
@@ -708,7 +819,6 @@ function renderWordBank() {
 }
 
 function handleBlankClick(inputEl) {
-  // 点击已填值的空格：清空反选
   if (inputEl.value) {
     inputEl.value = "";
     inputEl.classList.remove("has-val");
@@ -753,14 +863,15 @@ function onUserAnswerChange() {
 
 function getUserAnswers() {
   const answers = {};
-  document.querySelectorAll("#quiz-questions-container input").forEach(el => {
-    if (el.type === "radio") {
+  document.querySelectorAll("#quiz-questions-container input, #quiz-questions-container select").forEach(el => {
+    if (el.tagName === "SELECT") {
+      if (el.value) answers[el.id] = el.value;
+    } else if (el.type === "radio" || el.type === "checkbox") {
       if (el.checked) {
-        if (el.name.includes("m_")) {
-          answers[el.name] = answers[el.name] || [];
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
           answers[el.name].push(el.value);
-        } else {
-          answers[el.name] = el.value;
         }
       }
     } else if (el.type === "text") {
@@ -783,13 +894,15 @@ function restoreSavedAnswers(answers) {
   Object.keys(answers).forEach(key => {
     const val = answers[key];
     const textEl = document.getElementById(key);
-    if (textEl && textEl.type === "text") {
+    if (textEl && textEl.tagName === "SELECT") {
+      textEl.value = val;
+    } else if (textEl && textEl.type === "text") {
       textEl.value = val;
       textEl.classList.add("has-val");
     } else if (Array.isArray(val)) {
       val.forEach(v => {
-        const rad = document.querySelector(`input[name="${key}"][value="${v}"]`);
-        if (rad) rad.checked = true;
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
       });
     } else {
       const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
@@ -800,13 +913,39 @@ function restoreSavedAnswers(answers) {
 
 function gradeQuiz() {
   let score = 0;
-  const total = activeQuestionSet.length;
+  let totalItems = 0;
 
   activeQuestionSet.forEach(q => {
     const fb = document.getElementById(`fb-${q.id}`);
-    let isCorrect = false;
 
-    if (q.type === "radio" || q.type === "tf") {
+    if (q.type === "matching") {
+      let mOk = 0;
+      let errs = [];
+      q.rows.forEach(r => {
+        totalItems++;
+        const sel = document.getElementById(r.id);
+        const v = (sel.value || "").toUpperCase();
+        if (v === r.ans) {
+          mOk++;
+          score++;
+          sel.style.borderColor = "#16a34a";
+          sel.style.background = "#dcfce7";
+        } else {
+          sel.style.borderColor = "#dc2626";
+          sel.style.background = "#fee2e2";
+          errs.push(`${r.left.slice(0, 8)}...应配【${r.ans}】`);
+        }
+      });
+      if (mOk === q.rows.length) {
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `配对题全部正确！出处细节：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        fb.innerHTML = `配对题答对 ${mOk} / ${q.rows.length}。错误提示：${errs.join("； ")}`;
+      }
+    } else if (q.type === "radio" || q.type === "tf") {
+      totalItems++;
+      let isCorrect = false;
       if (Array.isArray(q.ans)) {
         const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
         if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
@@ -825,14 +964,17 @@ function gradeQuiz() {
         fb.innerHTML = `正确！解析：${q.desc}`;
       } else {
         fb.className = "feedback is-wrong";
-        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : q.ans.toUpperCase();
-        fb.innerHTML = `答案：【${ansTxt}】。解析：${q.desc}`;
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
       }
     } else if (q.type === "fill") {
+      totalItems++;
       let fillOk = true;
       q.blanks.forEach(b => {
         const el = document.getElementById(b.id);
-        if (el && el.value.trim() === b.ans.trim()) {
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
           el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
         } else {
           fillOk = false;
@@ -843,7 +985,7 @@ function gradeQuiz() {
       if (fillOk) {
         score++;
         fb.className = "feedback is-correct";
-        fb.innerHTML = `正确！解析：${q.desc}`;
+        fb.innerHTML = `正确！出处：${q.desc}`;
       } else {
         fb.className = "feedback is-wrong";
         const correctAns = q.blanks.map(b => b.ans).join(" / ");
@@ -852,17 +994,30 @@ function gradeQuiz() {
     }
   });
 
-  document.getElementById("total-score").innerText = `${score} / ${total}`;
-  document.getElementById("accuracy-rate").innerText = `${Math.round((score / total) * 100)}%`;
+  calculateAndUpdateTotals(score, totalItems);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function calculateAndUpdateTotals(score, totalItems) {
+  let total = totalItems;
+  if (!total) {
+    total = 0;
+    activeQuestionSet.forEach(q => {
+      if (q.type === "matching") total += q.rows.length;
+      else total += 1;
+    });
+  }
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
 function switchTab(tabId) {
-  document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
   document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
   
-  event.target.classList.add("active");
-  document.getElementById("tab-" + tabId).classList.add("active");
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
 }
 
 window.addEventListener("DOMContentLoaded", () => {
