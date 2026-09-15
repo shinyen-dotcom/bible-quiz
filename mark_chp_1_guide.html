@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>马可福音第一章 备战指南与互动测验</title>
+<title>马可福音第一章 全景备战指南与全真测验</title>
 <style>
   :root {
     --primary: #1e3a8a;
@@ -60,8 +60,8 @@
     flex: 1;
     border: none;
     background: transparent;
-    padding: 8px 4px;
-    font-size: 12.5px;
+    padding: 8px 2px;
+    font-size: 11.5px;
     font-weight: 600;
     color: #475569;
     border-radius: 8px;
@@ -151,9 +151,9 @@
   }
   .timeline-verse { font-size: 11px; font-weight: bold; color: var(--accent); }
   .timeline-title { font-size: 13.5px; font-weight: 700; margin: 2px 0; }
-  .timeline-desc { font-size: 12px; color: #475569; line-height: 1.4; }
+  .timeline-desc { font-size: 12px; color: #475569; line-height: 1.45; }
 
-  /* 陷阱卡片 */
+  /* 陷阱卡片与对比表格 */
   .trap-box {
     background: #fffbe6;
     border: 1px solid #ffe58f;
@@ -163,6 +163,19 @@
     font-size: 12px;
   }
   .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 10px; padding: 1px 5px; border-radius: 3px; font-weight: bold; margin-right: 4px; }
+  
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+  .info-table th, .info-table td {
+    border: 1px solid var(--border);
+    padding: 6px 8px;
+    text-align: left;
+  }
+  .info-table th { background: #f1f5f9; font-weight: bold; }
 
   /* 填空题样式 (16px防缩放) */
   .fill-card {
@@ -226,141 +239,195 @@
 <div class="mobile-container">
   <div class="header">
     <h1>《马可福音》第一章 备战指南</h1>
-    <p>圣经比赛考点精析 + 互动测验（自动保存版）</p>
+    <p>17 大核心章节剖析 + 互动全真测验（支持本地自动保存）</p>
   </div>
 
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('map')">🗺️ 考点地图</button>
-    <button class="tab-btn" onclick="switchTab('traps')">⚠️ 高频陷阱</button>
+    <button class="tab-btn active" onclick="switchTab('map')">🗺️ 17大事件</button>
+    <button class="tab-btn" onclick="switchTab('traps')">⚠️ 考点陷阱</button>
     <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文</button>
-    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 互动测验</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 全真测验</button>
   </div>
 
-  <!-- TAB 1: 考点大地图 -->
+  <!-- TAB 1: 考点大地图 (17大板块) -->
   <div id="tab-map" class="tab-content active">
     <div class="card">
-      <div class="card-title">第一章 7 大事件事件主线</div>
+      <div class="card-title">第一章 7 大主线与 17 节点大地图</div>
       
       <div class="timeline-item">
-        <div class="timeline-verse">1:1 - 1:8</div>
-        <div class="timeline-title">1. 施洗约翰传道</div>
-        <div class="timeline-desc">旷野声喊；穿骆驼毛衣、束皮带、吃蝗虫野蜜；用水施洗，预告后来的耶稣用圣灵施洗。</div>
+        <div class="timeline-verse">一 & 二 (1:1-8)</div>
+        <div class="timeline-title">1. 开头与施洗约翰传道</div>
+        <div class="timeline-desc">
+          • 开头：「神的儿子，耶稣基督福音的起头。」（无家谱、无出生故事，直奔约翰与耶稣）。<br>
+          • 角色：「在旷野有人声喊着说：预备主的道，修直他的路。」<br>
+          • 三关键词：旷野 → 悔改 → 洗礼。<br>
+          • 细节穿戴：骆驼毛衣 + 皮带 + 蝗虫 + 野蜜。<br>
+          • 信息对比：约翰（水/预备道路/能力较小） vs 耶稣（圣灵/真正的主/能力更大）。
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-verse">1:9 - 1:11</div>
+        <div class="timeline-verse">三 (1:9-11)</div>
         <div class="timeline-title">2. 耶稣受洗</div>
-        <div class="timeline-desc">从拿撒勒来，在约旦河受洗。天裂开，圣灵仿佛鸽子降下，天上有声音称“你是我的爱子”。</div>
+        <div class="timeline-desc">
+          • 地点：从拿撒勒来，在约旦河受约翰施洗。<br>
+          • 三连神迹：天裂开 → 圣灵仿佛鸽子降下 → 天上声音：“你是我的爱子，我喜悦你。”
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-verse">1:12 - 1:13</div>
+        <div class="timeline-verse">四 (1:12-13)</div>
         <div class="timeline-title">3. 耶稣受试探</div>
-        <div class="timeline-desc">圣灵“随即”催耶稣到旷野，四十天受撒但试探，与野兽同在，天使伺候祂。</div>
+        <div class="timeline-desc">
+          • 圣灵「随即」把耶稣催到旷野（马可偏爱“随即”）。<br>
+          • 四要素：40天 → 撒但试探 → 与野兽同在 → 天使伺候（无详细三次试探过程）。
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-verse">1:14 - 1:20</div>
-        <div class="timeline-title">4. 呼召四门徒</div>
-        <div class="timeline-desc">加利利海边呼召西门、安得烈（撒网）；呼召雅各、约翰（与父亲西庇太在船上补网）。</div>
+        <div class="timeline-verse">五 - 七 (1:14-20)</div>
+        <div class="timeline-title">4. 开始传道与呼召门徒</div>
+        <div class="timeline-desc">
+          • 约翰下监后，耶稣来到加利利宣讲神福音：“日期满了，神的国近了。你们当悔改，信福音！”（1:15）<br>
+          • 第一组：西门、安得烈在加利利海边**撒网**（打鱼的）。“得人如得鱼”。<br>
+          • 第二组：雅各、约翰在船上与父亲**西庇太**及雇工**补网**。<br>
+          • 呼召顺序：西门 → 安得烈 → 雅各 → 约翰。
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-verse">1:21 - 1:28</div>
+        <div class="timeline-verse">八 (1:21-28)</div>
         <div class="timeline-title">5. 迦百农会堂赶鬼</div>
-        <div class="timeline-desc">安息日进会堂教训人有权柄。污鬼喊“神的圣者”，耶稣责备赶出污鬼，名声传遍加利利。</div>
+        <div class="timeline-desc">
+          • 安息日进迦百农会堂教训人，众人希奇因为像有「权柄」的人。<br>
+          • 污鬼喊：“拿撒勒人耶稣...我知道你是谁，乃是神的圣者。”（污鬼认出耶稣）。<br>
+          • 耶稣命令：“不要作声，从这人身上出来吧！”众人都惊讶于这有权柄的新道理。
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-verse">1:29 - 1:34</div>
-        <div class="timeline-title">6. 医治彼得岳母与众人</div>
-        <div class="timeline-desc">西门岳母患热病，耶稣拉手扶起即愈，岳母服事他们。日落后合城的人聚集门前求医。</div>
+        <div class="timeline-verse">九 - 十 (1:29-34)</div>
+        <div class="timeline-title">6. 医治西门岳母与日落神迹</div>
+        <div class="timeline-desc">
+          • 进西门和安得烈的家，西门岳母患热病，耶稣拉手扶起即愈，岳母**服事他们**。<br>
+          • 天晚日落，合城聚集门前，治好许多人，赶出许多鬼，**不许鬼说话**（因鬼认识祂）。
+        </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-verse">1:35 - 1:45</div>
+        <div class="timeline-verse">十一 - 十七 (1:35-45)</div>
         <div class="timeline-title">7. 天未亮祷告与洁净麻风者</div>
-        <div class="timeline-desc">次日清晨天未亮旷野祷告；麻风者跪求“你若肯”，耶稣动慈心伸手摸并医治，嘱咐见祭司。</div>
+        <div class="timeline-desc">
+          • 1:35 属灵四动作：早晨 → 天未亮 → 旷野 → 祷告。<br>
+          • 西门和同伴寻找说“众人都找你”，耶稣回应：“我们可以往别处去...我也好在那里传道，因为我是为这事出来的。”<br>
+          • 大麻风者**跪下**求：“你若肯，必能叫我洁净了。”<br>
+          • 耶稣反应：**动了慈心 → 伸手摸他** → “我肯，你洁净了吧！”<br>
+          • 命令与因果：严严嘱咐不可告诉人 + 给祭司察看献礼物；那人广传 → 耶稣不能公开进城，只能在旷野地方。
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- TAB 2: 高频陷阱 -->
+  <!-- TAB 2: 高频考点与陷阱 -->
   <div id="tab-traps" class="tab-content">
     <div class="card">
       <div class="card-title">比赛极易扣分对比陷阱</div>
 
       <div class="trap-box">
-        <span class="trap-tag">动作陷阱</span>
+        <span class="trap-tag">门徒动作陷阱</span>
         <strong>撒网 vs 补网：</strong><br>
-        • 西门与安得烈被呼召时正在：<strong>撒网</strong>（打鱼的）。<br>
-        • 雅各与约翰被呼召时正在：与父亲西庇太在船上<strong>补网</strong>。
+        • **西门 & 安得烈**：在加利利海边<strong>撒网</strong>（打鱼的）。<br>
+        • **雅各 & 约翰**：与父亲西庇太在船上<strong>补网</strong>（还有雇工）。
       </div>
 
       <div class="trap-box">
         <span class="trap-tag">称呼陷阱</span>
         <strong>污鬼称呼 vs 天上声音：</strong><br>
-        • 污鬼在会堂称耶稣为：<strong>“神的圣者”</strong>（不是神的儿子）。<br>
-        • 耶稣受洗时天上的声音说：<strong>“你是我的爱子”</strong>。
+        • 污鬼在会堂称耶稣为：<strong>“神的圣者”</strong>（不是门徒说的）。<br>
+        • 耶稣受洗时天上的声音说：<strong>“你是我的爱子，我喜悦你”</strong>。
       </div>
 
       <div class="trap-box">
         <span class="trap-tag">洗礼对比</span>
         <strong>水 vs 圣灵：</strong><br>
-        • 施洗约翰说：我是用<strong>水</strong>给你们施洗。<br>
-        • 耶稣将要：用<strong>圣灵</strong>给你们施洗。
+        • 施洗约翰：用<strong>水</strong>施洗（预备道路、能力较小）。<br>
+        • 耶稣基督：用<strong>圣灵</strong>施洗（真正的主、能力更大）。
       </div>
 
       <div class="trap-box">
-        <span class="trap-tag">医治后动作</span>
-        <strong>西门岳母 vs 大麻风患者：</strong><br>
-        • 西门岳母热退之后：起来<strong>服事他们</strong>。<br>
-        • 大麻风患者洁净后：耶稣嘱咐不可告诉人，但他却出去<strong>广传这件事</strong>。
+        <span class="trap-tag">麻风者救治因果</span>
+        <strong>嘱咐与结果的有趣对比：</strong><br>
+        • 耶稣命令：① 严严嘱咐不可告诉人；② 给祭司察看并献摩西吩咐的礼物。<br>
+        • 患病者反应：出去<strong>广传这件事</strong>。<br>
+        • 导致结果：耶稣不得再明明进城，只能在外边<strong>旷野地方</strong>。
       </div>
+
+      <p style="font-size:12.5px; font-weight:bold; margin:10px 0 4px 0;">🔥 第一章 3 大重复出现的关键词：</p>
+      <table class="info-table">
+        <tr><th>关键词</th><th>出现场景 / 含义</th></tr>
+        <tr><td><strong>「随即 / 立刻」</strong></td><td>马可福音核心特色，体现福音节奏紧凑推进（如受洗后随即被催入旷野）。</td></tr>
+        <tr><td><strong>「权柄」</strong></td><td>会堂教训像有权柄的人、赶鬼显出权柄（教训与赶鬼双重权柄）。</td></tr>
+        <tr><td><strong>「旷野」</strong></td><td>约翰旷野传道 → 耶稣旷野受试探 → 耶稣天未亮旷野祷告 → 医治麻风后退居旷野。</td></tr>
+      </table>
+
+      <p style="font-size:12.5px; font-weight:bold; margin:12px 0 4px 0;">⏰ 第一章 3 大时间考点：</p>
+      <table class="info-table">
+        <tr><th>时间点</th><th>发生事件</th></tr>
+        <tr><td><strong>四十天</strong></td><td>耶稣在旷野受撒但试探。</td></tr>
+        <tr><td><strong>天晚日落</strong></td><td>合城的人把害病的、被鬼附的带到西门家门前。</td></tr>
+        <tr><td><strong>次日早晨，天未亮</strong></td><td>耶稣起来到旷野地方祷告。</td></tr>
+      </table>
     </div>
   </div>
 
-  <!-- TAB 3: 必背经文 -->
+  <!-- TAB 3: 必背经文与总复习口诀 -->
   <div id="tab-verses" class="tab-content">
     <div class="card">
-      <div class="card-title">第一章 必须背诵经文 (8 处)</div>
+      <div class="card-title">第一章 8 处必背经文</div>
 
-      <p style="font-size:12px; color:#475569; margin-bottom:8px;"><strong>🥇 Level 1：核心高频必背</strong></p>
+      <p style="font-size:12px; color:#475569; margin-bottom:6px;"><strong>🥇 Level 1：核心高频必背</strong></p>
       <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
-        <strong>1:1</strong> 神的儿子，耶稣基督福音的起头。
+        <strong>1. 可 1:1</strong> 神的儿子，耶稣基督福音的起头。
       </div>
       <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
-        <strong>1:3</strong> 在旷野有人声喊着说：预备主的道，修直他的路。
+        <strong>2. 可 1:3</strong> 在旷野有人声喊着说：预备主的道，修直他的路。
       </div>
       <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
-        <strong>1:8</strong> 我是用水给你们施洗，他却要用圣灵给你们施洗。
+        <strong>3. 可 1:8</strong> 我是用水给你们施洗，他却要用圣灵给你们施洗。
       </div>
       <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
-        <strong>1:11</strong> 你是我的爱子，我喜悦你。
+        <strong>4. 可 1:11</strong> 你是我的爱子，我喜悦你。
       </div>
       <div style="background:#eff6ff; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:12px;">
-        <strong>1:15</strong> 日期满了，神的国近了。你们当悔改，信福音！
+        <strong>5. 可 1:15</strong> 日期满了，神的国近了。你们当悔改，信福音！
       </div>
 
-      <p style="font-size:12px; color:#475569; margin-bottom:8px;"><strong>🥈 Level 2：重点进阶背诵</strong></p>
+      <p style="font-size:12px; color:#475569; margin-bottom:6px;"><strong>🥈 Level 2：重点进阶背诵</strong></p>
       <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
-        <strong>1:17</strong> 来跟从我，我要叫你们得人如得鱼一样。
+        <strong>6. 可 1:17</strong> 来跟从我，我要叫你们得人如得鱼一样。
       </div>
       <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:6px;">
-        <strong>1:35</strong> 次日早晨，天未亮的时候，耶稣起来，到旷野地方去，在那里祷告。
+        <strong>7. 可 1:35</strong> 次日早晨，天未亮的时候，耶稣起来，到旷野地方去，在那里祷告。
       </div>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 10px; border-radius:6px; font-size:12.5px;">
-        <strong>1:41</strong> 耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 10px; border-radius:6px; font-size:12.5px; margin-bottom:14px;">
+        <strong>8. 可 1:41</strong> 耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:10px; border-radius:8px;">
+        <p style="font-size:13px; font-weight:bold; color:#166534; margin:0 0 4px 0;">🎯 马可福音第 1 章速记总复习口诀：</p>
+        <p style="font-size:12px; color:#15803d; margin:0; line-height:1.5;">
+          约翰旷野传悔改，骆驼毛衣蝗虫蜜；耶稣约旦受洗，圣灵如鸽天声；四十日旷野受试探；加利利海召四门徒；迦百农会堂显权柄；西门岳母退热病；日落医病赶鬼；天未亮旷野祷告；麻风病人跪求洁净；耶稣动慈心伸手摸，叫他见祭司。
+        </p>
       </div>
     </div>
   </div>
 
-  <!-- TAB 4: 互动测验 -->
+  <!-- TAB 4: 互动全真测验 -->
   <div id="tab-quiz" class="tab-content">
     <div class="dashboard">
       <div class="stat-group">
         <div class="stat-box">
-          <div class="stat-val" id="total-score">0 / 12</div>
+          <div class="stat-val" id="total-score">0 / 20</div>
           <div class="stat-lbl">答对题数</div>
         </div>
         <div class="stat-box">
@@ -371,13 +438,13 @@
       <div>
         <button class="btn-submit" onclick="gradeAll()">核对答案</button>
         <button class="btn-reset" onclick="resetProgress()">重置</button>
-        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+        <span class="save-status" id="save-status">💾 进度自动保存就绪</span>
       </div>
     </div>
 
     <!-- 1. 填空题 -->
     <div class="card">
-      <div class="card-title">第一部分：核心经文填空</div>
+      <div class="card-title">第一部分：核心经文与细节填空</div>
       
       <div class="fill-card">
         <div class="fill-text">
@@ -388,76 +455,145 @@
 
       <div class="fill-card">
         <div class="fill-text">
-          2. 耶稣说：“日期满了，神的国近了。你们当<input type="text" class="blank-input" id="f2_1" data-ans="悔改" style="width:50px;"><span class="char-hint">（2字）</span>，信<input type="text" class="blank-input" id="f2_2" data-ans="福音" style="width:50px;"><span class="char-hint">（2字）</span>！”（1:15）
+          2. 施洗约翰穿<input type="text" class="blank-input" id="f2_1" data-ans="骆驼毛" style="width:60px;"><span class="char-hint">（3字）</span>的衣服，腰间束<input type="text" class="blank-input" id="f2_2" data-ans="皮带" style="width:44px;"><span class="char-hint">（2字）</span>，吃的是<input type="text" class="blank-input" id="f2_3" data-ans="蝗虫" style="width:44px;"><span class="char-hint">（2字）</span>和<input type="text" class="blank-input" id="f2_4" data-ans="野蜜" style="width:44px;"><span class="char-hint">（2字）</span>。（1:6）
         </div>
         <div class="feedback" id="fb-f2"></div>
       </div>
 
       <div class="fill-card">
         <div class="fill-text">
-          3. 次日早晨，<input type="text" class="blank-input" id="f3_1" data-ans="天未亮" style="width:60px;"><span class="char-hint">（3字）</span>的时候，耶稣起来，到<input type="text" class="blank-input" id="f3_2" data-ans="旷野" style="width:50px;"><span class="char-hint">（2字）</span>地方去，在那里祷告。（1:35）
+          3. 耶稣说：“日期满了，神的国近了。你们当<input type="text" class="blank-input" id="f3_1" data-ans="悔改" style="width:44px;"><span class="char-hint">（2字）</span>，信<input type="text" class="blank-input" id="f3_2" data-ans="福音" style="width:44px;"><span class="char-hint">（2字）</span>！”（1:15）
         </div>
         <div class="feedback" id="fb-f3"></div>
       </div>
+
+      <div class="fill-card">
+        <div class="fill-text">
+          4. 次日早晨，<input type="text" class="blank-input" id="f4_1" data-ans="天未亮" style="width:60px;"><span class="char-hint">（3字）</span>的时候，耶稣起来，到<input type="text" class="blank-input" id="f4_2" data-ans="旷野" style="width:44px;"><span class="char-hint">（2字）</span>地方去，在那里祷告。（1:35）
+        </div>
+        <div class="feedback" id="fb-f4"></div>
+      </div>
+
+      <div class="fill-card">
+        <div class="fill-text">
+          5. 大麻风患者跪下求耶稣：“你若<input type="text" class="blank-input" id="f5_1" data-ans="肯" style="width:30px;"><span class="char-hint">（1字）</span>，必能叫我洁净了。”耶稣动了慈心，就<input type="text" class="blank-input" id="f5_2" data-ans="伸手摸他" style="width:72px;"><span class="char-hint">（4字）</span>，说：“我<input type="text" class="blank-input" id="f5_3" data-ans="肯" style="width:30px;"><span class="char-hint">（1字）</span>，你洁净了吧！”（1:40-41）
+        </div>
+        <div class="feedback" id="fb-f5"></div>
+      </div>
     </div>
 
-    <!-- 2. 高频选择题 -->
+    <!-- 2. 高频单选与多选题 -->
     <div class="card">
-      <div class="card-title">第二部分：高频单选题</div>
+      <div class="card-title">第二部分：高频选择题</div>
 
       <div class="q-item">
-        <div class="q-title">4. 西门和安得烈被耶稣呼召时，他们正在加利利海边做什么？（可 1:16）</div>
+        <div class="q-title">6. 马可福音第一章的开头方式与马太福音和路加福音有何显著不同？（可 1:1-2）</div>
         <div class="opt-group">
-          <label class="opt-label"><input type="radio" name="c4" value="a"> A. 补网</label>
-          <label class="opt-label"><input type="radio" name="c4" value="b"> B. 撒网</label>
-          <label class="opt-label"><input type="radio" name="c4" value="c"> C. 卖鱼</label>
-          <label class="opt-label"><input type="radio" name="c4" value="d"> D. 修理船只</label>
-        </div>
-        <div class="feedback" id="fb-c4"></div>
-      </div>
-
-      <div class="q-item">
-        <div class="q-title">5. 雅各和约翰被呼召时，同在船上的父亲是谁？（可 1:19-20）</div>
-        <div class="opt-group">
-          <label class="opt-label"><input type="radio" name="c5" value="a"> A. 亚勒腓</label>
-          <label class="opt-label"><input type="radio" name="c5" value="b"> B. 西庇太</label>
-          <label class="opt-label"><input type="radio" name="c5" value="c"> C. 亚比亚他</label>
-          <label class="opt-label"><input type="radio" name="c5" value="d"> D. 亚希米勒</label>
-        </div>
-        <div class="feedback" id="fb-c5"></div>
-      </div>
-
-      <div class="q-item">
-        <div class="q-title">6. 在迦百农会堂里被污鬼附的人称耶稣是什么？（可 1:24）</div>
-        <div class="opt-group">
-          <label class="opt-label"><input type="radio" name="c6" value="a"> A. 神的儿子</label>
-          <label class="opt-label"><input type="radio" name="c6" value="b"> B. 大卫的子孙</label>
-          <label class="opt-label"><input type="radio" name="c6" value="c"> C. 神的圣者</label>
-          <label class="opt-label"><input type="radio" name="c6" value="d"> D. 犹太人的王</label>
+          <label class="opt-label"><input type="radio" name="c6" value="a"> A. 从耶稣的家谱谱系开始</label>
+          <label class="opt-label"><input type="radio" name="c6" value="b"> B. 从天使向玛利亚报喜开始</label>
+          <label class="opt-label"><input type="radio" name="c6" value="c"> C. 没有任何家谱与出生故事，直接进入施洗约翰与耶稣</label>
+          <label class="opt-label"><input type="radio" name="c6" value="d"> D. 从耶稣十二岁守逾越节开始</label>
         </div>
         <div class="feedback" id="fb-c6"></div>
       </div>
 
       <div class="q-item">
-        <div class="q-title">7. 耶稣医治西门的岳母之后，她立刻做了什么？（可 1:31）</div>
+        <div class="q-title">7. 施洗约翰说：“我是用水给你们施洗”，而后来的耶稣将用什么给你们施洗？（可 1:8）</div>
         <div class="opt-group">
-          <label class="opt-label"><input type="radio" name="c7" value="a"> A. 出去宣讲耶稣的名</label>
-          <label class="opt-label"><input type="radio" name="c7" value="b"> B. 服事他们</label>
-          <label class="opt-label"><input type="radio" name="c7" value="c"> C. 进会堂献祭</label>
-          <label class="opt-label"><input type="radio" name="c7" value="d"> D. 回拿撒勒老家</label>
+          <label class="opt-label"><input type="radio" name="c7" value="a"> A. 圣水</label>
+          <label class="opt-label"><input type="radio" name="c7" value="b"> B. 圣灵</label>
+          <label class="opt-label"><input type="radio" name="c7" value="c"> C. 火</label>
+          <label class="opt-label"><input type="radio" name="c7" value="d"> D. 宝血</label>
         </div>
         <div class="feedback" id="fb-c7"></div>
       </div>
 
       <div class="q-item">
-        <div class="q-title">8. 洁净长大麻风的人时，耶稣在医治前作出了什么情感与动作？（可 1:41）</div>
+        <div class="q-title">8. 耶稣受洗时，发生的三个连贯现象顺序列正确的是哪一项？（可 1:10-11）</div>
         <div class="opt-group">
-          <label class="opt-label"><input type="radio" name="c8" value="a"> A. 动了慈心，伸手摸他</label>
-          <label class="opt-label"><input type="radio" name="c8" value="b"> B. 动了怒气，责备大麻风</label>
-          <label class="opt-label"><input type="radio" name="c8" value="c"> C. 心中叹息，叫他洗澡</label>
-          <label class="opt-label"><input type="radio" name="c8" value="d"> D. 默默祷告，用泥抹眼</label>
+          <label class="opt-label"><input type="radio" name="c8" value="a"> A. 天上声音 → 圣灵降下 → 天裂开</label>
+          <label class="opt-label"><input type="radio" name="c8" value="b"> B. 天裂开 → 圣灵仿佛鸽子降下 → 天上声音</label>
+          <label class="opt-label"><input type="radio" name="c8" value="c"> C. 鸽子飞来 → 天裂开 → 耶稣祷告</label>
+          <label class="opt-label"><input type="radio" name="c8" value="d"> D. 天上声音 → 天裂开 → 鸽子降下</label>
         </div>
         <div class="feedback" id="fb-c8"></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-title">9. 耶稣在旷野受撒但试探四十天，关于这段经历马可福音特别提到了谁与祂同在？（可 1:13）</div>
+        <div class="opt-group">
+          <label class="opt-label"><input type="radio" name="c9" value="a"> A. 门徒</label>
+          <label class="opt-label"><input type="radio" name="c9" value="b"> B. 施洗约翰</label>
+          <label class="opt-label"><input type="radio" name="c9" value="c"> C. 野兽</label>
+          <label class="opt-label"><input type="radio" name="c9" value="d"> D. 法利赛人</label>
+        </div>
+        <div class="feedback" id="fb-c9"></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-title">10. 西门和安得烈被耶稣呼召时，他们正在加利利海边做什么？（可 1:16）</div>
+        <div class="opt-group">
+          <label class="opt-label"><input type="radio" name="c10" value="a"> A. 在船上补网</label>
+          <label class="opt-label"><input type="radio" name="c10" value="b"> B. 撒网</label>
+          <label class="opt-label"><input type="radio" name="c10" value="c"> C. 卖鱼</label>
+          <label class="opt-label"><input type="radio" name="c10" value="d"> D. 修理船只</label>
+        </div>
+        <div class="feedback" id="fb-c10"></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-title">11. 雅各和约翰被呼召时，正在船上和谁在一起补网？（多选）（可 1:19-20）</div>
+        <div class="opt-group">
+          <label class="opt-label"><input type="checkbox" name="c11" value="a"> A. 父亲西庇太</label>
+          <label class="opt-label"><input type="checkbox" name="c11" value="b"> B. 雇工</label>
+          <label class="opt-label"><input type="checkbox" name="c11" value="c"> C. 亚勒腓</label>
+          <label class="opt-label"><input type="checkbox" name="c11" value="d"> D. 撒都该人</label>
+        </div>
+        <div class="feedback" id="fb-c11"></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-title">12. 在迦百农会堂里，被污鬼附的人称耶稣为什么？（可 1:24）</div>
+        <div class="opt-group">
+          <label class="opt-label"><input type="radio" name="c12" value="a"> A. 神的儿子</label>
+          <label class="opt-label"><input type="radio" name="c12" value="b"> B. 大卫的子孙</label>
+          <label class="opt-label"><input type="radio" name="c12" value="c"> C. 神的圣者</label>
+          <label class="opt-label"><input type="radio" name="c12" value="d"> D. 犹太人的王</label>
+        </div>
+        <div class="feedback" id="fb-c12"></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-title">13. 耶稣医治西门的岳母之后，她退了热，立刻做了什么？（可 1:31）</div>
+        <div class="opt-group">
+          <label class="opt-label"><input type="radio" name="c13" value="a"> A. 出去宣讲耶稣的名声</label>
+          <label class="opt-label"><input type="radio" name="c13" value="b"> B. 服事他们</label>
+          <label class="opt-label"><input type="radio" name="c13" value="c"> C. 进会堂献祭</label>
+          <label class="opt-label"><input type="radio" name="c13" value="d"> D. 回拿撒勒老家</label>
+        </div>
+        <div class="feedback" id="fb-c13"></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-title">14. 当西门和同伴找到正在祷告的耶稣并说“众人都找你”时，耶稣如何回应？（可 1:38）</div>
+        <div class="opt-group">
+          <label class="opt-label"><input type="radio" name="c14" value="a"> A. “立刻带我回迦百农医治他们”</label>
+          <label class="opt-label"><input type="radio" name="c14" value="b"> B. “我们可以往别处去，到邻近的乡村，我也好在那里传道”</label>
+          <label class="opt-label"><input type="radio" name="c14" value="c"> C. “叫他们在门前等候，我随后就来”</label>
+          <label class="opt-label"><input type="radio" name="c14" value="d"> D. “我只被差遣到以色列家失丧的羊那里”</label>
+        </div>
+        <div class="feedback" id="fb-c14"></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-title">15. 洁净长大麻风的人后，耶稣给了他哪两个命令？（多选）（可 1:44）</div>
+        <div class="opt-group">
+          <label class="opt-label"><input type="checkbox" name="c15" value="a"> A. 严严地嘱咐他，什么都不可告诉人</label>
+          <label class="opt-label"><input type="checkbox" name="c15" value="b"> B. 去把身体给祭司察看，并献上摩西吩咐的礼物</label>
+          <label class="opt-label"><input type="checkbox" name="c15" value="c"> C. 在全城广传这神迹给众人作见证</label>
+          <label class="opt-label"><input type="checkbox" name="c15" value="d"> D. 留在迦百农作门徒</label>
+        </div>
+        <div class="feedback" id="fb-c15"></div>
       </div>
     </div>
 
@@ -466,39 +602,48 @@
       <div class="card-title">第三部分：易错是非题</div>
 
       <div class="q-item">
-        <div class="q-title">9. 施洗约翰穿骆驼毛的衣服，腰束皮带，吃蝗虫和野蜜。（可 1:6）</div>
+        <div class="q-title">16. 马可福音第一章中详细记录了撒但在旷野对耶稣进行的具体三次试探内容。（可 1:12-13）</div>
         <div class="opt-group" style="flex-direction: row;">
-          <label class="opt-label" style="flex:1;"><input type="radio" name="tf9" value="T"> √ 正确</label>
-          <label class="opt-label" style="flex:1;"><input type="radio" name="tf9" value="F"> × 错误</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf16" value="T"> √ 正确</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf16" value="F"> × 错误</label>
         </div>
-        <div class="feedback" id="fb-tf9"></div>
+        <div class="feedback" id="fb-tf16"></div>
       </div>
 
       <div class="q-item">
-        <div class="q-title">10. 耶稣在旷野受撒但试探一共持续了七天。（可 1:13）</div>
+        <div class="q-title">17. 最先被耶稣呼召的四位门徒依次是：西门、安得烈、雅各、约翰。（可 1:16-19）</div>
         <div class="opt-group" style="flex-direction: row;">
-          <label class="opt-label" style="flex:1;"><input type="radio" name="tf10" value="T"> √ 正确</label>
-          <label class="opt-label" style="flex:1;"><input type="radio" name="tf10" value="F"> × 错误</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf17" value="T"> √ 正确</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf17" value="F"> × 错误</label>
         </div>
-        <div class="feedback" id="fb-tf10"></div>
+        <div class="feedback" id="fb-tf17"></div>
       </div>
 
       <div class="q-item">
-        <div class="q-title">11. 施洗约翰说：“我是用水给你们施洗，他却要用圣水给你们施洗。”（可 1:8）</div>
+        <div class="q-title">18. 天晚日落的时候，合城的人带病人来，耶稣治好了许多人，并允许鬼说话为祂作见证。（可 1:34）</div>
         <div class="opt-group" style="flex-direction: row;">
-          <label class="opt-label" style="flex:1;"><input type="radio" name="tf11" value="T"> √ 正确</label>
-          <label class="opt-label" style="flex:1;"><input type="radio" name="tf11" value="F"> × 错误</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf18" value="T"> √ 正确</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf18" value="F"> × 错误</label>
         </div>
-        <div class="feedback" id="fb-tf11"></div>
+        <div class="feedback" id="fb-tf18"></div>
       </div>
 
       <div class="q-item">
-        <div class="q-title">12. 洁净大麻风病患后，耶稣严严嘱咐他要将身体给祭司察看，并献上摩西吩咐的礼物。（可 1:44）</div>
+        <div class="q-title">19. 雅各和约翰的父亲是西门。（可 1:19）</div>
         <div class="opt-group" style="flex-direction: row;">
-          <label class="opt-label" style="flex:1;"><input type="radio" name="tf12" value="T"> √ 正确</label>
-          <label class="opt-label" style="flex:1;"><input type="radio" name="tf12" value="F"> × 错误</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf19" value="T"> √ 正确</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf19" value="F"> × 错误</label>
         </div>
-        <div class="feedback" id="fb-tf12"></div>
+        <div class="feedback" id="fb-tf19"></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-title">20. 大麻风患者被洁净后，因为出去广传这件事，导致耶稣以后不得再明明进城，只能在外边旷野地方。（可 1:45）</div>
+        <div class="opt-group" style="flex-direction: row;">
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf20" value="T"> √ 正确</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="tf20" value="F"> × 错误</label>
+        </div>
+        <div class="feedback" id="fb-tf20"></div>
       </div>
     </div>
   </div>
@@ -514,14 +659,19 @@ function switchTab(tabId) {
   document.getElementById('tab-' + tabId).classList.add('active');
 }
 
-// 自动保存逻辑
-const STORAGE_KEY = 'mark_ch1_quiz_answers';
+// 自动保存逻辑 (localStorage)
+const STORAGE_KEY = 'mark_ch1_full_quiz_answers';
 
 function saveAnswers() {
   const state = {};
   document.querySelectorAll('input').forEach(el => {
     if (el.type === 'radio') {
       if (el.checked) state[el.name] = el.value;
+    } else if (el.type === 'checkbox') {
+      if (el.checked) {
+        state[el.name] = state[el.name] || [];
+        state[el.name].push(el.value);
+      }
     } else if (el.type === 'text') {
       if (el.value) state[el.id] = el.value;
     }
@@ -540,6 +690,11 @@ function loadAnswers() {
       const textEl = document.getElementById(key);
       if (textEl && textEl.type === 'text') {
         textEl.value = val;
+      } else if (Array.isArray(val)) {
+        val.forEach(v => {
+          const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+          if (chk) chk.checked = true;
+        });
       } else {
         const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
         if (rad) rad.checked = true;
@@ -561,13 +716,15 @@ function clean(s) { return (s || '').replace(/[\s，。、“”！？：；]/g,
 // 核对答案逻辑
 function gradeAll() {
   let score = 0;
-  const total = 12;
+  const total = 20;
 
   // 1. 填空题
   const fills = [
     { id: 1, ins: ['f1_1'], ans: ['耶稣基督'], exp: '耶稣基督', desc: '可1:1“神的儿子，耶稣基督福音的起头。”' },
-    { id: 2, ins: ['f2_1', 'f2_2'], ans: ['悔改', '福音'], exp: '悔改 / 福音', desc: '可1:15“你们当悔改，信福音！”' },
-    { id: 3, ins: ['f3_1', 'f3_2'], ans: ['天未亮', '旷野'], exp: '天未亮 / 旷野', desc: '可1:35“次日早晨，天未亮的时候...到旷野地方去”' }
+    { id: 2, ins: ['f2_1', 'f2_2', 'f2_3', 'f2_4'], ans: ['骆驼毛', '皮带', '蝗虫', '野蜜'], exp: '骆驼毛 / 皮带 / 蝗虫 / 野蜜', desc: '可1:6 约翰的衣着与饮食考点。' },
+    { id: 3, ins: ['f3_1', 'f3_2'], ans: ['悔改', '福音'], exp: '悔改 / 福音', desc: '可1:15“日期满了，神的国近了。你们当悔改，信福音！”' },
+    { id: 4, ins: ['f4_1', 'f4_2'], ans: ['天未亮', '旷野'], exp: '天未亮 / 旷野', desc: '可1:35“次日早晨，天未亮的时候...到旷野地方去，在那里祷告。”' },
+    { id: 5, ins: ['f5_1', 'f5_2', 'f5_3'], ans: ['肯', '伸手摸他', '肯'], exp: '肯 / 伸手摸他 / 肯', desc: '可1:40-41 医治大麻风患者的情感与动作。' }
   ];
 
   fills.forEach(r => {
@@ -589,19 +746,31 @@ function gradeAll() {
     }
   });
 
-  // 2. 单选题
+  // 2. 选择题
   const choices = [
-    { id: 'c4', ans: 'b', exp: 'B. 撒网', desc: '可1:16 西门和安得烈在加利利海边“撒网”（打鱼的）。' },
-    { id: 'c5', ans: 'b', exp: 'B. 西庇太', desc: '可1:19-20 雅各和约翰与父亲“西庇太”在船上补网。' },
-    { id: 'c6', ans: 'c', exp: 'C. 神的圣者', desc: '可1:24 污鬼喊道：“我知道你是谁，乃是神的圣者。”' },
-    { id: 'c7', ans: 'b', exp: 'B. 服事他们', desc: '可1:31 耶稣拉手扶她起来，热退了就“服事他们”。' },
-    { id: 'c8', ans: 'a', exp: 'A. 动了慈心，伸手摸他', desc: '可1:41 耶稣“动了慈心，伸手摸他”，说：“我肯，你洁净了吧！”' }
+    { id: 'c6', type: 'radio', ans: 'c', exp: 'C', desc: '可1:1 马可直接进入约翰与耶稣，无家谱与出生记载。' },
+    { id: 'c7', type: 'radio', ans: 'b', exp: 'B. 圣灵', desc: '可1:8 约翰用水施洗，耶稣用圣灵施洗。' },
+    { id: 'c8', type: 'radio', ans: 'b', exp: 'B', desc: '可1:10-11 顺序为：天裂开 → 圣灵如鸽子降下 → 天上声音。' },
+    { id: 'c9', type: 'radio', ans: 'c', exp: 'C. 野兽', desc: '可1:13 马可特别记载耶稣与“野兽”同在，有天使伺候祂。' },
+    { id: 'c10', type: 'radio', ans: 'b', exp: 'B. 撒网', desc: '可1:16 西门和安得烈在海边“撒网”（打鱼的）。' },
+    { id: 'c11', type: 'check', ans: ['a', 'b'], exp: 'A, B', desc: '可1:19-20 雅各约翰与父亲西庇太及雇工在船上补网。' },
+    { id: 'c12', type: 'radio', ans: 'c', exp: 'C. 神的圣者', desc: '可1:24 污鬼称耶稣为“神的圣者”。' },
+    { id: 'c13', type: 'radio', ans: 'b', exp: 'B. 服事他们', desc: '可1:31 西门岳母热退后起来“服事他们”。' },
+    { id: 'c14', type: 'radio', ans: 'b', exp: 'B', desc: '可1:38 耶稣表明使命是往邻近乡村“传道”。' },
+    { id: 'c15', type: 'check', ans: ['a', 'b'], exp: 'A, B', desc: '可1:44 命令不可告诉人，并去见祭司献礼物。' }
   ];
 
   choices.forEach(r => {
     const fb = document.getElementById('fb-' + r.id);
-    const sel = document.querySelector(`input[name="${r.id}"]:checked`);
-    if (sel && sel.value === r.ans) {
+    let ok = false;
+    if (r.type === 'radio') {
+      const sel = document.querySelector(`input[name="${r.id}"]:checked`);
+      if (sel && sel.value === r.ans) ok = true;
+    } else {
+      const arr = Array.from(document.querySelectorAll(`input[name="${r.id}"]:checked`)).map(e => e.value);
+      if (arr.length === r.ans.length && r.ans.every(v => arr.includes(v))) ok = true;
+    }
+    if (ok) {
       score++; fb.className = 'feedback is-correct'; fb.innerHTML = `正确！解析：${r.desc}`;
     } else {
       fb.className = 'feedback is-wrong'; fb.innerHTML = `答案：【${r.exp}】。解析：${r.desc}`;
@@ -610,10 +779,11 @@ function gradeAll() {
 
   // 3. 是非题
   const tfs = [
-    { id: 'tf9', ans: 'T', exp: '√ 正确', desc: '可1:6 约翰穿骆驼毛衣服，腰束皮带，吃蝗虫野蜜。' },
-    { id: 'tf10', ans: 'F', exp: '× 错误', desc: '可1:13 耶稣在旷野受试探一共“四十天”，非七天。' },
-    { id: 'tf11', ans: 'F', exp: '× 错误', desc: '可1:8 约翰说耶稣要用“圣灵”施洗，非“圣水”。' },
-    { id: 'tf12', ans: 'T', exp: '√ 正确', desc: '可1:44 严严嘱咐他给祭司察看并献礼物对众人作证据。' }
+    { id: 'tf16', ans: 'F', exp: '× 错误', desc: '马可福音未记录详细三次试探内容（马太与路加有写）。' },
+    { id: 'tf17', ans: 'T', exp: '√ 正确', desc: '可1:16-19 最先呼召四人顺序：西门 → 安得烈 → 雅各 → 约翰。' },
+    { id: 'tf18', ans: 'F', exp: '× 错误', desc: '可1:34 耶稣“不许鬼说话，因为鬼认识祂”。' },
+    { id: 'tf19', ans: 'F', exp: '× 错误', desc: '可1:19 雅各和约翰的父亲是西庇太（西门是安得烈的兄弟）。' },
+    { id: 'tf20', ans: 'T', exp: '√ 正确', desc: '可1:45 麻风患者广传后，耶稣不得明明进城，只能在旷野地方。' }
   ];
 
   tfs.forEach(r => {
