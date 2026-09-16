@@ -13,8 +13,6 @@
     --text-muted: #64748b;
     --bg-page: #f8fafc;
     --card-bg: #ffffff;
-    --correct: #15803d;
-    --correct-bg: #dcfce7;
     --ready-badge: #10b981;
     --pending-badge: #94a3b8;
   }
@@ -30,7 +28,6 @@
     justify-content: center;
     font-size: 15px;
   }
-
   .adaptive-container {
     width: 100%;
     max-width: 1000px;
@@ -43,8 +40,6 @@
   @media (max-width: 768px) {
     .adaptive-container { padding: 14px 12px 50px 12px; }
   }
-
-  /* 顶部横幅 */
   .header {
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
     color: white;
@@ -56,13 +51,12 @@
   .header h1 { margin: 0 0 8px 0; font-size: 24px; font-weight: 700; }
   .header p { margin: 0; opacity: 0.95; font-size: 15px; }
 
-  /* 备战总进度卡片 */
   .overview-card {
     background: #eff6ff;
     border: 1px solid #bfdbfe;
     border-radius: 12px;
     padding: 16px 20px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -73,21 +67,47 @@
   .overview-stats { font-size: 14px; color: var(--text-muted); }
   .overview-stats strong { color: var(--accent); font-size: 16px; }
 
-  /* 章节卡片网格布局 */
+  /* 置顶综合模拟考入口卡片 */
+  .grand-quiz-banner {
+    background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+    color: white;
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    box-shadow: 0 6px 16px rgba(30, 58, 138, 0.22);
+  }
+  .banner-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .banner-desc { font-size: 13.5px; opacity: 0.92; line-height: 1.5; }
+  .banner-btn {
+    background: #ffffff;
+    color: var(--accent);
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14.5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .banner-btn:hover { background: #f8fafc; transform: translateY(-1px); }
+
   .chapters-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 16px;
     margin-bottom: 30px;
   }
-
-  /* 章节卡片基础样式 */
   .chapter-card {
     background: var(--card-bg);
     border: 1.5px solid var(--border);
     border-radius: 12px;
     padding: 18px 16px;
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -95,8 +115,6 @@
     text-decoration: none;
     color: inherit;
   }
-
-  /* 已上线章节卡片 */
   .chapter-card.is-active {
     border-color: #93c5fd;
     cursor: pointer;
@@ -107,26 +125,19 @@
     border-color: var(--accent);
     box-shadow: 0 8px 18px rgba(37, 99, 235, 0.12);
   }
-
-  /* 未上线章节卡片 */
   .chapter-card.is-pending {
     background: #f8fafc;
     border-color: #e2e8f0;
     opacity: 0.85;
     cursor: not-allowed;
   }
-
   .chapter-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
   }
-  .chapter-number {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--primary);
-  }
+  .chapter-number { font-size: 17px; font-weight: 700; color: var(--primary); }
   .chapter-badge {
     font-size: 11px;
     font-weight: 600;
@@ -136,21 +147,8 @@
   }
   .badge-ready { background-color: var(--ready-badge); }
   .badge-pending { background-color: var(--pending-badge); }
-
-  .chapter-title {
-    font-size: 14.5px;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 8px;
-  }
-  .chapter-summary {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.55;
-    margin-bottom: 14px;
-    flex-grow: 1;
-  }
-
+  .chapter-title { font-size: 14.5px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
+  .chapter-summary { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 14px; flex-grow: 1; }
   .chapter-action {
     display: flex;
     align-items: center;
@@ -160,17 +158,8 @@
     padding-top: 10px;
     border-top: 1px dashed #e2e8f0;
   }
-  .action-link {
-    color: var(--accent);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .action-disabled {
-    color: #94a3b8;
-  }
-
-  /* 备战总诀卡片 */
+  .action-link { color: var(--accent); display: inline-flex; align-items: center; gap: 4px; }
+  .action-disabled { color: #94a3b8; }
   .footer-summary-card {
     background: #fffbe6;
     border: 1px solid #ffe58f;
@@ -180,31 +169,39 @@
     color: #92400e;
     line-height: 1.65;
   }
-  .footer-summary-card strong { color: #b45309; }
 </style>
 </head>
 <body>
 
 <div class="adaptive-container">
   <div class="header">
-    <h1>《马可福音》圣经比赛备战</h1>
-    <p>第 1 章至第 16 章研读指南与互动测验入口</p>
+    <h1>《马可福音》圣经比赛备战中心</h1>
+    <p>单章指南 ＋ 全卷综合模拟考枢纽</p>
   </div>
 
   <div class="overview-card">
     <div>
-      <div class="overview-title">📚 全书总览与通关进度</div>
-      <div style="font-size: 13px; color: #475569; margin-top: 2px;">共 16 章，专为圣经比赛设计的结构化提要与题库</div>
+      <div class="overview-title">📚 备战与题库开通进度</div>
+      <div style="font-size: 13px; color: #475569; margin-top: 2px;">专为圣经比赛设计的结构化重点与真题训练</div>
     </div>
     <div class="overview-stats">
       已开通模块：<strong>2 / 16</strong> 章
     </div>
   </div>
 
+  <!-- 🔥 置顶综合测试入口按钮卡片 -->
+  <div class="grand-quiz-banner">
+    <div>
+      <div class="banner-title">🏆 全真综合模拟考（跨章节混抽 50 题）</div>
+      <div class="banner-desc">打破单章思维定势！随机混抽第 1 章与第 2 章全部重点考题，全真还原比赛高压场景[cite: 7, 14]。</div>
+    </div>
+    <a href="mark_all_chapters_quiz.html" class="banner-btn">进入综合测验 →</a>
+  </div>
+
   <!-- 1-16章网格列表 -->
   <div class="chapters-grid">
 
-    <!-- 第 1 章 (已完成) -->
+    <!-- 第 1 章 -->
     <a href="mark_chp_1_guide.html" class="chapter-card is-active">
       <div>
         <div class="chapter-header">
@@ -213,7 +210,7 @@
         </div>
         <div class="chapter-title">福音的起头与权柄的显明</div>
         <div class="chapter-summary">
-          施洗约翰传道、耶稣受洗与受试探、呼召加利利海边四门徒、迦百农赶鬼、西门岳母退热、清晨旷野祷告、洁净长大麻风者。
+          施洗约翰传道、耶稣受洗与受试探、呼召加利利海边四门徒、迦百农赶鬼、西门岳母退热、清晨旷野祷告、洁净长大麻风者[cite: 11]。
         </div>
       </div>
       <div class="chapter-action">
@@ -221,7 +218,7 @@
       </div>
     </a>
 
-    <!-- 第 2 章 (已完成) -->
+    <!-- 第 2 章 -->
     <a href="mark_chp_2_guide.html" class="chapter-card is-active">
       <div>
         <div class="chapter-header">
@@ -230,258 +227,34 @@
         </div>
         <div class="chapter-title">赦罪的权柄与新旧之辩</div>
         <div class="chapter-summary">
-          四人拆房顶缒下瘫子、呼召税吏利未与罪人坐席、新郎与新酒装新皮袋比喻、安息日门徒掐麦穗、大卫吃陈设饼。
+          四人拆房顶缒下瘫子、呼召税吏利未与罪人坐席、新郎与新酒装新皮袋比喻、安息日门徒掐麦穗、大卫吃陈设饼[cite: 3, 11]。
         </div>
       </div>
       <div class="chapter-action">
-        <span class="action-link">进入学习与备战指南 →</span>
+        <span class="action-link">进入学习与 50 题测验 →</span>
       </div>
     </a>
 
-    <!-- 第 3 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 3 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">选立十二使徒与捆绑壮士</div>
-        <div class="chapter-summary">
-          安息日医治枯干一只手的人、海边退避、设立十二门徒名单与次序、文士论受别西卜附身、耶稣论真正的亲属。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 4 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 4 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">天国的比喻与平静风浪</div>
-        <div class="chapter-summary">
-          撒种的比喻（四种土壤）、灯放在斗底下、种子暗中生长、芥菜种的比喻、耶稣斥责风和海风浪大平。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 5 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 5 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">战胜污鬼、痼疾与死亡</div>
-        <div class="chapter-summary">
-          格拉森赶出“群”鬼入猪群、睚鲁的祈求、患十二年血漏的妇人摸衣裳得医治、睚鲁女儿复活（大利大古米）。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 6 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 6 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">差遣十二人与五饼二鱼</div>
-        <div class="chapter-summary">
-          家乡拿撒勒遭厌弃、差遣门徒两个两个出去、施洗约翰殉道始末、五饼二鱼喂饱五千人、夜间海面上行走。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 7 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 7 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">古人的遗传与洁净的真谛</div>
-        <div class="chapter-summary">
-          洗手与各样传统规条辨析、入腹与出口的污秽、叙利非尼基妇人的信心（碎渣儿）、医治耳聋舌结的人（以法大）。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 8 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 8 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">彼得认信与受难初次预言</div>
-        <div class="chapter-summary">
-          七个饼几条小鱼喂饱四千人、防备法利赛人与希律的酵、伯赛大渐进医瞎子、彼得在凯撒利亚腓立比认信基督、初次预言受难与舍己跟从。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 9 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 9 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">登山变像与降卑争大之训</div>
-        <div class="chapter-summary">
-          高山变像见摩西以利亚、山下赶出哑巴鬼（出于祷告）、二次预言受难、门徒争论谁为大、接纳小孩、地狱之火与盐的警戒。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 10 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 10 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">婚姻之道、少年财主与仆人服事</div>
-        <div class="chapter-summary">
-          论休妻与婚姻神圣、给小孩子祝福、少年的官求永生（骆驼穿针眼）、三次预言受难、雅各约翰求左右座位、医治瞎子巴底买。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 11 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 11 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">骑驴进京与洁净圣殿</div>
-        <div class="chapter-summary">
-          荣耀进耶路撒冷（和散那）、咒诅不结果子的无花果树、洁净圣殿推倒兑换银钱桌子、树干枯与信心的祷告、文士祭司盘问权柄来源。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 12 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 12 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">圣殿交锋与最大的诫命</div>
-        <div class="chapter-summary">
-          凶恶园户的比喻（房角石）、纳税给凯撒问题、撒都该人辩复活（七兄一妻）、文士问第一要紧的诫命、基督为大卫之主、穷寡妇的两个小钱。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 13 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 13 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">橄榄山末世预言与警醒</div>
-        <div class="chapter-summary">
-          圣殿被毁的预言、末期的预兆与大灾难、行毁坏可憎的、人子驾云降临、无花果树发嫩长叶、主来那日不知务要警醒。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 14 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 14 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">最后的晚餐与客西马尼的顺服</div>
-        <div class="chapter-summary">
-          伯大尼女人打破玉瓶膏主、犹大出卖、设立圣餐逾越节晚餐、客西马尼园汗滴祷告、犹大亲吻卖主、公会受审、彼得三次不认主鸡叫两遍。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 15 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 15 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">十字架上的受难与埋葬</div>
-        <div class="chapter-summary">
-          彼拉多审讯释放巴拉巴、兵丁戏弄戴荆棘冠冕、古利奈人西门背十字架、各各他钉十字架、遍地黑暗、殿幔裂开、百夫长认信、亚利马太的约瑟安葬。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
-    <!-- 第 16 章 -->
-    <div class="chapter-card is-pending">
-      <div>
-        <div class="chapter-header">
-          <span class="chapter-number">第 16 章</span>
-          <span class="chapter-badge badge-pending">待上线</span>
-        </div>
-        <div class="chapter-title">荣耀复活与向万民传福音</div>
-        <div class="chapter-summary">
-          七日第一日清晨妇女探空坟、白袍少年报复活佳音、向抹大拉的马利亚等显现、颁布大使命往普天下去传福音、主耶稣升天与门徒同行神迹。
-        </div>
-      </div>
-      <div class="chapter-action">
-        <span class="action-disabled">资料整理中</span>
-      </div>
-    </div>
-
+    <!-- 第 3 至 16 章待上线占位 -->
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 3 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">选立十二使徒与捆绑壮士</div><div class="chapter-summary">安息日医治枯干手、设立十二门徒名单与次序、论受别西卜附身[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 4 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">天国的比喻与平静风浪</div><div class="chapter-summary">撒种比喻、灯放在斗底、芥菜种比喻、耶稣斥责风和海[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 5 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">战胜污鬼、痼疾与死亡</div><div class="chapter-summary">格拉森赶鬼入猪群、十二年血漏妇人摸衣裳、睚鲁女儿复活[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 6 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">差遣十二人与五饼二鱼</div><div class="chapter-summary">家乡遭厌弃、差遣门徒两个两个出去、施洗约翰殉道、五饼二鱼[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 7 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">古人的遗传与洁净的真谛</div><div class="chapter-summary">洗手与洁净真谛、叙利非尼基妇人的信心、医治耳聋舌结者[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 8 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">彼得认信与受难初次预言</div><div class="chapter-summary">四千人吃饱、防备酵、彼得认信基督、初次预言受难舍己[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 9 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">登山变像与降卑争大之训</div><div class="chapter-summary">登山变像、山下赶出哑巴鬼、门徒争大、接纳小孩子[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 10 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">婚姻之道、少年财主与仆人服事</div><div class="chapter-summary">论休妻、少年官求永生、三次预言受难、医治瞎子巴底买[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 11 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">骑驴进京与洁净圣殿</div><div class="chapter-summary">荣耀进耶路撒冷、咒诅无花果树、洁净圣殿推倒银钱桌[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 12 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">圣殿交锋与最大的诫命</div><div class="chapter-summary">凶恶园户比喻、纳税给凯撒、辩复活、第一要紧的诫命[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 13 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">橄榄山末世预言与警醒</div><div class="chapter-summary">圣殿被毁预言、大灾难预兆、人子驾云降临、务要警醒[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 14 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">最后的晚餐与客西马尼的顺服</div><div class="chapter-summary">玉瓶膏主、设立圣餐、客西马尼祷告、犹大卖主、彼得不认主[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 15 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">十字架上的受难与埋葬</div><div class="chapter-summary">彼拉多审讯、各各他受钉、遍地黑暗、殿幔裂开、约瑟安葬[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
+    <div class="chapter-card is-pending"><div><div class="chapter-header"><span class="chapter-number">第 16 章</span><span class="chapter-badge badge-pending">待上线</span></div><div class="chapter-title">荣耀复活与向万民传福音</div><div class="chapter-summary">清晨空坟、复活显现、颁布万民大使命、主升天同行神迹[cite: 11]。</div></div><div class="chapter-action"><span class="action-disabled">资料整理中</span></div></div>
   </div>
 
-  <!-- 底部备战小锦囊 -->
   <div class="footer-summary-card">
-    <strong>💡 圣经比赛全书备战策略：</strong><br>
-    《马可福音》以节奏紧凑（反复使用“随即/立刻”）、生动刻画耶稣行动与仆人权柄为特征[cite: 8, 10]。建议先从第 1 章（福音起头与洁净大麻风）和第 2 章（医治瘫子与安息日之辩）牢牢筑稳基本盘[cite: 3, 10]，逐步推进全书 16 章的大地图梳理！
+    <strong>💡 圣经竞赛全书备考策略：</strong><br>
+    建议先进入各单章指南扎实筑稳人物、动作、地点与经文出处基本盘[cite: 7, 20]；随后多利用顶部的「全真综合模拟考」进行 50 题混抽自测[cite: 7, 14]，训练临场敏锐度！
   </div>
 </div>
 
