@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>马可福音第二章 圣经比赛备战指南</title>
+<title>马可福音第二章 圣经比赛备战指南与测验</title>
 <style>
   :root {
     --primary: #1e3a8a;
@@ -85,6 +85,48 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
+  /* 控制台卡片 */
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .stat-group { display: flex; gap: 18px; align-items: center; }
+  .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+
   .card {
     background: var(--card-bg);
     border-radius: 12px;
@@ -160,6 +202,142 @@
   }
   .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
 
+  /* 题型大区块分类标题 */
+  .type-section-header {
+    background: #f1f5f9;
+    border-left: 5px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 24px 0 16px 0;
+  }
+  .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
+  .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
+
+  /* 配对表格样式 */
+  .match-table-wrap { width: 100%; overflow-x: auto; margin-top: 10px; }
+  .match-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: white;
+  }
+  .match-table th {
+    background: #f8fafc;
+    padding: 10px 8px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .match-table td {
+    padding: 10px 8px;
+    border: 1px solid #e2e8f0;
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+  .col-num { width: 44%; }
+  .col-input { width: 12%; text-align: center; background: #f8fafc; }
+  .col-alpha { width: 44%; }
+  .match-select {
+    width: 50px;
+    height: 32px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: white;
+  }
+
+  /* 填空题专属词库 Pool */
+  .word-bank-box {
+    background: #eff6ff;
+    border: 2px dashed #93c5fd;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 12px 0 18px 0;
+  }
+  .word-bank-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip {
+    background: #ffffff;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .word-chip:hover, .word-chip:active {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* 题目块 */
+  .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    background: #ffffff;
+  }
+  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* 填空输入框 */
+  .blank-input {
+    border: none;
+    border-bottom: 2.5px solid #64748b;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #0f172a;
+    text-align: center;
+    margin: 0 4px;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .blank-input:focus, .blank-input.active-blank {
+    outline: none;
+    border-bottom-color: var(--accent);
+    background: #dbeafe;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+  }
+  .blank-input.has-val {
+    background: #e0f2fe;
+    color: #0369a1;
+    border-bottom-color: #0284c7;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 </style>
@@ -168,14 +346,15 @@
 
 <div class="adaptive-container">
   <div class="header">
-    <h1>《马可福音》第二章 备战指南</h1>
-    <p>四大核心事件解析 ＋ 易混淆矩阵 ＋ 必背经文与陷阱提示</p>
+    <h1>《马可福音》第二章 备战指南与测验</h1>
+    <p>四大核心事件重点 ＋ 50 题题型分组抽测验</p>
   </div>
 
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
     <button class="tab-btn" onclick="switchTab('traps')">🧠 易混淆人物与陷阱</button>
     <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
   </div>
 
   <!-- TAB 1: 备战指南四大事件 -->
@@ -195,17 +374,16 @@
       </table>
       <div class="highlight-box">
         <strong>🔥 第二章主线口诀：</strong><br>
-        瘫子 → 利未 → 禁食 → 安息日。这一条主线必须先背熟！
+        瘫子 → 利未 → 禁食 → 安息日。这条主线必须牢牢记住！
       </div>
 
-      <!-- 第一部分 -->
       <div class="section-h2">第一部分：2:1-12 医治瘫子（最高频考点）</div>
       <p>故事地点：📍 <strong>迦百农</strong>。过了些日子，耶稣又进了迦百农，大家听见祂在房子里。</p>
       
       <div class="section-h3">① 来了一个什么病人？是谁带他来的？</div>
       <p>👉 <strong>瘫子</strong>。是由 <strong>四个人</strong> 抬来的。</p>
       <div class="trap-box">
-        <span class="trap-tag">⚠️ 细节考点</span> 不要只记“有人带瘫子来”，Quiz 极常考查具体数字：<strong>四个人</strong>。
+        <span class="trap-tag">⚠️ 细节考点</span> 不要只记“有人带瘫子来”，竞赛题极常考查数字：<strong>四个人</strong>。
       </div>
 
       <div class="section-h3">② 为什么他们进不去？采取了什么动作？</div>
@@ -215,14 +393,14 @@
       </div>
 
       <div class="section-h3">③ 耶稣的第一句话是什么？</div>
-      <p>耶稣对瘫子说：<strong>「小子，你的罪赦了。」</strong></p>
+      <p>耶稣见他们的信心，对瘫子说：<strong>「小子，你的罪赦了。」</strong></p>
       <div class="notice-box">
         ⚠️ 注意：耶稣并不是一开始就说“你的病好了”，而是首先宣布：<strong>你的罪赦了</strong>。
       </div>
 
       <div class="section-h3">④ 谁心里议论？为什么？</div>
       <p>几个<strong>文士</strong>坐在那里，心里议论说：“这个人为什么这样说呢？他说<strong>僭妄的话</strong>了。除了神以外，谁能赦罪呢？”</p>
-      <p>👉 文士认为耶稣说了僭妄的话，因为他们的传统认知是：<strong>只有神能赦罪</strong>。</p>
+      <p>👉 文士认为耶稣说了僭妄的话，因为他们的观念是：<strong>只有神能赦罪</strong>。</p>
 
       <div class="section-h3">⑤ 耶稣知道他们的议论与回答</div>
       <p>耶稣心中知道他们心里如此议论，就说：“你们心里为什么这样议论呢？或对瘫子说：‘你的罪赦了’，或说：‘起来！拿你的褥子行走’，哪一样容易呢？”</p>
@@ -234,7 +412,6 @@
       <div class="section-h3">⑦ 瘫子的反应与众人的反应</div>
       <p>瘫子<strong>立刻起来，拿着褥子</strong>，当着众人面前出去了。众人都希奇惊叹，<strong>归荣耀与神</strong>，说：<strong>「我们从来没有见过这样的事！」</strong></p>
 
-      <!-- 第二部分 -->
       <div class="section-h2">第二部分：2:13-17 呼召利未、与罪人坐席</div>
       <p>地点移动：耶稣又出到<strong>海边</strong>去，众人就了祂来，祂便教训他们。</p>
 
@@ -255,7 +432,6 @@
         🔥「康健的人用不着医生，有病的人才用得着；我来本不是召义人，乃是召罪人。」（可 2:17）
       </div>
 
-      <!-- 第三部分 -->
       <div class="section-h2">第三部分：2:18-22 禁食的问题</div>
       <p>起因：<strong>约翰的门徒和法利赛人</strong>禁食，有人来问耶稣：“约翰的门徒和法利赛人的门徒禁食，你的门徒倒不禁食，这是为什么呢？”</p>
 
@@ -284,7 +460,6 @@
         🧠 比喻顺序口诀：<strong>新郎 → 新布 → 新酒</strong>（不要把顺序记倒）。
       </div>
 
-      <!-- 第四部分 -->
       <div class="section-h2">第四部分：2:23-28 安息日掐麦穗</div>
       <p>背景时间：<strong>安息日</strong>；场景：耶稣从<strong>麦地</strong>经过，门徒行路时<strong>掐了麦穗</strong>。</p>
 
@@ -294,7 +469,7 @@
       <div class="section-h3">② 耶稣引用旧约大卫的例子</div>
       <p>耶稣提到<strong>大卫</strong>和跟从他的人缺乏、饥饿之时所作的事：进入神的殿，吃了<strong>陈设饼</strong>，又给跟从的人吃；这饼除了<strong>祭司</strong>以外，人都不可吃。</p>
       <div class="trap-box">
-        <span class="trap-tag">⚠️ 极高频考点</span> 根据《马可福音》2:26 明确记载，大卫吃陈设饼是在<strong>亚比亚他作大祭司的时候</strong>。
+        <span class="trap-tag">⚠️ 极高频考点</span> 依《马可福音》2:26 明确记载，大卫吃陈设饼是在<strong>亚比亚他作大祭司的时候</strong>。
       </div>
 
       <div class="section-h3">③ 安息日的真理与基督的权柄（必背）</div>
@@ -305,7 +480,7 @@
     </div>
   </div>
 
-  <!-- TAB 2: 易混淆人物与矩阵 -->
+  <!-- TAB 2: 易混淆人物与陷阱 -->
   <div id="tab-traps" class="tab-content">
     <div class="card">
       <div class="card-title">🧠 第二章易混淆人物矩阵</div>
@@ -412,9 +587,596 @@
       </div>
     </div>
   </div>
+
+  <!-- TAB 4: 50 题随机测验 (按题型分组) -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="dashboard">
+      <div class="stat-group">
+        <div class="stat-box">
+          <div class="stat-val" id="total-score">0 / 50</div>
+          <div class="stat-lbl">答对题数</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="accuracy-rate">0%</div>
+          <div class="stat-lbl">正确率</div>
+        </div>
+      </div>
+      <div>
+        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+      </div>
+    </div>
+
+    <!-- 试题按题型组织呈现容器 -->
+    <div id="quiz-sections-container"></div>
+  </div>
 </div>
 
 <script>
+// 全量 MASTER QUESTION POOL (完整收录 Mark Chapter 2 Quiz.docx 与 Mark Chapter 2(Nathan).pdf 两份文件的所有题目)
+const MASTER_QUESTION_POOL = [
+  // 1. 配对题 (Nathan.pdf 配对题，共 7 对经文，右侧选项每次打乱)
+  {
+    id: "match1",
+    type: "matching",
+    title: "第二章经文前半句与后半句配对：",
+    desc: "考查经文上下句承接",
+    pairs: [
+      { id: "p1", left: "没有人把新布缝在旧衣服上，恐怕所补上的新布带坏了旧衣服，破的就更大了；", rightText: "也没有人把新酒装在旧皮袋里，恐怕酒把皮袋裂开，酒和皮袋就都坏了；唯有把新酒装在新皮袋里。" },
+      { id: "p2", left: "因为人多，不得近前，就把耶稣所在的房子拆了房顶，既拆通了，就把瘫子连所躺卧的褥子都缒下来。", rightText: "耶稣见他们的信心，就对瘫子说：小子，你的罪赦了。" },
+      { id: "p3", left: "又对他们说：『安息日是为人设立的，人不是为安息日设立的。", rightText: "所以人子也是安息日的主。" },
+      { id: "p4", left: "过了些日子，耶稣又进了迦百农，人听见他在房子里，", rightText: "就有许多人聚集，甚至连门前都没有空地；耶稣就对他们讲道。" },
+      { id: "p5", left: "当下，约翰的门徒和法利赛人禁食，他们来问耶稣说：『约翰的门徒和法利赛人的门徒禁食，你的门徒倒不禁食，这是为什么呢？』", rightText: "耶稣对他们说：新郎和陪伴之人同在的时候，陪伴之人岂能禁食呢？新郎还同在，他们不能禁食。" },
+      { id: "p6", left: "耶稣经过的时候，看见亚勒腓的儿子利未坐在税关上，就对他说：你跟从我来。他就起来，跟从了耶稣。", rightText: "耶稣在利未家里坐席的时候，有好些税吏和罪人与耶稣并门徒一同坐席；因为这样的人多，他们也跟随耶稣。" },
+      { id: "p7", left: "法利赛人对耶稣说：看哪，他们在安息日为什么做不可做的事呢？", rightText: "耶稣对他们说：经上记着大卫和跟从他的人缺乏、饥饿之时所做的事，你们没有念过吗？" }
+    ]
+  },
+
+  // 2. 填空题 (收录 docx 11-20、25-28 与 Nathan.pdf 填空 1-6)
+  { id: "fb1", type: "fill", title: "有人把瘫子连所躺的_____都缒下来。", blanks: [{id:"f1_1", ans:"褥子"}], desc: "可 2:4 把瘫子连所躺卧的褥子都缒下来。" },
+  { id: "fb2", type: "fill", title: "耶稣对瘫子说：「小子，你的_____赦了。」", blanks: [{id:"f2_1", ans:"罪"}], desc: "可 2:5 小子，你的罪赦了。" },
+  { id: "fb3", type: "fill", title: "耶稣说：「但要叫你们知道，人子在地上有_____的权柄。」", blanks: [{id:"f3_1", ans:"赦罪"}], desc: "可 2:10 人子在地上有赦罪的权柄。" },
+  { id: "fb4", type: "fill", title: "耶稣对瘫子说：「我吩咐你，起来！拿你的_____，回你的家去吧。」", blanks: [{id:"f4_1", ans:"褥子"}], desc: "可 2:11 拿你的褥子回家去吧。" },
+  { id: "fb5", type: "fill", title: "耶稣经过海边，看见_____坐在税关上。", blanks: [{id:"f5_1", ans:"利未"}], desc: "可 2:14 看见亚勒腓的儿子利未坐在税关上。" },
+  { id: "fb6", type: "fill", title: "耶稣对利未说：「你跟从我来。」利未就起来_____了耶稣。", blanks: [{id:"f6_1", ans:"跟从"}], desc: "可 2:14 他就起来跟从了耶稣。" },
+  { id: "fb7", type: "fill", title: "耶稣说：「康健的人用不着_____，有病的人才用得着。」", blanks: [{id:"f7_1", ans:"医生"}], desc: "可 2:17 康健的人用不着医生。" },
+  { id: "fb8", type: "fill", title: "耶稣说：「我来本不是召义人，乃是召_____。」", blanks: [{id:"f8_1", ans:"罪人"}], desc: "可 2:17 乃是召罪人。" },
+  { id: "fb9", type: "fill", title: "「安息日是为_____设立的，人不是为安息日设立的。」", blanks: [{id:"f9_1", ans:"人"}], desc: "可 2:27 安息日是为人设立的。" },
+  { id: "fb10", type: "fill", title: "「所以，人子也是安息日的_____。」", blanks: [{id:"f10_1", ans:"主"}], desc: "可 2:28 所以人子也是安息日的主。" },
+  { id: "fb11", type: "fill", title: "耶稣当_____日从麦地经过，他门徒行路的时候，掐了_____。", blanks: [{id:"f11_1", ans:"安息"},{id:"f11_2", ans:"麦穗"}], desc: "可 2:23 门徒行路掐了麦穗。" },
+  { id: "fb12", type: "fill", title: "有几个文士坐在那里，心里议论，说：“这个人为什么这样说呢？他说_____的话了！除了_____以外，谁能赦罪呢？”", blanks: [{id:"f12_1", ans:"僭妄"},{id:"f12_2", ans:"神"}], desc: "可 2:6-7 文士指责耶稣说僭妄的话。" },
+  { id: "fb13", type: "fill", title: "耶稣对他们说：经上记着大卫和跟从他的人缺乏饥饿之时所作的事，他当_____作大祭司的时候，进了神的殿，吃了_____。", blanks: [{id:"f13_1", ans:"亚比亚他"},{id:"f13_2", ans:"陈设饼"}], desc: "可 2:25-26 亚比亚他作大祭司时吃陈设饼。" },
+  { id: "fb14", type: "fill", title: "「小子，你的罪赦了」出现在马可福音第 2 章第_____节。", blanks: [{id:"f14_1", ans:"5|5节|2:5"}], desc: "可 2:5 宣告赦罪。" },
+  { id: "fb15", type: "fill", title: "「你跟从我来」呼召利未出现在马可福音第 2 章第_____节。", blanks: [{id:"f15_1", ans:"14|14节|2:14"}], desc: "可 2:14 呼召利未。" },
+  { id: "fb16", type: "fill", title: "「康健的人用不着医生，有病的人才用得着」出现在马可福音第 2 章第_____节。", blanks: [{id:"f16_1", ans:"17|17节|2:17"}], desc: "可 2:17 召罪人金句。" },
+  { id: "fb17", type: "fill", title: "「安息日是为人设立的，人不是为安息日设立的」出现在马可福音第 2 章第_____节。", blanks: [{id:"f17_1", ans:"27|27节|2:27"}], desc: "可 2:27 安息日真理。" },
+  { id: "fb18", type: "fill", title: "耶稣对长大麻风的人说：「我肯，你_____了吧！」（第1章关键串联）", blanks: [{id:"f18_1", ans:"洁净"}], desc: "可 1:41 我肯，你洁净了吧！" },
+
+  // 3. 选择题 (收录 docx 1-10、21-24、43-50 与 Nathan.pdf 1-14)
+  { id: "mc1", type: "radio", title: "耶稣再次进入迦百农时，众人听见祂在哪里？", opts: [{v:"a",t:"A. 会堂里"},{v:"b",t:"B. 海边"},{v:"c",t:"C. 房子里"},{v:"d",t:"D. 旷野"}], ans: "c", desc: "可 2:1 人听见他在房子里。" },
+  { id: "mc2", type: "radio", title: "有人带什么人来到耶稣那里？", opts: [{v:"a",t:"A. 瞎子"},{v:"b",t:"B. 瘫子"},{v:"c",t:"C. 长大麻风的人"},{v:"d",t:"D. 被鬼附的人"}], ans: "b", desc: "可 2:3 有人带着一个瘫子来见耶稣。" },
+  { id: "mc3", type: "radio", title: "一共有多少个人抬着瘫子来到耶稣面前？", opts: [{v:"a",t:"A. 两个"},{v:"b",t:"B. 三个"},{v:"c",t:"C. 四个"},{v:"d",t:"D. 五个"}], ans: "c", desc: "可 2:3 是用四个人抬来的。" },
+  { id: "mc4", type: "radio", title: "因为人多，他们最后怎样把瘫子带到耶稣面前？", opts: [{v:"a",t:"A. 从窗户进去"},{v:"b",t:"B. 从后门进去"},{v:"c",t:"C. 拆了房顶缒下来"},{v:"d",t:"D. 从会堂带进去"}], ans: "c", desc: "可 2:4 拆了房顶，把瘫子连褥子缒下来。" },
+  { id: "mc5", type: "radio", title: "耶稣首先对瘫子说了什么？", opts: [{v:"a",t:"A. 「起来，拿你的褥子」"},{v:"b",t:"B. 「你的病好了」"},{v:"c",t:"C. 「小子，你的罪赦了」"},{v:"d",t:"D. 「不要害怕」"}], ans: "c", desc: "可 2:5 首先说的是「小子，你的罪赦了」。" },
+  { id: "mc6", type: "radio", title: "谁心里议论耶稣说了僭妄的话？", opts: [{v:"a",t:"A. 法利赛人"},{v:"b",t:"B. 文士"},{v:"c",t:"C. 撒都该人"},{v:"d",t:"D. 门徒"}], ans: "b", desc: "可 2:6 有几个文士坐在那里心里议论。" },
+  { id: "mc7", type: "radio", title: "耶稣呼召利未的时候，利未正在：", opts: [{v:"a",t:"A. 海边捕鱼"},{v:"b",t:"B. 船上补网"},{v:"c",t:"C. 税关坐着"},{v:"d",t:"D. 会堂里听道"}], ans: "c", desc: "可 2:14 看见亚勒腓的儿子利未坐在税关上。" },
+  { id: "mc8", type: "radio", title: "耶稣在利未家里与谁一同坐席？", opts: [{v:"a",t:"A. 只有门徒"},{v:"b",t:"B. 许多税吏和罪人"},{v:"c",t:"C. 只有法利赛人"},{v:"d",t:"D. 只有利未的家人"}], ans: "b", desc: "可 2:15 好些税吏和罪人与耶稣并门徒一同坐席。" },
+  { id: "mc9", type: "radio", title: "谁与法利赛人一起问耶稣的门徒为什么不禁食？", opts: [{v:"a",t:"A. 撒都该人"},{v:"b",t:"B. 祭司"},{v:"c",t:"C. 约翰的门徒"},{v:"d",t:"D. 税吏"}], ans: "c", desc: "可 2:18 约翰的门徒和法利赛人禁食。" },
+  { id: "mc10", type: "radio", title: "耶稣说新酒必须装在：", opts: [{v:"a",t:"A. 旧皮袋"},{v:"b",t:"B. 新皮袋"},{v:"c",t:"C. 陶制瓦罐"},{v:"d",t:"D. 木桶"}], ans: "b", desc: "可 2:22 惟独把新酒装在新皮袋里。" },
+  { id: "mc11", type: "radio", title: "在马可福音第二章中，耶稣对法利赛人说了大卫缺乏饥饿时所作的事，这段历史记载出自哪里？", opts: [{v:"a",t:"A. 撒母耳记上 21:1-6"},{v:"b",t:"B. 玛拉基书 3:1"},{v:"c",t:"C. 出埃及记 20:8-11"},{v:"d",t:"D. 以赛亚书 40:3"}], ans: "a", desc: "大卫吃陈设饼记于《撒母耳记上》21:1-6。" },
+  { id: "mc12", type: "radio", title: "以下哪件事并没有记载在马可福音第二章中？", opts: [{v:"a",t:"A. 耶稣的门徒在安息日掐了麦穗"},{v:"b",t:"B. 耶稣说了新布和新酒的比喻"},{v:"c",t:"C. 耶稣医治了一个由三个人抬来的瘫子"},{v:"d",t:"D. 耶稣回答门徒不禁食的问题"}], ans: "c", desc: "瘫子是由四个人抬来的，并非三人。" },
+  { id: "mc13", type: "radio", title: "耶稣对利未说了什么，使他成为门徒？", opts: [{v:"a",t:"A. 祂说：“现在来吧！”"},{v:"b",t:"B. 祂说：“你跟从我来。”"},{v:"c",t:"C. 祂说：“起来，跟从我。”"},{v:"d",t:"D. 祂说：“你愿意作门徒吗？”"}], ans: "b", desc: "可 2:14 耶稣对他说：「你跟从我来。」" },
+  { id: "mc14", type: "radio", title: "为了向文士证明“人子在地上有赦罪的权柄”，耶稣对瘫子说了什么实际的行动命令？", opts: [{v:"a",t:"A. 去吧，你的家人在门口等你了"},{v:"b",t:"B. 到祭司那里去献上礼物"},{v:"c",t:"C. 我吩咐你，起来，拿你的褥子回家去吧！"},{v:"d",t:"D. 站起来向众人作见证"}], ans: "c", desc: "可 2:11 我吩咐你，起来，拿你的褥子回家去吧！" },
+  { id: "mc15", type: "radio", title: "大卫在饥饿时进入神的殿，吃了哪一种本来只有祭司才可以吃的饼？", opts: [{v:"a",t:"A. 陈设饼"},{v:"b",t:"B. 逾越节饼"},{v:"c",t:"C. 大麦饼"},{v:"d",t:"D. 无酵饼"}], ans: "a", desc: "可 2:26 吃了陈设饼。" },
+  { id: "mc16", type: "radio", title: "法利赛人中的文士看见耶稣和谁一同在利未家坐席吃喝？（多选）", opts: [{v:"a",t:"A. 罪人"},{v:"b",t:"B. 税吏"},{v:"c",t:"C. 医生"},{v:"d",t:"D. 祭司长"}], ans: ["a","b"], desc: "可 2:16 看见耶稣和税吏并罪人一同吃喝。" },
+  { id: "mc17", type: "radio", title: "有几个文士在现场听见耶稣对瘫子说话，他们指控耶稣犯了什么罪？", opts: [{v:"a",t:"A. 虚假"},{v:"b",t:"B. 癫狂"},{v:"c",t:"C. 不敬"},{v:"d",t:"D. 说僭妄的话"}], ans: "d", desc: "可 2:7 心里议论说：他说僭妄的话了！" },
+  { id: "mc18", type: "radio", title: "在安息日那天，门徒路过麦地掐了麦穗，法利赛人见状对耶稣提出什么质问？", opts: [{v:"a",t:"A. 他的门徒为何在安息日生火煮物？"},{v:"b",t:"B. 看哪，他们在安息日为什么作不可作的事呢？"},{v:"c",t:"C. 他和税吏罪人在安息日吃喝么？"},{v:"d",t:"D. 为何在安息日不洗手？"}], ans: "b", desc: "可 2:24 他们在安息日为什么作不可作的事呢？" },
+  { id: "mc19", type: "radio", title: "有谁来抱怨质问耶稣的门徒不禁食？（多选）", opts: [{v:"a",t:"A. 施洗约翰的门徒"},{v:"b",t:"B. 法利赛人的门徒"},{v:"c",t:"C. 文士的门徒"},{v:"d",t:"D. 撒都该人的门徒"}], ans: ["a","b"], desc: "可 2:18 约翰的门徒和法利赛人的门徒。" },
+  { id: "mc20", type: "radio", title: "在马可福音中，耶稣所行的第一个神迹是在什么日子并在哪里？", opts: [{v:"a",t:"A. 安息日，迦百农会堂"},{v:"b",t:"B. 除酵节，推罗"},{v:"c",t:"C. 逾越节，拿撒勒"},{v:"d",t:"D. 晚上，海边"}], ans: "a", desc: "可 1:21-27 安息日迦百农会堂赶鬼。" },
+  { id: "mc21", type: "radio", title: "在耶稣治好瘫子的故事中，耶稣为何对瘫子说“小子，你的罪赦了”？", opts: [{v:"a",t:"A. 祂看见他们的信心"},{v:"b",t:"B. 表达祂在地上有赦罪的权柄"},{v:"c",t:"C. 藉由文士议论暗示祂就是神"},{v:"d",t:"D. 以上皆是"}], ans: "d", desc: "综合展示信心、权柄与基督神性。" },
+  { id: "mc22", type: "radio", title: "谁是西门的兄弟，在第一章与西门一同撒网？", opts: [{v:"a",t:"A. 雅各"},{v:"b",t:"B. 约翰"},{v:"c",t:"C. 安得烈"},{v:"d",t:"D. 利未"}], ans: "c", desc: "可 1:16 西门和西门的兄弟安得烈。" },
+  { id: "mc23", type: "radio", title: "耶稣用谁的经历来说明门徒在安息日掐麦穗的问题？", opts: [{v:"a",t:"A. 摩西"},{v:"b",t:"B. 亚伯拉罕"},{v:"c",t:"C. 大卫"},{v:"d",t:"D. 所罗门"}], ans: "c", desc: "可 2:25 经上记着大卫和跟从他的人所作的事。" },
+  { id: "mc24", type: "radio", title: "【主客体陷阱】关于拆房顶，以下哪一个说法完全正确？", opts: [{v:"a",t:"A. 瘫子自己拆了房顶"},{v:"b",t:"B. 四个人拆了房顶，把瘫子缒下来"},{v:"c",t:"C. 门徒拆了房顶"},{v:"d",t:"D. 文士拆了房顶"}], ans: "b", desc: "是抬瘫子的四个人拆了房顶。" },
+  { id: "mc25", type: "radio", title: "【顺序陷阱】耶稣医治瘫子的过程中，哪一句最先出现？", opts: [{v:"a",t:"A. 「起来，拿你的褥子」"},{v:"b",t:"B. 「你的罪赦了」"},{v:"c",t:"C. 「你为什么这样议论」"},{v:"d",t:"D. 「我吩咐你」"}], ans: "b", desc: "见他们信心，首先说「小子，你的罪赦了」(2:5)。" },
+  { id: "mc26", type: "radio", title: "【人物陷阱】谁发问质问：“他和税吏并罪人一同吃喝吗？”", opts: [{v:"a",t:"A. 瘫子的朋友"},{v:"b",t:"B. 法利赛人中的文士"},{v:"c",t:"C. 约翰的门徒"},{v:"d",t:"D. 门徒"}], ans: "b", desc: "可 2:16 法利赛人中的文士发问。" },
+  { id: "mc27", type: "radio", title: "【比喻陷阱】关于禁食的问题，耶稣接下来使用了哪一组比喻？", opts: [{v:"a",t:"A. 好撒玛利亚人、浪子"},{v:"b",t:"B. 新郎、新布、新酒"},{v:"c",t:"C. 芥菜种、面酵"},{v:"d",t:"D. 牧人与羊群"}], ans: "b", desc: "可 2:19-22 新郎、新布缝旧衣、新酒装新皮袋。" },
+  { id: "mc28", type: "radio", title: "【安息日陷阱】门徒在安息日经过麦地时做了什么？", opts: [{v:"a",t:"A. 收割麦子"},{v:"b",t:"B. 掐了麦穗"},{v:"c",t:"C. 烧毁麦田"},{v:"d",t:"D. 撒种"}], ans: "b", desc: "可 2:23 门徒行路的时候，掐了麦穗。" },
+  { id: "mc29", type: "radio", title: "【终极陷阱】关于《马可福音》第2章，下列哪一个说法错误？", opts: [{v:"a",t:"A. 耶稣医治了一个瘫子"},{v:"b",t:"B. 耶稣呼召利未"},{v:"c",t:"C. 耶稣说祂来是召罪人"},{v:"d",t:"D. 耶稣说人是为安息日设立的"}], ans: "d", desc: "经文明确说「人不是为安息日设立的」。" },
+
+  // 4. 排序题 (来自 docx 29-34)
+  {
+    id: "seq1",
+    type: "radio",
+    title: "【瘫子事件排序】请排列先后顺序：A. 耶稣赦免瘫子的罪 B. 四个人把瘫子带来 C. 文士心里议论 D. 瘫子拿着褥子出去",
+    opts: [
+      {v:"a", t:"A. B → A → C → D"},
+      {v:"b", t:"B. B → C → A → D"},
+      {v:"c", t:"C. A → B → C → D"},
+      {v:"d", t:"D. B → A → D → C"}
+    ],
+    ans: "a",
+    desc: "四人带来(2:3) → 宣告赦罪(2:5) → 文士议论(2:6) → 拿着褥子出去(2:12)。"
+  },
+  {
+    id: "seq2",
+    type: "radio",
+    title: "【瘫子医治过程】请排列先后顺序：A. 耶稣说「起来」 B. 拆开房顶 C. 瘫子起来 D. 把瘫子缒下来",
+    opts: [
+      {v:"a", t:"A. B → D → A → C"},
+      {v:"b", t:"B. D → B → A → C"},
+      {v:"c", t:"C. B → A → D → C"},
+      {v:"d", t:"D. A → B → C → D"}
+    ],
+    ans: "a",
+    desc: "拆房顶(2:4) → 缒下褥子(2:4) → 吩咐起来(2:11) → 瘫子起来(2:12)。"
+  },
+  {
+    id: "seq3",
+    type: "radio",
+    title: "【利未事件排序】请排列先后顺序：A. 利未坐在税关 B. 耶稣呼召利未 C. 利未起来跟从耶稣 D. 耶稣与税吏和罪人坐席",
+    opts: [
+      {v:"a", t:"A. A → B → C → D"},
+      {v:"b", t:"B. B → A → C → D"},
+      {v:"c", t:"C. A → C → B → D"},
+      {v:"d", t:"D. D → A → B → C"}
+    ],
+    ans: "a",
+    desc: "坐税关(2:14) → 耶稣呼召(2:14) → 起来跟从(2:14) → 家中坐席(2:15)。"
+  },
+  {
+    id: "seq4",
+    type: "radio",
+    title: "【禁食答辩排序】请排列先后顺序：A. 约翰门徒和法利赛人禁食 B. 问为何门徒不禁食 C. 耶稣讲新郎比喻 D. 耶稣讲新酒与新皮袋",
+    opts: [
+      {v:"a", t:"A. A → B → C → D"},
+      {v:"b", t:"B. B → A → C → D"},
+      {v:"c", t:"C. A → C → B → D"},
+      {v:"d", t:"D. A → B → D → C"}
+    ],
+    ans: "a",
+    desc: "禁食背景(2:18) → 提出质问(2:18) → 新郎同在(2:19) → 新酒新皮袋(2:22)。"
+  },
+  {
+    id: "seq5",
+    type: "radio",
+    title: "【掐麦穗事件排序】请排列先后顺序：A. 门徒掐麦穗 B. 经过麦地 C. 法利赛人质问 D. 耶稣提到大卫",
+    opts: [
+      {v:"a", t:"A. B → A → C → D"},
+      {v:"b", t:"B. A → B → C → D"},
+      {v:"c", t:"C. B → C → A → D"},
+      {v:"d", t:"D. B → A → D → C"}
+    ],
+    ans: "a",
+    desc: "经过麦地(2:23) → 掐麦穗(2:23) → 法利赛人质问(2:24) → 引用大卫(2:25)。"
+  },
+  {
+    id: "seq6",
+    type: "radio",
+    title: "【第二章四大事件】请按经文先后顺序排列：A. 安息日掐麦穗 B. 医治瘫子 C. 呼召利未 D. 禁食答辩",
+    opts: [
+      {v:"a", t:"A. B → C → D → A"},
+      {v:"b", t:"B. B → D → C → A"},
+      {v:"c", t:"C. C → B → D → A"},
+      {v:"d", t:"D. A → B → C → D"}
+    ],
+    ans: "a",
+    desc: "口诀：瘫子(2:1) → 利未(2:13) → 禁食(2:18) → 安息日掐麦穗(2:23)。"
+  },
+
+  // 5. 是非判断题 (收录 docx 35-42 与 Nathan.pdf 是非 1-10)
+  { id: "tf1", type: "tf", title: "带瘫子到耶稣那里的是四个人。", ans: "T", desc: "对。可 2:3 明确记载四个人抬来。" },
+  { id: "tf2", type: "tf", title: "因为人太多，四个人从窗户把瘫子送进去。", ans: "F", desc: "错。是拆了房顶缒下来的。" },
+  { id: "tf3", type: "tf", title: "耶稣首先对瘫子说：「起来，拿你的褥子。」", ans: "F", desc: "错。耶稣首先说的是「小子，你的罪赦了」。" },
+  { id: "tf4", type: "tf", title: "文士心里议论，认为只有神能够赦罪。", ans: "T", desc: "对。可 2:7 除了神以外谁能赦罪呢。" },
+  { id: "tf5", type: "tf", title: "利未是一个加利利海边的渔夫。", ans: "F", desc: "错。利未是坐在税关上的税吏。" },
+  { id: "tf6", type: "tf", title: "利未是在税关坐着的时候被耶稣呼召的。", ans: "T", desc: "对。可 2:14 看见他坐在税关上。" },
+  { id: "tf7", type: "tf", title: "耶稣说新酒应该装在旧皮袋里，新布缝在旧衣上。", ans: "F", desc: "错。新酒必须装在新皮袋里。" },
+  { id: "tf8", type: "tf", title: "耶稣说人子也是安息日的主。", ans: "T", desc: "对。可 2:28 经文完全吻合。" },
+  { id: "tf9", type: "tf", title: "耶稣召利未起来跟从他，利未就起来，坐在税关上继续收税。", ans: "F", desc: "错。可 2:14 他就起来跟从了耶稣。" },
+  { id: "tf10", type: "tf", title: "耶稣看见他们的信心，就对瘫子说：“小子，你的信救了你。”", ans: "F", desc: "错。经文原话是：「小子，你的罪赦了。」" },
+  { id: "tf11", type: "tf", title: "在马可福音第二章中，人是为安息日设立的，安息日不是为人设立的。", ans: "F", desc: "错。可 2:27 明确宣布：安息日是为人设立的，人不是为安息日设立的。" },
+  { id: "tf12", type: "tf", title: "门徒雅各和约翰的父亲是亚勒腓。", ans: "F", desc: "错。雅各和约翰的父亲是西庇太；利未才是亚勒腓的儿子。" },
+  { id: "tf13", type: "tf", title: "耶稣回应质疑与税吏罪人吃喝的文士时，用了“祭司”的身份比喻自己。", ans: "F", desc: "错。耶稣用了“医生”的比喻（康健的人用不着医生）。" },
+  { id: "tf14", type: "tf", title: "在关于禁食的比喻中，耶稣说新郎和陪伴之人同在的时候，陪伴之人可以禁食。", ans: "F", desc: "错。新郎同在的时候，他们不能禁食。" },
+  { id: "tf15", type: "tf", title: "在马可福音第二章中，在医治瘫子前，耶稣正在给许多人治病。", ans: "F", desc: "错。可 2:2 记载人聚集在房子里，耶稣是对他们“讲道”。" },
+  { id: "tf16", type: "tf", title: "耶稣在利未家里坐席时，有好些税吏和罪人并门徒一起，再没有其他人。", ans: "F", desc: "错。现场还有法利赛人中的文士在旁观看与质问。" }
+];
+
+// 填空题备选词库 (Answer Pool)
+const ALL_WORD_POOL = [
+  "褥子", "罪", "赦罪", "利未", "跟从", "医生", "罪人", "人", "主", 
+  "安息", "麦穗", "僭妄", "神", "亚比亚他", "陈设饼", "5", "14", "17", "27", "洁净"
+];
+
+let activeQuestionSet = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch2_quiz_pool_v2";
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function initQuiz(forceRegenerate = false) {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeQuestionSet = parsed.questions || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  // 1. 固定抽取配对题（含 7 小题）
+  const matchQ = MASTER_QUESTION_POOL.filter(q => q.type === "matching");
+  // 2. 从题库其余项目中随机抽取 43 道，合计凑足 50 道抽测项
+  const others = shuffleArray(MASTER_QUESTION_POOL.filter(q => q.type !== "matching"));
+  const selectedOthers = others.slice(0, 43);
+
+  // 3. 严格按分类组织：配对题 -> 填空题 -> 单选/排序题 -> 是非题
+  const typeOrder = { "matching": 1, "fill": 2, "radio": 3, "tf": 4 };
+  activeQuestionSet = [...matchQ, ...selectedOthers].sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  saveQuizState({});
+  renderQuizUI();
+}
+
+function regenerateQuiz() {
+  if (confirm("确定要重新随机抽取 50 题（打乱配对题选项次序）并清空记录吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
+function renderQuizUI() {
+  const container = document.getElementById("quiz-sections-container");
+  container.innerHTML = "";
+
+  const groups = {
+    "matching": { title: "第一部分：配对题", desc: "在中间下拉框选填与前半句配对的字母（右侧选项次序已随机排布）：", list: [] },
+    "fill": { title: "第二部分：填空题", desc: "请根据下方词库填入空格（点击词汇填入，点击空格可反选清空）：", list: [] },
+    "radio": { title: "第三部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第四部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeQuestionSet.forEach(q => {
+    if (groups[q.type]) groups[q.type].list.push(q);
+  });
+
+  let globalQuestionCounter = 1;
+
+  ["matching", "fill", "radio", "tf"].forEach(typeKey => {
+    const grp = groups[typeKey];
+    if (grp.list.length === 0) return;
+
+    // 区域标题
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    const totalCount = typeKey === 'matching' ? grp.list[0].pairs.length : grp.list.length;
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}（共 ${totalCount} 题）</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    // 填空题词库专属呈现
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 填空题备选词库 (Answer Pool)：点击词汇填入，点击输入框可清除反选</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
+    }
+
+    grp.list.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      let html = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>`;
+
+      if (q.type === "matching") {
+        const letters = ["A", "B", "C", "D", "E", "F", "G"];
+        // 动态打乱右侧选项次序
+        const shuffledRight = shuffleArray(q.pairs.map(p => ({ pairId: p.id, text: p.rightText })));
+        
+        // 映射正确配对字母
+        const targetMap = {};
+        shuffledRight.forEach((item, i) => {
+          targetMap[item.pairId] = letters[i];
+        });
+
+        html += `
+          <div class="match-table-wrap">
+            <table class="match-table">
+              <thead>
+                <tr>
+                  <th class="col-num">序号与前半段</th>
+                  <th class="col-input">填入</th>
+                  <th class="col-alpha">备选项（A - G 随机排序）</th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+        q.pairs.forEach((p, idx) => {
+          const correctLetter = targetMap[p.id];
+          const rightItem = shuffledRight[idx];
+
+          html += `
+            <tr>
+              <td class="col-num"><strong>${idx + 1}.</strong> ${p.left}</td>
+              <td class="col-input">
+                <select class="match-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
+                  <option value="">-</option>
+                  <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+                </select>
+              </td>
+              <td class="col-alpha"><strong>${letters[idx]}.</strong> ${rightItem.text}</td>
+            </tr>`;
+        });
+
+        html += `</tbody></table></div>`;
+        globalQuestionCounter += (q.pairs.length - 1);
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        html += `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          html += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        html += `</div>`;
+      } else if (q.type === "tf") {
+        html += `<div class="opt-group" style="flex-direction:row; max-width:280px;">
+          <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+        </div>`;
+      } else if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        // 题号与题目文字合并在同一容器内，防止题号单独换行
+        html = `<div style="font-size:15px; line-height:2.4; word-break:break-word;">
+                  <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+                </div>`;
+      }
+
+      html += `<div class="feedback" id="fb-${q.id}"></div>`;
+      item.innerHTML = html;
+      container.appendChild(item);
+
+      globalQuestionCounter++;
+    });
+  });
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
+  calculateAndUpdateTotals(0);
+}
+
+function renderWordBank() {
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  const shuffledWords = shuffleArray(ALL_WORD_POOL);
+  shuffledWords.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
+  });
+}
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
+  document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
+}
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
+  }
+}
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
+function getUserAnswers() {
+  const answers = {};
+  document.querySelectorAll("#quiz-sections-container input, #quiz-sections-container select").forEach(el => {
+    if (el.tagName === "SELECT") {
+      if (el.value) answers[el.id] = el.value;
+    } else if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
+    }
+  });
+  return answers;
+}
+
+function saveQuizState(answers) {
+  const data = {
+    questions: activeQuestionSet,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
+}
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.tagName === "SELECT") {
+      textEl.value = val;
+    } else if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+  let totalItems = 0;
+
+  activeQuestionSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "matching") {
+      let mOk = 0;
+      let errs = [];
+      q.pairs.forEach(p => {
+        totalItems++;
+        const sel = document.getElementById("m_row_" + p.id);
+        const v = (sel.value || "").toUpperCase();
+        const expected = sel.getAttribute("data-ans");
+        if (v === expected) {
+          mOk++;
+          score++;
+          sel.style.borderColor = "#16a34a";
+          sel.style.background = "#dcfce7";
+        } else {
+          sel.style.borderColor = "#dc2626";
+          sel.style.background = "#fee2e2";
+          errs.push(`${p.left.slice(0, 8)}...应配【${expected}】`);
+        }
+      });
+      if (mOk === q.pairs.length) {
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `配对题全部正确！`;
+      } else {
+        fb.className = "feedback is-wrong";
+        fb.innerHTML = `答对 ${mOk} / ${q.pairs.length}。错误项：${errs.join("； ")}`;
+      }
+    } else if (q.type === "radio" || q.type === "tf") {
+      totalItems++;
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      totalItems++;
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。解析：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score, totalItems);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score, totalItems) {
+  let total = totalItems;
+  if (!total) {
+    total = 0;
+    activeQuestionSet.forEach(q => {
+      if (q.type === "matching") total += q.pairs.length;
+      else total += 1;
+    });
+  }
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
 function switchTab(tabId) {
   document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
   document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
@@ -423,6 +1185,10 @@ function switchTab(tabId) {
   const targetTab = document.getElementById("tab-" + tabId);
   if (targetTab) targetTab.classList.add("active");
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
 </script>
 
 </body>
