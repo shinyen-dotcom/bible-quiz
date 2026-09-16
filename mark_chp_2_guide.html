@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第二章 圣经比赛备战指南</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .adaptive-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .adaptive-container { padding: 12px 10px 50px 10px; }
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 24px 18px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
+
+  /* 导航栏 */
+  .nav-tabs {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    background: transparent;
+    padding: 11px 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 18px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    margin: 0 0 14px 0;
+  }
+
+  .section-h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 20px 0 10px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .section-h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 12px 0 6px 0;
+  }
+
+  .highlight-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #166534;
+  }
+  .trap-box {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+  }
+  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
+
+  .notice-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #991b1b;
+  }
+
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .info-table th, .info-table td {
+    border: 1px solid var(--border);
+    padding: 9px 12px;
+    text-align: left;
+  }
+  .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="adaptive-container">
+  <div class="header">
+    <h1>《马可福音》第二章 备战指南</h1>
+    <p>四大核心事件解析 ＋ 易混淆矩阵 ＋ 必背经文与陷阱提示</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 易混淆人物与陷阱</button>
+    <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+  </div>
+
+  <!-- TAB 1: 备战指南四大事件 -->
+  <div id="tab-guide" class="tab-content active">
+    <div class="card">
+      <div class="card-title">一、先掌握第 2 章的「四大事件」</div>
+      <table class="info-table">
+        <thead>
+          <tr><th>段落</th><th>内容</th><th>Quiz 重要度</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2:1-12</td><td>迦百农医治瘫子</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>2:13-17</td><td>呼召利未、与罪人吃饭</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>2:18-22</td><td>禁食的问题</td><td>⭐⭐⭐⭐</td></tr>
+          <tr><td>2:23-28</td><td>安息日掐麦穗</td><td>⭐⭐⭐⭐⭐</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        <strong>🔥 第二章主线口诀：</strong><br>
+        瘫子 → 利未 → 禁食 → 安息日。这一条主线必须先背熟！
+      </div>
+
+      <!-- 第一部分 -->
+      <div class="section-h2">第一部分：2:1-12 医治瘫子（最高频考点）</div>
+      <p>故事地点：📍 <strong>迦百农</strong>。过了些日子，耶稣又进了迦百农，大家听见祂在房子里。</p>
+      
+      <div class="section-h3">① 来了一个什么病人？是谁带他来的？</div>
+      <p>👉 <strong>瘫子</strong>。是由 <strong>四个人</strong> 抬来的。</p>
+      <div class="trap-box">
+        <span class="trap-tag">⚠️ 细节考点</span> 不要只记“有人带瘫子来”，Quiz 极常考查具体数字：<strong>四个人</strong>。
+      </div>
+
+      <div class="section-h3">② 为什么他们进不去？采取了什么动作？</div>
+      <p>因为<strong>人多</strong>，连门前都没有空地。他们做了一个非常特殊的动作：<strong>拆了房顶</strong>，把瘫子连所躺卧的<strong>褥子</strong>都缒下来。</p>
+      <div class="highlight-box">
+        🔥 动作链记忆：<strong>人多 → 进不去 → 房顶 → 拆开 → 缒下瘫子</strong>。
+      </div>
+
+      <div class="section-h3">③ 耶稣的第一句话是什么？</div>
+      <p>耶稣对瘫子说：<strong>「小子，你的罪赦了。」</strong></p>
+      <div class="notice-box">
+        ⚠️ 注意：耶稣并不是一开始就说“你的病好了”，而是首先宣布：<strong>你的罪赦了</strong>。
+      </div>
+
+      <div class="section-h3">④ 谁心里议论？为什么？</div>
+      <p>几个<strong>文士</strong>坐在那里，心里议论说：“这个人为什么这样说呢？他说<strong>僭妄的话</strong>了。除了神以外，谁能赦罪呢？”</p>
+      <p>👉 文士认为耶稣说了僭妄的话，因为他们的传统认知是：<strong>只有神能赦罪</strong>。</p>
+
+      <div class="section-h3">⑤ 耶稣知道他们的议论与回答</div>
+      <p>耶稣心中知道他们心里如此议论，就说：“你们心里为什么这样议论呢？或对瘫子说：‘你的罪赦了’，或说：‘起来！拿你的褥子行走’，哪一样容易呢？”</p>
+
+      <div class="section-h3">⑥ 「人子在地上有赦罪的权柄」⭐⭐⭐⭐⭐</div>
+      <p style="font-size:16px; font-weight:bold; color:var(--primary);">「但要叫你们知道，人子在地上有赦罪的权柄……」</p>
+      <p>随后对瘫子说：<strong>「我吩咐你，起来！拿你的褥子回家去吧。」</strong></p>
+
+      <div class="section-h3">⑦ 瘫子的反应与众人的反应</div>
+      <p>瘫子<strong>立刻起来，拿着褥子</strong>，当着众人面前出去了。众人都希奇惊叹，<strong>归荣耀与神</strong>，说：<strong>「我们从来没有见过这样的事！」</strong></p>
+
+      <!-- 第二部分 -->
+      <div class="section-h2">第二部分：2:13-17 呼召利未、与罪人坐席</div>
+      <p>地点移动：耶稣又出到<strong>海边</strong>去，众人就了祂来，祂便教训他们。</p>
+
+      <div class="section-h3">① 谁坐在税关？</div>
+      <p>亚勒腓的儿子<strong>利未</strong>坐在<strong>税关</strong>上。耶稣对他说：<strong>「你跟从我来。」</strong>他就起来跟从了耶稣。</p>
+      <div class="trap-box">
+        <span class="trap-tag">门徒区分</span> 第一章呼召的是渔夫（西门、安得烈、雅各、约翰）；第二章呼召的是税吏：<strong>利未（税关）</strong>。
+      </div>
+
+      <div class="section-h3">② 耶稣在哪里与谁吃饭？</div>
+      <p>在<strong>利未家里</strong>坐席。不仅有耶稣和门徒，还有<strong>许多税吏和罪人</strong>一同坐席。</p>
+
+      <div class="section-h3">③ 谁发出质问？质问什么？</div>
+      <p><strong>法利赛人中的文士</strong>看见，就对耶稣的门徒说：“祂和税吏并罪人一同吃喝吗？”</p>
+
+      <div class="section-h3">④ 耶稣的经典回应（核心金句）</div>
+      <div class="highlight-box" style="font-size:16px; font-weight:bold;">
+        🔥「康健的人用不着医生，有病的人才用得着；我来本不是召义人，乃是召罪人。」（可 2:17）
+      </div>
+
+      <!-- 第三部分 -->
+      <div class="section-h2">第三部分：2:18-22 禁食的问题</div>
+      <p>起因：<strong>约翰的门徒和法利赛人</strong>禁食，有人来问耶稣：“约翰的门徒和法利赛人的门徒禁食，你的门徒倒不禁食，这是为什么呢？”</p>
+
+      <div class="section-h3">耶稣所用的三个连贯比喻</div>
+      <table class="info-table">
+        <thead><tr><th>比喻</th><th>经文要点</th><th>考点提示</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>1. 新郎</strong></td>
+            <td>新郎和陪伴之人同在时不能禁食；新郎离开他们那日就要禁食。</td>
+            <td>陪伴之人岂能禁食？</td>
+          </tr>
+          <tr>
+            <td><strong>2. 新布</strong></td>
+            <td>没有人把新布缝在旧衣服上。</td>
+            <td>若缝上，所补上的新布会带坏旧衣服，破的就更大了。</td>
+          </tr>
+          <tr>
+            <td><strong>3. 新酒</strong></td>
+            <td>没有人把新酒装在旧皮袋里。</td>
+            <td>新酒会裂开皮袋，酒和皮袋都坏了；<strong>新酒必须装在新皮袋里</strong>。</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        🧠 比喻顺序口诀：<strong>新郎 → 新布 → 新酒</strong>（不要把顺序记倒）。
+      </div>
+
+      <!-- 第四部分 -->
+      <div class="section-h2">第四部分：2:23-28 安息日掐麦穗</div>
+      <p>背景时间：<strong>安息日</strong>；场景：耶稣从<strong>麦地</strong>经过，门徒行路时<strong>掐了麦穗</strong>。</p>
+
+      <div class="section-h3">① 法利赛人的质问</div>
+      <p>法利赛人对耶稣说：“看哪，他们在安息日为什么做不可做的事呢？”</p>
+
+      <div class="section-h3">② 耶稣引用旧约大卫的例子</div>
+      <p>耶稣提到<strong>大卫</strong>和跟从他的人缺乏、饥饿之时所作的事：进入神的殿，吃了<strong>陈设饼</strong>，又给跟从的人吃；这饼除了<strong>祭司</strong>以外，人都不可吃。</p>
+      <div class="trap-box">
+        <span class="trap-tag">⚠️ 极高频考点</span> 根据《马可福音》2:26 明确记载，大卫吃陈设饼是在<strong>亚比亚他作大祭司的时候</strong>。
+      </div>
+
+      <div class="section-h3">③ 安息日的真理与基督的权柄（必背）</div>
+      <div class="highlight-box" style="font-size:16px; font-weight:bold;">
+        🔥 可 2:27「安息日是为人设立的，人不是为安息日设立的。」<br>
+        🔥 可 2:28「所以，人子也是安息日的主。」
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: 易混淆人物与矩阵 -->
+  <div id="tab-traps" class="tab-content">
+    <div class="card">
+      <div class="card-title">🧠 第二章易混淆人物矩阵</div>
+      <table class="info-table">
+        <thead><tr><th style="width:26%;">人物</th><th style="width:74%;">身份 / 关键动作特征</th></tr></thead>
+        <tbody>
+          <tr><td><strong>四个人</strong></td><td>抬瘫子来、因人多拆开房顶缒下褥子的人。</td></tr>
+          <tr><td><strong>瘫子</strong></td><td>蒙耶稣赦罪并吩咐“拿褥子回家”，当众站立行走。</td></tr>
+          <tr><td><strong>利未</strong></td><td>亚勒腓的儿子，坐在税关，听从呼召，在自家设宴接待税吏与罪人。</td></tr>
+          <tr><td><strong>文士</strong></td><td>心里议论耶稣说僭妄的话（认为除神外无人能赦罪）。</td></tr>
+          <tr><td><strong>法利赛人的文士</strong></td><td>质问门徒为何耶稣与税吏和罪人一同吃喝。</td></tr>
+          <tr><td><strong>约翰的门徒</strong></td><td>与法利赛人一同向耶稣质问门徒为何不禁食。</td></tr>
+          <tr><td><strong>大卫</strong></td><td>饥饿缺乏时入神殿吃陈设饼并分给部下，被耶稣用作安息日例子。</td></tr>
+          <tr><td><strong>亚比亚他</strong></td><td>大卫吃陈设饼时的大祭司（可 2:26）。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="card-title" style="margin-top:24px;">📊 第二章四大事件快速对照表</div>
+      <table class="info-table">
+        <thead><tr><th>事件</th><th>对象</th><th>核心争议 / 问题</th><th>耶稣的核心回应</th></tr></thead>
+        <tbody>
+          <tr><td><strong>医治瘫子</strong></td><td>四人抬瘫子</td><td>谁能赦罪？是否说僭妄话？</td><td>人子在地上有赦罪的权柄</td></tr>
+          <tr><td><strong>呼召利未</strong></td><td>税吏与罪人</td><td>为什么与税吏罪人一同坐席？</td><td>我来本不是召义人，乃是召罪人</td></tr>
+          <tr><td><strong>禁食问题</strong></td><td>约翰门徒与法利赛人</td><td>为何你的门徒不禁食？</td><td>新郎同在不需禁食；新酒装在新皮袋</td></tr>
+          <tr><td><strong>掐麦穗</strong></td><td>安息日门徒</td><td>安息日为何做不可做的事？</td><td>安息日是为人设立的；人子是安息日的主</td></tr>
+        </tbody>
+      </table>
+
+      <div class="notice-box">
+        <strong>🚨 第二章超高频十大陷阱警示：</strong><br>
+        1. 抬瘫子的是<strong>四个人</strong>（不是门徒抬的）。<br>
+        2. 瘫子是从<strong>房顶</strong>缒下来的（不是从门口或窗户）。<br>
+        3. 耶稣首先对瘫子说的是<strong>「小子，你的罪赦了」</strong>（不是立刻说起来行走）。<br>
+        4. 指责耶稣说僭妄话的是<strong>文士</strong>。<br>
+        5. 利未被呼召时坐在<strong>税关</strong>，他是<strong>税吏</strong>（不是加利利海边的打鱼渔夫）。<br>
+        6. 和法利赛人一同质问禁食的是<strong>约翰的门徒</strong>。<br>
+        7. 新酒必须装在<strong>新皮袋</strong>里（装在旧皮袋会裂开坏掉）。<br>
+        8. 在安息日掐麦穗的是<strong>门徒</strong>（不是耶稣亲自去掐）。<br>
+        9. 耶稣用来解释安息日的人物是<strong>大卫</strong>，旧约出处来自《撒母耳记上》21章。<br>
+        10. 依马可福音 2:26 记载，大卫吃陈设饼时大祭司是<strong>亚比亚他</strong>。
+      </div>
+
+      <p style="font-size:15px; font-weight:bold; margin:16px 0 6px 0;">🗺️ 第二章地点考点：</p>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:8px; font-size:14.5px; text-align:center;">
+        迦百农（房子 / 房顶） → 海边（教训众人 / 税关） → 利未家里（筵席） → 麦地（安息日）
+      </div>
+
+      <p style="font-size:15px; font-weight:bold; margin:16px 0 6px 0;">⏰ 第二章时间标志考点：</p>
+      <table class="info-table">
+        <tr><th>时间词汇</th><th>对应经文背景</th></tr>
+        <tr><td><strong>「过了些日子」</strong></td><td>耶稣再次进入迦百农，众人在房子聚集。</td></tr>
+        <tr><td><strong>「安息日」</strong></td><td>门徒经过麦地掐麦穗引发法利赛人指责。</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 3: 必背经文与口诀 -->
+  <div id="tab-verses" class="tab-content">
+    <div class="card">
+      <div class="card-title">第二章 8 处必背经文清单</div>
+      
+      <p style="font-size:13.5px; color:#475569;"><strong>🥇 Level 1：比赛绝对必背</strong></p>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>1. 马可 2:5</strong>「小子，你的罪赦了。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>2. 马可 2:10</strong>「但要叫你们知道，人子在地上有赦罪的权柄……」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>3. 马可 2:14</strong>「你跟从我来。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;">
+        <strong>4. 马可 2:17</strong>「康健的人用不着医生，有病的人才用得着；我来本不是召义人，乃是召罪人。」
+      </div>
+
+      <p style="font-size:13.5px; color:#475569;"><strong>🥈 Level 2：强烈建议背诵</strong></p>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>5. 马可 2:19</strong>「新郎和陪伴之人同在的时候，陪伴之人岂能禁食呢？」
+      </div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>6. 马可 2:22</strong>「惟独常用新酒装在新皮袋里。」
+      </div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>7. 马可 2:27</strong>「安息日是为人设立的，人不是为安息日设立的。」
+      </div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:16px;">
+        <strong>8. 马可 2:28</strong>「所以，人子也是安息日的主。」
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 第二章比赛前 30 秒超级浓缩速记口诀：</p>
+        <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
+          迦百农——瘫子——四个人——房顶——缒下来；罪赦——文士议论——人子赦罪权柄——起来拿褥子；海边——利未——税关——跟从；利未家——税吏罪人——法利赛人质问——召罪人；约翰门徒＋法利赛人——禁食——新郎——新布——新酒——新皮袋；安息日——麦地——门徒掐麦穗——法利赛人质问；大卫——陈设饼——亚比亚他；安息日为人设立——人子是安息日的主。
+        </p>
+      </div>
+
+      <div style="background:#fffbe6; border:1px solid #ffe58f; padding:14px; border-radius:10px;">
+        <p style="font-size:15px; font-weight:bold; color:#b45309; margin:0 0 6px 0;">🎯 一、二章跨章节串联记忆：</p>
+        <p style="font-size:13.5px; color:#92400e; margin:0; line-height:1.65;">
+          • <strong>门徒呼召线</strong>：西门 → 安得烈 → 雅各 → 约翰（第1章打鱼） → 利未（第2章税吏）。<br>
+          • <strong>人子身份线</strong>：第1章是受试探与受洗的神子，第2章强调「人子有赦罪权柄」(2:10) 与「人子是安息日的主」(2:28)。<br>
+          • <strong>罪人主题线</strong>：赦罪(2:5) → 许多税吏罪人(2:15) → 与罪人吃喝(2:16) → 召罪人(2:17)。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(tabId) {
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
+}
+</script>
+
+</body>
+</html>
