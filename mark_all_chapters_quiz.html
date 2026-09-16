@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音 全卷综合模拟考</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+  .adaptive-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .adaptive-container { padding: 12px 10px 50px 10px; }
+  }
+
+  /* 顶部导航控制条 */
+  .top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .btn-nav-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .btn-nav-home:hover { background: #e2e8f0; }
+
+  .header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+    color: white;
+    padding: 24px 18px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
+
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .stat-group { display: flex; gap: 18px; align-items: center; }
+  .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+
+  .type-section-header {
+    background: #f1f5f9;
+    border-left: 5px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 24px 0 16px 0;
+  }
+  .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
+  .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
+
+  .match-table-wrap { width: 100%; overflow-x: auto; margin-top: 10px; }
+  .match-table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; }
+  .match-table th { background: #f8fafc; padding: 10px 8px; border: 1px solid var(--border); text-align: left; }
+  .match-table td { padding: 10px 8px; border: 1px solid #e2e8f0; vertical-align: middle; line-height: 1.5; }
+  .col-num { width: 44%; }
+  .col-input { width: 12%; text-align: center; background: #f8fafc; }
+  .col-alpha { width: 44%; }
+  .match-select { width: 50px; height: 32px; text-align: center; font-size: 14px; font-weight: bold; border: 1.5px solid var(--border); border-radius: 4px; background: white; }
+
+  .word-bank-box { background: #eff6ff; border: 2px dashed #93c5fd; border-radius: 10px; padding: 14px; margin: 12px 0 18px 0; }
+  .word-bank-title { font-size: 14px; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip { background: #ffffff; border: 1.5px solid var(--accent); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: all 0.15s ease; user-select: none; }
+  .word-chip:hover, .word-chip:active { background: var(--accent); color: white; }
+
+  .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; background: #ffffff; }
+  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .blank-input { border: none; border-bottom: 2.5px solid #64748b; background: #f1f5f9; padding: 2px 8px; font-size: 15px; font-weight: bold; color: #0f172a; text-align: center; margin: 0 4px; border-radius: 4px 4px 0 0; cursor: pointer; transition: all 0.2s ease; }
+  .blank-input:focus, .blank-input.active-blank { outline: none; border-bottom-color: var(--accent); background: #dbeafe; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25); }
+  .blank-input.has-val { background: #e0f2fe; color: #0369a1; border-bottom-color: #0284c7; }
+
+  .feedback { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+</style>
+</head>
+<body>
+
+<div class="adaptive-container">
+  <!-- 返回主页按钮条 -->
+  <div class="top-navbar">
+    <a href="index.html" class="btn-nav-home">🏠 返回主页</a>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音全卷综合模拟测验</span>
+  </div>
+
+  <div class="header">
+    <h1>《马可福音》全卷跨章节模拟考</h1>
+    <p>当前可用范围：第 1 章 ～ 第 2 章 ｜ 全真混抽 50 题</p>
+  </div>
+
+  <div class="dashboard">
+    <div class="stat-group">
+      <div class="stat-box">
+        <div class="stat-val" id="total-score">0 / 50</div>
+        <div class="stat-lbl">答对题数</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="accuracy-rate">0%</div>
+        <div class="stat-lbl">正确率</div>
+      </div>
+    </div>
+    <div>
+      <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+      <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+      <span class="save-status" id="save-status">💾 进度已自动保存</span>
+    </div>
+  </div>
+
+  <div id="quiz-sections-container"></div>
+</div>
+
+<script>
+// 聚合第1章与第2章的所有题库 MASTER POOL
+const COMBINED_QUESTION_POOL = [
+  // --- 第 1 章 配对题 ---
+  {
+    id: "ch1_match",
+    type: "matching",
+    title: "【第1章】经文前半句与后半句配对：",
+    desc: "考查第1章经文承接",
+    pairs: [
+      { id: "c1_p1", left: "耶稣责备他说：“不要作声，从这人身上出来吧！”", rightText: "污鬼叫那人抽了一阵风，大声喊叫，就出来了。" },
+      { id: "c1_p2", left: "有一个长大麻风的来求耶稣，向他跪下，说：“你若肯，必能叫我洁净了。”", rightText: "耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”" },
+      { id: "c1_p3", left: "他传道说：“有一位在我以后来的，能力比我更大，我就是弯腰给他解鞋带也是不配的。", rightText: "我是用水给你们施洗，他却要用圣灵给你们施洗。" },
+      { id: "c1_p4", left: "照这话，约翰来了，在旷野施洗，传悔改的洗礼，使罪得赦。", rightText: "犹太全地和耶路撒冷的人都出去到约翰那里，承认他们的罪，在约旦河里受他的洗。" },
+      { id: "c1_p5", left: "到了迦百农，耶稣就在安息日进了会堂教训人。", rightText: "众人很希奇他的教训，因为他教训他们，正像有权柄的人，不像文士。" },
+      { id: "c1_p6", left: "他从水里一上来，就看见天裂开了，圣灵仿佛鸽子降在他身上。", rightText: "又有声音从天上来，说：“你是我的爱子，我喜悦你！”" },
+      { id: "c1_p7", left: "约翰下监以后，耶稣来到加利利，宣传神的福音，", rightText: "说：“日期满了，神的国近了！你们当悔改，信福音。”" }
+    ]
+  },
+  // --- 第 2 章 配对题 ---
+  {
+    id: "ch2_match",
+    type: "matching",
+    title: "【第2章】经文前半句与后半句配对：",
+    desc: "考查第2章经文承接",
+    pairs: [
+      { id: "c2_p1", left: "没有人把新布缝在旧衣服上，恐怕所补上的新布带坏了旧衣服，破的就更大了；", rightText: "也没有人把新酒装在旧皮袋里，恐怕酒把皮袋裂开，酒和皮袋就都坏了；唯有把新酒装在新皮袋里。" },
+      { id: "c2_p2", left: "因为人多，不得近前，就把耶稣所在的房子拆了房顶，既拆通了，就把瘫子连所躺卧的褥子都缒下来。", rightText: "耶稣见他们的信心，就对瘫子说：小子，你的罪赦了。" },
+      { id: "c2_p3", left: "又对他们说：『安息日是为人设立的，人不是为安息日设立的。", rightText: "所以人子也是安息日的主。" },
+      { id: "c2_p4", left: "过了些日子，耶稣又进了迦百农，人听见他在房子里，", rightText: "就有许多人聚集，甚至连门前都没有空地；耶稣就对他们讲道。" },
+      { id: "c2_p5", left: "当下，约翰的门徒和法利赛人禁食，他们来问耶稣说：『约翰的门徒和法利赛人的门徒禁食，你的门徒倒不禁食，这是为什么呢？』", rightText: "耶稣对他们说：新郎和陪伴之人同在的时候，陪伴之人岂能禁食呢？新郎还同在，他们不能禁食。" },
+      { id: "c2_p6", left: "耶稣经过的时候，看见亚勒腓的儿子利未坐在税关上，就对他说：你跟从我来。他就起来，跟从了耶稣。", rightText: "耶稣在利未家里坐席的时候，有好些税吏和罪人与耶稣并门徒一同坐席；因为这样的人多，他们也跟随耶稣。" },
+      { id: "c2_p7", left: "法利赛人对耶稣说：看哪，他们在安息日为什么做不可做的事呢？", rightText: "耶稣对他们说：经上记着大卫和跟从他的人缺乏、饥饿之时所做的事，你们没有念过吗？" }
+    ]
+  },
+
+  // --- 填空精选题 (第1章与第2章) ---
+  { id: "c1_fb1", type: "fill", title: "根据马可福音第一章，污鬼称耶稣是_____。", blanks: [{id:"c1_f1_1", ans:"神的圣者"}], desc: "可 1:24 乃是神的圣者。" },
+  { id: "c1_fb2", type: "fill", title: "耶稣来到_____，宣讲神的福音，说：“日期满了，神的_____近了。你们当_____，信福音！”", blanks: [{id:"c1_f2_1", ans:"加利利"},{id:"c1_f2_2", ans:"国"},{id:"c1_f2_3", ans:"悔改"}], desc: "可 1:14-15 传道金句。" },
+  { id: "c1_fb3", type: "fill", title: "耶稣严严地嘱咐他：“你要_____，什么话都不可告诉人，只要去把_____给_____察看，献上_____所吩咐的礼物。”", blanks: [{id:"c1_f3_1", ans:"谨慎"},{id:"c1_f3_2", ans:"身体"},{id:"c1_f3_3", ans:"祭司"},{id:"c1_f3_4", ans:"摩西"}], desc: "可 1:44 洁净麻风后的吩咐。" },
+  { id: "c1_fb4", type: "fill", title: "在旷野有人声喊着说：“预备_____的道，修直他_____。”", blanks: [{id:"c1_f4_1", ans:"主"},{id:"c1_f4_2", ans:"的路"}], desc: "可 1:3 预备主的道。" },
+  { id: "c1_fb5", type: "fill", title: "耶稣受洗从水里一上来，就看见_____裂开了，_____仿佛鸽子降在他身上。天上发声说：“你是我的_____，我喜悦你。”", blanks: [{id:"c1_f5_1", ans:"天"},{id:"c1_f5_2", ans:"圣灵"},{id:"c1_f5_3", ans:"爱子"}], desc: "可 1:10-11 三一神受洗显现。" },
+  { id: "c1_fb6", type: "fill", title: "施洗约翰穿_____的衣服，腰间束_____，吃的是_____和_____。", blanks: [{id:"c1_f6_1", ans:"骆驼毛"},{id:"c1_f6_2", ans:"皮带"},{id:"c1_f6_3", ans:"蝗虫"},{id:"c1_f6_4", ans:"野蜜"}], desc: "可 1:6 约翰的衣食细节。" },
+
+  { id: "c2_fb1", type: "fill", title: "有人把瘫子连所躺的_____都缒下来。", blanks: [{id:"c2_f1_1", ans:"褥子"}], desc: "可 2:4 把瘫子连所躺卧的褥子都缒下来。" },
+  { id: "c2_fb2", type: "fill", title: "耶稣说：「但要叫你们知道，人子在地上有_____的权柄。」", blanks: [{id:"c2_f2_1", ans:"赦罪"}], desc: "可 2:10 人子在地上有赦罪的权柄。" },
+  { id: "c2_fb3", type: "fill", title: "耶稣经过海边，看见_____坐在税关上。", blanks: [{id:"c2_f3_1", ans:"利未"}], desc: "可 2:14 看见亚勒腓的儿子利未坐在税关上。" },
+  { id: "c2_fb4", type: "fill", title: "耶稣说：「康健的人用不着_____，有病的人才用得着；我来本不是召义人，乃是召_____。」", blanks: [{id:"c2_f4_1", ans:"医生"},{id:"c2_f4_2", ans:"罪人"}], desc: "可 2:17 召罪人金句。" },
+  { id: "c2_fb5", type: "fill", title: "「安息日是为_____设立的，人不是为安息日设立的。所以，人子也是安息日的_____。」", blanks: [{id:"c2_f5_1", ans:"人"},{id:"c2_f5_2", ans:"主"}], desc: "可 2:27-28 安息日的真理。" },
+  { id: "c2_fb6", type: "fill", title: "有几个文士坐在那里，心里议论说：“他说_____的话了！除了_____以外，谁能赦罪呢？”", blanks: [{id:"c2_f6_1", ans:"僭妄"},{id:"c2_f6_2", ans:"神"}], desc: "可 2:6-7 文士议论赦罪。" },
+  { id: "c2_fb7", type: "fill", title: "耶稣提到大卫当_____作大祭司的时候，进了神的殿，吃了_____。", blanks: [{id:"c2_f7_1", ans:"亚比亚他"},{id:"c2_f7_2", ans:"陈设饼"}], desc: "可 2:26 亚比亚他作大祭司吃陈设饼。" },
+
+  // --- 选择题与排序题 ---
+  { id: "c1_mc1", type: "radio", title: "施洗约翰传道时穿什么衣服？吃什么食物？", opts: [{v:"a",t:"A. 穿细麻衣，吃陈设饼"},{v:"b",t:"B. 穿细绵羊毛的衣服，腰束皮带，吃无酵饼"},{v:"c",t:"C. 穿骆驼毛的衣服，腰束皮带，吃蝗虫与野蜜"},{v:"d",t:"D. 穿普通的麻布长衫，吃五谷杂粮"}], ans: "c", desc: "可 1:6 约翰穿骆驼毛衣服，吃蝗虫野蜜。" },
+  { id: "c1_mc2", type: "radio", title: "耶稣呼召西门和安得烈时，他们正在做什么？", opts: [{v:"a",t:"A. 修理船"},{v:"b",t:"B. 在船上补网"},{v:"c",t:"C. 在海里撒网"},{v:"d",t:"D. 整理鱼"}], ans: "c", desc: "可 1:16 见西门和安得烈在海里撒网。" },
+  { id: "c1_mc3", type: "radio", title: "雅各和约翰被呼召时正在做什么？", opts: [{v:"a",t:"A. 撒网"},{v:"b",t:"B. 在船上与雇工补网"},{v:"c",t:"C. 洗网"},{v:"d",t:"D. 售卖鱼"}], ans: "b", desc: "可 1:19 雅各和约翰在船上补网。" },
+  { id: "c1_mc4", type: "radio", title: "耶稣在谁的家中医治彼得的岳母？", opts: [{v:"a",t:"A. 彼得岳母的家"},{v:"b",t:"B. 雅各的家"},{v:"c",t:"C. 约翰和雅各的家"},{v:"d",t:"D. 西门和安得烈的家"}], ans: "d", desc: "可 1:29 进了西门和安得烈的家。" },
+  { id: "c1_mc5", type: "radio", title: "长大麻风的人被医治以后做了什么？", opts: [{v:"a",t:"A. 完全守秘密"},{v:"b",t:"B. 出去，倒说许多话，把这件事传扬开了"},{v:"c",t:"C. 立刻去拿撒勒"},{v:"d",t:"D. 只告诉了同乡门徒"}], ans: "b", desc: "可 1:45 那人出去，倒说许多话，把这件事传扬开了。" },
+  { id: "c1_mc6", type: "radio", title: "【门徒排序】请排列四位最早被耶稣呼召的门徒先后顺序：A. 雅各 B. 西门 C. 约翰 D. 安得烈", opts: [{v:"a", t:"A. B → D → A → C"},{v:"b", t:"B. B → A → D → C"},{v:"c", t:"C. D → B → A → C"},{v:"d", t:"D. B → D → C → A"}], ans: "a", desc: "先见西门安得烈(1:16)，稍往前走见雅各约翰(1:19)。" },
+
+  { id: "c2_mc1", type: "radio", title: "一共有多少个人抬着瘫子来到耶稣面前？", opts: [{v:"a",t:"A. 两个"},{v:"b",t:"B. 三个"},{v:"c",t:"C. 四个"},{v:"d",t:"D. 五个"}], ans: "c", desc: "可 2:3 是用四个人抬来的。" },
+  { id: "c2_mc2", type: "radio", title: "耶稣首先对瘫子说了什么？", opts: [{v:"a",t:"A. 「起来，拿你的褥子」"},{v:"b",t:"B. 「你的病好了」"},{v:"c",t:"C. 「小子，你的罪赦了」"},{v:"d",t:"D. 「不要害怕」"}], ans: "c", desc: "可 2:5 首先说的是「小子，你的罪赦了」。" },
+  { id: "c2_mc3", type: "radio", title: "耶稣呼召利未的时候，利未正在：", opts: [{v:"a",t:"A. 海边捕鱼"},{v:"b",t:"B. 船上补网"},{v:"c",t:"C. 税关坐着"},{v:"d",t:"D. 会堂里听道"}], ans: "c", desc: "可 2:14 看见亚勒腓的儿子利未坐在税关上。" },
+  { id: "c2_mc4", type: "radio", title: "谁与法利赛人一起质问耶稣的门徒为什么不禁食？", opts: [{v:"a",t:"A. 撒都该人"},{v:"b",t:"B. 祭司"},{v:"c",t:"C. 约翰的门徒"},{v:"d",t:"D. 罗马兵丁"}], ans: "c", desc: "可 2:18 约翰的门徒和法利赛人禁食。" },
+  { id: "c2_mc5", type: "radio", title: "大卫在饥饿时进入神的殿，吃了哪种本只有祭司才可以吃的饼？", opts: [{v:"a",t:"A. 陈设饼"},{v:"b",t:"B. 逾越节饼"},{v:"c",t:"C. 大麦饼"},{v:"d",t:"D. 无酵饼"}], ans: "a", desc: "可 2:26 吃了陈设饼。" },
+  { id: "c2_mc6", type: "radio", title: "关于新酒的比喻，耶稣指出新酒必须装在：", opts: [{v:"a",t:"A. 旧皮袋"},{v:"b",t:"B. 新皮袋"},{v:"c",t:"C. 陶制瓦罐"},{v:"d",t:"D. 木桶"}], ans: "b", desc: "可 2:22 惟独把新酒装在新皮袋里。" },
+  { id: "c2_mc7", type: "radio", title: "【第二章主线排序】请按经文先后顺序排列：A. 安息日掐麦穗 B. 医治瘫子 C. 呼召利未 D. 禁食答辩", opts: [{v:"a", t:"A. B → C → D → A"},{v:"b", t:"B. B → D → C → A"},{v:"c", t:"C. C → B → D → A"},{v:"d", t:"D. A → B → C → D"}], ans: "a", desc: "口诀：瘫子(2:1) → 利未(2:13) → 禁食(2:18) → 安息日掐麦穗(2:23)。" },
+
+  // --- 是非判断题 ---
+  { id: "c1_tf1", type: "tf", title: "耶稣从加利利的拿撒勒来，在约旦河受约翰的洗。", ans: "T", desc: "对。可 1:9 经文完全吻合。" },
+  { id: "c1_tf2", type: "tf", title: "西门和安得烈被呼召时正在船上补网。", ans: "F", desc: "错。西门和安得烈在海里撒网；雅各和约翰才是在船上补网。" },
+  { id: "c1_tf3", type: "tf", title: "次日早晨天未亮的时候，耶稣起来，到旷野地方去，在那里祷告。", ans: "T", desc: "对。可 1:35 经文完全吻合。" },
+  { id: "c1_tf4", type: "tf", title: "污鬼喊叫说：“我知道你是谁，乃是神的爱子。”", ans: "F", desc: "错。可 1:24 污鬼称“乃是神的圣者”。" },
+  { id: "c1_tf5", type: "tf", title: "正如先知以赛亚书上记着说：看哪，我要差遣我的使者在你前面。以上经文引自以赛亚书。", ans: "F", desc: "错。该句引自《玛拉基书》3:1。" },
+  { id: "c2_tf1", type: "tf", title: "带瘫子到耶稣面前的是四个人，因为人多拆了房顶缒下来。", ans: "T", desc: "对。可 2:3-4 经文完全吻合。" },
+  { id: "c2_tf2", type: "tf", title: "利未是一个加利利海边的打鱼渔夫。", ans: "F", desc: "错。利未是坐在税关上的税吏。" },
+  { id: "c2_tf3", type: "tf", title: "在马可福音第二章中，人是为安息日设立的，安息日不是为人设立的。", ans: "F", desc: "错。可 2:27 明确说安息日是为人设立的。" },
+  { id: "c2_tf4", type: "tf", title: "门徒雅各和约翰的父亲是亚勒腓。", ans: "F", desc: "错。雅各和约翰的父亲是西庇太；利未才是亚勒腓的儿子。" },
+  { id: "c2_tf5", type: "tf", title: "耶稣说人子也是安息日的主。", ans: "T", desc: "对。可 2:28 经文完全吻合。" }
+];
+
+// 全卷词库 (Answer Pool)
+const COMBINED_WORD_POOL = [
+  "神的圣者", "加利利", "国", "悔改", "谨慎", "身体", "祭司", "摩西", 
+  "主", "的路", "天", "圣灵", "爱子", "骆驼毛", "皮带", "蝗虫", "野蜜", 
+  "褥子", "赦罪", "利未", "医生", "罪人", "人", "僭妄", "神", "亚比亚他", "陈设饼"
+];
+
+let activeQuestionSet = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_all_chapters_quiz_v2";
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function initQuiz(forceRegenerate = false) {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeQuestionSet = parsed.questions || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  // 1. 随机选一套配对题（第1章或第2章配对题随机呈现）
+  const matchPool = COMBINED_QUESTION_POOL.filter(q => q.type === "matching");
+  const selectedMatch = [shuffleArray(matchPool)[0]]; // 计 7 项
+
+  // 2. 剩余题目混洗抽取 43 题，凑成 50 题项目
+  const others = shuffleArray(COMBINED_QUESTION_POOL.filter(q => q.type !== "matching"));
+  const selectedOthers = others.slice(0, 43);
+
+  // 3. 严格按分类组织：配对题 -> 填空题 -> 单选/排序题 -> 是非题
+  const typeOrder = { "matching": 1, "fill": 2, "radio": 3, "tf": 4 };
+  activeQuestionSet = [...selectedMatch, ...selectedOthers].sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  saveQuizState({});
+  renderQuizUI();
+}
+
+function regenerateQuiz() {
+  if (confirm("确定要重新随机抽取 50 道跨章节综合测验题目吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
+function renderQuizUI() {
+  const container = document.getElementById("quiz-sections-container");
+  container.innerHTML = "";
+
+  const groups = {
+    "matching": { title: "第一部分：配对题", desc: "在中间下拉框选填与前半句配对的字母（右侧选项已随机打乱）：", list: [] },
+    "fill": { title: "第二部分：填空题", desc: "请根据下方词库填入空格（点击词汇填入，点击空格反选清空）：", list: [] },
+    "radio": { title: "第三部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第四部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeQuestionSet.forEach(q => {
+    if (groups[q.type]) groups[q.type].list.push(q);
+  });
+
+  let globalQuestionCounter = 1;
+
+  ["matching", "fill", "radio", "tf"].forEach(typeKey => {
+    const grp = groups[typeKey];
+    if (grp.list.length === 0) return;
+
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    const totalCount = typeKey === 'matching' ? grp.list[0].pairs.length : grp.list.length;
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}（共 ${totalCount} 题）</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 综合备选词库 (Answer Pool)：点击填入，点击空格清除</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
+    }
+
+    grp.list.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      let html = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>`;
+
+      if (q.type === "matching") {
+        const letters = ["A", "B", "C", "D", "E", "F", "G"];
+        const shuffledRight = shuffleArray(q.pairs.map(p => ({ pairId: p.id, text: p.rightText })));
+        const targetMap = {};
+        shuffledRight.forEach((item, i) => {
+          targetMap[item.pairId] = letters[i];
+        });
+
+        html += `
+          <div class="match-table-wrap">
+            <table class="match-table">
+              <thead>
+                <tr>
+                  <th class="col-num">序号与前半段</th>
+                  <th class="col-input">填入</th>
+                  <th class="col-alpha">备选项（A - G 随机排序）</th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+        q.pairs.forEach((p, idx) => {
+          const correctLetter = targetMap[p.id];
+          const rightItem = shuffledRight[idx];
+
+          html += `
+            <tr>
+              <td class="col-num"><strong>${idx + 1}.</strong> ${p.left}</td>
+              <td class="col-input">
+                <select class="match-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
+                  <option value="">-</option>
+                  <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+                </select>
+              </td>
+              <td class="col-alpha"><strong>${letters[idx]}.</strong> ${rightItem.text}</td>
+            </tr>`;
+        });
+
+        html += `</tbody></table></div>`;
+        globalQuestionCounter += (q.pairs.length - 1);
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        html += `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          html += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        html += `</div>`;
+      } else if (q.type === "tf") {
+        html += `<div class="opt-group" style="flex-direction:row; max-width:280px;">
+          <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+          <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+        </div>`;
+      } else if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        html = `<div style="font-size:15px; line-height:2.4; word-break:break-word;">
+                  <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+                </div>`;
+      }
+
+      html += `<div class="feedback" id="fb-${q.id}"></div>`;
+      item.innerHTML = html;
+      container.appendChild(item);
+
+      globalQuestionCounter++;
+    });
+  });
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
+  calculateAndUpdateTotals(0);
+}
+
+function renderWordBank() {
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  const shuffledWords = shuffleArray(COMBINED_WORD_POOL);
+  shuffledWords.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
+  });
+}
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
+  document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
+}
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
+  }
+}
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
+function getUserAnswers() {
+  const answers = {};
+  document.querySelectorAll("#quiz-sections-container input, #quiz-sections-container select").forEach(el => {
+    if (el.tagName === "SELECT") {
+      if (el.value) answers[el.id] = el.value;
+    } else if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
+    }
+  });
+  return answers;
+}
+
+function saveQuizState(answers) {
+  const data = {
+    questions: activeQuestionSet,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
+}
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.tagName === "SELECT") {
+      textEl.value = val;
+    } else if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+  let totalItems = 0;
+
+  activeQuestionSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "matching") {
+      let mOk = 0;
+      let errs = [];
+      q.pairs.forEach(p => {
+        totalItems++;
+        const sel = document.getElementById("m_row_" + p.id);
+        const v = (sel.value || "").toUpperCase();
+        const expected = sel.getAttribute("data-ans");
+        if (v === expected) {
+          mOk++;
+          score++;
+          sel.style.borderColor = "#16a34a";
+          sel.style.background = "#dcfce7";
+        } else {
+          sel.style.borderColor = "#dc2626";
+          sel.style.background = "#fee2e2";
+          errs.push(`${p.left.slice(0, 8)}...应配【${expected}】`);
+        }
+      });
+      if (mOk === q.pairs.length) {
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `配对题全部正确！`;
+      } else {
+        fb.className = "feedback is-wrong";
+        fb.innerHTML = `答对 ${mOk} / ${q.pairs.length}。错误项：${errs.join("； ")}`;
+      }
+    } else if (q.type === "radio" || q.type === "tf") {
+      totalItems++;
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      totalItems++;
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。解析：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score, totalItems);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score, totalItems) {
+  let total = totalItems;
+  if (!total) {
+    total = 0;
+    activeQuestionSet.forEach(q => {
+      if (q.type === "matching") total += q.pairs.length;
+      else total += 1;
+    });
+  }
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
+</script>
+
+</body>
+</html>
