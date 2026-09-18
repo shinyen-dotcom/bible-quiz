@@ -162,12 +162,12 @@
 <div class="adaptive-container">
   <div class="top-navbar">
     <a href="index.html" class="btn-nav-home">🏠 返回主页</a>
-    <span style="font-size: 13px; color: var(--text-muted);">马可福音全卷综合全真测试</span>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音全卷综合全真测试 (第1-4章)</span>
   </div>
 
   <div class="header">
     <h1>《马可福音》全卷综合模拟考</h1>
-    <p>范围：第 1 章 ～ 第 3 章 ｜ 130+道真题全覆盖 · 精准混抽 50 题</p>
+    <p>范围：第 1 章 ～ 第 4 章 ｜ 全真混抽 50 题 · 动态精准词库</p>
   </div>
 
   <div class="dashboard">
@@ -216,10 +216,10 @@ const ALL_MATCHING_PAIRS = [
 ];
 
 // ==========================================
-// 2. 全量单项题库池 (包含第1、2、3章所有填空、选择、排序、是非题)
+// 2. 全量单项题库池 (完整收录第1、2、3、4章所有填空、选择、排序、是非题，共 130+ 题)
 // ==========================================
 const ALL_SINGLE_QUESTIONS = [
-  // ---【第1章 填空题库】---
+  // ---【第1章 填空题】---
   { id: "c1_fb1", type: "fill", title: "根据马可福音第一章，污鬼称耶稣是_____。", blanks: [{id:"c1_f1_1", ans:"神的圣者"}], desc: "可 1:24 乃是神的圣者。" },
   { id: "c1_fb2", type: "fill", title: "耶稣来到_____，宣讲神的福音，说：“日期满了，神的_____近了。你们当_____，信福音！”", blanks: [{id:"c1_f2_1", ans:"加利利"},{id:"c1_f2_2", ans:"国"},{id:"c1_f2_3", ans:"悔改"}], desc: "可 1:14-15 传道金句。" },
   { id: "c1_fb3", type: "fill", title: "耶稣严严地嘱咐他：“你要_____，什么话都不可告诉人，只要去把_____给_____察看，献上_____所吩咐的礼物。”", blanks: [{id:"c1_f3_1", ans:"谨慎"},{id:"c1_f3_2", ans:"身体"},{id:"c1_f3_3", ans:"祭司"},{id:"c1_f3_4", ans:"摩西"}], desc: "可 1:44 洁净麻风后的吩咐。" },
@@ -236,7 +236,7 @@ const ALL_SINGLE_QUESTIONS = [
   { id: "c1_fb14", type: "fill", title: "「次日早晨，天未亮的时候……在那里祷告」出现在马可福音第一章第_____节。", blanks: [{id:"c1_f14_1", ans:"35|35节|1:35"}], desc: "可 1:35 灵修模范经文。" },
   { id: "c1_fb15", type: "fill", title: "耶稣对长大麻风的人说：「我肯，你_____了吧！」", blanks: [{id:"c1_f15_1", ans:"洁净"}], desc: "可 1:41 我肯，你洁净了吧！" },
 
-  // ---【第2章 填空题库】---
+  // ---【第2章 填空题】---
   { id: "c2_fb1", type: "fill", title: "有人把瘫子连所躺的_____都缒下来。", blanks: [{id:"c2_f1_1", ans:"褥子"}], desc: "可 2:4 连所躺卧的褥子都缒下来。" },
   { id: "c2_fb2", type: "fill", title: "耶稣对瘫子说：「小子，你的_____赦了。」", blanks: [{id:"c2_f2_1", ans:"罪"}], desc: "可 2:5 小子，你的罪赦了。" },
   { id: "c2_fb3", type: "fill", title: "耶稣说：「但要叫你们知道，人子在地上有_____的权柄。」", blanks: [{id:"c2_f3_1", ans:"赦罪"}], desc: "可 2:10 人子在地上有赦罪的权柄。" },
@@ -251,122 +251,116 @@ const ALL_SINGLE_QUESTIONS = [
   { id: "c2_fb12", type: "fill", title: "有几个文士坐在那里，心里议论，说：“这个人为什么这样说呢？他说_____的话了！除了_____以外，谁能赦罪呢？”", blanks: [{id:"c2_f12_1", ans:"僭妄"},{id:"c2_f12_2", ans:"神"}], desc: "可 2:6-7 文士指责耶稣说僭妄的话。" },
   { id: "c2_fb13", type: "fill", title: "耶稣说大卫当_____作大祭司的时候，进了神的殿，吃了_____。", blanks: [{id:"c2_f13_1", ans:"亚比亚他"},{id:"c2_f13_2", ans:"陈设饼"}], desc: "可 2:26 亚比亚他作大祭司时吃陈设饼。" },
   { id: "c2_fb14", type: "fill", title: "「小子，你的罪赦了」出现在马可福音第 2 章第_____节。", blanks: [{id:"c2_f14_1", ans:"5|5节|2:5"}], desc: "可 2:5 赦罪恩言。" },
-  { id: "c2_fb15", type: "fill", title: "「你跟从我来」呼召利未出现在马可福音第 2 章第_____节。", blanks: [{id:"c2_f15_1", ans:"14|14节|2:14"}], desc: "可 2:14 呼召利未。" },
-  { id: "c2_fb16", type: "fill", title: "「康健的人用不着医生，有病的人才用得着」出现在马可福音第 2 章第_____节。", blanks: [{id:"c2_f16_1", ans:"17|17节|2:17"}], desc: "可 2:17 召罪人金句。" },
-  { id: "c2_fb17", type: "fill", title: "「安息日是为人设立的，人不是为安息日设立的」出现在马可福音第 2 章第_____节。", blanks: [{id:"c2_f17_1", ans:"27|27节|2:27"}], desc: "可 2:27 安息日真理。" },
 
-  // ---【第3章 填空题库】---
+  // ---【第3章 填空题】---
   { id: "c3_fb1", type: "fill", title: "耶稣对枯干一只手的人说：「起来，站在当中。」又对众人说：「在安息日行_____行_____，救命害命，哪样是可以的呢？」", blanks: [{id:"c3_f1_1", ans:"善"},{id:"c3_f1_2", ans:"恶"}], desc: "可 3:4 在安息日行善行恶，救命害命，哪样是可以的呢？" },
   { id: "c3_fb2", type: "fill", title: "耶稣看见他们的心刚硬，就_____周围的人，又为他们的心刚硬_____。", blanks: [{id:"c3_f2_1", ans:"怒目"},{id:"c3_f2_2", ans:"忧愁"}], desc: "可 3:5 怒目周围看他们，为他们的心刚硬忧愁。" },
   { id: "c3_fb3", type: "fill", title: "耶稣对那人说：「伸出手来。」他把手一伸，手就_____了。", blanks: [{id:"c3_f3_1", ans:"复原"}], desc: "可 3:5 他把手一伸，手就复原了。" },
   { id: "c3_fb4", type: "fill", title: "从耶路撒冷下来的文士说：「他是被_____附着。」又说：「他是靠着_____赶鬼。」", blanks: [{id:"c3_f4_1", ans:"别西卜"},{id:"c3_f4_2", ans:"鬼王"}], desc: "可 3:22 污蔑耶稣被别西卜附着、靠鬼王赶鬼。" },
   { id: "c3_fb5", type: "fill", title: "耶稣说：「若一国自相纷争，那国就_____不住；若一家自相纷争，那家就_____不住。」", blanks: [{id:"c3_f5_1", ans:"站立"},{id:"c3_f5_2", ans:"站立"}], desc: "可 3:24-25 一国一家自相纷争必站立不住。" },
   { id: "c3_fb6", type: "fill", title: "耶稣说：「没有人能进_____家里抢夺他的家具，必先_____那壮士，才可以抢夺他的家。」", blanks: [{id:"c3_f6_1", ans:"壮士"},{id:"c3_f6_2", ans:"捆住|捆绑"}], desc: "可 3:27 必先捆住那壮士，才可以抢夺他的家。" },
-  { id: "c3_fb7", type: "fill", title: "耶稣说：「我实在告诉你们，世人一切的罪和一切亵渎的话，都可得_____。」", blanks: [{id:"c3_f7_1", ans:"赦免"}], desc: "可 3:28 一切的罪和亵渎的话都可得赦免。" },
-  { id: "c3_fb8", type: "fill", title: "「凡亵渎_____的，却永不得赦免，乃要担当永远的罪。」", blanks: [{id:"c3_f8_1", ans:"圣灵"}], desc: "可 3:29 凡亵渎圣灵的永不得赦免。" },
-  { id: "c3_fb9", type: "fill", title: "耶稣给西庇太的儿子雅各、雅各的兄弟约翰起名叫_____，就是「_____」的意思。", blanks: [{id:"c3_f9_1", ans:"半尼其"},{id:"c3_f9_2", ans:"雷子"}], desc: "可 3:17 半尼其就是雷子的意思。" },
-  { id: "c3_fb10", type: "fill", title: "耶稣说：「凡遵行_____的人，就是我的弟兄姐妹和母亲了。」", blanks: [{id:"c3_f10_1", ans:"神旨意|神的旨意"}], desc: "可 3:35 凡遵行神旨意的人。" },
-  { id: "c3_fb11", type: "fill", title: "污鬼一见到耶稣，就俯伏在他面前喊着说：「你是_____！」", blanks: [{id:"c3_f11_1", ans:"神的儿子"}], desc: "可 3:11 污鬼俯伏喊叫：你是神的儿子。" },
-  { id: "c3_fb12", type: "fill", title: "耶稣设立十二使徒，要他们常和自己同在，也要差他们去_____，并给他们_____赶鬼。", blanks: [{id:"c3_f12_1", ans:"传道"},{id:"c3_f12_2", ans:"权柄"}], desc: "可 3:14-15 差他们去传道，给他们权柄赶鬼。" },
-  { id: "c3_fb13", type: "fill", title: "「看哪，我的母亲，我的弟兄」这句话出现在马可福音第 3 章第_____节。", blanks: [{id:"c3_f13_1", ans:"34|34节|3:34"}], desc: "可 3:34 耶稣宣告属天家庭。" },
+  { id: "c3_fb7", type: "fill", title: "「凡亵渎_____的，却永不得赦免，乃要担当永远的罪。」", blanks: [{id:"c3_f7_1", ans:"圣灵"}], desc: "可 3:29 凡亵渎圣灵的永不得赦免。" },
+  { id: "c3_fb8", type: "fill", title: "耶稣给西庇太的儿子雅各、雅各的兄弟约翰起名叫_____，就是「_____」的意思。", blanks: [{id:"c3_f8_1", ans:"半尼其"},{id:"c3_f8_2", ans:"雷子"}], desc: "可 3:17 半尼其就是雷子的意思。" },
+  { id: "c3_fb9", type: "fill", title: "耶稣说：「凡遵行_____的人，就是我的弟兄姐妹和母亲了。」", blanks: [{id:"c3_f9_1", ans:"神旨意|神的旨意"}], desc: "可 3:35 凡遵行神旨意的人。" },
+
+  // ---【第4章 填空题 (完全导入自 Mark Chapter 4 Quiz.docx)】---
+  { id: "c4_fb1", type: "fill", title: "耶稣说：“有耳可听的，就应当_____。”", blanks: [{id:"c4_f1_1", ans:"听"}], desc: "可 4:9 有耳可听的，就应当听。" },
+  { id: "c4_fb2", type: "fill", title: "“撒种之人所撒的就是_____。”", blanks: [{id:"c4_f2_1", ans:"道"}], desc: "可 4:14 撒种之人所撒的就是道。" },
+  { id: "c4_fb3", type: "fill", title: "撒在好地上的，就是人听道，又领受，且结实，有_____倍的，有_____倍的，有_____倍的。", blanks: [{id:"c4_f3_1", ans:"三十"},{id:"c4_f3_2", ans:"六十"},{id:"c4_f3_3", ans:"一百"}], desc: "可 4:20 三十倍、六十倍、一百倍。" },
+  { id: "c4_fb4", type: "fill", title: "耶稣说：“人拿灯来，岂是要放在_____底下，或是_____底下，不放在灯台上吗？”", blanks: [{id:"c4_f4_1", ans:"斗"},{id:"c4_f4_2", ans:"床"}], desc: "可 4:21 岂是要放在斗底下，或是床底下，不放在灯台上吗？" },
+  { id: "c4_fb5", type: "fill", title: "耶稣说：“所听的要_____。”", blanks: [{id:"c4_f5_1", ans:"留心"}], desc: "可 4:24 所听的要留心。" },
+  { id: "c4_fb6", type: "fill", title: "耶稣说：“你们用什么_____量给人，也必用什么_____量给你们，并且要多给你们。”", blanks: [{id:"c4_f6_1", ans:"量器"},{id:"c4_f6_2", ans:"量器"}], desc: "可 4:24 你们用什么量器量给人，也必用什么量器量给你们。" },
+  { id: "c4_fb7", type: "fill", title: "“因为有的，还要给他；没有的，连他所有的也要_____。”", blanks: [{id:"c4_f7_1", ans:"夺去"}], desc: "可 4:25 连他所有的也要夺去。" },
+  { id: "c4_fb8", type: "fill", title: "种子发芽渐长，那人却不晓得如何这样。地生出_____来，随后长_____，再后穗上结成_____。", blanks: [{id:"c4_f8_1", ans:"苗"},{id:"c4_f8_2", ans:"穗"},{id:"c4_f8_3", ans:"饱满的子粒"}], desc: "可 4:27-28 地生苗，后长穗，再后穗上结成饱满的子粒。" },
+  { id: "c4_fb9", type: "fill", title: "“谷既熟了，就用_____去割，因为收成的时候到了。”", blanks: [{id:"c4_f9_1", ans:"镰刀"}], desc: "可 4:29 谷既熟了，就用镰刀去割。" },
+  { id: "c4_fb10", type: "fill", title: "耶稣斥责风，向海说：“_____吧！_____吧！”", blanks: [{id:"c4_f10_1", ans:"住"},{id:"c4_f10_2", ans:"静"}], desc: "可 4:39 住了吧！静了吧！" },
 
   // ---【第1章 选择/排序题】---
   { id: "c1_mc1", type: "radio", title: "马可福音 1:1 称耶稣基督是谁的儿子？", opts: [{v:"a",t:"A. 人子"},{v:"b",t:"B. 神的儿子，耶稣基督"},{v:"c",t:"C. 大卫的儿子"},{v:"d",t:"D. 约瑟的儿子"}], ans: "b", desc: "可 1:1『神的儿子，耶稣基督福音的起头。』" },
-  { id: "c1_mc2", type: "radio", title: "施洗约翰在哪里传道？", opts: [{v:"a",t:"A. 耶路撒冷"},{v:"b",t:"B. 加利利"},{v:"c",t:"C. 旷野"},{v:"d",t:"D. 伯利恒"}], ans: "c", desc: "可 1:4 约翰在旷野施洗。" },
-  { id: "c1_mc3", type: "radio", title: "施洗约翰穿什么衣服？吃什么食物？", opts: [{v:"a",t:"A. 穿细麻衣，吃陈设饼"},{v:"b",t:"B. 穿细绵羊毛衣，腰束皮带，吃无酵饼"},{v:"c",t:"C. 穿骆驼毛的衣服，腰束皮带，吃蝗虫与野蜜"},{v:"d",t:"D. 穿普通的麻布长衫，吃五谷杂粮"}], ans: "c", desc: "可 1:6 约翰穿骆驼毛的衣服，吃蝗虫野蜜。" },
-  { id: "c1_mc4", type: "radio", title: "约翰说，他给人施洗是用：", opts: [{v:"a",t:"A. 圣灵"},{v:"b",t:"B. 火"},{v:"c",t:"C. 水"},{v:"d",t:"D. 油"}], ans: "c", desc: "可 1:8『我是用水给你们施洗...』" },
-  { id: "c1_mc5", type: "radio", title: "耶稣受谁的洗？", opts: [{v:"a",t:"A. 彼得"},{v:"b",t:"B. 施洗约翰"},{v:"c",t:"C. 雅各"},{v:"d",t:"D. 安得烈"}], ans: "b", desc: "可 1:9 在约旦河受了约翰的洗。" },
-  { id: "c1_mc6", type: "radio", title: "圣灵降在受洗的耶稣身上时，形状仿佛什么？", opts: [{v:"a",t:"A. 火焰"},{v:"b",t:"B. 云彩"},{v:"c",t:"C. 鸽子"},{v:"d",t:"D. 雄鹰"}], ans: "c", desc: "可 1:10 圣灵仿佛鸽子降在他身上。" },
-  { id: "c1_mc7", type: "radio", title: "耶稣在旷野受撒但试探多久？", opts: [{v:"a",t:"A. 7天"},{v:"b",t:"B. 30天"},{v:"c",t:"C. 40天"},{v:"d",t:"D. 70天"}], ans: "c", desc: "可 1:13 在旷野四十天受撒旦试探。" },
-  { id: "c1_mc8", type: "radio", title: "耶稣呼召西门和安得烈时，他们正在做什么？", opts: [{v:"a",t:"A. 修理船"},{v:"b",t:"B. 在船上补网"},{v:"c",t:"C. 在海里撒网"},{v:"d",t:"D. 整理鱼"}], ans: "c", desc: "可 1:16 见西门和安得烈在海里撒网。" },
-  { id: "c1_mc9", type: "radio", title: "耶稣医治西门的岳母后，她立刻做什么？", opts: [{v:"a",t:"A. 离开家"},{v:"b",t:"B. 去会堂"},{v:"c",t:"C. 服事他们"},{v:"d",t:"D. 去告诉众人"}], ans: "c", desc: "可 1:31 热就退了，她就服事他们。" },
-  { id: "c1_mc10", type: "radio", title: "谁是「在旷野有人声喊着说：预备主的道」的人？", opts: [{v:"a",t:"A. 施洗约翰"},{v:"b",t:"B. 耶稣"},{v:"c",t:"C. 以利亚"},{v:"d",t:"D. 西面"}], ans: "a", desc: "可 1:3-4 预备主的道指的是施洗约翰。" },
-  { id: "c1_mc11", type: "radio", title: "谁是西门的兄弟？", opts: [{v:"a",t:"A. 雅各"},{v:"b",t:"B. 安得烈"},{v:"c",t:"C. 约翰"},{v:"d",t:"D. 西庇太"}], ans: "b", desc: "可 1:16 西门和西门的兄弟安得烈。" },
-  { id: "c1_mc12", type: "radio", title: "雅各和约翰的父亲是谁？", opts: [{v:"a",t:"A. 西门"},{v:"b",t:"B. 亚勒腓"},{v:"c",t:"C. 西庇太"},{v:"d",t:"D. 撒迦利亚"}], ans: "c", desc: "可 1:19 西庇太的儿子雅各和雅各的兄弟约翰。" },
-  { id: "c1_mc13", type: "radio", title: "在迦百农会堂里，谁称耶稣为「神的圣者」？", opts: [{v:"a",t:"A. 污鬼"},{v:"b",t:"B. 彼得"},{v:"c",t:"C. 祭司"},{v:"d",t:"D. 文士"}], ans: "a", desc: "可 1:24 被污鬼附着的人喊叫说：乃是神的圣者。" },
-  { id: "c1_mc14", type: "radio", title: "谁对耶稣说：「你若肯，必能叫我洁净了」？", opts: [{v:"a",t:"A. 瘫子"},{v:"b",t:"B. 长大麻风的人"},{v:"c",t:"C. 瞎子巴底买"},{v:"d",t:"D. 百夫长"}], ans: "b", desc: "可 1:40 有一个长大麻风的来求耶稣跪下说。" },
-  { id: "c1_mc15", type: "radio", title: "【人物陷阱】以下哪一组人物关系完全正确？", opts: [{v:"a",t:"A. 西门——雅各的兄弟"},{v:"b",t:"B. 安得烈——西门的兄弟"},{v:"c",t:"C. 约翰——西门的父亲"},{v:"d",t:"D. 西庇太——安得烈的父亲"}], ans: "b", desc: "安得烈是西门的兄弟；雅各和约翰的父亲是西庇太。" },
-  { id: "c1_mc16", type: "radio", title: "【人物+动作陷阱】雅各和约翰被呼召时正在做什么？", opts: [{v:"a",t:"A. 撒网"},{v:"b",t:"B. 在船上补网"},{v:"c",t:"C. 洗网"},{v:"d",t:"D. 售卖鱼"}], ans: "b", desc: "可 1:19 雅各和约翰在船上补网。" },
-  { id: "c1_mc17", type: "radio", title: "【时间陷阱】「天未亮的时候」，耶稣做了什么？", opts: [{v:"a",t:"A. 医病"},{v:"b",t:"B. 赶鬼"},{v:"c",t:"C. 传道"},{v:"d",t:"D. 起来到旷野祷告"}], ans: "d", desc: "可 1:35 次日早晨，天未亮的时候，耶稣起来到旷野地方祷告。" },
-  { id: "c1_mc18", type: "radio", title: "【对象陷阱】耶稣医治长大麻风的人以后，吩咐他把身体给谁察看？", opts: [{v:"a",t:"A. 门徒"},{v:"b",t:"B. 会堂管会堂的人"},{v:"c",t:"C. 祭司"},{v:"d",t:"D. 罗马官员"}], ans: "c", desc: "可 1:44 只要去把身体给祭司察看。" },
-  { id: "c1_mc19", type: "radio", title: "【事件排序】请排列先后顺序：A. 耶稣呼召西门和安得烈 B. 施洗约翰出现 C. 耶稣受洗 D. 耶稣受撒但试探", opts: [{v:"a", t:"A. B → C → D → A"},{v:"b", t:"B. B → D → C → A"},{v:"c", t:"C. C → B → D → A"},{v:"d", t:"D. B → A → C → D"}], ans: "a", desc: "施洗约翰(1:4) → 受洗(1:9) → 受试探(1:12) → 呼召门徒(1:16)。" },
-  { id: "c1_mc20", type: "radio", title: "【门徒排序】请排列四位最早被耶稣呼召的门徒先后顺序：A. 雅各 B. 西门 C. 约翰 D. 安得烈", opts: [{v:"a", t:"A. B → D → A → C"},{v:"b", t:"B. B → A → D → C"},{v:"c", t:"C. D → B → A → C"},{v:"d", t:"D. B → D → C → A"}], ans: "a", desc: "先见西门与安得烈(1:16)，稍往前走见雅各与约翰(1:19)。" },
+  { id: "c1_mc2", type: "radio", title: "施洗约翰穿什么衣服？吃什么食物？", opts: [{v:"a",t:"A. 穿细麻衣，吃陈设饼"},{v:"b",t:"B. 穿细绵羊毛衣，腰束皮带，吃无酵饼"},{v:"c",t:"C. 穿骆驼毛的衣服，腰束皮带，吃蝗虫与野蜜"},{v:"d",t:"D. 穿普通的麻布长衫，吃五谷杂粮"}], ans: "c", desc: "可 1:6 约翰穿骆驼毛的衣服，吃蝗虫野蜜。" },
+  { id: "c1_mc3", type: "radio", title: "耶稣呼召西门和安得烈时，他们正在做什么？", opts: [{v:"a",t:"A. 修理船"},{v:"b",t:"B. 在船上补网"},{v:"c",t:"C. 在海里撒网"},{v:"d",t:"D. 整理鱼"}], ans: "c", desc: "可 1:16 见西门和安得烈在海里撒网。" },
+  { id: "c1_mc4", type: "radio", title: "雅各和约翰被呼召时正在做什么？", opts: [{v:"a",t:"A. 撒网"},{v:"b",t:"B. 在船上与雇工补网"},{v:"c",t:"C. 洗网"},{v:"d",t:"D. 售卖鱼"}], ans: "b", desc: "可 1:19 雅各和约翰在船上补网。" },
+  { id: "c1_mc5", type: "radio", title: "【时间陷阱】「天未亮的时候」，耶稣做了什么？", opts: [{v:"a",t:"A. 医病"},{v:"b",t:"B. 赶鬼"},{v:"c",t:"C. 传道"},{v:"d",t:"D. 起来到旷野祷告"}], ans: "d", desc: "可 1:35 次日早晨，天未亮的时候，耶稣起来到旷野地方祷告。" },
+  { id: "c1_mc6", type: "radio", title: "长大麻风的人被医治以后做了什么？", opts: [{v:"a",t:"A. 完全守秘密"},{v:"b",t:"B. 出去，倒说许多话，把这件事传扬开了"},{v:"c",t:"C. 立刻去拿撒勒"},{v:"d",t:"D. 只告诉同乡"}], ans: "b", desc: "可 1:45 那人出去传扬开了。" },
+  { id: "c1_mc7", type: "radio", title: "【门徒排序】请排列四位最早被耶稣呼召的门徒先后顺序：A. 雅各 B. 西门 C. 约翰 D. 安得烈", opts: [{v:"a", t:"A. B → D → A → C"},{v:"b", t:"B. B → A → D → C"},{v:"c", t:"C. D → B → A → C"},{v:"d", t:"D. B → D → C → A"}], ans: "a", desc: "先见西门安得烈(1:16)，稍往前走见雅各约翰(1:19)。" },
 
   // ---【第2章 选择/排序题】---
   { id: "c2_mc1", type: "radio", title: "一共有多少个人抬着瘫子来到耶稣面前？", opts: [{v:"a",t:"A. 两个"},{v:"b",t:"B. 三个"},{v:"c",t:"C. 四个"},{v:"d",t:"D. 五个"}], ans: "c", desc: "可 2:3 是用四个人抬来的。" },
-  { id: "c2_mc2", type: "radio", title: "因为人多，他们最后怎样把瘫子带到耶稣面前？", opts: [{v:"a",t:"A. 从窗户进去"},{v:"b",t:"B. 从后门进去"},{v:"c",t:"C. 拆了房顶缒下来"},{v:"d",t:"D. 从会堂带进去"}], ans: "c", desc: "可 2:4 拆了房顶，把瘫子连褥子缒下来。" },
-  { id: "c2_mc3", type: "radio", title: "耶稣首先对瘫子说了什么？", opts: [{v:"a",t:"A. 「起来，拿你的褥子」"},{v:"b",t:"B. 「你的病好了」"},{v:"c",t:"C. 「小子，你的罪赦了」"},{v:"d",t:"D. 「不要害怕」"}], ans: "c", desc: "可 2:5 首先说的是「小子，你的罪赦了」。" },
-  { id: "c2_mc4", type: "radio", title: "谁心里议论耶稣说了僭妄的话？", opts: [{v:"a",t:"A. 法利赛人"},{v:"b",t:"B. 文士"},{v:"c",t:"C. 撒都该人"},{v:"d",t:"D. 门徒"}], ans: "b", desc: "可 2:6 有几个文士坐在那里心里议论。" },
-  { id: "c2_mc5", type: "radio", title: "耶稣呼召利未的时候，利未正在：", opts: [{v:"a",t:"A. 海边捕鱼"},{v:"b",t:"B. 船上补网"},{v:"c",t:"C. 税关坐着"},{v:"d",t:"D. 会堂里听道"}], ans: "c", desc: "可 2:14 看见亚勒腓的儿子利未坐在税关上。" },
-  { id: "c2_mc6", type: "radio", title: "耶稣在利未家里与谁一同坐席？", opts: [{v:"a",t:"A. 只有门徒"},{v:"b",t:"B. 许多税吏和罪人"},{v:"c",t:"C. 只有法利赛人"},{v:"d",t:"D. 只有利未的家人"}], ans: "b", desc: "可 2:15 好些税吏和罪人与耶稣并门徒一同坐席。" },
-  { id: "c2_mc7", type: "radio", title: "谁与法利赛人一起问耶稣的门徒为什么不禁食？", opts: [{v:"a",t:"A. 撒都该人"},{v:"b",t:"B. 祭司"},{v:"c",t:"C. 约翰的门徒"},{v:"d",t:"D. 税吏"}], ans: "c", desc: "可 2:18 约翰的门徒和法利赛人禁食。" },
-  { id: "c2_mc8", type: "radio", title: "耶稣说新酒必须装在：", opts: [{v:"a",t:"A. 旧皮袋"},{v:"b",t:"B. 新皮袋"},{v:"c",t:"C. 陶制瓦罐"},{v:"d",t:"D. 木桶"}], ans: "b", desc: "可 2:22 惟独把新酒装在新皮袋里。" },
-  { id: "c2_mc9", type: "radio", title: "大卫在饥饿时进入神的殿，吃了哪一种本来只有祭司才可以吃的饼？", opts: [{v:"a",t:"A. 陈设饼"},{v:"b",t:"B. 逾越节饼"},{v:"c",t:"C. 大麦饼"},{v:"d",t:"D. 无酵饼"}], ans: "a", desc: "可 2:26 吃了陈设饼。" },
-  { id: "c2_mc10", type: "radio", title: "在安息日那天，门徒路过麦地掐了麦穗，法利赛人见状对耶稣提出什么质问？", opts: [{v:"a",t:"A. 他的门徒为何在安息日生火煮物？"},{v:"b",t:"B. 看哪，他们在安息日为什么作不可作的事呢？"},{v:"c",t:"C. 他和税吏罪人在安息日吃喝么？"},{v:"d",t:"D. 为何在安息日不洗手？"}], ans: "b", desc: "可 2:24 他们在安息日为什么作不可作的事呢？" },
-  { id: "c2_mc11", type: "radio", title: "【第二章主线排序】请按经文先后顺序排列：A. 安息日掐麦穗 B. 医治瘫子 C. 呼召利未 D. 禁食答辩", opts: [{v:"a", t:"A. B → C → D → A"},{v:"b", t:"B. B → D → C → A"},{v:"c", t:"C. C → B → D → A"},{v:"d", t:"D. A → B → C → D"}], ans: "a", desc: "口诀：瘫子(2:1) → 利未(2:13) → 禁食(2:18) → 安息日掐麦穗(2:23)。" },
-  { id: "c2_mc12", type: "radio", title: "【瘫子医治过程】请排列先后顺序：A. 耶稣说「起来」 B. 拆开房顶 C. 瘫子起来 D. 把瘫子缒下来", opts: [{v:"a", t:"A. B → D → A → C"},{v:"b", t:"B. D → B → A → C"},{v:"c", t:"C. B → A → D → C"},{v:"d", t:"D. A → B → C → D"}], ans: "a", desc: "拆房顶(2:4) → 缒下褥子(2:4) → 吩咐起来(2:11) → 瘫子起来(2:12)。" },
+  { id: "c2_mc2", type: "radio", title: "耶稣呼召利未的时候，利未正在：", opts: [{v:"a",t:"A. 海边捕鱼"},{v:"b",t:"B. 船上补网"},{v:"c",t:"C. 税关坐着"},{v:"d",t:"D. 会堂里听道"}], ans: "c", desc: "可 2:14 看见亚勒腓的儿子利未坐在税关上。" },
+  { id: "c2_mc3", type: "radio", title: "大卫在饥饿时进入神的殿，吃了哪种本只有祭司才可以吃的饼？", opts: [{v:"a",t:"A. 陈设饼"},{v:"b",t:"B. 逾越节饼"},{v:"c",t:"C. 大麦饼"},{v:"d",t:"D. 无酵饼"}], ans: "a", desc: "可 2:26 吃了陈设饼。" },
+  { id: "c2_mc4", type: "radio", title: "关于新酒的比喻，耶稣指出新酒必须装在：", opts: [{v:"a",t:"A. 旧皮袋"},{v:"b",t:"B. 新皮袋"},{v:"c",t:"C. 陶制瓦罐"},{v:"d",t:"D. 木桶"}], ans: "b", desc: "可 2:22 惟独把新酒装在新皮袋里。" },
+  { id: "c2_mc5", type: "radio", title: "【第二章主线排序】请按经文先后顺序排列：A. 安息日掐麦穗 B. 医治瘫子 C. 呼召利未 D. 禁食答辩", opts: [{v:"a", t:"A. B → C → D → A"},{v:"b", t:"B. B → D → C → A"},{v:"c", t:"C. C → B → D → A"},{v:"d", t:"D. A → B → C → D"}], ans: "a", desc: "瘫子(2:1) → 利未(2:13) → 禁食(2:18) → 掐麦穗(2:23)。" },
 
   // ---【第3章 选择/排序题】---
-  { id: "c3_mc1", type: "radio", title: "马可福音第 3 章开始时，耶稣进入哪里？", opts: [{v:"a",t:"A. 圣殿"},{v:"b",t:"B. 会堂"},{v:"c",t:"C. 伯利恒"},{v:"d",t:"D. 旷野"}], ans: "b", desc: "可 3:1 耶稣又进了会堂。" },
-  { id: "c3_mc2", type: "radio", title: "会堂里有一个人的什么部位枯干了？", opts: [{v:"a",t:"A. 右脚"},{v:"b",t:"B. 左脚"},{v:"c",t:"C. 一只手"},{v:"d",t:"D. 一只眼睛"}], ans: "c", desc: "可 3:1 在那里有一个人枯干了一只手。" },
-  { id: "c3_mc3", type: "radio", title: "法利赛人窥探耶稣，是为了什么？", opts: [{v:"a",t:"A. 要请耶稣吃饭"},{v:"b",t:"B. 要听耶稣讲道"},{v:"c",t:"C. 要看耶稣是否在安息日医治人，好控告祂"},{v:"d",t:"D. 要请耶稣离开会堂"}], ans: "c", desc: "可 3:2 窥探耶稣在安息日医治不医治，意思是要控告他。" },
-  { id: "c3_mc4", type: "radio", title: "耶稣看见周围的人时，是什么反应？", opts: [{v:"a",t:"A. 喜乐"},{v:"b",t:"B. 惊讶"},{v:"c",t:"C. 怒目周围看他们，又为他们的心刚硬忧愁"},{v:"d",t:"D. 转身离开"}], ans: "c", desc: "可 3:5 怒目周围看他们，又为他们的心刚硬忧愁。" },
-  { id: "c3_mc5", type: "radio", title: "法利赛人出去以后，与谁商议要怎样除灭耶稣？", opts: [{v:"a",t:"A. 撒都该人"},{v:"b",t:"B. 希律党的人"},{v:"c",t:"C. 文士"},{v:"d",t:"D. 祭司长"}], ans: "b", desc: "可 3:6 同希律党的人商议怎样可以除灭耶稣。" },
-  { id: "c3_mc6", type: "radio", title: "大批群众跟随耶稣，以下哪一个地方没有出现在马可 3:7–8 的群众来源中？", opts: [{v:"a",t:"A. 犹太"},{v:"b",t:"B. 耶路撒冷"},{v:"c",t:"C. 撒玛利亚"},{v:"d",t:"D. 推罗"}], ans: "c", desc: "七大地区为加利利、犹太、耶路撒冷、以土买、约旦河外、推罗、西顿；无撒玛利亚。" },
-  { id: "c3_mc7", type: "radio", title: "为什么耶稣吩咐门徒叫一只小船伺候着？", opts: [{v:"a",t:"A. 因为祂要渡海"},{v:"b",t:"B. 因为祂要离开加利利"},{v:"c",t:"C. 因为人多，恐怕他们拥挤祂"},{v:"d",t:"D. 因为天气不好"}], ans: "c", desc: "可 3:9 因为人多，恐怕他们拥挤他。" },
-  { id: "c3_mc8", type: "radio", title: "耶稣在山上设立十二个人，首先的目的是什么？", opts: [{v:"a",t:"A. 叫他们管理群众"},{v:"b",t:"B. 要他们常和自己同在"},{v:"c",t:"C. 叫他们建立会堂"},{v:"d",t:"D. 叫他们掌管钱财"}], ans: "b", desc: "可 3:14 要他们常和自己同在，也要差他们去传道。" },
-  { id: "c3_mc9", type: "radio", title: "耶稣给谁取名叫「半尼其」（雷子）？（多选）", opts: [{v:"a",t:"A. 西门"},{v:"b",t:"B. 雅各"},{v:"c",t:"C. 安得烈"},{v:"d",t:"D. 约翰"}], ans: ["b","d"], desc: "可 3:17 西庇太的儿子雅各和约翰取名半尼其。" },
-  { id: "c3_mc10", type: "radio", title: "在马可福音第 3 章中，谁说耶稣「癫狂了」（疯了）？", opts: [{v:"a",t:"A. 门徒"},{v:"b",t:"B. 罗马兵丁"},{v:"c",t:"C. 耶稣的亲属（家人）"},{v:"d",t:"D. 拿撒勒的民众"}], ans: "c", desc: "可 3:21 耶稣的亲属听见要拉住他，因为他们说他癫狂了。" },
-  { id: "c3_mc11", type: "radio", title: "耶稣说世人一切的罪都可得赦免，唯独凡亵渎什么却永不得赦免？", opts: [{v:"a",t:"A. 上帝"},{v:"b",t:"B. 天国"},{v:"c",t:"C. 先知"},{v:"d",t:"D. 圣灵"}], ans: "d", desc: "可 3:29 凡亵渎圣灵的，却永不得赦免。" },
-  { id: "c3_mc12", type: "radio", title: "【人物与言论配对陷阱】①家人 ②文士 ③污鬼，分别对应什么说法？<br>a.「他是被别西卜附着」 b.「你是神的儿子」 c.「他癫狂了」", opts: [{v:"a",t:"A. ①a, ②b, ③c"},{v:"b",t:"B. ①c, ②a, ③b"},{v:"c",t:"C. ①b, ②c, ③a"},{v:"d",t:"D. ①c, ②b, ③a"}], ans: "b", desc: "家人说癫狂，文士说别西卜，污鬼说神的儿子。" },
-  { id: "c3_mc13", type: "radio", title: "【事件排序】请按马可福音第 3 章事件发展排列先后：<br>A. 法利赛人与希律党商议除灭耶稣 B. 耶稣医治枯干的手 C. 大批群众来到海边 D. 设立十二使徒", opts: [{v:"a", t:"A. B → A → C → D"},{v:"b", t:"B. B → C → A → D"},{v:"c", t:"C. A → B → C → D"},{v:"d", t:"D. C → B → A → D"}], ans: "a", desc: "医枯手(3:1) → 商议除灭(3:6) → 群众退海边(3:7) → 设立使徒(3:13)。" },
-  { id: "c3_mc14", type: "radio", title: "【比喻逻辑排序】请按照经文逻辑出现顺序排列：<br>A. 「一国自相纷争」 B. 「一家自相纷争」 C. 「撒但自相攻打纷争」 D. 「捆绑壮士」", opts: [{v:"a", t:"A. A → B → C → D"},{v:"b", t:"B. B → A → C → D"},{v:"c", t:"C. A → C → B → D"},{v:"d", t:"D. D → A → B → C"}], ans: "a", desc: "国(3:24) → 家(3:25) → 撒但(3:26) → 壮士(3:27)。" },
+  { id: "c3_mc1", type: "radio", title: "会堂里有一个人的什么部位枯干了？", opts: [{v:"a",t:"A. 右脚"},{v:"b",t:"B. 左脚"},{v:"c",t:"C. 一只手"},{v:"d",t:"D. 一只眼睛"}], ans: "c", desc: "可 3:1 在那里有一个人枯干了一只手。" },
+  { id: "c3_mc2", type: "radio", title: "法利赛人出去以后，与谁商议要怎样除灭耶稣？", opts: [{v:"a",t:"A. 撒都该人"},{v:"b",t:"B. 希律党的人"},{v:"c",t:"C. 文士"},{v:"d",t:"D. 祭司长"}], ans: "b", desc: "可 3:6 同希律党的人商议怎样可以除灭耶稣。" },
+  { id: "c3_mc3", type: "radio", title: "为什么耶稣吩咐门徒叫一只小船伺候着？", opts: [{v:"a",t:"A. 因为祂要渡海"},{v:"b",t:"B. 因为祂要离开加利利"},{v:"c",t:"C. 因为人多，恐怕他们拥挤祂"},{v:"d",t:"D. 因为天气不好"}], ans: "c", desc: "可 3:9 因为人多，恐怕他们拥挤他。" },
+  { id: "c3_mc4", type: "radio", title: "耶稣给谁取名叫「半尼其」（雷子）？（多选）", opts: [{v:"a",t:"A. 西门"},{v:"b",t:"B. 雅各"},{v:"c",t:"C. 安得烈"},{v:"d",t:"D. 约翰"}], ans: ["b","d"], desc: "可 3:17 西庇太的儿子雅各和约翰取名半尼其。" },
+  { id: "c3_mc5", type: "radio", title: "耶稣说世人一切的罪都可得赦免，唯独凡亵渎什么却永不得赦免？", opts: [{v:"a",t:"A. 上帝"},{v:"b",t:"B. 天国"},{v:"c",t:"C. 先知"},{v:"d",t:"D. 圣灵"}], ans: "d", desc: "可 3:29 凡亵渎圣灵的，却永不得赦免。" },
+  { id: "c3_mc6", type: "radio", title: "【人物与言论配对陷阱】①家人 ②文士 ③污鬼，分别对应什么说法？<br>a.「他是被别西卜附着」 b.「你是神的儿子」 c.「他癫狂了」", opts: [{v:"a",t:"A. ①a, ②b, ③c"},{v:"b",t:"B. ①c, ②a, ③b"},{v:"c",t:"C. ①b, ②c, ③a"},{v:"d",t:"D. ①c, ②b, ③a"}], ans: "b", desc: "家人说癫狂，文士说别西卜，污鬼说神的儿子。" },
 
-  // ---【是非判断题库（第1、2、3章全量是非题）】---
+  // ---【第4章 选择/排序题 (完全导入自 Mark Chapter 4 Quiz.docx)】---
+  { id: "c4_mc1", type: "radio", title: "耶稣在马可福音 4 章开始讲撒种的比喻时，在哪里教训众人？", opts: [{v:"a",t:"A. 会堂里"},{v:"b",t:"B. 山上"},{v:"c",t:"C. 海边"},{v:"d",t:"D. 旷野"}], ans: "c", desc: "可 4:1 耶稣又在海边教训人。" },
+  { id: "c4_mc2", type: "radio", title: "因为众人甚多，耶稣上了一只船坐下；众人在哪里？", opts: [{v:"a",t:"A. 船上"},{v:"b",t:"B. 海边的岸上"},{v:"c",t:"C. 山坡上"},{v:"d",t:"D. 会堂里"}], ans: "b", desc: "可 4:1 耶稣上船坐下，众人都靠近海，在岸上。" },
+  { id: "c4_mc3", type: "radio", title: "撒种的人所撒的是什么？", opts: [{v:"a",t:"A. 麦子"},{v:"b",t:"B. 律法"},{v:"c",t:"C. 道"},{v:"d",t:"D. 福音书"}], ans: "c", desc: "可 4:14 撒种之人所撒的就是道。" },
+  { id: "c4_mc4", type: "radio", title: "撒在石头地上的种子为什么发苗最快却不能长久？", opts: [{v:"a",t:"A. 没有水"},{v:"b",t:"B. 没有根"},{v:"c",t:"C. 没有阳光"},{v:"d",t:"D. 被飞鸟吃了"}], ans: "b", desc: "可 4:5-6 因为没有根，就枯干了。" },
+  { id: "c4_mc5", type: "radio", title: "撒在荆棘里的种子被什么挤住了，以致不能结实？", opts: [{v:"a",t:"A. 世上的思虑、钱财的迷惑和别样的私欲"},{v:"b",t:"B. 飞鸟、太阳和石头"},{v:"c",t:"C. 暴风、大雨和旱灾"},{v:"d",t:"D. 仇敌与魔鬼"}], ans: "a", desc: "可 4:19 世上的思虑、钱财的迷惑，和别样的私欲把道挤住了。" },
+  { id: "c4_mc6", type: "radio", title: "撒在好地上的，结实有多少倍？", opts: [{v:"a",t:"A. 十倍、二十倍、三十倍"},{v:"b",t:"B. 三十倍、六十倍、一百倍"},{v:"c",t:"C. 四十倍、六十倍、一百倍"},{v:"d",t:"D. 三十倍、五十倍、一百倍"}], ans: "b", desc: "可 4:20 有三十倍的，有六十倍的，有一百倍的。" },
+  { id: "c4_mc7", type: "radio", title: "耶稣在平静风浪之前，在船尾做什么？", opts: [{v:"a",t:"A. 祷告"},{v:"b",t:"B. 教训门徒"},{v:"c",t:"C. 枕着枕头睡觉"},{v:"d",t:"D. 看着海面"}], ans: "c", desc: "可 4:38 耶稣在船尾上，枕着枕头睡觉。" },
+  { id: "c4_mc8", type: "radio", title: "风浪平静以后，耶稣对门徒说了什么？", opts: [{v:"a",t:"A. “你们为什么不祷告？”"},{v:"b",t:"B. “为什么胆怯？你们还没有信心吗？”"},{v:"c",t:"C. “你们为什么离开我？”"},{v:"d",t:"D. “你们要刚强壮胆。”"}], ans: "b", desc: "可 4:40 耶稣对他们说：“为什么胆怯？你们还没有信心吗？”" },
+  { id: "c4_mc9", type: "radio", title: "在马可福音 4:30–32，耶稣用什么比喻神的国，虽比百种都小，长大后却长出大枝？", opts: [{v:"a",t:"A. 葡萄树"},{v:"b",t:"B. 芥菜种"},{v:"c",t:"C. 麦子"},{v:"d",t:"D. 无花果树"}], ans: "b", desc: "可 4:31 好像一粒芥菜种。" },
+  { id: "c4_mc10", type: "radio", title: "【陷阱题】门徒在风浪中叫醒耶稣时，原话称呼与内容是什么？", opts: [{v:"a",t:"A. “夫子！我们害怕，你不顾我们吗？”"},{v:"b",t:"B. “夫子！我们丧命，你不顾吗？”"},{v:"c",t:"C. “主啊！我们要灭亡了，求你救我们！”"},{v:"d",t:"D. “夫子！风浪太大了，我们怎么办？”"}], ans: "b", desc: "可 4:38 叫醒了他，说：“夫子！我们丧命，你不顾吗？”" },
+  { id: "c4_mc11", type: "radio", title: "【土地出现顺序】请按照经文出现的先后次序排列四种土地：<br>① 好地 ② 石头地 ③ 路旁 ④ 荆棘", opts: [{v:"a", t:"A. ③ → ② → ④ → ①"},{v:"b", t:"B. ③ → ④ → ② → ①"},{v:"c", t:"C. ② → ③ → ④ → ①"},{v:"d", t:"D. ③ → ② → ① → ④"}], ans: "a", desc: "路旁(4:4) → 石头地(4:5) → 荆棘(4:7) → 好地(4:8)。" },
+  { id: "c4_mc12", type: "radio", title: "【作物生长三阶】请按照种子生长的自然次序排列：<br>① 穗上结成饱满的子粒 ② 地生苗 ③ 长穗 ④ 发芽渐长", opts: [{v:"a", t:"A. ② → ④ → ③ → ①"},{v:"b", t:"B. ④ → ② → ③ → ①"},{v:"c", t:"C. ② → ③ → ④ → ①"},{v:"d", t:"D. ④ → ③ → ② → ①"}], ans: "a", desc: "地生苗(4:28) → 发芽渐长(4:27) → 长穗(4:28) → 结成饱满子粒(4:28)。" },
+  { id: "c4_mc13", type: "radio", title: "【第4章各大事件排序】请按照经文先后顺序排列：<br>① 灯的比喻 ② 撒种的比喻 ③ 芥菜种的比喻 ④ 种子自己生长的比喻 ⑤ 平静风浪", opts: [{v:"a", t:"A. ② → ① → ④ → ③ → ⑤"},{v:"b", t:"B. ② → ④ → ① → ③ → ⑤"},{v:"c", t:"C. ① → ② → ④ → ③ → ⑤"},{v:"d", t:"D. ② → ① → ③ → ④ → ⑤"}], ans: "a", desc: "撒种(4:1) → 灯(4:21) → 种子生长(4:26) → 芥菜种(4:30) → 平静风浪(4:35)。" },
+
+  // ---【是非题库 (第1-4章全量精选是非)】---
   { id: "c1_tf1", type: "tf", title: "耶稣稍往前走，又见西庇太的儿子雅各和雅各的兄弟约翰在岸上补网。", ans: "F", desc: "错。可 1:19 是在“船上补网”，不是岸上。" },
-  { id: "c1_tf2", type: "tf", title: "有一个长大麻风的来求耶稣，向他跪下，说：“你若肯，必能叫我洁净了。”耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”", ans: "T", desc: "对。可 1:40-41 经文完全吻合。" },
-  { id: "c1_tf3", type: "tf", title: "约翰下监以后，耶稣来到迦百农，宣传神的福音，说：“日期满了，神的国近了。你们当悔改，信福音！”", ans: "F", desc: "错。可 1:14 是来到“加利利”，非迦百农。" },
-  { id: "c1_tf4", type: "tf", title: "耶稣从水里一上来，就看见天裂开了，圣灵仿佛鸽子降在他身上。", ans: "T", desc: "对。可 1:10 经文完全吻合。" },
-  { id: "c1_tf5", type: "tf", title: "次日早晨天未亮的时候，耶稣起来，到旷野地方去，在那里祷告。", ans: "T", desc: "对。可 1:35 经文完全吻合。" },
-  { id: "c1_tf6", type: "tf", title: "撒旦就把耶稣催到旷野里去。他在旷野四十天，受撒旦的试探，并与野兽同在一处。", ans: "F", desc: "错。可 1:12 是“圣灵”催促耶稣到旷野，非撒旦。" },
-  { id: "c1_tf7", type: "tf", title: "我是用水给你们施洗，他却要用圣水给你们施洗。", ans: "F", desc: "错。可 1:8 是“用圣灵给你们施洗”，非圣水。" },
-  { id: "c1_tf8", type: "tf", title: "马可福音是四福音书中，最迟写成的并且也是最短的一卷。", ans: "F", desc: "错。马可福音是四福音中“最早写成”且最短的一卷。" },
-  { id: "c1_tf9", type: "tf", title: "他喊叫说：“拿撒勒人耶稣，我们与你有什么相干？你来灭我们吗？我知道你是谁，乃是神的爱子。”", ans: "F", desc: "错。可 1:24 污鬼称“乃是神的圣者”，非神的爱子。" },
-  { id: "c1_tf10", type: "tf", title: "正如先知以赛亚书上记着说：看哪，我要差遣我的使者在你前面，预备道路。以上经文引自以赛亚书。", ans: "F", desc: "错。该句出自《玛拉基书》3:1。" },
-
-  { id: "c2_tf1", type: "tf", title: "带瘫子到耶稣那里的是四个人。", ans: "T", desc: "对。可 2:3 明确记载四个人抬来。" },
-  { id: "c2_tf2", type: "tf", title: "因为人太多，四个人从窗户把瘫子送进去。", ans: "F", desc: "错。是拆了房顶缒下来的。" },
-  { id: "c2_tf3", type: "tf", title: "耶稣首先对瘫子说：「起来，拿你的褥子。」", ans: "F", desc: "错。耶稣首先说的是「小子，你的罪赦了」。" },
-  { id: "c2_tf4", type: "tf", title: "利未是一个加利利海边的打鱼渔夫。", ans: "F", desc: "错。利未是坐在税关上的税吏。" },
-  { id: "c2_tf5", type: "tf", title: "耶稣说新酒应该装在旧皮袋里，新布缝在旧衣上。", ans: "F", desc: "错。新酒必须装在新皮袋里。" },
-  { id: "c2_tf6", type: "tf", title: "耶稣说人子也是安息日的主。", ans: "T", desc: "对。可 2:28 经文完全吻合。" },
-  { id: "c2_tf7", type: "tf", title: "在马可福音第二章中，人是为安息日设立的，安息日不是为人设立的。", ans: "F", desc: "错。可 2:27 明确宣布：安息日是为人设立的，人不是为安息日设立的。" },
-  { id: "c2_tf8", type: "tf", title: "门徒雅各和约翰的父亲是亚勒腓。", ans: "F", desc: "错。雅各和约翰的父亲是西庇太；利未才是亚勒腓的儿子。" },
-  { id: "c2_tf9", type: "tf", title: "耶稣回应质疑与税吏罪人吃喝的文士时，用了“祭司”的身份比喻自己。", ans: "F", desc: "错。耶稣用了“医生”的比喻（康健的人用不着医生）。" },
-
+  { id: "c1_tf2", type: "tf", title: "有一个长大麻风的来求耶稣，向他跪下，说：“你若肯，必能叫我洁净了。”耶稣动了慈心，伸手摸他说：“我肯，你洁净了吧！”", ans: "T", desc: "对。可 1:40-41 经文完全吻合。" },
+  { id: "c1_tf3", type: "tf", title: "撒旦就把耶稣催到旷野里去。他在旷野四十天，受撒旦的试探，并与野兽同在一处。", ans: "F", desc: "错。可 1:12 是“圣灵”催促耶稣到旷野，非撒旦。" },
+  { id: "c2_tf1", type: "tf", title: "带瘫子到耶稣那里的是四个人，因为人多拆了房顶缒下来。", ans: "T", desc: "对。可 2:3-4 经文完全吻合。" },
+  { id: "c2_tf2", type: "tf", title: "在马可福音第二章中，人是为安息日设立的，安息日不是为人设立的。", ans: "F", desc: "错。可 2:27 明确宣布：安息日是为人设立的，人不是为安息日设立的。" },
+  { id: "c2_tf3", type: "tf", title: "门徒雅各和约翰的父亲是亚勒腓。", ans: "F", desc: "错。雅各和约翰的父亲是西庇太；利未才是亚勒腓的儿子。" },
   { id: "c3_tf1", type: "tf", title: "耶稣是在安息日进入会堂，并在那里医治了一个手枯干的人。", ans: "T", desc: "对。可 3:1-2 经文完全吻合。" },
-  { id: "c3_tf2", type: "tf", title: "法利赛人和希律党一开始就支持耶稣，并热心协助祂医治病人。", ans: "F", desc: "错。法利赛人同希律党商议怎样除灭耶稣。" },
-  { id: "c3_tf3", type: "tf", title: "污鬼无论何时看见耶稣，就俯伏在祂面前，喊着说：“你是神的儿子。”", ans: "T", desc: "对。可 3:11 经文完全吻合。" },
-  { id: "c3_tf4", type: "tf", title: "耶稣允许污鬼把祂是谁公开告诉所有人，借此宣扬神的名声。", ans: "F", desc: "错。可 3:12 耶稣屡次严严地嘱咐它们不要把祂显露出来。" },
-  { id: "c3_tf5", type: "tf", title: "耶稣设立十二使徒，要他们常和自己同在，也要差他们去传道，并给他们权柄赶鬼。", ans: "T", desc: "对。可 3:14-15 经文完全吻合。" },
-  { id: "c3_tf6", type: "tf", title: "马可福音第 3 章中，耶稣的亲属认为祂癫狂了（疯了），出来要拉住祂。", ans: "T", desc: "对。可 3:21 亲属说他癫狂了，要拉住他。" },
-  { id: "c3_tf7", type: "tf", title: "从耶路撒冷下来的祭司长诬蔑说：耶稣是靠着神的能力赶鬼。", ans: "F", desc: "错。可 3:22 是从耶路撒冷下来的“文士”，诬蔑祂靠鬼王赶鬼。" },
-  { id: "c3_tf8", type: "tf", title: "耶稣说，凡遵行神旨意的人，就是祂的弟兄、姐妹和母亲了。", ans: "T", desc: "对。可 3:35 经文完全吻合。" },
-  { id: "c3_tf9", type: "tf", title: "西庇太的儿子雅各和雅各的兄弟约翰，耶稣给这两个人起名叫所其尼。", ans: "F", desc: "错。起名叫“半尼其”（Boanerges），即雷子的意思。" },
-  { id: "c3_tf10", type: "tf", title: "大批群众听见耶稣所作的大事，就从包括撒玛利亚在内的各地来到祂那里。", ans: "F", desc: "错。群众来源七大地区中没有撒玛利亚。" }
+  { id: "c3_tf2", type: "tf", title: "马可福音第 3 章中，耶稣的亲属认为祂癫狂了（疯了），出来要拉住祂。", ans: "T", desc: "对。可 3:21 亲属说他癫狂了，要拉住他。" },
+  { id: "c3_tf3", type: "tf", title: "西庇太的儿子雅各和雅各的兄弟约翰，耶稣给这两个人起名叫所其尼。", ans: "F", desc: "错。起名叫“半尼其”（Boanerges），即雷子的意思。" },
+  { id: "c4_tf1", type: "tf", title: "耶稣讲撒种比喻的时候，是站在岸上面对船上的众人讲道。", ans: "F", desc: "错。可 4:1 是耶稣上船坐下，众人在海边的岸上。" },
+  { id: "c4_tf2", type: "tf", title: "撒在石头地上的人听了道，立刻欢喜领受，但心里没有根，遇见患难逼迫就跌倒。", ans: "T", desc: "对。可 4:16-17 经文完全吻合。" },
+  { id: "c4_tf3", type: "tf", title: "撒在荆棘里的种子，是被世上的思虑、钱财的迷惑和别样的私欲挤住，以致不能结实。", ans: "T", desc: "对。可 4:19 经文完全吻合。" },
+  { id: "c4_tf4", type: "tf", title: "在种子自己生长的比喻中，撒种的人完全知道种子为什么能够发芽渐长。", ans: "F", desc: "错。可 4:27 明确记载“那人却不晓得如何这样”。" },
+  { id: "c4_tf5", type: "tf", title: "平静风浪以后，门徒彼此说：“这到底是谁，连风和海也听从他了？”", ans: "T", desc: "对。可 4:41 经文完全吻合。" }
 ];
 
-// 全局混淆备用词汇池（用于动态词库抽样时补充干扰项）
-const DISTRACTOR_WORDS = [
-  "撒玛利亚", "大祭司", "法利赛人", "文士", "撒都该人", "伯利恒", "拿撒勒", "陈设饼", 
-  "彼得", "安得烈", "雅各", "约翰", "西门", "希律党", "亚勒腓", "小船"
-];
+// 核心功能：根据本次抽中的填空题，动态精准过滤出最相关的 Answer Pool
+const DISTRACTOR_POOL = ["葡萄树", "箱子", "桌子", "网", "岸上", "五倍", "船头", "祭司长", "撒玛利亚", "伯利恒"];
+
+function generateDynamicAnswerPool(selectedQuestions) {
+  const answerSet = new Set();
+  
+  // 1. 抓取本次抽中的所有填空题答案
+  selectedQuestions.forEach(q => {
+    if (q.type === "fill" && q.blanks) {
+      q.blanks.forEach(b => {
+        const primaryAns = b.ans.split("|")[0].trim();
+        if (primaryAns) answerSet.add(primaryAns);
+      });
+    }
+  });
+
+  // 2. 补充 4-6 个混淆词，控制总词量在 18-24 个之间，高度聚焦精准
+  const shuffledDistractors = shuffleArray(DISTRACTOR_POOL);
+  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDistractors[i]);
+  }
+
+  return shuffleArray(Array.from(answerSet));
+}
 
 let activeMatchSet = []; 
 let activeOtherSet = []; 
-let activeDynamicWordPool = []; // 当前抽题专属匹配的答案词库
+let activeDynamicWordPool = []; 
 let activeBlankId = null;
-const STORAGE_KEY = "mark_all_chapters_strict50_dynamicpool_v3";
+const STORAGE_KEY = "mark_all_chapters_strict50_ch1to4_v4";
 
 function shuffleArray(arr) {
   const array = [...arr];
@@ -375,31 +369,6 @@ function shuffleArray(arr) {
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
-}
-
-// 核心优化：依据当前实际抽中的填空题，动态生成精准 Answer Pool
-function generateDynamicAnswerPool(selectedQuestions) {
-  const answerSet = new Set();
-
-  // 1. 抽取当前所有填空题的标准答案词汇
-  selectedQuestions.forEach(q => {
-    if (q.type === "fill" && q.blanks) {
-      q.blanks.forEach(b => {
-        // 分割可能存在的备选同义词（如 "神旨意|神的旨意" 取第一项）
-        const primaryAns = b.ans.split("|")[0].trim();
-        if (primaryAns) answerSet.add(primaryAns);
-      });
-    }
-  });
-
-  // 2. 随机补充 4-6 个混淆干扰词，保持考试辨析挑战性
-  const shuffledDistractors = shuffleArray(DISTRACTOR_WORDS);
-  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 24; i++) {
-    answerSet.add(shuffledDistractors[i]);
-  }
-
-  // 3. 彻底打乱词库
-  return shuffleArray(Array.from(answerSet));
 }
 
 function initQuiz(forceRegenerate = false) {
@@ -416,16 +385,16 @@ function initQuiz(forceRegenerate = false) {
     } catch(e) { console.error(e); }
   }
 
-  // 1. 跨章节配对池随机混抽 7 组对子 (题号 1 - 7)
+  // 1. 跨章节配对池混抽 7 组对子 (严格占题号 1 - 7)
   const shuffledPairs = shuffleArray(ALL_MATCHING_PAIRS);
   activeMatchSet = shuffledPairs.slice(0, 7);
 
-  // 2. 从第1、2、3章全量单题池中混抽 43 道单题 (题号 8 - 50)
+  // 2. 从全量单题池中混抽 43 道单题 (严格占题号 8 - 50)
   const shuffledOthers = shuffleArray(ALL_SINGLE_QUESTIONS);
   const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
   activeOtherSet = shuffledOthers.slice(0, 43).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
 
-  // 3. 针对本次抽中的题目，动态生成精准匹配的 Answer Pool
+  // 3. 动态精准过滤本次填空题的 Answer Pool
   activeDynamicWordPool = generateDynamicAnswerPool(activeOtherSet);
 
   saveQuizState({});
@@ -433,7 +402,7 @@ function initQuiz(forceRegenerate = false) {
 }
 
 function regenerateQuiz() {
-  if (confirm("确定要重新随机混抽 50 道跨章节题目（并智能刷新专属词库）吗？")) {
+  if (confirm("确定要重新随机混抽 50 道跨章节测验题目（并靶向刷新专属词库）吗？")) {
     localStorage.removeItem(STORAGE_KEY);
     initQuiz(true);
   }
@@ -485,7 +454,7 @@ function renderQuizUI() {
       <tr>
         <td class="col-num"><strong>${qNum}.</strong> <span style="font-size:12px; color:#2563eb; font-weight:bold;">[${p.ch}]</span> ${p.left}</td>
         <td class="col-input">
-          <select class="match-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
+          <select class="match-select match-row-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
             <option value="">-</option>
             <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
           </select>
@@ -500,7 +469,7 @@ function renderQuizUI() {
   matchItem.innerHTML = matchTableHtml;
   container.appendChild(matchItem);
 
-  // ---------------- PART 2: 剩余 43 道题 (第 8 - 50 题) ----------------
+  // ---------------- PART 2: 剩余 43 道题目 (第 8 - 50 题) ----------------
   const subGroups = {
     "fill": { title: "第二部分：填空题", desc: "请根据下方专为此套题目匹配的词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
     "radio": { title: "第三部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
@@ -526,13 +495,13 @@ function renderQuizUI() {
     `;
     container.appendChild(secHeader);
 
-    // 智能过滤后的 Answer Pool 专属置顶呈现
+    // 智能精准过滤后的 Answer Pool 专属呈现
     if (typeKey === "fill") {
       const bankCard = document.createElement("div");
       bankCard.className = "word-bank-box";
       bankCard.innerHTML = `
         <div class="word-bank-title">
-          <span>💡 本次考题专属匹配词库 (Answer Pool)：点击词汇填入，点击空格反选清空</span>
+          <span>💡 动态精准词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
           <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
         </div>
         <div class="word-chips" id="word-chips-container"></div>
