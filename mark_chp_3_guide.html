@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第三章 圣经比赛备战指南与测验</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .adaptive-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .adaptive-container { padding: 12px 10px 50px 10px; }
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 24px 18px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
+
+  /* 导航栏 */
+  .nav-tabs {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    background: transparent;
+    padding: 11px 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  /* 控制台卡片 */
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .stat-group { display: flex; gap: 18px; align-items: center; }
+  .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 18px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    margin: 0 0 14px 0;
+  }
+
+  .section-h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 20px 0 10px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .section-h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 12px 0 6px 0;
+  }
+
+  .highlight-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #166534;
+  }
+  .trap-box {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+  }
+  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
+
+  .notice-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #991b1b;
+  }
+
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .info-table th, .info-table td {
+    border: 1px solid var(--border);
+    padding: 9px 12px;
+    text-align: left;
+  }
+  .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  /* 题型分类标题 */
+  .type-section-header {
+    background: #f1f5f9;
+    border-left: 5px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 24px 0 16px 0;
+  }
+  .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
+  .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
+
+  /* 填空题专属词库 Pool */
+  .word-bank-box {
+    background: #eff6ff;
+    border: 2px dashed #93c5fd;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 12px 0 18px 0;
+  }
+  .word-bank-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip {
+    background: #ffffff;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .word-chip:hover, .word-chip:active {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* 题目块 */
+  .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    background: #ffffff;
+  }
+  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* 填空输入框 */
+  .blank-input {
+    border: none;
+    border-bottom: 2.5px solid #64748b;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #0f172a;
+    text-align: center;
+    margin: 0 4px;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .blank-input:focus, .blank-input.active-blank {
+    outline: none;
+    border-bottom-color: var(--accent);
+    background: #dbeafe;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+  }
+  .blank-input.has-val {
+    background: #e0f2fe;
+    color: #0369a1;
+    border-bottom-color: #0284c7;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="adaptive-container">
+  <!-- 顶部返回主页导航条 -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+    <a href="index.html" style="display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); padding: 7px 13px; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none;">🏠 返回主页</a>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
+  </div>
+
+  <div class="header">
+    <h1>《马可福音》第三章 备战指南与测验</h1>
+    <p>选立使徒与天国家族 ＋ 50 题题型分组抽测验</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 易混淆人物与矩阵</button>
+    <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
+  </div>
+
+  <!-- TAB 1: 备战指南大地图 -->
+  <div id="tab-guide" class="tab-content active">
+    <div class="card">
+      <div class="card-title">一、先掌握第 3 章的「大骨架」</div>
+      <table class="info-table">
+        <thead>
+          <tr><th>经文分段</th><th>内容要点</th><th>Quiz 关键词</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>3:1–6</td><td>安息日医治枯干的手</td><td>会堂、安息日、法利赛人、希律党</td></tr>
+          <tr><td>3:7–12</td><td>大批群众来到海边</td><td>加利利、犹太、耶路撒冷、以土买、约旦河外、推罗、西顿、小船</td></tr>
+          <tr><td>3:13–19</td><td>拣选设立十二使徒</td><td>山上、十二人、彼得、半尼其（雷子）、加略人犹大</td></tr>
+          <tr><td>3:20–30</td><td>别西卜事件与亵渎圣灵</td><td>家、文士、撒但赶撒但、一国一家、壮士、圣灵</td></tr>
+          <tr><td>3:31–35</td><td>母亲和弟兄来找耶稣</td><td>站在门外、周围坐着的人、遵行神旨意</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        <strong>🔥 考试秒定章节关键词：</strong><br>
+        「枯干的手」→ 3:1 ｜ 「半尼其 / 雷子」→ 3:17 ｜ 「别西卜」→ 3:22 ｜ 「捆绑壮士」→ 3:27 ｜ 「凡亵渎圣灵」→ 3:29 ｜ 「遵行神旨意」→ 3:35
+      </div>
+
+      <div class="section-h2">第一部分：3:1–6 安息日医治枯干的手</div>
+      <p>① <strong>病症细节</strong>：不是瘫子、不是麻风，而是<strong>一只枯干的手</strong>（3:1）。</p>
+      <p>② <strong>地点与时间</strong>：耶稣<strong>「又进了会堂」</strong>（不是第一次进），时间又是<strong>安息日</strong>。</p>
+      <p>③ <strong>法利赛人的窥探目的</strong>：并非关心病人，而是窥探耶稣在安息日医治不医治，<strong>好控告祂</strong>。</p>
+      <p>④ <strong>耶稣的灵魂发问</strong>：对众人说：<strong>「在安息日行善行恶，救命害命，哪样是可以的呢？」</strong>（众人都不作声）。</p>
+      <p>⑤ <strong>耶稣的神圣情感（极常考细节）</strong>：<strong>怒目周围看他们</strong>，又为他们的<strong>心刚硬而忧愁</strong>（怒 + 忧愁双重反应）。</p>
+      <p>⑥ <strong>敌对联盟的形成</strong>：法利赛人出去，立刻同<strong>希律党</strong>商议怎样可以<strong>除灭耶稣</strong>（注意：是希律党，不是撒都该人，也不是祭司长）。</p>
+
+      <div class="section-h2">第二部分：3:7–12 海边群众与小船</div>
+      <p>① <strong>群众来源七大地区（必背地名考点）</strong>：</p>
+      <div class="highlight-box">
+        <strong>🗺️ 地名七字诀：加—犹—耶—以—约—推—西</strong><br>
+        加利利、犹太、耶路撒冷、以土买、约旦河外、推罗、西顿（⚠️ 注意：名单中绝无“撒玛利亚”或“伯利恒”！）。
+      </div>
+      <p>② <strong>为何吩咐预备小船？</strong> 经文明确记载：<strong>因为人多，恐怕他们拥挤祂</strong>（3:9，不是为了渡海旅游，也不是为了在船上睡觉）。</p>
+      <p>③ <strong>污鬼的认信与耶稣的禁止</strong>：污鬼俯伏喊叫：<strong>「你是神的儿子！」</strong>耶稣严严地嘱咐它们<strong>不要把祂显露出来</strong>。</p>
+
+      <div class="section-h2">第三部分：3:13–19 设立十二使徒（超高频考区）</div>
+      <p>① <strong>地点与方式</strong>：耶稣<strong>上了山</strong>，随自己的意思叫人来。</p>
+      <p>② <strong>设立的三大目的</strong>：<strong>① 常和自己同在；② 差他们去传道；③ 给他们权柄赶鬼</strong>（口诀：同在 → 传道 → 赶鬼权柄；注意：没有“管理食物或账务”）。</p>
+      <p>③ <strong>十二使徒名录全景</strong>：</p>
+      <table class="info-table">
+        <thead><tr><th>使徒姓名</th><th>附加称呼 / 特征说明</th></tr></thead>
+        <tbody>
+          <tr><td>1. 西门</td><td>耶稣又给他起名叫<strong>彼得</strong></td></tr>
+          <tr><td>2. 雅各</td><td>西庇太的儿子；与约翰同被称为<strong>「半尼其」（雷子的意思）</strong></td></tr>
+          <tr><td>3. 约翰</td><td>雅各的兄弟；与雅各同被称为<strong>「半尼其」（雷子的意思）</strong></td></tr>
+          <tr><td>4. 安得烈</td><td>西门的兄弟</td></tr>
+          <tr><td>5. 腓力</td><td>使徒</td></tr>
+          <tr><td>6. 巴多罗买</td><td>使徒</td></tr>
+          <tr><td>7. 马太</td><td>即税吏利未</td></tr>
+          <tr><td>8. 多马</td><td>使徒</td></tr>
+          <tr><td>9. 雅各</td><td><strong>亚勒腓的儿子</strong>（注意：第二个雅各）</td></tr>
+          <tr><td>10. 达太</td><td>使徒</td></tr>
+          <tr><td>11. 西门</td><td><strong>奋锐党的西门</strong>（注意：第二个西门）</td></tr>
+          <tr><td>12. 加略人犹大</td><td><strong>就是卖耶稣的</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-h2">第四部分：3:20–30 别西卜辩论与亵渎圣灵</div>
+      <p>① <strong>耶稣进屋与家人的反应</strong>：耶稣进了一个屋子，众人聚集连饭也顾不得吃。<strong>祂的亲属（家人）听见就出来要拉住祂，因为他们说祂「癫狂了」</strong>（疯了）。</p>
+      <p>② <strong>耶路撒冷文士的恶毒诬蔑</strong>：从耶路撒冷下来的文士说：<strong>「祂是被别西卜附着；是靠着鬼王赶鬼。」</strong></p>
+      <p>③ <strong>耶稣的连环逻辑反驳</strong>：撒但怎能赶出撒但？<br>
+      • <strong>一国</strong>自相纷争，那国就站立不住；<br>
+      • <strong>一家</strong>自相纷争，那家就站立不住；<br>
+      • <strong>撒但</strong>若自相攻打纷争，他就站立不住，必要灭亡。</p>
+      <p>④ <strong>捆绑壮士比喻</strong>：没有人能进<strong>壮士</strong>家里抢夺他的家具，<strong>必先捆住那壮士</strong>，才可以抢夺他的家（3:27）。</p>
+      <p>⑤ <strong>最核心神学经文（永不得赦免的罪）</strong>：</p>
+      <div class="notice-box">
+        🔥 可 3:28–29「我实在告诉你们，世人一切的罪和一切亵渎的话都可得赦免；<strong>凡亵渎圣灵的，却永不得赦免，乃要担当永远的罪。</strong>」<br>
+        👉 <strong>耶稣说这话的原因</strong>（3:30）：是因为文士污蔑说「祂是被污鬼附着的」。
+      </div>
+
+      <div class="section-h2">第五部分：3:31–35 属灵家庭与神的旨意</div>
+      <p>① <strong>场景站位</strong>：耶稣的母亲和弟兄来，<strong>站在外边</strong>，打发人去叫祂。</p>
+      <p>② <strong>耶稣的宣告</strong>：看着周围坐着的人说：「看哪，我的母亲，我的弟兄。<strong>凡遵行神旨意的人，就是我的弟兄姐妹和母亲了。</strong>」</p>
+    </div>
+  </div>
+
+  <!-- TAB 2: 易混人物与陷阱 -->
+  <div id="tab-traps" class="tab-content">
+    <div class="card">
+      <div class="card-title">🧠 第三章极易混淆的关键人物与对比</div>
+      <table class="info-table">
+        <thead><tr><th>对比组</th><th>人物 A</th><th>人物 B</th><th>考点警示</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>两个西门</strong></td>
+            <td><strong>西门（彼得）</strong></td>
+            <td><strong>奋锐党的西门</strong></td>
+            <td>听到“奋锐党”立刻选第二个西门，不是彼得。</td>
+          </tr>
+          <tr>
+            <td><strong>两个雅各</strong></td>
+            <td><strong>西庇太的儿子雅各</strong>（雷子，约翰之兄）</td>
+            <td><strong>亚勒腓的儿子雅各</strong></td>
+            <td>听到“亚勒腓的儿子”是指第 9 位使徒雅各，勿与西庇太之子混淆。</td>
+          </tr>
+          <tr>
+            <td><strong>谁说了什么</strong></td>
+            <td><strong>耶稣的家人</strong>：“祂癫狂了！”</td>
+            <td><strong>耶路撒冷的文士</strong>：“祂被别西卜附着！”</td>
+            <td>家人说疯癫，文士指控被鬼王附着。</td>
+          </tr>
+          <tr>
+            <td><strong>谁与法利赛人联手</strong></td>
+            <td><strong>希律党</strong>（商议除灭耶稣）</td>
+            <td>不是文士，不是撒都该人</td>
+            <td>政治与宗教势力的异常结合。</td>
+          </tr>
+          <tr>
+            <td><strong>谁被称为半尼其</strong></td>
+            <td><strong>雅各与约翰</strong>（雷子）</td>
+            <td>不是彼得，不是全体门徒</td>
+            <td>半尼其专指西庇太两兄弟。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="notice-box">
+        <strong>🚨 第三章十大防中招陷阱：</strong><br>
+        1. 枯干手病人的动作是：<strong>站起来 → 伸出手来 → 手就复原了</strong>。<br>
+        2. 法利赛人商议除灭耶稣的对象是<strong>希律党</strong>（3:6）。<br>
+        3. 叫小船伺候的唯一原因是<strong>人多恐怕拥挤</strong>，不是为了上船讲道或渡海。<br>
+        4. 设立十二使徒是发生在<strong>山上</strong>，不是海边。<br>
+        5. 设立使徒的目的中<strong>绝没有“管理饭食或分派钱财”</strong>。<br>
+        6. 雅各和约翰的别名叫<strong>半尼其</strong>，意思是<strong>雷子</strong>。<br>
+        7. 说耶稣“癫狂了”的是<strong>亲属（家人）</strong>，站在门外找祂的是<strong>母亲和弟兄</strong>。<br>
+        8. 抢夺家具前必须先<strong>捆绑壮士</strong>。<br>
+        9. 唯一永不得赦免的罪是<strong>亵渎圣灵</strong>，因为文士说祂是被污鬼附着的。<br>
+        10. 属天亲属的定义标准是<strong>「遵行神旨意的人」</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 必背经文与口诀 -->
+  <div id="tab-verses" class="tab-content">
+    <div class="card">
+      <div class="card-title">第三章 6 处必须熟背经文</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>1. 马可 3:4</strong>「在安息日行善行恶，救命害命，哪样是可以的呢？」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>2. 马可 3:14–15</strong>「祂就设立十二个人，要他们常和自己同在，也要差他们去传道，并给他们权柄赶鬼。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>3. 马可 3:24–25</strong>「若一国自相纷争，那国就站立不住；若一家自相纷争，那家就站立不住。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>4. 马可 3:27</strong>「没有人能进壮士家里抢夺他的家具，必先捆住那壮士，才可以抢夺他的家。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>5. 马可 3:28–29</strong>「我实在告诉你们，世人一切的罪和一切亵渎的话都可得赦免；凡亵渎圣灵的，却永不得赦免，乃要担当永远的罪。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;">
+        <strong>6. 马可 3:35</strong>「凡遵行神旨意的人，就是我的弟兄姐妹和母亲了。」
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 第三章 30 秒极速通关口诀：</p>
+        <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
+          安息会堂枯干手，怒目忧愁显拯救；法利赛合希律党，密谋商议除灭王；海边群众挤小船，污鬼俯伏称神子；山上设立十二徒，同在传道赐权柄；亲属门外说癫狂，文士诬陷别西卜；一国一家怎纷争，必先捆住那壮士；亵渎圣灵永定罪，遵行旨意为亲属！
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: 50 题随机测验 (按题型分组) -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="dashboard">
+      <div class="stat-group">
+        <div class="stat-box">
+          <div class="stat-val" id="total-score">0 / 50</div>
+          <div class="stat-lbl">答对题数</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="accuracy-rate">0%</div>
+          <div class="stat-lbl">正确率</div>
+        </div>
+      </div>
+      <div>
+        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+      </div>
+    </div>
+
+    <!-- 试题按题型组织呈现容器 -->
+    <div id="quiz-sections-container"></div>
+  </div>
+</div>
+
+<script>
+// 全量 MASTER QUESTION POOL (完整收录 Mark Chapter 3 Quiz.docx 与 Mark Chapter 3 Quiz(Nathan).pdf 两份文件的所有题目)
+const MASTER_QUESTION_POOL = [
+  // --- 填空题库 (收录 docx 11-20 与 Nathan.pdf 填空题 1-10) ---
+  { id: "fb1", type: "fill", title: "耶稣对那有枯干一只手的人说：「起来，站在当中。」又对众人说：「在安息日行_____行_____，救命行_____，害命行_____，哪样是可以的呢？」", blanks: [{id:"f1_1", ans:"善"},{id:"f1_2", ans:"恶"},{id:"f1_3", ans:"善|命"},{id:"f1_4", ans:"恶|命"}], desc: "可 3:4 在安息日行善行恶，救命害命，哪样是可以的呢？" },
+  { id: "fb2", type: "fill", title: "耶稣看见他们的心刚硬，就_____周围的人，又为他们的心刚硬_____。", blanks: [{id:"f2_1", ans:"怒目"},{id:"f2_2", ans:"忧愁"}], desc: "可 3:5 怒目周围看他们，为他们的心刚硬忧愁。" },
+  { id: "fb3", type: "fill", title: "耶稣对那人说：「伸出手来。」他把手一伸，手就_____了。", blanks: [{id:"f3_1", ans:"复原"}], desc: "可 3:5 他把手一伸，手就复原了。" },
+  { id: "fb4", type: "fill", title: "从耶路撒冷下来的文士说：「他是被_____附着。」又说：「他是靠着_____赶鬼。」", blanks: [{id:"f4_1", ans:"别西卜"},{id:"f4_2", ans:"鬼王"}], desc: "可 3:22 污蔑耶稣被别西卜附着、靠鬼王赶鬼。" },
+  { id: "fb5", type: "fill", title: "耶稣说：「若一国自相纷争，那国就_____不住；若一家自相纷争，那家就_____不住。」", blanks: [{id:"f5_1", ans:"站立"},{id:"f5_2", ans:"站立"}], desc: "可 3:24-25 一国一家自相纷争必站立不住。" },
+  { id: "fb6", type: "fill", title: "耶稣说：「没有人能进_____家里抢夺他的家具，必先_____那壮士，才可以抢夺他的家。」", blanks: [{id:"f6_1", ans:"壮士"},{id:"f6_2", ans:"捆住|捆绑"}], desc: "可 3:27 必先捆住那壮士，才可以抢夺他的家。" },
+  { id: "fb7", type: "fill", title: "耶稣说：「我实在告诉你们，世人一切的罪和一切亵渎的话，都可得_____。」", blanks: [{id:"f7_1", ans:"赦免"}], desc: "可 3:28 一切的罪和亵渎的话都可得赦免。" },
+  { id: "fb8", type: "fill", title: "「凡亵渎_____的，却永不得赦免，乃要担当永远的罪。」", blanks: [{id:"f8_1", ans:"圣灵"}], desc: "可 3:29 凡亵渎圣灵的永不得赦免。" },
+  { id: "fb9", type: "fill", title: "耶稣给西庇太的儿子雅各、雅各的兄弟约翰起名叫_____，就是「_____」的意思。", blanks: [{id:"f9_1", ans:"半尼其"},{id:"f9_2", ans:"雷子"}], desc: "可 3:17 半尼其就是雷子的意思。" },
+  { id: "fb10", type: "fill", title: "耶稣说：「凡遵行_____的人，就是我的弟兄姐妹和母亲了。」", blanks: [{id:"f10_1", ans:"神旨意|神的旨意"}], desc: "可 3:35 凡遵行神旨意的人。" },
+  { id: "fb11", type: "fill", title: "污鬼一见到耶稣，就俯伏在他面前喊着说：「你是_____！」", blanks: [{id:"f11_1", ans:"神的儿子"}], desc: "可 3:11 污鬼俯伏喊叫：你是神的儿子。" },
+  { id: "fb12", type: "fill", title: "耶稣设立十二使徒，要他们常和自己同在，也要差他们去_____，并给他们_____赶鬼。", blanks: [{id:"f12_1", ans:"传道"},{id:"f12_2", ans:"权柄"}], desc: "可 3:14-15 差他们去传道，给他们权柄赶鬼。" },
+  { id: "fb13", type: "fill", title: "「看哪，我的母亲，我的弟兄」这句话出现在马可福音第 3 章第_____节。", blanks: [{id:"f13_1", ans:"34|34节|3:34"}], desc: "可 3:34 耶稣宣告属天家庭。" },
+
+  // --- 选择题与排序题 (收录 docx 1-10, 21-28, 29-34, 43-50 及 Nathan.pdf 1-11) ---
+  { id: "mc1", type: "radio", title: "马可福音第 3 章开始时，耶稣进入哪里？", opts: [{v:"a",t:"A. 圣殿"},{v:"b",t:"B. 会堂"},{v:"c",t:"C. 伯利恒"},{v:"d",t:"D. 旷野"}], ans: "b", desc: "可 3:1 耶稣又进了会堂。" },
+  { id: "mc2", type: "radio", title: "会堂里有一个人的什么部位枯干了？", opts: [{v:"a",t:"A. 右脚"},{v:"b",t:"B. 左脚"},{v:"c",t:"C. 一只手"},{v:"d",t:"D. 一只眼睛"}], ans: "c", desc: "可 3:1 在那里有一个人枯干了一只手。" },
+  { id: "mc3", type: "radio", title: "法利赛人窥探耶稣，是为了什么？", opts: [{v:"a",t:"A. 要请耶稣吃饭"},{v:"b",t:"B. 要听耶稣讲道"},{v:"c",t:"C. 要看耶稣是否在安息日医治人，好控告祂"},{v:"d",t:"D. 要请耶稣离开会堂"}], ans: "c", desc: "可 3:2 窥探耶稣在安息日医治不医治，意思是要控告他。" },
+  { id: "mc4", type: "radio", title: "耶稣医治那人的枯干手之前，首先吩咐他做什么？", opts: [{v:"a",t:"A. 跪下"},{v:"b",t:"B. 起来，站在当中"},{v:"c",t:"C. 坐下"},{v:"d",t:"D. 走到门外"}], ans: "b", desc: "可 3:3 耶稣对那枯干一只手的人说：「起来！站在当中。」" },
+  { id: "mc5", type: "radio", title: "众人都不作声时，耶稣环视他们是什么反应？", opts: [{v:"a",t:"A. 喜乐"},{v:"b",t:"B. 惊讶"},{v:"c",t:"C. 怒目周围看他们，又为他们的心刚硬忧愁"},{v:"d",t:"D. 转身离开"}], ans: "c", desc: "可 3:5 怒目周围看他们，又为他们的心刚硬忧愁。" },
+  { id: "mc6", type: "radio", title: "法利赛人出去以后，与谁商议要怎样除灭耶稣？", opts: [{v:"a",t:"A. 撒都该人"},{v:"b",t:"B. 希律党的人"},{v:"c",t:"C. 文士"},{v:"d",t:"D. 祭司长"}], ans: "b", desc: "可 3:6 同希律党的人商议怎样可以除灭耶稣。" },
+  { id: "mc7", type: "radio", title: "大批群众跟随耶稣，以下哪一个地方没有出现在马可 3:7–8 的群众来源中？", opts: [{v:"a",t:"A. 犹太"},{v:"b",t:"B. 耶路撒冷"},{v:"c",t:"C. 撒玛利亚"},{v:"d",t:"D. 推罗"}], ans: "c", desc: "七大地区为加利利、犹太、耶路撒冷、以土买、约旦河外、推罗、西顿；无撒玛利亚。" },
+  { id: "mc8", type: "radio", title: "为什么耶稣吩咐门徒叫一只小船伺候着？", opts: [{v:"a",t:"A. 因为祂要渡海"},{v:"b",t:"B. 因为祂要离开加利利"},{v:"c",t:"C. 因为人多，恐怕他们拥挤祂"},{v:"d",t:"D. 因为天气不好"}], ans: "c", desc: "可 3:9 因为人多，恐怕他们拥挤他。" },
+  { id: "mc9", type: "radio", title: "耶稣在山上设立十二个人，首先的目的是什么？", opts: [{v:"a",t:"A. 叫他们管理群众"},{v:"b",t:"B. 要他们常和自己同在"},{v:"c",t:"C. 叫他们建立会堂"},{v:"d",t:"D. 叫他们掌管钱财"}], ans: "b", desc: "可 3:14 要他们常和自己同在，也要差他们去传道。" },
+  { id: "mc10", type: "radio", title: "耶稣给西门起的别名是什么？", opts: [{v:"a",t:"A. 巴多罗买"},{v:"b",t:"B. 半尼其"},{v:"c",t:"C. 彼得"},{v:"d",t:"D. 达太"}], ans: "c", desc: "可 3:16 这十二个人有西门，耶稣又给他起名叫彼得。" },
+  { id: "mc11", type: "radio", title: "谁是第一个在马可福音 3 章使徒名单中被列出的人？", opts: [{v:"a",t:"A. 安得烈"},{v:"b",t:"B. 西门（彼得）"},{v:"c",t:"C. 雅各"},{v:"d",t:"D. 约翰"}], ans: "b", desc: "可 3:16 这十二个人有西门（彼得）。" },
+  { id: "mc12", type: "radio", title: "谁是西庇太的儿子？", opts: [{v:"a",t:"A. 彼得和安得烈"},{v:"b",t:"B. 雅各和约翰"},{v:"c",t:"C. 腓力和巴多罗买"},{v:"d",t:"D. 马太和多马"}], ans: "b", desc: "可 3:17 还有西庇太的儿子雅各和雅各的兄弟约翰。" },
+  { id: "mc13", type: "radio", title: "使徒名单中，谁被称为「奋锐党的西门」？", opts: [{v:"a",t:"A. 西门彼得"},{v:"b",t:"B. 奋锐党的西门"},{v:"c",t:"C. 雅各"},{v:"d",t:"D. 达太"}], ans: "b", desc: "可 3:18 明确注明为奋锐党的西门。" },
+  { id: "mc14", type: "radio", title: "使徒名单中，谁是「亚勒腓的儿子」？", opts: [{v:"a",t:"A. 雅各"},{v:"b",t:"B. 约翰"},{v:"c",t:"C. 腓力"},{v:"d",t:"D. 多马"}], ans: "a", desc: "可 3:18 亚勒腓的儿子雅各。" },
+  { id: "mc15", type: "radio", title: "使徒名单中，谁是后来出卖耶稣的？", opts: [{v:"a",t:"A. 达太"},{v:"b",t:"B. 腓力"},{v:"c",t:"C. 加略人犹大"},{v:"d",t:"D. 奋锐党的西门"}], ans: "c", desc: "可 3:19 还有加略人犹大，就是卖耶稣的。" },
+  { id: "mc16", type: "radio", title: "俯伏喊着说「你是神的儿子」的是谁？", opts: [{v:"a",t:"A. 法利赛人"},{v:"b",t:"B. 文士"},{v:"c",t:"C. 污鬼"},{v:"d",t:"D. 群众"}], ans: "c", desc: "可 3:11 污鬼一看见他就俯伏喊叫：你是神的儿子。" },
+  { id: "mc17", type: "radio", title: "指责说「他是被别西卜附着」的是谁？", opts: [{v:"a",t:"A. 耶稣的母亲"},{v:"b",t:"B. 从耶路撒冷下来的文士"},{v:"c",t:"C. 十二使徒"},{v:"d",t:"D. 希律党"}], ans: "b", desc: "可 3:22 从耶路撒冷下来的文士指控。" },
+  { id: "mc18", type: "radio", title: "耶稣说凡遵行神旨意的人，就是我的什么？（多选）", opts: [{v:"a",t:"A. 弟兄"},{v:"b",t:"B. 姐妹"},{v:"c",t:"C. 母亲"},{v:"d",t:"D. 父亲"}], ans: ["a","b","c"], desc: "可 3:35 凡遵行神旨意的人，就是我的弟兄、姐妹和母亲了（无父亲）。" },
+  { id: "mc19", type: "radio", title: "耶稣设立十二使徒的主要目的包括什么？（多选）", opts: [{v:"a",t:"A. 常和自己同在"},{v:"b",t:"B. 差他们去传道"},{v:"c",t:"C. 给他们权柄赶鬼"},{v:"d",t:"D. 掌管账房救济穷人"}], ans: ["a","b","c"], desc: "可 3:14-15 同在、传道、权柄赶鬼；无管理账目。" },
+  { id: "mc20", type: "radio", title: "耶稣给谁取名叫「半尼其」（雷子）？（多选）", opts: [{v:"a",t:"A. 西门"},{v:"b",t:"B. 雅各"},{v:"c",t:"C. 安得烈"},{v:"d",t:"D. 约翰"}], ans: ["b","d"], desc: "可 3:17 西庇太的儿子雅各和约翰取名半尼其。" },
+  { id: "mc21", type: "radio", title: "在马可福音第 3 章中，谁说耶稣「癫狂了」（疯了）？", opts: [{v:"a",t:"A. 门徒"},{v:"b",t:"B. 罗马兵丁"},{v:"c",t:"C. 耶稣的亲属（家人）"},{v:"d",t:"D. 拿撒勒的民众"}], ans: "c", desc: "可 3:21 耶稣的亲属听见要拉住他，因为他们说他癫狂了。" },
+  { id: "mc22", type: "radio", title: "耶稣说世人一切的罪都可得赦免，唯独凡亵渎什么却永不得赦免？", opts: [{v:"a",t:"A. 上帝"},{v:"b",t:"B. 天国"},{v:"c",t:"C. 先知"},{v:"d",t:"D. 圣灵"}], ans: "d", desc: "可 3:29 凡亵渎圣灵的，却永不得赦免。" },
+  { id: "mc23", type: "radio", title: "以下哪一组人物全部属于十二使徒？", opts: [{v:"a",t:"A. 马太、彼得、腓力、巴多罗买"},{v:"b",t:"B. 犹大、雅各、安得烈、达太"},{v:"c",t:"C. 约翰、西门、多马、亚勒腓的儿子雅各"},{v:"d",t:"D. 以上皆是"}], ans: "d", desc: "所列全在可 3:16-19 十二使徒名单中。" },
+  { id: "mc24", type: "radio", title: "【人物与言论配对陷阱】①家人 ②文士 ③污鬼，分别对应什么说法？<br>a.「他是被别西卜附着」 b.「你是神的儿子」 c.「他癫狂了」", opts: [{v:"a",t:"A. ①a, ②b, ③c"},{v:"b",t:"B. ①c, ②a, ③b"},{v:"c",t:"C. ①b, ②c, ③a"},{v:"d",t:"D. ①c, ②b, ③a"}], ans: "b", desc: "家人说癫狂，文士说别西卜，污鬼说神的儿子。" },
+  { id: "mc25", type: "radio", title: "【事件排序】请按马可福音第 3 章事件发展排列先后：<br>A. 法利赛人与希律党商议除灭耶稣 B. 耶稣医治枯干的手 C. 大批群众来到海边 D. 设立十二使徒", opts: [{v:"a", t:"A. B → A → C → D"},{v:"b", t:"B. B → C → A → D"},{v:"c", t:"C. A → B → C → D"},{v:"d", t:"D. C → B → A → D"}], ans: "a", desc: "医枯手(3:1) → 商议除灭(3:6) → 群众退海边(3:7) → 设立使徒(3:13)。" },
+  { id: "mc26", type: "radio", title: "【别西卜事件排序】请排列先后顺序：<br>A. 文士指控靠别西卜赶鬼 B. 耶稣进屋连饭也顾不得吃 C. 耶稣用一国自相纷争回应 D. 亲属要出来拉住祂", opts: [{v:"a", t:"A. B → D → A → C"},{v:"b", t:"B. B → A → D → C"},{v:"c", t:"C. A → B → D → C"},{v:"d", t:"D. B → D → C → A"}], ans: "a", desc: "进屋(3:20) → 亲属拉住(3:21) → 文士诬蔑(3:22) → 比喻反驳(3:23)。" },
+  { id: "mc27", type: "radio", title: "【医治枯干手过程排序】请排列先后顺序：<br>A. 那人把手一伸 B. 叫那人起来站在当中 C. 耶稣进会堂 D. 耶稣向众人发问 E. 手就复原了", opts: [{v:"a", t:"A. C → B → D → A → E"},{v:"b", t:"B. C → D → B → A → E"},{v:"c", t:"C. B → C → D → A → E"},{v:"d", t:"D. C → B → A → D → E"}], ans: "a", desc: "进会堂(3:1) → 站在当中(3:3) → 问安息日行善(3:4) → 伸出手(3:5) → 复原(3:5)。" },
+  { id: "mc28", type: "radio", title: "【比喻逻辑排序】请按照经文逻辑出现顺序排列：<br>A. 「一国自相纷争」 B. 「一家自相纷争」 C. 「撒但自相攻打纷争」 D. 「捆绑壮士」", opts: [{v:"a", t:"A. A → B → C → D"},{v:"b", t:"B. B → A → C → D"},{v:"c", t:"C. A → C → B → D"},{v:"d", t:"D. D → A → B → C"}], ans: "a", desc: "国(3:24) → 家(3:25) → 撒但(3:26) → 壮士(3:27)。" },
+  { id: "mc29", type: "radio", title: "【家庭认信排序】请排列先后顺序：<br>A. 母亲和弟兄站在外边 B. 众人坐在周围告诉耶稣 C. 耶稣反问谁是我的母亲弟兄 D. 宣告凡遵行神旨意的人就是弟兄姐妹母亲", opts: [{v:"a", t:"A. A → B → C → D"},{v:"b", t:"B. B → A → C → D"},{v:"c", t:"C. A → C → B → D"},{v:"d", t:"D. C → A → B → D"}], ans: "a", desc: "母亲站在外边(3:31) → 传话(3:32) → 反问(3:33) → 宣告遵行旨意(3:35)。" },
+
+  // --- 是非判断题库 (收录 docx 35-42 与 Nathan.pdf 是非 1-10) ---
+  { id: "tf1", type: "tf", title: "耶稣是在安息日进入会堂，并在那里医治了一个手枯干的人。", ans: "T", desc: "对。可 3:1-2 经文完全吻合。" },
+  { id: "tf2", type: "tf", title: "法利赛人和希律党一开始就支持耶稣，并热心协助祂医治病人。", ans: "F", desc: "错。法利赛人同希律党商议怎样除灭耶稣。" },
+  { id: "tf3", type: "tf", title: "污鬼无论何时看见耶稣，就俯伏在祂面前，喊着说：“你是神的儿子。”", ans: "T", desc: "对。可 3:11 经文完全吻合。" },
+  { id: "tf4", type: "tf", title: "耶稣允许污鬼把祂是谁公开告诉所有人，借此宣扬神的名声。", ans: "F", desc: "错。可 3:12 耶稣屡次严严地嘱咐它们不要把祂显露出来。" },
+  { id: "tf5", type: "tf", title: "耶稣设立十二使徒，要他们常和自己同在，也要差他们去传道，并给他们权柄赶鬼。", ans: "T", desc: "对。可 3:14-15 经文完全吻合。" },
+  { id: "tf6", type: "tf", title: "马可福音第 3 章中，耶稣的亲属认为祂癫狂了（疯了），出来要拉住祂。", ans: "T", desc: "对。可 3:21 亲属说他癫狂了，要拉住他。" },
+  { id: "tf7", type: "tf", title: "从耶路撒冷下来的祭司长诬蔑说：耶稣是靠着神的能力赶鬼。", ans: "F", desc: "错。可 3:22 是从耶路撒冷下来的“文士”，诬蔑祂靠鬼王赶鬼。" },
+  { id: "tf8", type: "tf", title: "耶稣说，凡遵行神旨意的人，就是祂的弟兄、姐妹和母亲了。", ans: "T", desc: "对。可 3:35 经文完全吻合。" },
+  { id: "tf9", type: "tf", title: "西庇太的儿子雅各和雅各的兄弟约翰，耶稣给这两个人起名叫所其尼。", ans: "F", desc: "错。起名叫“半尼其”（Boanerges），即雷子的意思。" },
+  { id: "tf10", type: "tf", title: "耶稣进了一个屋子，众人聚集连饭也顾不得吃，母亲和弟兄一直在屋里与祂同坐。", ans: "F", desc: "错。可 3:31 明确记载母亲和弟兄是“站在外边”，非屋里。" },
+  { id: "tf11", type: "tf", title: "耶稣设立十二个人的主要目的之一，是差他们去周济穷人、建设社区。", ans: "F", desc: "错。目的是同在、传道及赐权柄赶鬼，经文未提社区建设。" },
+  { id: "tf12", type: "tf", title: "大批群众听见耶稣所作的大事，就从包括撒玛利亚在内的各地来到祂那里。", ans: "F", desc: "错。群众来源七大地区中没有撒玛利亚。" },
+  { id: "tf13", type: "tf", title: "文士说耶稣是被污鬼附着的，这是引发耶稣谈论“亵渎圣灵永不得赦免”的直接原因。", ans: "T", desc: "对。可 3:30『这话是因为他们说：他是被污鬼附着的。』" }
+];
+
+// 填空题专属备选词库 (Answer Pool)
+const ALL_WORD_POOL = [
+  "善", "恶", "命", "怒目", "忧愁", "复原", "别西卜", "鬼王", 
+  "站立", "壮士", "捆住", "捆绑", "赦免", "圣灵", "半尼其", "雷子", 
+  "神旨意", "神的儿子", "传道", "权柄", "34", "希律党", "会堂", "小船"
+];
+
+let activeQuestionSet = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch3_quiz_pool_v1";
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function initQuiz(forceRegenerate = false) {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeQuestionSet = parsed.questions || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  // 从题库中混洗随机抽取 50 道项目
+  const shuffledPool = shuffleArray(MASTER_QUESTION_POOL);
+  const selected = shuffledPool.slice(0, 50);
+
+  // 严格按三大题型归类排序：填空 -> 单选/排序 -> 是非
+  const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
+  activeQuestionSet = selected.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  saveQuizState({});
+  renderQuizUI();
+}
+
+function regenerateQuiz() {
+  if (confirm("确定要重新随机抽取 50 题并清空当前作答吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
+function renderQuizUI() {
+  const container = document.getElementById("quiz-sections-container");
+  container.innerHTML = "";
+
+  const groups = {
+    "fill": { title: "第一部分：填空题", desc: "请根据下方词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
+    "radio": { title: "第二部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeQuestionSet.forEach(q => {
+    if (groups[q.type]) groups[q.type].list.push(q);
+  });
+
+  let globalQuestionCounter = 1;
+
+  ["fill", "radio", "tf"].forEach(typeKey => {
+    const grp = groups[typeKey];
+    if (grp.list.length === 0) return;
+
+    const startNum = globalQuestionCounter;
+    const endNum = globalQuestionCounter + grp.list.length - 1;
+
+    // 区域标题头
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    // 填空题 Answer Pool 专属置顶呈现
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 填空题备选词库 (Answer Pool)：点击词汇填入，点击空格反选清空</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
+    }
+
+    grp.list.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        // 题号与题目文字紧凑处于同一行，杜绝单独换行
+        item.innerHTML = `
+          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
+            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        let optsHtml = `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        optsHtml += `</div>`;
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          ${optsHtml}
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "tf") {
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="opt-group" style="flex-direction:row; max-width:280px;">
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      }
+
+      container.appendChild(item);
+      globalQuestionCounter++;
+    });
+  });
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
+  calculateAndUpdateTotals(0);
+}
+
+function renderWordBank() {
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  const shuffledWords = shuffleArray(ALL_WORD_POOL);
+  shuffledWords.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
+  });
+}
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
+  document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
+}
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
+  }
+}
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
+function getUserAnswers() {
+  const answers = {};
+  document.querySelectorAll("#quiz-sections-container input").forEach(el => {
+    if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
+    }
+  });
+  return answers;
+}
+
+function saveQuizState(answers) {
+  const data = {
+    questions: activeQuestionSet,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
+}
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+  const total = activeQuestionSet.length;
+
+  activeQuestionSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "radio" || q.type === "tf") {
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。出处：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score) {
+  const total = activeQuestionSet.length;
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
+</script>
+
+</body>
+</html>
