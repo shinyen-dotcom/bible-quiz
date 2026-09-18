@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第四章 圣经比赛备战指南与测验</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .adaptive-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .adaptive-container { padding: 12px 10px 50px 10px; }
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 24px 18px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
+
+  /* 导航栏 */
+  .nav-tabs {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    background: transparent;
+    padding: 11px 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  /* 控制台卡片 */
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .stat-group { display: flex; gap: 18px; align-items: center; }
+  .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 18px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    margin: 0 0 14px 0;
+  }
+
+  .section-h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 20px 0 10px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .section-h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 12px 0 6px 0;
+  }
+
+  .highlight-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #166534;
+  }
+  .trap-box {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+  }
+  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
+
+  .notice-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #991b1b;
+  }
+
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .info-table th, .info-table td {
+    border: 1px solid var(--border);
+    padding: 9px 12px;
+    text-align: left;
+  }
+  .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  /* 题型分类标题 */
+  .type-section-header {
+    background: #f1f5f9;
+    border-left: 5px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 24px 0 16px 0;
+  }
+  .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
+  .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
+
+  /* 填空题专属词库 Pool */
+  .word-bank-box {
+    background: #eff6ff;
+    border: 2px dashed #93c5fd;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 12px 0 18px 0;
+  }
+  .word-bank-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip {
+    background: #ffffff;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .word-chip:hover, .word-chip:active {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* 题目块 */
+  .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    background: #ffffff;
+  }
+  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* 填空输入框 */
+  .blank-input {
+    border: none;
+    border-bottom: 2.5px solid #64748b;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #0f172a;
+    text-align: center;
+    margin: 0 4px;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .blank-input:focus, .blank-input.active-blank {
+    outline: none;
+    border-bottom-color: var(--accent);
+    background: #dbeafe;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+  }
+  .blank-input.has-val {
+    background: #e0f2fe;
+    color: #0369a1;
+    border-bottom-color: #0284c7;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="adaptive-container">
+  <!-- 顶部返回主页导航条 -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+    <a href="index.html" style="display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); padding: 7px 13px; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none;">🏠 返回主页</a>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
+  </div>
+
+  <div class="header">
+    <h1>《马可福音》第四章 备战指南与测验</h1>
+    <p>天国比喻的奥秘 ＋ 平静风浪 ＋ 50 题全真模拟测验</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 核心图表与陷阱</button>
+    <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
+  </div>
+
+  <!-- TAB 1: 备战指南大地图 -->
+  <div id="tab-guide" class="tab-content active">
+    <div class="card">
+      <div class="card-title">一、先掌握第 4 章的「大地图」</div>
+      <table class="info-table">
+        <thead>
+          <tr><th>段落</th><th>内容</th><th>Quiz 重要度</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>4:1–20</td><td>撒种的比喻＋四种土地解释</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>4:21–25</td><td>灯的比喻＋量器的原则</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>4:26–29</td><td>种子自己生长的比喻（马可独有）</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>4:30–34</td><td>芥菜种的比喻</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>4:35–41</td><td>夜渡与平静风浪</td><td>⭐⭐⭐⭐⭐</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        <strong>🔥 考试主线推进：</strong><br>
+        撒种 → 四种土地 → 灯 → 量器 → 种子生长 → 芥菜种 → 平静风浪。<br>
+        特色在于多重比喻连续呈现，需熟记：场景、比喻意象、解释及对应收成数字！
+      </div>
+
+      <div class="section-h2">第一部分：4:1–20 撒种的比喻（最高频考点）</div>
+      <p>① <strong>场景设定</strong>：地点在<strong>海边</strong>。众人极多，耶稣上了一只船<strong>坐下</strong>；众人都在海边的<strong>陆地上</strong>（不是耶稣在岸上、众人在船里！）。</p>
+      <p>② <strong>开篇号召</strong>：耶稣首先呼召：「你们听啊！」（本章核心字为“听”）。</p>
+      <p>③ <strong>所撒的种子代表什么？</strong> 耶稣明确解释：<strong>所撒的就是「道」</strong>（4:14）。</p>
+      <p>④ <strong>四种土地与结局对照</strong>：</p>
+      <table class="info-table">
+        <thead><tr><th>土地类别</th><th>发生事件</th><th>灵意解释（失落 / 结果原因）</th></tr></thead>
+        <tbody>
+          <tr><td><strong>路旁</strong></td><td>飞鸟来吃尽了</td><td>撒但立刻来，把撒在他们心里的道夺了去。</td></tr>
+          <tr><td><strong>土浅石头地</strong></td><td>日头出来晒焦，因无根枯干</td><td>听道欢喜领受，但心里<strong>没有根</strong>；为道遭患难或逼迫，立刻跌倒。</td></tr>
+          <tr><td><strong>荆棘里</strong></td><td>荆棘长起把它挤住，不结实</td><td>被<strong>世上的思虑、钱财的迷惑、别样的私欲</strong>挤住，不能结实。</td></tr>
+          <tr><td><strong>好土里</strong></td><td>长大结实</td><td>人听道又领受，结实有<strong>三十倍、六十倍、一百倍</strong>。</td></tr>
+        </tbody>
+      </table>
+      <p>⑤ <strong>比喻的目的</strong>：<strong>「神国的奥秘只叫你们知道；若是对外人讲，凡事就用比喻。」</strong>（4:11）</p>
+
+      <div class="section-h2">第二部分：4:21–25 灯的比喻与量器原则</div>
+      <p>① <strong>灯该放何处？</strong> 人拿灯来，岂是要放在<strong>斗底下、床底下</strong>，不放在<strong>灯台上</strong>吗？</p>
+      <p>② <strong>显露的原则</strong>：掩藏的事没有不显出来的，隐瞒的事没有不露出来的（4:22）。</p>
+      <p>③ <strong>量器的法则</strong>：<strong>「你们用什么量器量给人，也必用什么量器量给你们，并且要多给你们。因为有的还要给他；没有的，连他所有的也要夺去。」</strong>（4:24–25）</p>
+
+      <div class="section-h2">第三部分：4:26–29 种子自己生长（马可福音独有）</div>
+      <p>① <strong>生长的奥秘</strong>：神的国如同人把种撒在地上，<strong>黑夜睡觉，白日起来</strong>，这种就发芽渐长，<strong>那人却不晓得如何这样</strong>（强调撒种者不明白其生长机理）。</p>
+      <p>② <strong>三个成长阶段</strong>：地生出<strong>苗</strong>来 → 随后长<strong>穗</strong> → 再后穗上结成<strong>饱满的子粒</strong>。</p>
+      <p>③ <strong>收成动作</strong>：谷既熟了，就用<strong>镰刀</strong>去割，因为收成的时候到了。</p>
+
+      <div class="section-h2">第四部分：4:30–34 芥菜种的比喻</div>
+      <p>① <strong>对比悬殊</strong>：种在地里的时候，<strong>虽比地上的百种都小</strong>；但长起来比各样的菜都大，长出大枝，天上的飞鸟可以宿在它的荫下。</p>
+      <p>② <strong>教训方式</strong>：若不用比喻就不对他们讲；<strong>私下没有人的时候，就把一切的道讲给门徒听</strong>。</p>
+
+      <div class="section-h2">第五部分：4:35–41 平静风浪（极高频细节题）</div>
+      <p>① <strong>时间与命令</strong>：<strong>当那天晚上</strong>，耶稣对门徒说：「我们渡到那边去。」</p>
+      <p>② <strong>同行船只细节</strong>：门徒离开众人，把耶稣带去，<strong>也有别的船和祂同行</strong>（不仅有一条船！）。</p>
+      <p>③ <strong>风浪与耶稣的位置</strong>：波浪打入船内甚至要满了水。<strong>耶稣在船尾上，枕着枕头睡觉</strong>（船尾 + 枕头 + 睡觉）。</p>
+      <p>④ <strong>门徒的呼叫</strong>：<strong>「夫子！我们丧命，你不顾吗？」</strong></p>
+      <p>⑤ <strong>斥责风海的原话</strong>：耶稣起来，斥责风，向海说：<strong>「住了吧！静了吧！」</strong>风就止住，大大地平静了。</p>
+      <p>⑥ <strong>耶稣的责备与门徒的惊叹</strong>：<br>
+      • 耶稣说：<strong>「为什么胆怯？你们还没有信心吗？」</strong><br>
+      • 门徒彼此说：<strong>「这到底是谁，连风和海也听从他了？」</strong></p>
+    </div>
+  </div>
+
+  <!-- TAB 2: 易混人物与矩阵 -->
+  <div id="tab-traps" class="tab-content">
+    <div class="card">
+      <div class="card-title">🧠 第四章对比矩阵与数字考点</div>
+      <table class="info-table">
+        <thead><tr><th>考点分类</th><th>核心项目</th><th>详细说明与易错警示</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>四种土壤与障碍</strong></td>
+            <td>路旁 / 石头 / 荆棘 / 好土</td>
+            <td>路旁(飞鸟/撒但夺道) → 石头(无根/遭患难逼迫跌倒) → 荆棘(思虑钱财私欲挤住) → 好土(结实30/60/100倍)。</td>
+          </tr>
+          <tr>
+            <td><strong>灯不放哪里？</strong></td>
+            <td>斗底下、床底下</td>
+            <td>经文明确是斗底或床底，不是桌子底或箱子底。</td>
+          </tr>
+          <tr>
+            <td><strong>作物成长三阶</strong></td>
+            <td>苗 → 穗 → 饱满的子粒</td>
+            <td>顺序不可颠倒；熟了之后用“镰刀”收割。</td>
+          </tr>
+          <tr>
+            <td><strong>核心数字倍数</strong></td>
+            <td>三十倍、六十倍、一百倍</td>
+            <td>严格递增次序：30 → 60 → 100。</td>
+          </tr>
+          <tr>
+            <td><strong>风浪中的细节</strong></td>
+            <td>船尾、枕头、睡觉</td>
+            <td>称呼是“夫子”；命令是“住了吧！静了吧！”；时间是“那天晚上”。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="notice-box">
+        <strong>🚨 第四章高频失分陷阱：</strong><br>
+        1. 撒种的比喻中，<strong>种子就是「道」</strong>（4:14），不是信徒，也不是行为。<br>
+        2. 耶稣教训众人时，<strong>耶稣在船上坐着，众人在陆地上</strong>（4:1）。<br>
+        3. 石头地枯干的原因是<strong>心里没有根</strong>；荆棘地不结实的原因是被<strong>思虑、钱财迷惑、私欲挤住</strong>。<br>
+        4. 种子自己生长时，撒种的人<strong>黑夜睡觉、白日起来，他却不晓得种子如何生长</strong>。<br>
+        5. 芥菜种下地时是<strong>比地上的百种都小</strong>，长成后<strong>天上的飞鸟宿在荫下</strong>。<br>
+        6. 门徒叫醒耶稣的原话是<strong>「夫子！我们丧命，你不顾吗？」</strong>（不是“主啊救我”）。<br>
+        7. 耶稣平息风浪的话是<strong>「住了吧！静了吧！」</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 必背经文与口诀 -->
+  <div id="tab-verses" class="tab-content">
+    <div class="card">
+      <div class="card-title">第四章 8 处必背经文</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>1. 马可 4:9</strong>「有耳可听的，就应当听！」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>2. 马可 4:14</strong>「撒种之人所撒的就是道。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>3. 马可 4:20</strong>「那撒在好地上的，就是人听道，又领受，并且结实，有三十倍的，有六十倍的，有一百倍的。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>4. 马可 4:24</strong>「你们所听的要留心。你们用什么量器量给人，也必用什么量器量给你们，并且要多给你们。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>5. 马可 4:25</strong>「因为有的，还要给他；没有的，连他所有的也要夺去。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>6. 马可 4:28</strong>「地生苗，后长穗，再后穗上结成饱满的子粒。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>7. 马可 4:39</strong>「耶稣醒了，斥责风，向海说：『住了吧！静了吧！』风就止住，大大地平静了。」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;">
+        <strong>8. 马可 4:41</strong>「他们就大大地惧怕，彼此说：『这到底是谁，连风和海也听从他了？』」
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 第四章口诀速记：</p>
+        <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
+          海边撒种讲四地，路旁石头荆棘好；种子本是神之道，三十六十和一百；灯放灯台照通亮，量器给人多加添；夜睡日长苗穗粒，收成割下用镰刀；芥菜虽小长成大，飞鸟宿荫神国显；晚上渡海暴风狂，船尾枕头主安睡；斥责风海住且静，门徒惊叹祂是谁！
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: 50 题随机测验 (按题型分组) -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="dashboard">
+      <div class="stat-group">
+        <div class="stat-box">
+          <div class="stat-val" id="total-score">0 / 50</div>
+          <div class="stat-lbl">答对题数</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="accuracy-rate">0%</div>
+          <div class="stat-lbl">正确率</div>
+        </div>
+      </div>
+      <div>
+        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+      </div>
+    </div>
+
+    <!-- 试题按题型组织呈现容器 -->
+    <div id="quiz-sections-container"></div>
+  </div>
+</div>
+
+<script>
+// 全量 MASTER QUESTION POOL (完整收录 Mark Chapter 4 Quiz.docx 50题)
+const MASTER_QUESTION_POOL = [
+  // --- 填空题 (docx 11-20) ---
+  { id: "fb1", type: "fill", title: "耶稣说：“有耳可听的，就应当_____。”", blanks: [{id:"f1_1", ans:"听"}], desc: "可 4:9 有耳可听的，就应当听。" },
+  { id: "fb2", type: "fill", title: "“撒种之人所撒的就是_____。”", blanks: [{id:"f2_1", ans:"道"}], desc: "可 4:14 撒种之人所撒的就是道。" },
+  { id: "fb3", type: "fill", title: "撒在好地上的，就是人听道，又领受，且结实，有_____倍的，有_____倍的，有_____倍的。", blanks: [{id:"f3_1", ans:"三十"},{id:"f3_2", ans:"六十"},{id:"f3_3", ans:"一百"}], desc: "可 4:20 三十倍、六十倍、一百倍。" },
+  { id: "fb4", type: "fill", title: "耶稣说：“人拿灯来，岂是要放在_____底下，或是_____底下，不放在灯台上吗？”", blanks: [{id:"f4_1", ans:"斗"},{id:"f4_2", ans:"床"}], desc: "可 4:21 岂是要放在斗底下，或是床底下，不放在灯台上吗？" },
+  { id: "fb5", type: "fill", title: "耶稣说：“所听的要_____。”", blanks: [{id:"f5_1", ans:"留心"}], desc: "可 4:24 所听的要留心。" },
+  { id: "fb6", type: "fill", title: "耶稣说：“你们用什么_____量给人，也必用什么_____量给你们，并且要多给你们。”", blanks: [{id:"f6_1", ans:"量器"},{id:"f6_2", ans:"量器"}], desc: "可 4:24 你们用什么量器量给人，也必用什么量器量给你们。" },
+  { id: "fb7", type: "fill", title: "“因为有的，还要给他；没有的，连他所有的也要_____。”", blanks: [{id:"f7_1", ans:"夺去"}], desc: "可 4:25 连他所有的也要夺去。" },
+  { id: "fb8", type: "fill", title: "种子发芽渐长，那人却不晓得如何这样。地生出_____来，随后长_____，再后穗上结成_____。", blanks: [{id:"f8_1", ans:"苗"},{id:"f8_2", ans:"穗"},{id:"f8_3", ans:"饱满的子粒"}], desc: "可 4:27-28 地生苗，后长穗，再后穗上结成饱满的子粒。" },
+  { id: "fb9", type: "fill", title: "“谷既熟了，就用_____去割，因为收成的时候到了。”", blanks: [{id:"f9_1", ans:"镰刀"}], desc: "可 4:29 谷既熟了，就用镰刀去割。" },
+  { id: "fb10", type: "fill", title: "耶稣斥责风，向海说：“_____吧！_____吧！”", blanks: [{id:"f10_1", ans:"住"},{id:"f10_2", ans:"静"}], desc: "可 4:39 住了吧！静了吧！" },
+
+  // --- 选择题 (docx 1-10, 21-27, 43-50) ---
+  { id: "mc1", type: "radio", title: "耶稣在马可福音 4 章开始讲撒种的比喻时，在哪里教训众人？", opts: [{v:"a",t:"A. 会堂里"},{v:"b",t:"B. 山上"},{v:"c",t:"C. 海边"},{v:"d",t:"D. 旷野"}], ans: "c", desc: "可 4:1 耶稣又在海边教训人。" },
+  { id: "mc2", type: "radio", title: "因为众人甚多，耶稣上了一只船坐下；众人在哪里？", opts: [{v:"a",t:"A. 船上"},{v:"b",t:"B. 海边的岸上"},{v:"c",t:"C. 山坡上"},{v:"d",t:"D. 会堂里"}], ans: "b", desc: "可 4:1 耶稣上船坐下，众人都靠近海，在岸上。" },
+  { id: "mc3", type: "radio", title: "撒种的人所撒的是什么？", opts: [{v:"a",t:"A. 麦子"},{v:"b",t:"B. 律法"},{v:"c",t:"C. 道"},{v:"d",t:"D. 福音书"}], ans: "c", desc: "可 4:14 撒种之人所撒的就是道。" },
+  { id: "mc4", type: "radio", title: "撒在路旁的种子发生了什么事？", opts: [{v:"a",t:"A. 被太阳晒死"},{v:"b",t:"B. 被荆棘挤住"},{v:"c",t:"C. 飞鸟来吃尽了"},{v:"d",t:"D. 很快结出果实"}], ans: "c", desc: "可 4:4 有落在路旁的，飞鸟来吃尽了。" },
+  { id: "mc5", type: "radio", title: "撒在石头地上的种子为什么发苗最快却不能长久？", opts: [{v:"a",t:"A. 没有水"},{v:"b",t:"B. 没有根"},{v:"c",t:"C. 没有阳光"},{v:"d",t:"D. 被飞鸟吃了"}], ans: "b", desc: "可 4:5-6 因为没有根，就枯干了。" },
+  { id: "mc6", type: "radio", title: "撒在荆棘里的种子被什么挤住了，以致不能结实？", opts: [{v:"a",t:"A. 世上的思虑、钱财的迷惑和别样的私欲"},{v:"b",t:"B. 飞鸟、太阳和石头"},{v:"c",t:"C. 暴风、大雨和旱灾"},{v:"d",t:"D. 仇敌与魔鬼"}], ans: "a", desc: "可 4:19 世上的思虑、钱财的迷惑，和别样的私欲进来，把道挤住了。" },
+  { id: "mc7", type: "radio", title: "撒在好地上的，结实有多少倍？", opts: [{v:"a",t:"A. 十倍、二十倍、三十倍"},{v:"b",t:"B. 三十倍、六十倍、一百倍"},{v:"c",t:"C. 四十倍、六十倍、一百倍"},{v:"d",t:"D. 三十倍、五十倍、一百倍"}], ans: "b", desc: "可 4:20 有三十倍的，有六十倍的，有一百倍的。" },
+  { id: "mc8", type: "radio", title: "耶稣说灯拿来，是要放在哪里？", opts: [{v:"a",t:"A. 斗底下"},{v:"b",t:"B. 床底下"},{v:"c",t:"C. 灯台上"},{v:"d",t:"D. 桌子下"}], ans: "c", desc: "可 4:21 岂是要放在斗底下，或是床底下，不放在灯台上吗？" },
+  { id: "mc9", type: "radio", title: "耶稣在平静风浪之前，在船尾做什么？", opts: [{v:"a",t:"A. 祷告"},{v:"b",t:"B. 教训门徒"},{v:"c",t:"C. 枕着枕头睡觉"},{v:"d",t:"D. 看着海面"}], ans: "c", desc: "可 4:38 耶稣在船尾上，枕着枕头睡觉。" },
+  { id: "mc10", type: "radio", title: "风浪平静以后，耶稣对门徒说了什么？", opts: [{v:"a",t:"A. “你们为什么不祷告？”"},{v:"b",t:"B. “为什么胆怯？你们还没有信心吗？”"},{v:"c",t:"C. “你们为什么离开我？”"},{v:"d",t:"D. “你们要刚强壮胆。”"}], ans: "b", desc: "可 4:40 耶稣对他们说：“为什么胆怯？你们还没有信心吗？”" },
+  { id: "mc11", type: "radio", title: "“撒种之人所撒的就是道。”这是马可福音第几章第几节？", opts: [{v:"a",t:"A. 4:13"},{v:"b",t:"B. 4:14"},{v:"c",t:"C. 4:15"},{v:"d",t:"D. 4:20"}], ans: "b", desc: "可 4:14 经文原话。" },
+  { id: "mc12", type: "radio", title: "无人的时候，谁向耶稣询问比喻的意思？", opts: [{v:"a",t:"A. 岸上的众人"},{v:"b",t:"B. 法利赛人"},{v:"c",t:"C. 跟随祂的人和十二个门徒"},{v:"d",t:"D. 彼得一个人"}], ans: "c", desc: "可 4:10 无人的时候，跟随耶稣的人和十二个门徒问他这比喻的意思。" },
+  { id: "mc13", type: "radio", title: "耶稣解释撒在路旁的种子，说撒但来把撒在人心里面的道夺去了，这记载在：", opts: [{v:"a",t:"A. 4:15"},{v:"b",t:"B. 4:16"},{v:"c",t:"C. 4:17"},{v:"d",t:"D. 4:18"}], ans: "a", desc: "可 4:15 撒但立刻来，把撒在他心里的道夺了去。" },
+  { id: "mc14", type: "radio", title: "谁黑夜睡觉，白日起来，种子就发芽渐长？", opts: [{v:"a",t:"A. 撒种的人"},{v:"b",t:"B. 门徒"},{v:"c",t:"C. 耶稣"},{v:"d",t:"D. 众人"}], ans: "a", desc: "可 4:26-27 神的国如同人把种撒在地上，黑夜睡觉，白日起来，这种就发芽渐长。" },
+  { id: "mc15", type: "radio", title: "在马可福音 4:30–32，耶稣用什么比喻神的国，虽比百种都小，长大后却长出大枝？", opts: [{v:"a",t:"A. 葡萄树"},{v:"b",t:"B. 芥菜种"},{v:"c",t:"C. 麦子"},{v:"d",t:"D. 无花果树"}], ans: "b", desc: "可 4:31 好像一粒芥菜种。" },
+  { id: "mc16", type: "radio", title: "马可福音 4:38 明确记载耶稣在船的什么位置睡觉？", opts: [{v:"a",t:"A. 船头"},{v:"b",t:"B. 船舱中间"},{v:"c",t:"C. 船尾上"},{v:"d",t:"D. 桅杆下"}], ans: "c", desc: "可 4:38 耶稣在船尾上，枕着枕头睡觉。" },
+  { id: "mc17", type: "radio", title: "“这到底是谁，连风和海也听从他了？”这句话是谁说的？", opts: [{v:"a",t:"A. 岸边的众人"},{v:"b",t:"B. 法利赛人"},{v:"c",t:"C. 门徒"},{v:"d",t:"D. 别的船上的人"}], ans: "c", desc: "可 4:41 门徒大大地惧怕，彼此说：这到底是谁。" },
+  { id: "mc18", type: "radio", title: "【陷阱题】以下哪一项不是撒在荆棘里的种子所代表的情况？", opts: [{v:"a",t:"A. 世上的思虑"},{v:"b",t:"B. 钱财的迷惑"},{v:"c",t:"C. 别样的私欲"},{v:"d",t:"D. 患难和逼迫"}], ans: "d", desc: "患难和逼迫属于石头地的情况(4:17)；荆棘里是思虑、钱财迷惑、别样私欲(4:19)。" },
+  { id: "mc19", type: "radio", title: "【陷阱题】根据马可福音 4:20，关于好地的描述，哪一项完全符合原文字词？", opts: [{v:"a",t:"A. 听道、明白、结实"},{v:"b",t:"B. 听道、又领受、并且结实"},{v:"c",t:"C. 听道、遵行、结实"},{v:"d",t:"D. 听道、相信、结实"}], ans: "b", desc: "可 4:20 明确为：人听道，又领受，并且结实。" },
+  { id: "mc20", type: "radio", title: "【陷阱题】关于马可福音 4:21 的“灯”，哪一个组合完全符合经文？", opts: [{v:"a",t:"A. 斗底下／桌底下／灯台上"},{v:"b",t:"B. 斗底下／床底下／灯台上"},{v:"c",t:"C. 床底下／桌底下／台上"},{v:"d",t:"D. 斗底下／箱子里／灯台上"}], ans: "b", desc: "经文原话：岂是要放在斗底下，或是床底下，不放在灯台上吗？" },
+  { id: "mc21", type: "radio", title: "【陷阱题】耶稣说：“你们用什么量器量给人，也必用什么量器量给你们”，紧接着说：", opts: [{v:"a",t:"A. “并且要多给你们。”"},{v:"b",t:"B. “并且要赐福给你们。”"},{v:"c",t:"C. “并且要使你们完全。”"},{v:"d",t:"D. “并且要加倍给你们。”"}], ans: "a", desc: "可 4:24 原话：并且要多给你们。" },
+  { id: "mc22", type: "radio", title: "【陷阱题】平静风浪的故事发生在什么具体时间？", opts: [{v:"a",t:"A. 清晨天未亮"},{v:"b",t:"B. 正午日头最晒时"},{v:"c",t:"C. 当那天晚上"},{v:"d",t:"D. 安息日下午"}], ans: "c", desc: "可 4:35 当那天晚上，耶稣对门徒说：我们渡到那边去。" },
+  { id: "mc23", type: "radio", title: "【陷阱题】门徒在风浪中叫醒耶稣时，原话称呼与内容是什么？", opts: [{v:"a",t:"A. “夫子！我们害怕，你不顾我们吗？”"},{v:"b",t:"B. “夫子！我们丧命，你不顾吗？”"},{v:"c",t:"C. “主啊！我们要灭亡了，求你救我们！”"},{v:"d",t:"D. “夫子！风浪太大了，我们怎么办？”"}], ans: "b", desc: "可 4:38 叫醒了他，说：“夫子！我们丧命，你不顾吗？”" },
+  { id: "mc24", type: "radio", title: "【终极陷阱题】以下关于马可福音第 4 章的说法，哪一项完全正确？", opts: [
+    {v:"a", t:"A. 撒在路旁的是因为没有根，所以被撒但夺去；撒在石头地的是钱财迷惑"},
+    {v:"b", t:"B. 撒在路旁的，道被撒但夺去；撒在石头地的，遇见患难逼迫就跌倒；撒在荆棘里的，被思虑钱财私欲挤住"},
+    {v:"c", t:"C. 撒在路旁的被太阳晒死；撒在石头地的被飞鸟吃掉"},
+    {v:"d", t:"D. 四种土地最后都结实，只是结果子的倍数不同"}
+  ], ans: "b", desc: "B 选项完全吻合四种土地的真实解释。" },
+
+  // --- 排序题 (docx 28-33) ---
+  {
+    id: "seq1",
+    type: "radio",
+    title: "【土地出现顺序】请按照经文出现的先后次序排列四种土地：<br>① 好地 ② 石头地 ③ 路旁 ④ 荆棘",
+    opts: [
+      {v:"a", t:"A. ③ → ② → ④ → ①"},
+      {v:"b", t:"B. ③ → ④ → ② → ①"},
+      {v:"c", t:"C. ② → ③ → ④ → ①"},
+      {v:"d", t:"D. ③ → ② → ① → ④"}
+    ],
+    ans: "a",
+    desc: "路旁(4:4) → 石头地(4:5) → 荆棘(4:7) → 好地(4:8)。"
+  },
+  {
+    id: "seq2",
+    type: "radio",
+    title: "【石头地发展排序】请按照撒在石头地的种子的发展过程排序：<br>① 遇患难逼迫立刻跌倒 ② 欢喜领受 ③ 没有根 ④ 日头出来一晒",
+    opts: [
+      {v:"a", t:"A. ② → ③ → ④ → ①"},
+      {v:"b", t:"B. ② → ④ → ③ → ①"},
+      {v:"c", t:"C. ③ → ② → ④ → ①"},
+      {v:"d", t:"D. ④ → ③ → ② → ①"}
+    ],
+    ans: "a",
+    desc: "欢喜领受(4:16) → 心里没有根(4:17) → 日头晒干(4:6) → 遭逼迫跌倒(4:17)。"
+  },
+  {
+    id: "seq3",
+    type: "radio",
+    title: "【植物成长阶段】请按照种子在作物生长的自然次序排列：<br>① 穗上结成饱满的子粒 ② 地生苗 ③ 长穗 ④ 发芽渐长",
+    opts: [
+      {v:"a", t:"A. ② → ④ → ③ → ①"},
+      {v:"b", t:"B. ④ → ② → ③ → ①"},
+      {v:"c", t:"C. ② → ③ → ④ → ①"},
+      {v:"d", t:"D. ④ → ③ → ② → ①"}
+    ],
+    ans: "a",
+    desc: "地生苗(4:28) → 发芽渐长(4:27) → 长穗(4:28) → 结成饱满子粒(4:28)。"
+  },
+  {
+    id: "seq4",
+    type: "radio",
+    title: "【平静风浪过程排序】请按照平静风浪故事的先后次序排列：<br>① 耶稣斥责风 ② 门徒叫醒耶稣 ③ 耶稣睡觉 ④ 耶稣说渡到那边去 ⑤ 风止住大大平静 ⑥ 门徒彼此说这到底是谁",
+    opts: [
+      {v:"a", t:"A. ④ → ③ → ② → ① → ⑤ → ⑥"},
+      {v:"b", t:"B. ④ → ② → ③ → ① → ⑤ → ⑥"},
+      {v:"c", t:"C. ③ → ④ → ② → ① → ⑤ → ⑥"},
+      {v:"d", t:"D. ④ → ③ → ① → ② → ⑤ → ⑥"}
+    ],
+    ans: "a",
+    desc: "渡那边(4:35) → 睡觉(4:38) → 叫醒(4:38) → 斥责风(4:39) → 平静(4:39) → 惊叹(4:41)。"
+  },
+  {
+    id: "seq5",
+    type: "radio",
+    title: "【第4章各大事件排序】请按照马可福音第 4 章经文先后出现的次序排列：<br>① 灯的比喻 ② 撒种的比喻 ③ 芥菜种的比喻 ④ 种子自己生长的比喻 ⑤ 平静风浪",
+    opts: [
+      {v:"a", t:"A. ② → ① → ④ → ③ → ⑤"},
+      {v:"b", t:"B. ② → ④ → ① → ③ → ⑤"},
+      {v:"c", t:"C. ① → ② → ④ → ③ → ⑤"},
+      {v:"d", t:"D. ② → ① → ③ → ④ → ⑤"}
+    ],
+    ans: "a",
+    desc: "撒种(4:1) → 灯(4:21) → 种子生长(4:26) → 芥菜种(4:30) → 平静风浪(4:35)。"
+  },
+  {
+    id: "seq6",
+    type: "radio",
+    title: "【种子解释顺序】耶稣解释撒种比喻时，土地讲解的先后顺序为何？<br>① 荆棘里的 ② 路旁的 ③ 好地的 ④ 石头地的",
+    opts: [
+      {v:"a", t:"A. ② → ④ → ① → ③"},
+      {v:"b", t:"B. ② → ① → ④ → ③"},
+      {v:"c", t:"C. ④ → ② → ① → ③"},
+      {v:"d", t:"D. ② → ④ → ③ → ①"}
+    ],
+    ans: "a",
+    desc: "路旁(4:15) → 石头地(4:16) → 荆棘里(4:18) → 好地上(4:20)。"
+  },
+
+  // --- 是非题 (docx 34-42) ---
+  { id: "tf1", type: "tf", title: "耶稣讲撒种比喻的时候，是站在岸上面对船上的众人讲道。", ans: "F", desc: "错。可 4:1 是耶稣上船坐下，众人在海边的岸上。" },
+  { id: "tf2", type: "tf", title: "撒在路旁的种子，是因为没有根，所以被撒但夺去。", ans: "F", desc: "错。“没有根”是石头地；路旁的种子是飞鸟吃尽，预表撒但把道夺去。" },
+  { id: "tf3", type: "tf", title: "撒在石头地上的人听了道，立刻欢喜领受。", ans: "T", desc: "对。可 4:16 听了道，立刻欢喜领受。" },
+  { id: "tf4", type: "tf", title: "撒在石头地上的种子，因为心里没有根，所以遇见患难或受逼迫就跌倒。", ans: "T", desc: "对。可 4:17 经文完全吻合。" },
+  { id: "tf5", type: "tf", title: "撒在荆棘里的种子，是被世上的思虑、钱财的迷惑和别样的私欲挤住，以致不能结实。", ans: "T", desc: "对。可 4:19 经文完全吻合。" },
+  { id: "tf6", type: "tf", title: "撒在好地上的人只是听道，却没有结出子粒来。", ans: "F", desc: "错。可 4:20 好地结实有三十倍、六十倍、一百倍。" },
+  { id: "tf7", type: "tf", title: "耶稣说，隐藏的事最终都会显露出来，掩藏的事也要归于显露。", ans: "T", desc: "对。可 4:22 经文完全吻合。" },
+  { id: "tf8", type: "tf", title: "在种子自己生长的比喻中，撒种的人完全知道种子为什么能够发芽渐长。", ans: "F", desc: "错。可 4:27 明确记载“那人却不晓得如何这样”。" },
+  { id: "tf9", type: "tf", title: "平静风浪以后，门徒彼此说：“这到底是谁，连风和海也听从他了？”", ans: "T", desc: "对。可 4:41 经文完全吻合。" }
+];
+
+// 核心功能：根据本次抽中的填空题，动态精准生成 Answer Pool
+const DISTRACTOR_WORDS_CH4 = ["葡萄树", "桌子", "箱子", "麦饼", "网", "五倍", "岸上", "船头", "无花果", "信心的手"];
+
+function generateDynamicAnswerPool(selectedQuestions) {
+  const answerSet = new Set();
+  selectedQuestions.forEach(q => {
+    if (q.type === "fill" && q.blanks) {
+      q.blanks.forEach(b => {
+        const primaryAns = b.ans.split("|")[0].trim();
+        if (primaryAns) answerSet.add(primaryAns);
+      });
+    }
+  });
+
+  const shuffledDistractors = shuffleArray(DISTRACTOR_WORDS_CH4);
+  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDistractors[i]);
+  }
+
+  return shuffleArray(Array.from(answerSet));
+}
+
+let activeQuestionSet = [];
+let activeDynamicWordPool = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch4_quiz_pool_v1";
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function initQuiz(forceRegenerate = false) {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeQuestionSet = parsed.questions || [];
+      activeDynamicWordPool = parsed.wordPool || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  // 严格从 50 题题库中洗牌抽取 50 题（全覆盖）
+  const shuffledPool = shuffleArray(MASTER_QUESTION_POOL);
+  const selected = shuffledPool.slice(0, 50);
+
+  // 按三大题型分类排序：填空 -> 选择/排序 -> 是非
+  const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
+  activeQuestionSet = selected.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  // 动态匹配专属词库
+  activeDynamicWordPool = generateDynamicAnswerPool(activeQuestionSet);
+
+  saveQuizState({});
+  renderQuizUI();
+}
+
+function regenerateQuiz() {
+  if (confirm("确定要重新随机抽取 50 题并刷新专属词库吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
+function renderQuizUI() {
+  const container = document.getElementById("quiz-sections-container");
+  container.innerHTML = "";
+
+  const groups = {
+    "fill": { title: "第一部分：填空题", desc: "请参考下方专为此卷生成的词库填入空格（点击词汇填入，点击空格反选清空）：", list: [] },
+    "radio": { title: "第二部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeQuestionSet.forEach(q => {
+    if (groups[q.type]) groups[q.type].list.push(q);
+  });
+
+  let globalQuestionCounter = 1;
+
+  ["fill", "radio", "tf"].forEach(typeKey => {
+    const grp = groups[typeKey];
+    if (grp.list.length === 0) return;
+
+    const startNum = globalQuestionCounter;
+    const endNum = globalQuestionCounter + grp.list.length - 1;
+
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    // 专属置顶 Answer Pool
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
+    }
+
+    grp.list.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        item.innerHTML = `
+          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
+            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        let optsHtml = `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        optsHtml += `</div>`;
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          ${optsHtml}
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "tf") {
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="opt-group" style="flex-direction:row; max-width:280px;">
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      }
+
+      container.appendChild(item);
+      globalQuestionCounter++;
+    });
+  });
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
+  calculateAndUpdateTotals(0);
+}
+
+function renderWordBank() {
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  const shuffledWords = shuffleArray(activeDynamicWordPool);
+  shuffledWords.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
+  });
+}
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
+  document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
+}
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
+  }
+}
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
+function getUserAnswers() {
+  const answers = {};
+  document.querySelectorAll("#quiz-sections-container input").forEach(el => {
+    if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
+    }
+  });
+  return answers;
+}
+
+function saveQuizState(answers) {
+  const data = {
+    questions: activeQuestionSet,
+    wordPool: activeDynamicWordPool,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
+}
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+  const total = activeQuestionSet.length;
+
+  activeQuestionSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "radio" || q.type === "tf") {
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。出处：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score) {
+  const total = activeQuestionSet.length;
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
+</script>
+
+</body>
+</html>
