@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第五章 圣经比赛备战指南与测验</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .adaptive-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .adaptive-container { padding: 12px 10px 50px 10px; }
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 24px 18px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
+
+  /* 导航栏 */
+  .nav-tabs {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    background: transparent;
+    padding: 11px 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  /* 控制台卡片 */
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .stat-group { display: flex; gap: 18px; align-items: center; }
+  .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 18px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    margin: 0 0 14px 0;
+  }
+
+  .section-h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 20px 0 10px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .section-h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 12px 0 6px 0;
+  }
+
+  .highlight-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #166534;
+  }
+  .trap-box {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+  }
+  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
+
+  .notice-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #991b1b;
+  }
+
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .info-table th, .info-table td {
+    border: 1px solid var(--border);
+    padding: 9px 12px;
+    text-align: left;
+  }
+  .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  .type-section-header {
+    background: #f1f5f9;
+    border-left: 5px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 24px 0 16px 0;
+  }
+  .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
+  .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
+
+  /* 填空题专属词库 Pool */
+  .word-bank-box {
+    background: #eff6ff;
+    border: 2px dashed #93c5fd;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 12px 0 18px 0;
+  }
+  .word-bank-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip {
+    background: #ffffff;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .word-chip:hover, .word-chip:active {
+    background: var(--accent);
+    color: white;
+  }
+
+  .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    background: #ffffff;
+  }
+  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .blank-input {
+    border: none;
+    border-bottom: 2.5px solid #64748b;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #0f172a;
+    text-align: center;
+    margin: 0 4px;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .blank-input:focus, .blank-input.active-blank {
+    outline: none;
+    border-bottom-color: var(--accent);
+    background: #dbeafe;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+  }
+  .blank-input.has-val {
+    background: #e0f2fe;
+    color: #0369a1;
+    border-bottom-color: #0284c7;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="adaptive-container">
+  <!-- 顶部返回主页导航条 -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+    <a href="index.html" style="display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); padding: 7px 13px; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none;">🏠 返回主页</a>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
+  </div>
+
+  <div class="header">
+    <h1>《马可福音》第五章 备战指南与测验</h1>
+    <p>格拉森赶鬼 ＋ 患血漏女人 ＋ 睚鲁女儿复活 ＋ 50 题精选互动全真测验</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 易混人物与矩阵</button>
+    <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
+  </div>
+
+  <!-- TAB 1: 备战指南大地图 -->
+  <div id="tab-guide" class="tab-content active">
+    <div class="card">
+      <div class="card-title">一、先掌握第 5 章的「大地图」</div>
+      <table class="info-table">
+        <thead>
+          <tr><th>段落</th><th>主要内容</th><th>Quiz 重要度</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>5:1–20</td><td>格拉森赶鬼；群鬼进入猪群</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>5:21–34</td><td>睚鲁求耶稣救女；患血漏女人摸衣裳得医治</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>5:35–43</td><td>闺女被报死；耶稣使睚鲁女儿复活</td><td>⭐⭐⭐⭐⭐</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        <strong>🔥 第5章主线贯通：</strong><br>
+        渡到格拉森 → 赶出群鬼 → 入约二千猪群投海 → 众人求耶稣离开 → 得医者往低加坡里传扬 → 渡回海边 → 睚鲁俯伏求女 → 患病十二年女人摸衣裳痊愈 → 报信女死 → 不要怕只要信 → 大利大古米！
+      </div>
+
+      <div class="section-h2">第一部分：5:1–20 格拉森赶鬼（超高频考点）</div>
+      <p>① <strong>地点背景</strong>：到了海那边<strong>格拉森人的地方</strong>。耶稣一下船，就有一个被污鬼附着的人从<strong>坟茔里</strong>出来迎着祂（5:1-2）。</p>
+      <p>② <strong>被附者的异常动作</strong>：常住在坟茔里，没有人能捆住他，就是用铁链也不能；铁链被他挣断，脚镣被他弄碎；<strong>昼夜在坟茔里和山中喊叫，又用石头砍自己</strong>（5:3-5）。</p>
+      <p>③ <strong>污鬼的称呼与请求</strong>：远远拜耶稣大声喊叫：<strong>「至高神的儿子耶稣，我与你有什么相干？我指着神恳求你，不要叫我受苦！」</strong>（5:7）</p>
+      <p>④ <strong>名字的含义</strong>：耶稣问：「你名叫什么？」它回答：<strong>「我名叫『群』，因为我们多的缘故。」</strong>（5:9，注意：“群”是鬼的回答，非人名）。</p>
+      <p>⑤ <strong>二千猪群投海</strong>：山坡上有一大群猪吃食，鬼央求打发进入猪里。耶稣准了它们，那群猪闯下山崖，投在海里淹死了，<strong>数目约有二千</strong>（5:11-13）。</p>
+      <p>⑥ <strong>众人的恐惧反应</strong>：众人来到见被鬼附的人<strong>坐着、穿上衣服、心里明白过来</strong>，就<strong>害怕</strong>，转而<strong>求耶稣离开他们的境界</strong>（5:15-17）。</p>
+      <p>⑦ <strong>戏剧性反差（使命委派）</strong>：被医治的人恳求与耶稣同在，耶稣却<strong>不许</strong>，吩咐他：<strong>「你回家去，到你的亲属那里，将主为你所做的是何等大的事，是怎样怜悯你，都告诉他们。」</strong>那人就在<strong>低加坡里</strong>传扬开来（5:18-20）。</p>
+
+      <div class="section-h2">第二部分：5:21–34 睚鲁与患血漏的女人（双线交错）</div>
+      <p>① <strong>管会堂的睚鲁</strong>：睚鲁见耶稣就<strong>俯伏在祂脚前</strong>，再三求祂说：<strong>「我的小女儿快要死了，求你去按手在她身上，使她痊愈，得以活了。」</strong>（5:22-23，注意：此时女儿是快要死，而非已死）。</p>
+      <p>② <strong>患血漏女人的苦况</strong>：患了<strong>十二年的血漏</strong>；在好些医生手里受了许多苦，花尽所有的反倒更重（5:25-26）。</p>
+      <p>③ <strong>信心的一摸</strong>：杂在众人中间摸耶稣的衣裳，心里说：<strong>「我只摸他的衣裳，就必痊愈。」</strong>血漏的源头立刻干了（5:27-29）。</p>
+      <p>④ <strong>能力的流出与追问</strong>：耶稣觉得有能力从自己身上出去，转过来问：<strong>「谁摸我的衣裳？」</strong>门徒答：「你看众人拥挤你，还说谁摸我吗？」（5:30-31）。</p>
+      <p>⑤ <strong>当面认信与平安祝福</strong>：女人恐惧战兢俯伏将实情全说出来。耶稣说：<strong>「女儿，你的信救了你，平平安安地回去吧！你的灾病痊愈了。」</strong>（5:33-34）。</p>
+
+      <div class="section-h2">第三部分：5:35–43 睚鲁女儿复活</div>
+      <p>① <strong>噩耗传来</strong>：有人从管会堂家里来说：「你的女儿死了，何必还劳动先生呢？」（5:35）。</p>
+      <p>② <strong>定海神针金句</strong>：耶稣听见就对管会堂的说：<strong>「不要怕，只要信！」</strong>（5:36）。</p>
+      <p>③ <strong>核心见证团</strong>：耶稣不许别人跟随，只带着<strong>彼得、雅各、和雅各的兄弟约翰</strong>同去（5:37）。</p>
+      <p>④ <strong>嗤笑与撵出</strong>：进家见人乱嚷哭泣哀号，耶稣说：「孩子不是死了，是睡着了。」众人嗤笑祂。耶稣把众人撵出去，只带<strong>孩子的父母和同来的门徒</strong>进内（5:38-40）。</p>
+      <p>⑤ <strong>大利大古米</strong>：拉着孩子的手说：<strong>「大利大古米！」</strong>翻出来就是：<strong>「闺女，我吩咐你起来！」</strong>（5:41）。</p>
+      <p>⑥ <strong>女童复起与最后细节</strong>：女孩<strong>立刻起来走，她已经十二岁了</strong>。众人大大惊奇，耶稣切切嘱咐不要叫人知道，并<strong>吩咐给她东西吃</strong>（5:42-43）。</p>
+    </div>
+  </div>
+
+  <!-- TAB 2: 易混人物与矩阵 -->
+  <div id="tab-traps" class="tab-content">
+    <div class="card">
+      <div class="card-title">🧠 第五章双线核心对比矩阵</div>
+      <table class="info-table">
+        <thead><tr><th>对比项目</th><th>患血漏的女人</th><th>管会堂的女儿</th></tr></thead>
+        <tbody>
+          <tr><td><strong>数字关键纽带</strong></td><td><strong>患病 12 年</strong>（漫长受苦）</td><td><strong>年龄 12 岁</strong>（生命花季）</td></tr>
+          <tr><td><strong>身份境遇</strong></td><td>贫穷无名、受尽医生之苦、花尽所有</td><td>公职尊贵之家的爱女、病重快死</td></tr>
+          <tr><td><strong>求治动作</strong></td><td>暗暗在人群背后“摸衣裳”</td><td>父亲当众俯伏“求耶稣按手”</td></tr>
+          <tr><td><strong>医治时刻</strong></td><td>在前往睚鲁家的半路上即时痊愈</td><td>死信传来后，在闺房中被拉手复活</td></tr>
+          <tr><td><strong>耶稣赐言</strong></td><td>“女儿，你的信救了你，平平安安回去吧”</td><td>“不要怕，只要信！” / “大利大古米！”</td></tr>
+        </tbody>
+      </table>
+
+      <div class="notice-box">
+        <strong>🚨 第五章十大高危失分陷阱：</strong><br>
+        1. 污鬼的名字回答是<strong>「群」</strong>，不是被附之人的本名（5:9）。<br>
+        2. 投海淹死的猪群数目<strong>约有二千</strong>，不是二百（5:13）。<br>
+        3. 众人看见被医好的人坐着明白过来，表现是<strong>「害怕」并求耶稣离开</strong>，不是欢喜迎接（5:15-17）。<br>
+        4. 被治好的人想跟随耶稣，耶稣却叫他<strong>「回家去告诉亲属主怜悯他的大事」</strong>并在<strong>低加坡里</strong>传扬（5:19-20）。<br>
+        5. 睚鲁来求耶稣时，女儿是<strong>「快要死了」</strong>，不是已经死了（5:23）。<br>
+        6. 两个十二：女人患病<strong>十二年</strong>；闺女年龄<strong>十二岁</strong>（5:25, 5:42）。<br>
+        7. 耶稣追问“谁摸我”，门徒反诘的是<strong>「你看众人拥挤你」</strong>（5:31）。<br>
+        8. 耶稣带进闺房的只有<strong>彼得、雅各、约翰以及孩子的父母</strong>（5:37, 5:40）。<br>
+        9. <strong>「大利大古米」</strong>翻出来是<strong>「闺女，我吩咐你起来！」</strong>（5:41）。<br>
+        10. 闺女起来走后，耶稣切切嘱咐不要叫人知道，并特别吩咐<strong>「给她东西吃」</strong>（5:43）。
+      </div>
+
+      <p style="font-size:15px; font-weight:bold; margin:16px 0 6px 0;">🗺️ 第五章地点与轨迹：</p>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:8px; font-size:14.5px; text-align:center;">
+        海那边格拉森人的地方（坟茔 / 山坡） → 渡回海那边岸上 → 往睚鲁家的路上 → 睚鲁家里
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 必背经文与口诀 -->
+  <div id="tab-verses" class="tab-content">
+    <div class="card">
+      <div class="card-title">第五章 7 处必须背诵经文</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>1. 马可 5:9</strong>「耶稣问他说：『你名叫什么？』回答说：『我名叫群，因为我们多的缘故。』」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>2. 马可 5:19</strong>「耶稣不许，却对他说：『你回家去，到你的亲属那里，将主为你所做的是何等大的事，是怎样怜悯你，都告诉他们。』」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>3. 马可 5:28</strong>「因为她说：『我只摸他的衣裳，就必痊愈。』」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>4. 马可 5:34</strong>「耶稣对她说：『女儿，你的信救了你，平平安安地回去吧！你的灾病痊愈了。』」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>5. 马可 5:36</strong>「耶稣听见所说的话，就对管会堂的说：『不要怕，只要信！』」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>6. 马可 5:39</strong>「就进去对他们说：『为什么乱嚷哭泣呢？孩子不是死了，是睡着了。』」
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;">
+        <strong>7. 马可 5:41</strong>「就拉着孩子的手，对她说：『大利大古米！』（翻出来就是说：『闺女，我吩咐你起来！』）」
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 第五章极速通关口诀：</p>
+        <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
+          格拉森人赶群鬼，投海淹死二千猪；得愈见证传亲属，低加坡里播主恩；管会堂者俯伏求，血漏妇人摸衣裳；能力流出干血源，你的信救你平安；死讯传来莫害怕，只要坚信神大能；三徒双亲入内堂，大利大古米复起；女孩十二起来走，切切吩咐给她吃！
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: 50 题随机测验 (按题型分组) -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="dashboard">
+      <div class="stat-group">
+        <div class="stat-box">
+          <div class="stat-val" id="total-score">0 / 50</div>
+          <div class="stat-lbl">答对题数</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="accuracy-rate">0%</div>
+          <div class="stat-lbl">正确率</div>
+        </div>
+      </div>
+      <div>
+        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+      </div>
+    </div>
+
+    <!-- 试题按题型组织呈现容器 -->
+    <div id="quiz-sections-container"></div>
+  </div>
+</div>
+
+<script>
+// 全量 MASTER QUESTION POOL (基于 Mark Chapter 5.docx 核心细节构建的 50 题全真题库)
+const MASTER_QUESTION_POOL = [
+  // --- 填空题 (10 题) ---
+  { id: "fb1", type: "fill", title: "耶稣问污鬼说：「你名叫什么？」回答说：「我名叫_____，因为我们多的缘故。」", blanks: [{id:"f1_1", ans:"群"}], desc: "可 5:9 我名叫群，因为我们多的缘故。" },
+  { id: "fb2", type: "fill", title: "进入猪群的污鬼使那群猪闯下山崖投在海里淹死了，猪的数目约有_____。", blanks: [{id:"f2_1", ans:"二千|2000"}], desc: "可 5:13 猪的数目约有二千。" },
+  { id: "fb3", type: "fill", title: "耶稣对得洁净的人说：「你回家去，到你的_____那里，将主为你所做的是何等大的事，是怎样_____你，都告诉他们。」", blanks: [{id:"f3_1", ans:"亲属"},{id:"f3_2", ans:"怜悯"}], desc: "可 5:19 到你的亲属那里作见证。" },
+  { id: "fb4", type: "fill", title: "那人在_____传扬耶稣为他作了何等大的事，众人就都希奇。", blanks: [{id:"f4_1", ans:"低加坡里"}], desc: "可 5:20 在低加坡里传扬。" },
+  { id: "fb5", type: "fill", title: "有一个管会堂的人，名叫_____，来见耶稣，就俯伏在他脚前。", blanks: [{id:"f5_1", ans:"睚鲁"}], desc: "可 5:22 有一个管会堂的人名叫睚鲁。" },
+  { id: "fb6", type: "fill", title: "有一个女人，患了_____年的血漏，在好些医生手里受了许多苦。", blanks: [{id:"f6_1", ans:"十二|12"}], desc: "可 5:25 患了十二年的血漏。" },
+  { id: "fb7", type: "fill", title: "女人心里说：「我只摸他的_____，就必痊愈。」", blanks: [{id:"f7_1", ans:"衣裳"}], desc: "可 5:28 我只摸他的衣裳，就必痊愈。" },
+  { id: "fb8", type: "fill", title: "耶稣对她说：「女儿，你的_____救了你，平平安安地回去吧！你的灾病痊愈了。」", blanks: [{id:"f8_1", ans:"信"}], desc: "可 5:34 女儿，你的信救了你。" },
+  { id: "fb9", type: "fill", title: "耶稣听见所说的话，就对管会堂的说：「不要_____，只要_____！」", blanks: [{id:"f9_1", ans:"怕"},{id:"f9_2", ans:"信"}], desc: "可 5:36 不要怕，只要信！" },
+  { id: "fb10", type: "fill", title: "耶稣拉着孩子的手，对她说：「_____！」翻出来就是说：「闺女，我吩咐你起来！」", blanks: [{id:"f10_1", ans:"大利大古米"}], desc: "可 5:41 大利大古米！" },
+
+  // --- 选择题与排序题 (26 题) ---
+  { id: "mc1", type: "radio", title: "耶稣渡海来到格拉森人的地方，那被污鬼附着的人是从哪里出来迎着祂？", opts: [{v:"a",t:"A. 会堂里"},{v:"b",t:"B. 坟茔里"},{v:"c",t:"C. 城门外"},{v:"d",t:"D. 海边船上"}], ans: "b", desc: "可 5:2 从坟茔里出来迎着他。" },
+  { id: "mc2", type: "radio", title: "格拉森被鬼附的人常有什么疯狂异常的举动？", opts: [{v:"a",t:"A. 昼夜喊叫，用石头砍自己"},{v:"b",t:"B. 住在树林里不吃不喝"},{v:"c",t:"C. 在街市上向众人要钱"},{v:"d",t:"D. 跳入海中游泳"}], ans: "a", desc: "可 5:5 昼夜在坟茔里和山中喊叫，又用石头砍自己。" },
+  { id: "mc3", type: "radio", title: "被鬼附的人远远看见耶稣，跑过去拜祂并如何呼叫祂？", opts: [{v:"a",t:"A. 大卫的子孙耶稣"},{v:"b",t:"B. 至高神的儿子耶稣"},{v:"c",t:"C. 加利利的先知"},{v:"d",t:"D. 犹太人的王"}], ans: "b", desc: "可 5:7 至高神的儿子耶稣，我与你有什么相干？" },
+  { id: "mc4", type: "radio", title: "污鬼央求耶稣打发它们进入什么动物里面？", opts: [{v:"a",t:"A. 羊群"},{v:"b",t:"B. 牛群"},{v:"c",t:"C. 猪群"},{v:"d",t:"D. 鱼群"}], ans: "c", desc: "可 5:12 求你打发我们往猪里附着去。" },
+  { id: "mc5", type: "radio", title: "城里和乡下的人来到耶稣那里，看见那被鬼附的人变得如何？", opts: [{v:"a",t:"A. 昏迷不醒"},{v:"b",t:"B. 坐着、穿上衣服、心里明白过来"},{v:"c",t:"C. 还在大声呼叫"},{v:"d",t:"D. 痛哭流涕"}], ans: "b", desc: "可 5:15 看见那被鬼附的人坐着，穿上衣服，心里明白过来。" },
+  { id: "mc6", type: "radio", title: "格拉森当地的众人看见神迹后，对耶稣有什么反应？", opts: [{v:"a",t:"A. 欢喜快乐接祂进城"},{v:"b",t:"B. 害怕，并央求耶稣离开他们的境界"},{v:"c",t:"C. 拿石头打祂"},{v:"d",t:"D. 摆设筵席招待祂"}], ans: "b", desc: "可 5:15-17 他们就害怕，便央求耶稣离开他们的境界。" },
+  { id: "mc7", type: "radio", title: "被治好的人恳求要和耶稣同在，耶稣如何回应他？", opts: [{v:"a",t:"A. 准许他上了船"},{v:"b",t:"B. 叫他立刻进会堂受洗"},{v:"c",t:"C. 不许，吩咐他回家到亲属那里作见证"},{v:"d",t:"D. 吩咐他什么都不可告诉人"}], ans: "c", desc: "可 5:19 耶稣不许，吩咐他回家告诉亲属主怜悯他的大事。" },
+  { id: "mc8", type: "radio", title: "睚鲁来见耶稣时，他的公职身份是什么？", opts: [{v:"a",t:"A. 罗马百夫长"},{v:"b",t:"B. 会堂里的管会堂的人"},{v:"c",t:"C. 税吏长"},{v:"d",t:"D. 祭司长"}], ans: "b", desc: "可 5:22 有一个管会堂的人，名叫睚鲁。" },
+  { id: "mc9", type: "radio", title: "睚鲁最初来求耶稣时，他女儿当时的实际情况是怎样？", opts: [{v:"a",t:"A. 已经断气了"},{v:"b",t:"B. 快要死了"},{v:"c",t:"C. 患了热病"},{v:"d",t:"D. 被鬼附着"}], ans: "b", desc: "可 5:23 我的小女儿快要死了，求你去按手。" },
+  { id: "mc10", type: "radio", title: "患血漏的妇人花了多少钱在医生手里？结局如何？", opts: [{v:"a",t:"A. 花尽所有的，一点不见好，病势反倒更重"},{v:"b",t:"B. 花了一半家产，病得医治一半"},{v:"c",t:"C. 没有花钱，医生不肯医"},{v:"d",t:"D. 借了许多债，病情稳定"}], ans: "a", desc: "可 5:26 花尽了他所有的，一点也不见好，病势反倒更重了。" },
+  { id: "mc11", type: "radio", title: "患血漏的妇人是在哪里摸耶稣的衣裳？", opts: [{v:"a",t:"A. 站在耶稣面前"},{v:"b",t:"B. 从后头来，杂在众人中间"},{v:"c",t:"C. 跪在会堂门口"},{v:"d",t:"D. 在家里等耶稣来"}], ans: "b", desc: "可 5:27 从后头来，杂在众人中间，摸耶稣的衣裳。" },
+  { id: "mc12", type: "radio", title: "耶稣觉得身上有能力出去，问“谁摸我”，门徒如何回答？", opts: [{v:"a",t:"A. “是一个女人摸的”"},{v:"b",t:"B. “你看众人拥挤你，还说谁摸我吗？”"},{v:"c",t:"C. “没有人摸你”"},{v:"d",t:"D. “彼得摸了你”"}], ans: "b", desc: "可 5:31 你看众人拥挤你，还说谁摸我吗？" },
+  { id: "mc13", type: "radio", title: "妇人得知自己痊愈后，以怎样的态度来到耶稣面前？", opts: [{v:"a",t:"A. 欢呼跳跃"},{v:"b",t:"B. 恐惧战兢，俯伏在耶稣跟前诉说实情"},{v:"c",t:"C. 悄悄溜走"},{v:"d",t:"D. 向众人收钱"}], ans: "b", desc: "可 5:33 妇人恐惧战兢，俯伏在耶稣跟前，将实情全告诉他。" },
+  { id: "mc14", type: "radio", title: "有人从睚鲁家里来报信说了什么？", opts: [{v:"a",t:"A. “你女儿病好了”"},{v:"b",t:"B. “你女儿死了，何必还劳动先生呢？”"},{v:"c",t:"C. “家里来了许多客人”"},{v:"d",t:"D. “快请医生来”"}], ans: "b", desc: "可 5:35 你的女儿死了，何必还劳动先生呢？" },
+  { id: "mc15", type: "radio", title: "耶稣往睚鲁家去使女孩复活时，只带了哪三位门徒？", opts: [{v:"a",t:"A. 安得烈、腓力、多马"},{v:"b",t:"B. 彼得、雅各、和雅各的兄弟约翰"},{v:"c",t:"C. 马太、犹大、达太"},{v:"d",t:"D. 彼得、约翰、安得烈"}], ans: "b", desc: "可 5:37 除了彼得、雅各，和雅各的兄弟约翰，不许别人跟随。" },
+  { id: "mc16", type: "radio", title: "耶稣进了睚鲁的家，看见众人乱嚷哭泣，说了什么引来众人嗤笑？", opts: [{v:"a",t:"A. “孩子不是死了，是睡着了。”"},{v:"b",t:"B. “你们不要吵，我很累。”"},{v:"c",t:"C. “这孩子本来就没有病。”"},{v:"d",t:"D. “拿钱来我就医治她。”"}], ans: "a", desc: "可 5:39 为什么乱嚷哭泣呢？孩子不是死了，是睡着了。" },
+  { id: "mc17", type: "radio", title: "睚鲁复活的女儿当时年龄有多大？", opts: [{v:"a",t:"A. 8 岁"},{v:"b",t:"B. 10 岁"},{v:"c",t:"C. 12 岁"},{v:"d",t:"D. 15 岁"}], ans: "c", desc: "可 5:42 女孩立刻起来走，她已经十二岁了。" },
+  { id: "mc18", type: "radio", title: "女孩复活起来行走后，耶稣切切嘱咐他们之后，又特别吩咐了什么细节？", opts: [{v:"a",t:"A. 吩咐她去献祭"},{v:"b",t:"B. 吩咐给她东西吃"},{v:"c",t:"C. 吩咐她继续睡觉"},{v:"d",t:"D. 吩咐她向官长作见证"}], ans: "b", desc: "可 5:43 又吩咐给她东西吃。" },
+  { id: "mc19", type: "radio", title: "【数字陷阱】关于马可福音第 5 章中的两个“十二”，下列哪项完全正确？", opts: [{v:"a",t:"A. 女人患病12个月；女孩12岁"},{v:"b",t:"B. 女人患病12年；女孩12岁"},{v:"c",t:"C. 猪有1200只；女孩12岁"},{v:"d",t:"D. 门徒有12人被带入内房；女人患病12年"}], ans: "b", desc: "女人患血漏十二年，闺女年龄十二岁。" },
+  { id: "mc20", type: "radio", title: "【主客体陷阱】是谁求耶稣不要叫它们离开那地方？", opts: [{v:"a",t:"A. 格拉森的百姓"},{v:"b",t:"B. 附在那人身上的污鬼"},{v:"c",t:"C. 放猪的人"},{v:"d",t:"D. 门徒"}], ans: "b", desc: "可 5:10 就再三地求耶稣，不要叫他们离开那地方。" },
+  { id: "mc21", type: "radio", title: "【使命陷阱】在低加坡里传扬耶稣所作大事的人是谁？", opts: [{v:"a",t:"A. 睚鲁"},{v:"b",t:"B. 患血漏得医治的妇人"},{v:"c",t:"C. 原来被群鬼附着的人"},{v:"d",t:"D. 放猪的人"}], ans: "c", desc: "可 5:20 那人就走了，在低加坡里传扬耶稣为他作了何等大的事。" },
+  { id: "mc22", type: "radio", title: "【排序题】请按照格拉森赶鬼的事件先后排序：<br>① 猪群闯下山崖投海 ② 鬼回答名叫“群” ③ 耶稣吩咐他回家作见证 ④ 众人害怕求耶稣离开", opts: [{v:"a", t:"A. ② → ① → ④ → ③"},{v:"b", t:"B. ① → ② → ④ → ③"},{v:"c", t:"C. ② → ④ → ① → ③"},{v:"d", t:"D. ② → ① → ③ → ④"}], ans: "a", desc: "名叫群(5:9) → 投海(5:13) → 众人求离(5:17) → 吩咐见证(5:19)。" },
+  { id: "mc23", type: "radio", title: "【排序题】请按照患血漏妇人得医治的过程先后排序：<br>① 妇人俯伏全说出实情 ② 摸耶稣的衣裳 ③ 耶稣转过来问谁摸我 ④ 血漏源头立刻干了", opts: [{v:"a", t:"A. ② → ④ → ③ → ①"},{v:"b", t:"B. ② → ③ → ④ → ①"},{v:"c", t:"C. ④ → ② → ③ → ①"},{v:"d", t:"D. ② → ④ → ① → ③"}], ans: "a", desc: "摸衣裳(5:27) → 源头干了(5:29) → 追问谁摸(5:30) → 述说实情(5:33)。" },
+  { id: "mc24", type: "radio", title: "【排序题】请按照睚鲁女儿事件发展排序：<br>① 传话人报信说女儿死了 ② 睚鲁求耶稣按手救女 ③ 耶稣说大利大古米闺女起来 ④ 耶稣说不要怕只要信", opts: [{v:"a", t:"A. ② → ① → ④ → ③"},{v:"b", t:"B. ① → ② → ④ → ③"},{v:"c", t:"C. ② → ④ → ① → ③"},{v:"d", t:"D. ② → ① → ③ → ④"}], ans: "a", desc: "求按手(5:23) → 报死讯(5:35) → 只要信(5:36) → 复活(5:41)。" },
+  { id: "mc25", type: "radio", title: "【进屋成员陷阱】耶稣进入闺房使女孩起来时，带了谁同在？（多选）", opts: [{v:"a",t:"A. 彼得、雅各、约翰"},{v:"b",t:"B. 孩子的父母"},{v:"c",t:"C. 所有十二门徒"},{v:"d",t:"D. 啼哭哀号的众人"}], ans: ["a","b"], desc: "可 5:40 带着孩子的父母和跟随的人进了孩子所在的地方。" },
+  { id: "mc26", type: "radio", title: "“大利大古米”是哪种语言翻出来的？", opts: [{v:"a",t:"A. 希腊文"},{v:"b",t:"B. 亚兰文"},{v:"c",t:"C. 拉丁文"},{v:"d",t:"D. 希伯来文"}], ans: "b", desc: "大利大古米是亚兰文音译。" },
+
+  // --- 是非判断题 (14 题) ---
+  { id: "tf1", type: "tf", title: "格拉森被鬼附着的人，没有人能捆住他，就是用铁链也不能。", ans: "T", desc: "对。可 5:3 经文完全吻合。" },
+  { id: "tf2", type: "tf", title: "被鬼附的人看见耶稣就远远跑开躲在坟茔里，不敢见祂。", ans: "F", desc: "错。可 5:6 他远远地看见耶稣，就跑过去拜他。" },
+  { id: "tf3", type: "tf", title: "污鬼回答耶稣说：“我名叫群，因为我们多的缘故。”", ans: "T", desc: "对。可 5:9 经文完全吻合。" },
+  { id: "tf4", type: "tf", title: "投进海里淹死的那群猪，数目大约有二百只。", ans: "F", desc: "错。可 5:13 明确记载“约有二千”，不是二百。" },
+  { id: "tf5", type: "tf", title: "格拉森当地人看见那人坐着、穿上衣服、明白过来，就欢欢喜喜地留耶稣常住。", ans: "F", desc: "错。可 5:15-17 他们就害怕，便央求耶稣离开他们的境界。" },
+  { id: "tf6", type: "tf", title: "耶稣允许那个得洁净的人上船与祂一同离开格拉森去传道。", ans: "F", desc: "错。可 5:19 耶稣不许，吩咐他回家到亲属那里作见证。" },
+  { id: "tf7", type: "tf", title: "管会堂的睚鲁来求耶稣时，带着极为恭敬的态度俯伏在耶稣脚前。", ans: "T", desc: "对。可 5:22 见耶稣就俯伏在他脚前。" },
+  { id: "tf8", type: "tf", title: "患血漏的女人相信只要摸到耶稣的衣裳就必痊愈。", ans: "T", desc: "对。可 5:28 她说我只摸他的衣裳就必痊愈。" },
+  { id: "tf9", type: "tf", title: "患血漏的妇人摸了衣裳后，过了好几天病才渐渐好转。", ans: "F", desc: "错。可 5:29 她的血漏源头立刻干了。" },
+  { id: "tf10", type: "tf", title: "面对拥挤的人群，彼得等门徒对耶稣追问“谁摸我”感到难以理解。", ans: "T", desc: "对。可 5:31 门徒说你看众人拥挤你还说谁摸我吗。" },
+  { id: "tf11", type: "tf", title: "当管会堂家里传来女孩死讯时，耶稣对睚鲁说：“不要怕，只要信！”", ans: "T", desc: "对。可 5:36 经文完全吻合。" },
+  { id: "tf12", type: "tf", title: "在睚鲁家里，那些哭泣哀号的人听见耶稣说孩子是睡着了，就感动得痛哭。", ans: "F", desc: "错。可 5:40 众人听见就嗤笑耶稣。" },
+  { id: "tf13", type: "tf", title: "「大利大古米」翻译出来的意思是：「平平安安地回去吧！」", ans: "F", desc: "错。可 5:41 翻出来是说：「闺女，我吩咐你起来！」" },
+  { id: "tf14", type: "tf", title: "女孩复活后，耶稣切切嘱咐不要叫人知道，并吩咐给她东西吃。", ans: "T", desc: "对。可 5:43 经文完全吻合。" }
+];
+
+// 核心功能：根据本次抽中的填空题，动态精准过滤出最相关的 Answer Pool
+const DISTRACTOR_POOL_CH5 = ["迦百农", "二百", "衣服", "睡着了", "二万", "彼得", "按手", "撒但", "十二岁", "十倍"];
+
+function generateDynamicAnswerPool(selectedQuestions) {
+  const answerSet = new Set();
+  selectedQuestions.forEach(q => {
+    if (q.type === "fill" && q.blanks) {
+      q.blanks.forEach(b => {
+        const primaryAns = b.ans.split("|")[0].trim();
+        if (primaryAns) answerSet.add(primaryAns);
+      });
+    }
+  });
+
+  const shuffledDistractors = shuffleArray(DISTRACTOR_POOL_CH5);
+  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDistractors[i]);
+  }
+
+  return shuffleArray(Array.from(answerSet));
+}
+
+let activeQuestionSet = []; 
+let activeDynamicWordPool = []; 
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch5_quiz_pool_v1";
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function initQuiz(forceRegenerate = false) {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeQuestionSet = parsed.questions || [];
+      activeDynamicWordPool = parsed.wordPool || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  // 严格从 50 题题库中洗牌抽取 50 题（全量考卷）
+  const shuffledPool = shuffleArray(MASTER_QUESTION_POOL);
+  const selected = shuffledPool.slice(0, 50);
+
+  // 按题型排序：填空 -> 选择/排序 -> 是非
+  const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
+  activeQuestionSet = selected.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  // 动态匹配专属词库
+  activeDynamicWordPool = generateDynamicAnswerPool(activeQuestionSet);
+
+  saveQuizState({});
+  renderQuizUI();
+}
+
+function regenerateQuiz() {
+  if (confirm("确定要重新随机抽取 50 题并刷新专属词库吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
+function renderQuizUI() {
+  const container = document.getElementById("quiz-sections-container");
+  container.innerHTML = "";
+
+  const groups = {
+    "fill": { title: "第一部分：填空题", desc: "请参考下方专为此卷生成的词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
+    "radio": { title: "第二部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeQuestionSet.forEach(q => {
+    if (groups[q.type]) groups[q.type].list.push(q);
+  });
+
+  let globalQuestionCounter = 1;
+
+  ["fill", "radio", "tf"].forEach(typeKey => {
+    const grp = groups[typeKey];
+    if (grp.list.length === 0) return;
+
+    const startNum = globalQuestionCounter;
+    const endNum = globalQuestionCounter + grp.list.length - 1;
+
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    // 专属置顶 Answer Pool
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
+    }
+
+    grp.list.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        item.innerHTML = `
+          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
+            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        let optsHtml = `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        optsHtml += `</div>`;
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          ${optsHtml}
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "tf") {
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="opt-group" style="flex-direction:row; max-width:280px;">
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      }
+
+      container.appendChild(item);
+      globalQuestionCounter++;
+    });
+  });
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
+  calculateAndUpdateTotals(0);
+}
+
+function renderWordBank() {
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  const shuffledWords = shuffleArray(activeDynamicWordPool);
+  shuffledWords.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
+  });
+}
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
+  document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
+}
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
+  }
+}
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
+function getUserAnswers() {
+  const answers = {};
+  document.querySelectorAll("#quiz-sections-container input").forEach(el => {
+    if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
+    }
+  });
+  return answers;
+}
+
+function saveQuizState(answers) {
+  const data = {
+    questions: activeQuestionSet,
+    wordPool: activeDynamicWordPool,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
+}
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+  const total = activeQuestionSet.length;
+
+  activeQuestionSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "radio" || q.type === "tf") {
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。出处：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score) {
+  const total = activeQuestionSet.length;
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
+</script>
+
+</body>
+</html>
