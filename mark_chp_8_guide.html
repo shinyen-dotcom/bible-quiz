@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第八章 圣经比赛备战指南与测验</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .adaptive-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .adaptive-container { padding: 12px 10px 50px 10px; }
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 24px 18px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
+
+  /* 导航栏 */
+  .nav-tabs {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    background: transparent;
+    padding: 11px 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  /* 控制台卡片 */
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .stat-group { display: flex; gap: 18px; align-items: center; }
+  .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 18px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    margin: 0 0 14px 0;
+  }
+
+  .section-h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 20px 0 10px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .section-h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 12px 0 6px 0;
+  }
+
+  .highlight-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #166534;
+  }
+  .trap-box {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+  }
+  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
+
+  .notice-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14.5px;
+    color: #991b1b;
+  }
+
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    margin: 10px 0;
+  }
+  .info-table th, .info-table td {
+    border: 1px solid var(--border);
+    padding: 9px 12px;
+    text-align: left;
+  }
+  .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  .type-section-header {
+    background: #f1f5f9;
+    border-left: 5px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 24px 0 16px 0;
+  }
+  .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
+  .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
+
+  /* 填空题专属词库 Pool */
+  .word-bank-box {
+    background: #eff6ff;
+    border: 2px dashed #93c5fd;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 12px 0 18px 0;
+  }
+  .word-bank-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip {
+    background: #ffffff;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .word-chip:hover, .word-chip:active {
+    background: var(--accent);
+    color: white;
+  }
+
+  .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    background: #ffffff;
+  }
+  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .blank-input {
+    border: none;
+    border-bottom: 2.5px solid #64748b;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #0f172a;
+    text-align: center;
+    margin: 0 4px;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .blank-input:focus, .blank-input.active-blank {
+    outline: none;
+    border-bottom-color: var(--accent);
+    background: #dbeafe;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+  }
+  .blank-input.has-val {
+    background: #e0f2fe;
+    color: #0369a1;
+    border-bottom-color: #0284c7;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="adaptive-container">
+  <!-- 顶部返回主页导航条 -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+    <a href="index.html" style="display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); padding: 7px 13px; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none;">🏠 返回主页</a>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
+  </div>
+
+  <div class="header">
+    <h1>《马可福音》第八章 备战指南与测验</h1>
+    <p>四千人吃饱 ＋ 彼得认信基督 ＋ 第一次预言受难 ＋ 背十架跟从主[cite: 52]</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 核心图表与陷阱</button>
+    <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
+  </div>
+
+  <!-- TAB 1: 备战指南大地图 -->
+  <div id="tab-guide" class="tab-content active">
+    <div class="card">
+      <div class="card-title">一、先掌握第 8 章的「大地图」</div>
+      <p>马可福音第八章是全书承前启后的枢纽转折：前半章围绕神迹与门徒的愚顽；从 8:27 开始，耶稣将焦点带入「祂是谁」以及「十字架道路与作门徒的代价」[cite: 52]。</p>
+      <table class="info-table">
+        <thead>
+          <tr><th>经文段落</th><th>主要内容</th><th>Quiz 重要度</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>8:1–10</td><td>四千人吃饱（七饼、几条小鱼、七筐子）</td><td>⭐⭐⭐⭐⭐[cite: 52]</td></tr>
+          <tr><td>8:11–13</td><td>法利赛人求从天上来的神迹；耶稣深深叹息</td><td>⭐⭐⭐⭐[cite: 52]</td></tr>
+          <tr><td>8:14–21</td><td>门徒忘记带饼；提防法利赛人和希律的酵</td><td>⭐⭐⭐⭐⭐[cite: 52]</td></tr>
+          <tr><td>8:22–26</td><td>伯赛大医治瞎子（两次按手、人像树木）</td><td>⭐⭐⭐⭐⭐[cite: 52]</td></tr>
+          <tr><td>8:27–30</td><td>凯撒利亚·腓立比路上彼得认信：「你是基督」</td><td>⭐⭐⭐⭐⭐[cite: 52]</td></tr>
+          <tr><td>8:31–33</td><td>第一次预言受难；彼得劝阻被斥为撒但</td><td>⭐⭐⭐⭐⭐[cite: 52]</td></tr>
+          <tr><td>8:34–38</td><td>舍己、背起十字架跟从主；赚全世界赔上生命</td><td>⭐⭐⭐⭐⭐[cite: 52]</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        <strong>🔥 第8章核心主线：</strong><br>
+        四千人吃饱 → 求神迹叹息 → 船上只有一个饼 → 防备法利赛与希律的酵 → 伯赛大瞎子得见 → 彼得认信基督 → 预言受苦受死复活 → 斥责撒但 → 舍己背十架！[cite: 52]
+      </div>
+
+      <div class="section-h2">第一部分：8:1–10 四千人吃饱（切勿与五千人混淆）</div>
+      <p>① <strong>跟随时间</strong>：众人在旷野同耶稣在这里已经<strong>三天</strong>，没有吃的（8:2）[cite: 52]。</p>
+      <p>② <strong>耶稣动慈心</strong>：怜悯他们从远处来，若饿着回去必在路上困乏（8:3）[cite: 52]。</p>
+      <p>③ <strong>现有食物配额</strong>：门徒手里有<strong>七个饼</strong>，还有<strong>几条小鱼</strong>（8:5, 7）[cite: 52]。</p>
+      <p>④ <strong>饱食与零碎</strong>：众人吃饱了，收拾剩下的零碎装满了<strong>七个筐子</strong>（8:8）[cite: 52]。</p>
+      <p>⑤ <strong>就餐人数</strong>：人数约有<strong>四千</strong>（8:9）[cite: 52]。</p>
+      <div class="trap-box">
+        <span class="trap-tag">⚠️ 经典混淆考点</span><br>
+        • 第 6 章五千人：五饼 + 二鱼 → 吃饱男人五千 → 剩下 <strong>十二个篮子</strong>[cite: 49, 52]。<br>
+        • 第 8 章四千人：七饼 + 几条小鱼 → 同在三天 → 吃饱四千人 → 剩下 <strong>七个筐子</strong>[cite: 52]。<br>
+        （口诀：4千 → 7饼 → 7筐）[cite: 52]
+      </div>
+
+      <div class="section-h2">第二部分：8:11–21 求神迹与防备“酵”</div>
+      <p>① <strong>法利赛人的试探</strong>：出来盘问耶稣，求祂显<strong>从天上来的神迹</strong>，想要试验祂（8:11）[cite: 52]。</p>
+      <p>② <strong>耶稣的反应</strong>：<strong>「心里深深地叹息」</strong>，说：「这世代为什么求神迹呢？我实在告诉你们，没有神迹给这世代看。」随即上船离去（8:12-13）[cite: 52]。</p>
+      <p>③ <strong>船上的疏忽与警告</strong>：门徒忘了带饼，在船上<strong>除了一个饼以外</strong>没有别的食物（8:14）[cite: 52]。耶稣警告说：<strong>「你们要谨慎，防备法利赛人的酵和希律的酵。」</strong>（8:15，注意：不可遗漏希律！）[cite: 52]。</p>
+      <p>④ <strong>门徒的物质思维与耶稣的责备</strong>：门徒误以为是因为自己没带饼而议论[cite: 52]。耶稣点出他们的愚顽，连环提问五饼十二篮与七饼七筐，责问道：<strong>「你们还不明白吗？」</strong>（8:17-21）[cite: 52]。</p>
+
+      <div class="section-h2">第三部分：8:22–26 伯赛大医治瞎子（递进式医治）</div>
+      <p>① <strong>地点与带出</strong>：来到<strong>伯赛大</strong>。有人带一个瞎子来求摸他[cite: 52]。耶稣拉着瞎子的手，领他到<strong>村外</strong>（8:22-23）[cite: 52]。</p>
+      <p>② <strong>第一次按手与模糊视觉</strong>：<strong>吐唾沫在他眼睛上，按手在他身上</strong>，问他看见什么[cite: 52]。瞎子抬头说：<strong>「我看见人，他们好像树木，并且行走。」</strong>（8:23-24）[cite: 52]。</p>
+      <p>③ <strong>第二次按手与彻底复原</strong>：耶稣<strong>又按手在他眼睛上</strong>，他定睛一看就复了原，样样都看得清楚了（8:25）[cite: 52]。</p>
+      <p>④ <strong>离去叮嘱</strong>：耶稣打发他回家，说：<strong>「连这村子你也不要进去。」</strong>（8:26）[cite: 52]。</p>
+
+      <div class="section-h2">第四部分：8:27–38 凯撒利亚·腓立比认信与受难预言</div>
+      <p>① <strong>两个问题</strong>：在往<strong>凯撒利亚·腓立比</strong>的村庄路上（8:27）[cite: 52]：<br>
+      • 第一个问题：「人说我是谁？」（回答：施洗约翰、以利亚、先知里的一位）[cite: 52]<br>
+      • 第二个问题：<strong>「你们说我是谁？」</strong>彼得回答说：<strong>「你是基督！」</strong>（8:29）[cite: 52]。</p>
+      <p>② <strong>第一次受难预言（核心要素）</strong>：耶稣禁戒他们不要告诉人，从此教导他们说：<strong>「人子必须受许多的苦，被长老、祭司长和文士弃绝，并且被杀，过三天复活。」</strong>（8:31）[cite: 52]。</p>
+      <p>③ <strong>彼得的劝阻与耶稣的斥责</strong>：彼得拉祂到一边劝祂责备祂[cite: 52]。耶稣看着门徒责备彼得说：<strong>「撒但，退我后边去吧！因为你不体贴神的意思，只体贴人的意思。」</strong>（8:32-33）[cite: 52]。</p>
+      <p>④ <strong>作门徒的十字架代价（全章最高峰金句）</strong>：<br>
+      • <strong>「若有人要跟从我，就当舍己，背起他的十字架来跟从我。」</strong>（8:34）[cite: 52]<br>
+      • <strong>「因为凡要救自己生命的，必丧掉生命；凡为我和福音丧掉生命的，必救了生命。」</strong>（8:35）[cite: 52]<br>
+      • <strong>「人就是赚得全世界，赔上自己的生命，有什么益处呢？人还能拿什么换生命呢？」</strong>（8:36-37）[cite: 52]<br>
+      • 在淫乱罪恶世代把耶稣和祂的道当作可耻的，人子在父荣耀里同圣天使降临时，也要把那人当作可耻的（8:38）[cite: 52]。</p>
+    </div>
+  </div>
+
+  <!-- TAB 2: 易混人物与矩阵 -->
+  <div id="tab-traps" class="tab-content">
+    <div class="card">
+      <div class="card-title">🧠 第八章高频神迹与数字对比矩阵</div>
+      <table class="info-table">
+        <thead><tr><th>对比维度</th><th>五千人吃饱（第 6 章）</th><th>四千人吃饱（第 8 章）</th></tr></thead>
+        <tbody>
+          <tr><td><strong>就餐人群</strong></td><td>男人约有五千人[cite: 49]</td><td>约有四千人（男女老少）[cite: 52]</td></tr>
+          <tr><td><strong>现有食物</strong></td><td><strong>五个饼、两条鱼</strong>[cite: 49]</td><td><strong>七个饼、几条小鱼</strong>[cite: 52]</td></tr>
+          <tr><td><strong>同在天数</strong></td><td>当天日落天晚时[cite: 49]</td><td><strong>同在已经三天</strong>[cite: 52]</td></tr>
+          <tr><td><strong>剩下零碎</strong></td><td><strong>装满十二个篮子</strong>[cite: 49]</td><td><strong>装满七个筐子</strong>[cite: 52]</td></tr>
+          <tr><td><strong>发生背景</strong></td><td>加利利海边旷野（门徒歇歇）[cite: 49]</td><td>外邦/低加波利边境，群众从远处来[cite: 50, 52]</td></tr>
+        </tbody>
+      </table>
+
+      <div class="notice-box">
+        <strong>🚨 第八章十大绝命考点与陷阱：</strong><br>
+        1. 四千人吃饱后剩下的是<strong>「七个筐子」</strong>，五千人吃饱剩下的是<strong>「十二个篮子」</strong>，不可混答！[cite: 52]<br>
+        2. 众人跟随耶稣在这里已经<strong>「三天」</strong>，并非当天[cite: 52]。<br>
+        3. 法利赛人求的是<strong>「从天上来的神迹」</strong>，耶稣的反应是<strong>「心里深深地叹息」</strong>[cite: 52]。<br>
+        4. 船上门徒只有一个饼，耶稣叮嘱防备的是<strong>「法利赛人的酵和希律的酵」</strong>（两者皆有）[cite: 52]。<br>
+        5. 伯赛大瞎子的医治是<strong>两次按手</strong>；第一次看见人<strong>「好像树木，并且行走」</strong>，第二次才<strong>「样样都看得清楚了」</strong>[cite: 52]。<br>
+        6. 治好瞎子后吩咐他<strong>「连这村子你也不要进去」</strong>[cite: 52]。<br>
+        7. 彼得认信基督的发生地点是在<strong>「凯撒利亚·腓立比的村庄路上」</strong>，不是伯赛大[cite: 52]。<br>
+        8. 受难预言次序：<strong>受许多苦 → 被长老祭司长文士弃绝 → 被杀 → 过三天复活</strong>[cite: 52]。<br>
+        9. 耶稣责备彼得为撒但的原因是：<strong>「不体贴神的意思，只体贴人的意思」</strong>[cite: 52]。<br>
+        10. 跟从主的三步要求：<strong>舍己 → 背起十字架 → 跟从我</strong>[cite: 52]。
+      </div>
+
+      <p style="font-size:15px; font-weight:bold; margin:16px 0 6px 0;">🗺️ 第八章地理坐标移动线：</p>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:8px; font-size:14.5px; text-align:center;">
+        海边旷野（四千人吃饱） → 达玛奴他境内（法利赛人求神迹） → 船中渡海（讨论无饼与酵） → 伯赛大（医治瞎子） → 凯撒利亚·腓立比（彼得认基督 / 预言受难）
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 必背经文与口诀 -->
+  <div id="tab-verses" class="tab-content">
+    <div class="card">
+      <div class="card-title">第八章 7 处必须背诵经文</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>1. 马可 8:15</strong>「耶稣嘱咐他们说：『你们要谨慎，防备法利赛人的酵和希律的酵。』」[cite: 52]
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>2. 马可 8:24</strong>「他就抬头一看，说：『我看见人了，他们好像树木，并且行走。』」[cite: 52]
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>3. 马可 8:29</strong>「又问他们说：『你们说我是谁？』彼得回答说：『你是基督。』」[cite: 52]
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>4. 马可 8:31</strong>「从此，他教训他们说：『人子必须受许多的苦，被长老、祭司长和文士弃绝，并且被杀，过三天复活。』」[cite: 52]
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>5. 马可 8:33</strong>「耶稣转过来，看着门徒，就责备彼得说：『撒但，退我后边去吧！因为你不体贴神的意思，只体贴人的意思。』」[cite: 52]
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
+        <strong>6. 马可 8:34</strong>「于是叫众人和门徒来，对他们说：『若有人要跟从我，就当舍己，背起他的十字架来跟从我。』」[cite: 52]
+      </div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;">
+        <strong>7. 马可 8:36–37</strong>「人就是赚得全世界，赔上自己的生命，有什么益处呢？人还能拿什么换生命呢？」[cite: 52]
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 第八章极速背诵通关口诀：</p>
+        <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
+          四千同在已经三天，七饼小鱼剩七筐；法利赛人求天神迹，耶稣深深发叹息；船中一饼防双酵，五饼七饼岂不知；伯赛大村外二次按手，见人如树终看清；腓立比路上认基督，预言受死三日活；彼得阻拦遭斥责，体贴人意成撒但；舍己跟从背十架，赚得世界丧生命！[cite: 52]
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: 50 题随机测验 (按题型分组) -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="dashboard">
+      <div class="stat-group">
+        <div class="stat-box">
+          <div class="stat-val" id="total-score">0 / 50</div>
+          <div class="stat-lbl">答对题数</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="accuracy-rate">0%</div>
+          <div class="stat-lbl">正确率</div>
+        </div>
+      </div>
+      <div>
+        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+      </div>
+    </div>
+
+    <!-- 试题按题型组织呈现容器 -->
+    <div id="quiz-sections-container"></div>
+  </div>
+</div>
+
+<script>
+// 全量 MASTER QUESTION POOL (基于 Mark Chapter 8.docx 提炼的高频 50 题真实题库)
+const MASTER_QUESTION_POOL = [
+  // --- 填空题 (10 题) ---
+  { id: "c8_fb1", type: "fill", title: "耶稣说：我怜悯这众人，因为他们同我在这里已经_____天，也没有吃的了。", blanks: [{id:"f1_1", ans:"三|3"}], desc: "可 8:2 众人同在这里已经三天。" },
+  { id: "c8_fb2", type: "fill", title: "门徒回答有_____个饼，还有几条小鱼；众人都吃饱了，收拾剩下的零碎有_____个筐子。", blanks: [{id:"f2_1", ans:"七|7"},{id:"f2_2", ans:"七|7"}], desc: "可 8:5, 8 七个饼，剩下七个筐子。" },
+  { id: "c8_fb3", type: "fill", title: "吃四千人饱食神迹的人数，约有_____。", blanks: [{id:"f3_1", ans:"四千|4000"}], desc: "可 8:9 人数约有四千。" },
+  { id: "c8_fb4", type: "fill", title: "法利赛人出来求从天上来的神迹想要试验耶稣，耶稣心里深深地_____。", blanks: [{id:"f4_1", ans:"叹息"}], desc: "可 8:12 耶稣心里深深地叹息。" },
+  { id: "c8_fb5", type: "fill", title: "耶稣嘱咐他们说：「你们要谨慎，防备法利赛人的_____和希律的_____。」", blanks: [{id:"f5_1", ans:"酵"},{id:"f5_2", ans:"酵"}], desc: "可 8:15 防备法利赛人的酵和希律的酵。" },
+  { id: "c8_fb6", type: "fill", title: "伯赛大瞎子第一次被按手后抬头说：「我看见人了，他们好像_____，并且行走。」", blanks: [{id:"f6_1", ans:"树木"}], desc: "可 8:24 他们好像树木，并且行走。" },
+  { id: "c8_fb7", type: "fill", title: "耶稣问门徒说：「你们说我是谁？」彼得回答说：「你是_____。」", blanks: [{id:"f7_1", ans:"基督"}], desc: "可 8:29 彼得回答说：你是基督。" },
+  { id: "c8_fb8", type: "fill", title: "耶稣责备彼得说：「_____，退我后边去吧！因为你不体贴神的意思，只体贴人的意思。」", blanks: [{id:"f8_1", ans:"撒但"}], desc: "可 8:33 撒但，退我后边去吧！" },
+  { id: "c8_fb9", type: "fill", title: "耶稣说：「若有人要跟从我，就当_____，背起他的_____来跟从我。」", blanks: [{id:"f9_1", ans:"舍己"},{id:"f9_2", ans:"十字架"}], desc: "可 8:34 当舍己，背起他的十字架来跟从我。" },
+  { id: "c8_fb10", type: "fill", title: "人就是赚得_____，赔上自己的_____，有什么益处呢？", blanks: [{id:"f10_1", ans:"全世界"},{id:"f10_2", ans:"生命"}], desc: "可 8:36 赚得全世界，赔上自己的生命。" },
+
+  // --- 选择题与排序题 (26 题) ---
+  { id: "c8_mc1", type: "radio", title: "耶稣在旷野怜悯四千人，主要是因为群众跟随祂在这里已经多久？", opts: [{v:"a",t:"A. 一整天"},{v:"b",t:"B. 两天"},{v:"c",t:"C. 三天"},{v:"d",t:"D. 七天"}], ans: "c", desc: "可 8:2 因为他们同我在这里已经三天，也没有吃的了。" },
+  { id: "c8_mc2", type: "radio", title: "给四千人吃饱的神迹中，门徒手里所有的食物配额是多少？", opts: [{v:"a",t:"A. 五个饼、两条鱼"},{v:"b",t:"B. 七个饼、几条小鱼"},{v:"c",t:"C. 二十两银子的饼"},{v:"d",t:"D. 一个饼"}], ans: "b", desc: "可 8:5, 7 有七个饼，还有几条小鱼。" },
+  { id: "c8_mc3", type: "radio", title: "四千人吃饱后，收拾剩下的零碎装满了什么器皿？多少个？", opts: [{v:"a",t:"A. 十二个篮子"},{v:"b",t:"B. 七个筐子"},{v:"c",t:"C. 十二个筐子"},{v:"d",t:"D. 七个盘子"}], ans: "b", desc: "可 8:8 收拾剩下的零碎，有七个筐子。" },
+  { id: "c8_mc4", type: "radio", title: "法利赛人出来盘问耶稣，向祂求什么以图试验祂？", opts: [{v:"a",t:"A. 求分地的凭证"},{v:"b",t:"B. 求从天上来的神迹"},{v:"c",t:"C. 求摩西的约书"},{v:"d",t:"D. 求税银的裁决"}], ans: "b", desc: "可 8:11 向他求从天上来的神迹，想要试探他。" },
+  { id: "c8_mc5", type: "radio", title: "面对法利赛人求从天上来的神迹，耶稣的身体反应是什么？", opts: [{v:"a",t:"A. 怒目看他们"},{v:"b",t:"B. 心里深深地叹息"},{v:"c",t:"C. 掩面哭泣"},{v:"d",t:"D. 闭口不答"}], ans: "b", desc: "可 8:12 耶稣心里深深地叹息。" },
+  { id: "c8_mc6", type: "radio", title: "在船上，门徒忘了带饼，船中一共只剩下多少食物？", opts: [{v:"a",t:"A. 完全没有食物"},{v:"b",t:"B. 除了一个饼以外没有别的食物"},{v:"c",t:"C. 还有七个饼"},{v:"d",t:"D. 还有两条小鱼"}], ans: "b", desc: "可 8:14 在船上除了一个饼以外，没有别的食物。" },
+  { id: "c8_mc7", type: "radio", title: "耶稣警诫门徒要防备的“酵”，指名提到了哪两个来源？", opts: [{v:"a",t:"A. 撒都该人的酵和法利赛人的酵"},{v:"b",t:"B. 法利赛人的酵和希律的酵"},{v:"c",t:"C. 文士的酵和罗马人的酵"},{v:"d",t:"D. 希律的酵和祭司长的酵"}], ans: "b", desc: "可 8:15 谨慎防备法利赛人的酵和希律的酵。" },
+  { id: "c8_mc8", type: "radio", title: "门徒听到耶稣说防备酵，他们私下错误议论的原因是什么？", opts: [{v:"a",t:"A. 以为耶稣在指责他们没有买面粉"},{v:"b",t:"B. 以为是因为他们没有饼"},{v:"c",t:"C. 以为希律派兵来抓捕"},{v:"d",t:"D. 以为法利赛人下了毒"}], ans: "b", desc: "可 8:16 他们彼此议论说：这是因为我们没有饼吧。" },
+  { id: "c8_mc9", type: "radio", title: "在伯赛大，有人带了一个什么病人来求耶稣摸他？", opts: [{v:"a",t:"A. 耳聋舌结的人"},{v:"b",t:"B. 瞎子"},{v:"c",t:"C. 瘫子"},{v:"d",t:"D. 患大麻风的"}], ans: "b", desc: "可 8:22 有人带一个瞎子来，求耶稣摸他。" },
+  { id: "c8_mc10", type: "radio", title: "医治伯赛大瞎子时，耶稣首先领他到了哪里？", opts: [{v:"a",t:"A. 会堂当中"},{v:"b",t:"B. 村外"},{v:"c",t:"C. 海边小船上"},{v:"d",t:"D. 圣殿廊下"}], ans: "b", desc: "可 8:23 拉着瞎子的手，领他到村外。" },
+  { id: "c8_mc11", type: "radio", title: "伯赛大瞎子经历第一次按手后，视力恢复到了什么程度？", opts: [{v:"a",t:"A. 依然一片漆黑"},{v:"b",t:"B. 看见人好像树木并且行走"},{v:"c",t:"C. 样样看得完全清楚"},{v:"d",t:"D. 只看见天上的飞鸟"}], ans: "b", desc: "可 8:24 我看见人了，他们好像树木，并且行走。" },
+  { id: "c8_mc12", type: "radio", title: "瞎子完全看清复原后，耶稣打发他回家时吩咐了什么？", opts: [{v:"a",t:"A. 「连这村子你也不要进去」"},{v:"b",t:"B. 「快去给祭司察看身体」"},{v:"c",t:"C. 「到低加波利去传扬」"},{v:"d",t:"D. 「在村中作见证」"}], ans: "a", desc: "可 8:26 连这村子你也不要进去。" },
+  { id: "c8_mc13", type: "radio", title: "彼得认耶稣为基督的地点是在哪里附近的路上？", opts: [{v:"a",t:"A. 伯赛大"},{v:"b",t:"B. 凯撒利亚·腓立比的村庄"},{v:"c",t:"C. 迦百农"},{v:"d",t:"D. 耶利哥"}], ans: "b", desc: "可 8:27 耶稣和门徒出去，往凯撒利亚·腓立比的村庄去。" },
+  { id: "c8_mc14", type: "radio", title: "当耶稣问「人说我是谁」，门徒回覆的外界传言不包括下列哪项？", opts: [{v:"a",t:"A. 施洗约翰"},{v:"b",t:"B. 以利亚"},{v:"c",t:"C. 先知里的一位"},{v:"d",t:"D. 希律王"}], ans: "d", desc: "可 8:28 有人说是施洗的约翰，有人说以利亚，又有人说先知里的一位。" },
+  { id: "c8_mc15", type: "radio", title: "当耶稣问「你们说我是谁」，谁作出了正确回答？他的回答是什么？", opts: [{v:"a",t:"A. 约翰回答说：你是夫子"},{v:"b",t:"B. 彼得回答说：你是基督"},{v:"c",t:"C. 雅各回答说：你是大卫之子"},{v:"d",t:"D. 安得烈回答说：你是神的圣者"}], ans: "b", desc: "可 8:29 彼得回答说：你是基督。" },
+  { id: "c8_mc16", type: "radio", title: "彼得认信后，耶稣首次预言人子受难，内容包括哪些要素？", opts: [
+    {v:"a", t:"A. 受许多苦 → 被长老、祭司长和文士弃绝 → 被杀 → 过三天复活"},
+    {v:"b", t:"B. 进耶路撒冷作王 → 驱逐罗马总督"},
+    {v:"c", t:"C. 被卖给外邦人 → 钉十字架 → 当天升天"},
+    {v:"d", t:"D. 召十二营天使降临毁灭仇敌"}
+  ], ans: "a", desc: "可 8:31 受许多苦，被弃绝，被杀，过三天复活。" },
+  { id: "c8_mc17", type: "radio", title: "听见受难预言后，谁拉着耶稣责备祂？", opts: [{v:"a",t:"A. 犹大"},{v:"b",t:"B. 彼得"},{v:"c",t:"C. 约翰"},{v:"d",t:"D. 雅各"}], ans: "b", desc: "可 8:32 彼得就拉着他，劝（责备）他。" },
+  { id: "c8_mc18", type: "radio", title: "耶稣斥责彼得「撒但，退我后边去吧」，指出的核心罪咎是什么？", opts: [{v:"a",t:"A. 因为彼得偷拿了钱囊"},{v:"b",t:"B. 因为他不体贴神的意思，只体贴人的意思"},{v:"c",t:"C. 因为彼得胆怯害怕风浪"},{v:"d",t:"D. 因为彼得三次不认主"}], ans: "b", desc: "可 8:33 因为你不体贴神的意思，只体贴人的意思。" },
+  { id: "c8_mc19", type: "radio", title: "跟从耶稣的明确三部曲条件是什么？", opts: [{v:"a",t:"A. 受洗、传道、行神迹"},{v:"b",t:"B. 舍己、背起十字架、跟从我"},{v:"c",t:"C. 变卖产业、周济穷人、住旷野"},{v:"d",t:"D. 禁食、祷告、守律法"}], ans: "b", desc: "可 8:34 若有人要跟从我，就当舍己，背起他的十字架来跟从我。" },
+  { id: "c8_mc20", type: "radio", title: "【数字陷阱】关于四千人吃饱与五千人吃饱的器具与零碎，何者正确？", opts: [
+    {v:"a", t:"A. 五千人剩十二筐；四千人剩七篮"},
+    {v:"b", t:"B. 五千人剩十二篮；四千人剩七筐"},
+    {v:"c", t:"C. 两者都剩十二篮"},
+    {v:"d", t:"D. 两者都剩七筐"}
+  ], ans: "b", desc: "五千人剩十二个篮子(6:43)；四千人剩七个筐子(8:8)。" },
+  { id: "c8_mc21", type: "radio", title: "【排序题】请按照伯赛大瞎子得医治的动作顺序排列：<br>① 吐唾沫在眼睛上按手 ② 领到村外 ③ 再次按手样样看清 ④ 瞎子说看见人像树木", opts: [
+    {v:"a", t:"A. ② → ① → ④ → ③"},
+    {v:"b", t:"B. ① → ② → ④ → ③"},
+    {v:"c", t:"C. ② → ④ → ① → ③"},
+    {v:"d", t:"D. ① → ④ → ② → ③"}
+  ], ans: "a", desc: "领村外(8:23) → 吐唾沫按手(8:23) → 见人如树(8:24) → 再按手看清(8:25)。" },
+  { id: "c8_mc22", type: "radio", title: "【排序题】请按照彼得认信到受难预言的发展顺序排列：<br>① 耶稣责备彼得为撒但 ② 彼得认耶稣为基督 ③ 耶稣宣告舍己背十字架 ④ 耶稣首次预言受难受死复活", opts: [
+    {v:"a", t:"A. ② → ④ → ① → ③"},
+    {v:"b", t:"B. ② → ① → ④ → ③"},
+    {v:"c", t:"C. ④ → ② → ① → ③"},
+    {v:"d", t:"D. ② → ④ → ③ → ①"}
+  ], ans: "a", desc: "认基督(8:29) → 预言受难(8:31) → 斥责撒但(8:33) → 呼召背十架(8:34)。" },
+  { id: "c8_mc23", type: "radio", title: "【排序题】请按照四千人吃饱神迹的过程先后排序：<br>① 门徒将零碎装满七个筐子 ② 耶稣祝谢擘开七个饼和鱼递给门徒 ③ 门徒清点有七个饼几条鱼 ④ 众人同在三天困乏", opts: [
+    {v:"a", t:"A. ④ → ③ → ② → ①"},
+    {v:"b", t:"B. ③ → ④ → ② → ①"},
+    {v:"c", t:"C. ④ → ② → ③ → ①"},
+    {v:"d", t:"D. ③ → ② → ④ → ①"}
+  ], ans: "a", desc: "同在三天(8:2) → 七饼小鱼(8:5-7) → 祝谢擘开分给(8:6) → 收拾七筐(8:8)。" },
+  { id: "c8_mc24", type: "radio", title: "【主线大排序】请按照马可福音第 8 章事件发展排列先后次序：<br>A. 伯赛大瞎子得医治 B. 凯撒利亚·腓立比路上彼得认信 C. 四千人吃饱 D. 防备法利赛人与希律的酵", opts: [
+    {v:"a", t:"A. C → D → A → B"},
+    {v:"b", t:"B. C → A → D → B"},
+    {v:"c", t:"C. D → C → A → B"},
+    {v:"d", t:"D. C → D → B → A"}
+  ], ans: "a", desc: "四千人吃饱(8:1) → 防备双酵(8:15) → 瞎子医治(8:22) → 彼得认信(8:27)。" },
+  { id: "c8_mc25", type: "radio", title: "耶稣说凡在这淫乱罪恶的世代把谁当作可耻的，人子降临时也要把那人当作可耻？", opts: [{v:"a",t:"A. 圣殿与祭司"},{v:"b",t:"B. 我和我的道"},{v:"c",t:"C. 十二使徒"},{v:"d",t:"D. 律法与诫命"}], ans: "b", desc: "可 8:38 把我和我的道当作可耻的。" },
+  { id: "c8_mc26", type: "radio", title: "受难预言中，耶稣宣告人子被杀后过几天复活？", opts: [{v:"a",t:"A. 一天"},{v:"b",t:"B. 两天"},{v:"c",t:"C. 三天"},{v:"d",t:"D. 七天"}], ans: "c", desc: "可 8:31 并且被杀，过三天复活。" },
+
+  // --- 是非判断题 (14 题) ---
+  { id: "c8_tf1", type: "tf", title: "四千人吃饱的神迹中，众人是在第一天听完道后立刻领受五饼二鱼的。", ans: "F", desc: "错。可 8:2 明确记载“同我在这里已经三天，也没有吃的了”。" },
+  { id: "c8_tf2", type: "tf", title: "四千人吃饱后，门徒收拾剩下的零碎装满了七个筐子。", ans: "T", desc: "对。可 8:8 经文完全吻合。" },
+  { id: "c8_tf3", type: "tf", title: "法利赛人向耶稣求从天上来的神迹，耶稣当场行了一个大天象神迹折服了他们。", ans: "F", desc: "错。可 8:12 耶稣深深叹息并声明没有神迹给这世代看。" },
+  { id: "c8_tf4", type: "tf", title: "在船上，耶稣嘱咐门徒要谨慎防备法利赛人的酵和撒都该人的酵。", ans: "F", desc: "错。可 8:15 明确是防备“法利赛人的酵和希律的酵”。" },
+  { id: "c8_tf5", type: "tf", title: "门徒以为耶稣提到酵，是因为责备他们船上忘记带饼。", ans: "T", desc: "对。可 8:16 经文完全吻合。" },
+  { id: "c8_tf6", type: "tf", title: "伯赛大瞎子的眼睛在耶稣第一次吐唾沫按手后，就立刻样样都看得极其清楚。", ans: "F", desc: "错。第一次按手后看见人“好像树木，并且行走”，第二次按手才完全看清。" },
+  { id: "c8_tf7", type: "tf", title: "医好瞎子后，耶稣打发他回家，特别叮嘱他“连这村子你也不要进去”。", ans: "T", desc: "对。可 8:26 经文完全吻合。" },
+  { id: "c8_tf8", type: "tf", title: "彼得认信耶稣为基督是在伯赛大会堂里公开发表的声明。", ans: "F", desc: "错。发生在往凯撒利亚·腓立比村庄的行路途中。" },
+  { id: "c8_tf9", type: "tf", title: "彼得认信说「你是基督」之后，得到了耶稣的高度称赞，并当场吩咐门徒向犹太全地大力宣传。", ans: "F", desc: "错。可 8:30 耶稣禁戒他们，不要告诉人。" },
+  { id: "c8_tf10", type: "tf", title: "耶稣预言人子必须受许多苦，被长老、祭司长和文士弃绝，被杀后过三天复活。", ans: "T", desc: "对。可 8:31 经文完全吻合。" },
+  { id: "c8_tf11", type: "tf", title: "彼得听见受难预言后拉着耶稣劝阻，耶稣斥责他说：“撒但，退我后边去吧！”", ans: "T", desc: "对。可 8:32-33 经文完全吻合。" },
+  { id: "c8_tf12", type: "tf", title: "耶稣责备彼得是因为他不体贴神的意思，只体贴人的意思。", ans: "T", desc: "对。可 8:33 经文完全吻合。" },
+  { id: "c8_tf13", type: "tf", title: "耶稣教导说：凡要救自己生命的，必救了生命；凡丧掉生命的，必永远灭亡。", ans: "F", desc: "错。可 8:35 凡要救自己生命的必丧掉生命；为我和福音丧掉生命的必救了生命。" },
+  { id: "c8_tf14", type: "tf", title: "人就是赚得全世界，赔上自己的生命，并没有任何益处。", ans: "T", desc: "对。可 8:36 经文完全吻合。" }
+];
+
+// 核心优化：动态精准 Answer Pool（只展示当前抽中填空题相关的词汇）
+const DISTRACTOR_POOL_CH8 = ["五千", "两条鱼", "十二篮", "摩西", "彼得", "大卫", "伯赛大", "以利亚", "三天半", "十两银子"];
+
+function generateDynamicAnswerPool(selectedQuestions) {
+  const answerSet = new Set();
+  selectedQuestions.forEach(q => {
+    if (q.type === "fill" && q.blanks) {
+      q.blanks.forEach(b => {
+        const primaryAns = b.ans.split("|")[0].trim();
+        if (primaryAns) answerSet.add(primaryAns);
+      });
+    }
+  });
+
+  const shuffledDistractors = shuffleArray(DISTRACTOR_POOL_CH8);
+  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDistractors[i]);
+  }
+
+  return shuffleArray(Array.from(answerSet));
+}
+
+let activeQuestionSet = []; 
+let activeDynamicWordPool = []; 
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch8_quiz_pool_v1";
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function initQuiz(forceRegenerate = false) {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeQuestionSet = parsed.questions || [];
+      activeDynamicWordPool = parsed.wordPool || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  const shuffledPool = shuffleArray(MASTER_QUESTION_POOL);
+  const selected = shuffledPool.slice(0, 50);
+
+  // 题型分类排序：填空 -> 选择/排序 -> 是非
+  const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
+  activeQuestionSet = selected.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  // 动态生成专属靶向词库
+  activeDynamicWordPool = generateDynamicAnswerPool(activeQuestionSet);
+
+  saveQuizState({});
+  renderQuizUI();
+}
+
+function regenerateQuiz() {
+  if (confirm("确定要重新随机抽取 50 题并刷新专属词库吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
+function renderQuizUI() {
+  const container = document.getElementById("quiz-sections-container");
+  container.innerHTML = "";
+
+  const groups = {
+    "fill": { title: "第一部分：填空题", desc: "请参考下方专为此卷生成的词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
+    "radio": { title: "第二部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeQuestionSet.forEach(q => {
+    if (groups[q.type]) groups[q.type].list.push(q);
+  });
+
+  let globalQuestionCounter = 1;
+
+  ["fill", "radio", "tf"].forEach(typeKey => {
+    const grp = groups[typeKey];
+    if (grp.list.length === 0) return;
+
+    const startNum = globalQuestionCounter;
+    const endNum = globalQuestionCounter + grp.list.length - 1;
+
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    // 专属置顶 Answer Pool
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
+    }
+
+    grp.list.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        item.innerHTML = `
+          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
+            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        let optsHtml = `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        optsHtml += `</div>`;
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          ${optsHtml}
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "tf") {
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="opt-group" style="flex-direction:row; max-width:280px;">
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      }
+
+      container.appendChild(item);
+      globalQuestionCounter++;
+    });
+  });
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
+  calculateAndUpdateTotals(0);
+}
+
+function renderWordBank() {
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  activeDynamicWordPool.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
+  });
+}
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
+  document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
+}
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
+  }
+}
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
+function getUserAnswers() {
+  const answers = {};
+  document.querySelectorAll("#quiz-sections-container input").forEach(el => {
+    if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
+    }
+  });
+  return answers;
+}
+
+function saveQuizState(answers) {
+  const data = {
+    questions: activeQuestionSet,
+    wordPool: activeDynamicWordPool,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
+}
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+  const total = activeQuestionSet.length;
+
+  activeQuestionSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "radio" || q.type === "tf") {
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。出处：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score) {
+  const total = activeQuestionSet.length;
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
+</script>
+
+</body>
+</html>
