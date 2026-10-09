@@ -43,7 +43,6 @@
     .adaptive-container { padding: 12px 10px 50px 10px; }
   }
 
-  /* 顶部返回主页条 */
   .top-navbar {
     display: flex;
     justify-content: space-between;
@@ -76,7 +75,6 @@
   .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
   .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
 
-  /* 导航栏 */
   .nav-tabs {
     display: flex;
     background: #e2e8f0;
@@ -106,7 +104,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
-  /* 控制台卡片 */
   .dashboard {
     display: flex;
     justify-content: space-between;
@@ -127,6 +124,20 @@
   .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
   .btn-submit { background: var(--accent); color: white; border: none; padding: 9px 16px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; }
   .btn-reset { background: #e2e8f0; color: #475569; border: none; padding: 9px 12px; font-size: 14px; font-weight: 600; border-radius: 8px; margin-left: 6px; cursor: pointer; }
+  .btn-master-link {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 6px;
+  }
+  .btn-master-link:hover { background: #e2e8f0; }
 
   .card {
     background: var(--card-bg);
@@ -152,12 +163,6 @@
     border-radius: 8px;
     margin: 24px 0 14px 0;
     border-left: 4px solid var(--accent);
-  }
-  .section-h3 {
-    font-size: 15.5px;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 14px 0 6px 0;
   }
 
   .highlight-box {
@@ -238,214 +243,238 @@
 
   <div class="header">
     <h1>📖 马可福音第 10 章 Bible Quiz 备战</h1>
-    <p>全章逐节问答考点拆解 ＋ 50 题互动模拟赛</p>
+    <p>全章大地图逐节问答拆解 ＋ 50 题全真模拟赛</p>
   </div>
 
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南 (全问答)</button>
-    <button class="tab-btn" onclick="switchTab('traps')">🧠 人物/地点/陷阱</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 人物/地点/顺序题</button>
     <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
     <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题全真测验</button>
   </div>
 
-  <!-- TAB 1: 完整还原的原版备战指南 (问答式拆解) -->
+  <!-- TAB 1: 完整还原的原版问答式备战讲义 -->
   <div id="tab-guide" class="tab-content active">
     <div class="card">
       <div class="card-title">一、先掌握第 10 章的「大地图」</div>
-      <p>马可福音第 10 章可以分成 <strong>6 个主要事件</strong>。第 10 章非常适合出「人物＋问题＋原话＋顺序」的题目，所以不要只背故事，要把每一段的关键动作一起记住。</p>
+      <p>马可福音第 10 章可以分成 <strong>6 个主要事件</strong>[cite: 43]。第 10 章非常适合出「人物＋问题＋原话＋顺序」的题目，所以不要只背故事，要把每一段的关键动作一起记住[cite: 43]。</p>
       <table class="info-table">
         <thead><tr><th>段落</th><th>内容</th><th>Quiz 重要度</th></tr></thead>
         <tbody>
-          <tr><td>10:1-12</td><td>婚姻、休妻与神所配合的</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>10:13-16</td><td>耶稣为小孩子祝福</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>10:17-31</td><td>有钱人求永生、跟从耶稣</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>10:32-34</td><td>第三次预言受难、受死、复活</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>10:35-45</td><td>雅各约瀚求荣耀、谁为大</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>10:46-52</td><td>耶利哥路旁巴底买呼求、得看见</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>10:1-12</td><td>婚姻、休妻与神所配合的</td><td>⭐⭐⭐⭐⭐[cite: 43]</td></tr>
+          <tr><td>10:13-16</td><td>耶稣为小孩子祝福</td><td>⭐⭐⭐⭐⭐[cite: 43]</td></tr>
+          <tr><td>10:17-31</td><td>有钱人求永生、跟从耶稣</td><td>⭐⭐⭐⭐⭐[cite: 43]</td></tr>
+          <tr><td>10:32-34</td><td>第三次预言受难、受死、复活</td><td>⭐⭐⭐⭐⭐[cite: 43]</td></tr>
+          <tr><td>10:35-45</td><td>雅各约翰求荣耀、谁为大</td><td>⭐⭐⭐⭐⭐[cite: 43]</td></tr>
+          <tr><td>10:46-52</td><td>耶利哥路旁巴底买呼求、得看见</td><td>⭐⭐⭐⭐⭐[cite: 43]</td></tr>
         </tbody>
       </table>
       <div class="highlight-box">
         <strong>考试时最重要的主线：</strong><br>
-        婚姻 → 小孩子 → 有钱人 → 受难预言 → 雅各约翰求位 → 谁为大 → 巴底买得医治
+        婚姻 → 小孩子 → 有钱人 → 受难预言 → 雅各约翰求位 → 谁为大 → 巴底买得医治[cite: 43]
       </div>
-      <p>🔥 <strong>第 10 章其实一直在问一个核心问题：什么叫真正跟从耶稣？</strong><br>
-      婚姻上忠于神的心意 → 像小孩子接受神的国 → 放下财富依靠神 → 接受十字架道路 → 不争地位而服事 → 像巴底买一样呼求并跟随耶稣。</p>
+      <p>🔥 <strong>第 10 章其实一直在问一个核心问题：什么叫真正跟从耶稣？</strong>[cite: 43]<br>
+      婚姻上忠于神的心意 → 像小孩子接受神的国 → 放下财富依靠神 → 接受十字架道路 → 不争地位而服事 → 像巴底买一样呼求并跟随耶稣[cite: 43]。</p>
 
       <div class="section-h2">二、10:1-12 婚姻、休妻——非常容易出细节题</div>
       <div class="quiz-q">① 耶稣到了哪里？</div>
-      <div class="quiz-a">📍 <strong>犹太境内、约旦河外</strong>。众人又聚集到祂那里，祂又照常教训他们。</div>
+      <div class="quiz-a">📍 <strong>犹太境内、约旦河外</strong>[cite: 43]。众人又聚集到祂那里，祂又照常教训他们[cite: 43]。</div>
 
-      <div class="quiz-q">② 谁来试探耶稣？</div>
-      <div class="quiz-a">法利赛人。他们问：<strong>「人休妻可以不可以？」</strong></div>
+      <div class="quiz-q">② 谁来试探耶稣？问了什么？</div>
+      <div class="quiz-a"><strong>法利赛人</strong>[cite: 43]。他们问：<strong>「人休妻可以不可以？」</strong>[cite: 43]</div>
       <div class="trap-box">
-        <span class="trap-tag">⚠️ Quiz 陷阱</span> 不要把问题记成「男人可不可以休妻？」——Quiz 很可能要求你说出他们实际问的原话问题。
+        <span class="trap-tag">⚠️ Quiz 陷阱</span> 不要把问题记成「男人可不可以休妻？」——Quiz 很可能要求你说出他们实际问的原话问题[cite: 43]。
       </div>
 
       <div class="quiz-q">③ 耶稣反问他们什么？</div>
-      <div class="quiz-a">「摩西吩咐你们的是什么？」他们回答：摩西准许写了休书便可以休妻。</div>
+      <div class="quiz-a">「摩西吩咐你们的是什么？」[cite: 43]他们回答：摩西准许写了休书便可以休妻[cite: 43]。</div>
 
       <div class="quiz-q">④ 耶稣为什么说摩西这样写？</div>
-      <div class="quiz-a">因为他们的<strong>心硬</strong>。<br>🔥 关键词：<strong>休书 → 摩西 → 心硬</strong>。</div>
+      <div class="quiz-a">因为他们的<strong>心硬</strong>[cite: 43]。🔥 关键词：<strong>休书 → 摩西 → 心硬</strong>[cite: 43]。</div>
 
-      <div class="quiz-q">⑤ 耶稣把重点带回创造</div>
-      <div class="quiz-a">「但从起初创造的时候，神造人是造男造女。」因此人要离开父母，与妻子连合，二人成为一体。<br>
-      🔥 <strong>最重要结论：</strong>「神所配合的，人不可分开。」（10:9）</div>
+      <div class="quiz-q">⑤ 耶稣把重点带回创造：</div>
+      <div class="quiz-a">「但从起初创造的时候，神造人是造男造女[cite: 43]。」因此人要离开父母，与妻子连合，二人成为一体[cite: 43]。<br>
+      🔥 <strong>最重要结论：</strong><br>
+      <strong>「神所配合的，人不可分开。」（10:9）</strong>[cite: 43]</div>
 
-      <div class="quiz-q">⑥ 进屋以后，门徒又问这件事</div>
-      <div class="quiz-a">耶稣告诉他们：人若休妻另娶，就是犯奸淫；妻子若离弃丈夫另嫁，也是犯奸淫。</div>
-      <div class="trap-box">
-        <span class="trap-tag">⚠️ 顺序提示</span> Quiz 很容易把「众人面前的讨论」和「进屋以后门徒再问」混在一起。要记住：<br>
-        <strong>法利赛人问 → 耶稣回答 → 进屋 → 门徒再问 → 耶稣进一步说明</strong>。
-      </div>
+      <div class="quiz-q">⑥ 进屋以后，门徒又问这件事：</div>
+      <div class="quiz-a">耶稣告诉他们：人若休妻另娶，就是犯奸淫；妻子若离弃丈夫另嫁，也是犯奸淫[cite: 43]。<br>
+      ⚠️ Quiz 很容易把「众人面前的讨论」和「进屋以后门徒再问」混在一起[cite: 43]。要记住：<br>
+      <strong>法利赛人问 → 耶稣回答 → 进屋 → 门徒再问 → 耶稣进一步说明</strong>[cite: 43]。</div>
 
       <div class="section-h2">三、10:13-16 小孩子——第 10 章必背</div>
-      <div class="quiz-q">① 谁把小孩子带到耶稣那里？</div>
-      <div class="quiz-a">有人把小孩子带到耶稣那里，要祂摸他们。</div>
+      <div class="quiz-q">① 谁把小孩子带到耶稣那里？门徒做了什么？</div>
+      <div class="quiz-a">有人把小孩子带到耶稣那里，要祂摸他们[cite: 43]。门徒责备那些人[cite: 43]。<br>
+      耶稣看见就<strong>恼怒</strong>，对门徒说：<strong>「让小孩子到我这里来，不要禁止他们，因为在神国的，正是这样的人。」</strong>[cite: 43]</div>
 
-      <div class="quiz-q">② 门徒做了什么？</div>
-      <div class="quiz-a">门徒责备那些人。耶稣看见就<strong>恼怒</strong>，对门徒说：「让小孩子到我这里来，不要禁止他们，因为在神国的，正是这样的人。」</div>
+      <div class="quiz-q">② 非常重要的动作顺序：</div>
+      <div class="quiz-a">🔥 建议直接背：<strong>让小孩子来 → 不要禁止 → 抱着 → 按手 → 祝福</strong>[cite: 43]。</div>
 
-      <div class="quiz-q">③ 非常重要的动作顺序</div>
-      <div class="quiz-a">🔥 建议直接背：<strong>让小孩子来 → 不要禁止 → 抱着 → 按手 → 祝福</strong>。</div>
-
-      <div class="quiz-q">④ 必背 10:15 原文</div>
+      <div class="quiz-q">③ 必背 10:15 原文：</div>
       <div class="highlight-box">
-        <strong>「我实在告诉你们，凡要承受神国的，若不像小孩子，断不能进去。」</strong>
+        🔥🔥🔥 <strong>「我实在告诉你们，凡要承受神国的，若不像小孩子，断不能进去。」</strong>[cite: 43]
       </div>
-      <p style="font-size:13.5px; color:#475569;">⚠️ 注意经文是「承受神国」＋「不像小孩子」＋「断不能进去」。不要把它改记成「像小孩子一样单纯」等概括说法；Bible Quiz 很可能考原句。</p>
+      <div class="trap-box">
+        ⚠️ 注意经文是「承受神国」＋「不像小孩子」＋「断不能进去」[cite: 43]。不要把它改记成「像小孩子一样单纯」等概括说法；Bible Quiz 很可能考原句[cite: 43]。
+      </div>
 
       <div class="section-h2">四、10:17-31 有钱人——不要把别的福音书细节混进来</div>
       <div class="quiz-q">① 这个人怎么来到耶稣面前？</div>
-      <div class="quiz-a"><strong>跑来，跪在耶稣面前</strong>，问祂：「良善的夫子，我当做什么事才可以承受永生？」<br>
-      🔥 三个动作：<strong>跑来 → 跪下 → 发问</strong>。</div>
+      <div class="quiz-a"><strong>跑来，跪在耶稣面前</strong>，问祂：「良善的夫子，我当做什么事才可以承受永生？」[cite: 43]<br>
+      🔥 三个动作：<strong>跑来 → 跪下 → 发问</strong>[cite: 43]。</div>
 
-      <div class="quiz-q">② 耶稣先问他什么？</div>
-      <div class="quiz-a">「你为什么称我是良善的？除了神一位之外，再没有良善的。」然后耶稣提到诫命：不可杀人、不可奸淫、不可偷盗、不可作假见证、不可亏负人、当孝敬父母。</div>
+      <div class="quiz-q">② 耶稣先问他什么？诫命提到哪些？</div>
+      <div class="quiz-a">「你为什么称我是良善的？除了神一位之外，再没有良善的[cite: 43]。」然后耶稣提到诫命：不可杀人、不可奸淫、不可偷盗、不可作假见证、不可亏负人、当孝敬父母[cite: 43]。</div>
 
       <div class="quiz-q">③ 这个人回答什么？</div>
-      <div class="quiz-a">「夫子，这一切我<strong>从小</strong>都遵守了。」（⚠️ 「从小」非常容易成为填空题）。</div>
+      <div class="quiz-a">「夫子，这一切我<strong>从小</strong>都遵守了[cite: 43]。」（⚠️ 「从小」非常容易成为填空题[cite: 43]）。</div>
 
       <div class="quiz-q">④ 耶稣看着他，然后发生什么？</div>
-      <div class="quiz-a"><strong>「耶稣看着他，就爱他。」</strong>然后说：「你还缺少一件：去变卖你所有的，分给穷人，就必有财宝在天上；你还要来跟从我。」</div>
+      <div class="quiz-a"><strong>「耶稣看着他，就爱他[cite: 43]。」</strong>然后说：<br>
+      <strong>「你还缺少一件：去变卖你所有的，分给穷人，就必有财宝在天上；你还要来跟从我[cite: 43]。」</strong>（🔥 这是本段最重要的命令[cite: 43]）。</div>
 
-      <div class="quiz-q">⑤ 他的反应</div>
-      <div class="quiz-a">听见这话，<strong>脸上就变了色，忧忧愁愁地走了</strong>，因为他的产业很多。<br>
-      🔥 顺序一定记：<strong>耶稣爱他 → 吩咐变卖分给穷人 → 来跟从 → 他脸变色 → 忧忧愁愁 → 因产业很多而走了</strong>。</div>
+      <div class="quiz-q">⑤ 他的反应是什么？</div>
+      <div class="quiz-a">听见这话，<strong>脸上就变了色，忧忧愁愁地走了，因为他的产业很多</strong>[cite: 43]。<br>
+      🔥 顺序一定记：<strong>耶稣爱他 → 吩咐变卖分给穷人 → 来跟从 → 他脸变色 → 忧忧愁愁 → 因产业很多而走了</strong>[cite: 43]。</div>
 
-      <div class="quiz-q">⑥ 骆驼穿过针的眼</div>
-      <div class="quiz-a">耶稣说：「有钱财的人进神的国是何等的难哪！」门徒希奇祂的话。耶稣又说：「小子，倚靠钱财的人进神的国是何等的难哪！<strong>骆驼穿过针的眼，比财主进神的国还容易呢。</strong>」<br>
-      门徒问：「这样谁能得救呢？」耶稣回答：<strong>「在人是不能，在神却不然，因为神凡事都能。」</strong></div>
+      <div class="quiz-q">⑥ 骆驼穿过针的眼：</div>
+      <div class="quiz-a">
+        耶稣说：「有钱财的人进神的国是何等的难哪[cite: 43]！」门徒希奇祂的话[cite: 43]。耶稣又说：「小子，倚靠钱财的人进神的国是何等的难哪[cite: 43]！<strong>骆驼穿过针的眼，比财主进神的国还容易呢[cite: 43]。</strong>」<br>
+        门徒问：「这样谁能得救呢[cite: 43]？」耶稣回答：<strong>「在人是不能，在神却不然，因为神凡事都能[cite: 43]。」</strong>
+      </div>
 
-      <div class="quiz-q">⑦ 彼得的问题与应许</div>
-      <div class="quiz-a">彼得说：「看哪，我们已经撇下所有的跟从你了。」耶稣回答：为祂和福音撇下的，今世得百倍（并且要受逼迫），来世必得永生。<br>
-      🔥 最后出现名言：<strong>「然而，有许多在前的将要在后，在后的将要在前。」</strong></div>
+      <div class="quiz-q">⑦ 彼得的问题与耶稣的应许：</div>
+      <div class="quiz-a">
+        彼得说：「看哪，我们已经撇下所有的跟从你了[cite: 43]。」<br>
+        耶稣回答：为祂和福音撇下房屋、弟兄、姐妹、父母、儿女、田地的，今世得百倍，并且要受逼迫；来世必得永生[cite: 43]。<br>
+        🔥 最后出现：<strong>「然而，有许多在前的将要在后，在后的将要在前。」</strong>[cite: 43]
+      </div>
 
       <div class="section-h2">五、10:32-34 第三次预言受难——顺序题超高频</div>
-      <p>① <strong>往哪里去？</strong> 上耶路撒冷去。<br>
-      ② <strong>耶稣走在前头</strong>，门徒惊奇，跟从的人也害怕。耶稣把十二个门徒带到一边，把自己将要遭遇的事告诉他们。</p>
-      <div class="quiz-q">③ 三次受难预言深度对比（必须背）：</div>
+      <div class="quiz-a">
+        • <strong>往哪里去？</strong> 上耶路撒冷去[cite: 43]。<br>
+        • <strong>耶稣走在前头</strong>，门徒惊奇，跟从的人也害怕[cite: 43]。耶稣把十二个门徒带到一边，把自己将要遭遇的事告诉他们[cite: 43]。
+      </div>
       <table class="info-table">
-        <thead><tr><th>预言次序</th><th>经文重点</th></tr></thead>
+        <thead><tr><th>预言</th><th>重点内容对比</th></tr></thead>
         <tbody>
-          <tr><td>第 1 次（8:31）</td><td>受许多苦 → 被弃绝 → 被杀 → 三天后复活</td></tr>
-          <tr><td>第 2 次（9:31）</td><td>被交在人手里 → 被杀 → 三天后复活</td></tr>
-          <tr><td>第 3 次（10:33-34）</td><td><strong>交给祭司长和文士 → 定死罪 → 交给外邦人 → 戏弄、吐唾沫、鞭打、杀害 → 三天后复活</strong></td></tr>
+          <tr><td>第 1 次（8:31）</td><td>受许多苦 → 被弃绝 → 被杀 → 三天后复活[cite: 43]</td></tr>
+          <tr><td>第 2 次（9:31）</td><td>被交在人手里 → 被杀 → 三天后复活[cite: 43]</td></tr>
+          <tr><td>第 3 次（10:33-34）</td><td><strong>交给祭司长和文士 → 定死罪 → 交给外邦人 → 戏弄、吐唾沫、鞭打、杀害 → 三天后复活</strong>[cite: 43]</td></tr>
         </tbody>
       </table>
       <div class="notice-box">
-        🔥 第 10 章的第三次预言最详细。尤其背熟这个顺序：<br>
-        <strong>祭司长文士 → 定死罪 → 交给外邦人 → 戏弄 → 吐唾沫 → 鞭打 → 杀害 → 三天后复活</strong>。
+        🔥 第 10 章的第三次预言最详细[cite: 43]。尤其背熟这个顺序：<br>
+        <strong>祭司长文士 → 定死罪 → 交给外邦人 → 戏弄 → 吐唾沫 → 鞭打 → 杀害 → 三天后复活</strong>[cite: 43]。
       </div>
 
       <div class="section-h2">六、10:35-45 雅各和约翰求位——极容易和彼得混淆</div>
-      <div class="quiz-q">① 谁来求？</div>
-      <div class="quiz-a"><strong>西庇太的儿子雅各、约翰</strong>。他们说：「夫子，我们无论求你什么，愿你给我们做。」（⚠️ 这里不是彼得，也不是全部十二门徒）。</div>
+      <div class="quiz-q">① 谁来求？求什么？</div>
+      <div class="quiz-a"><strong>西庇太的儿子雅各、约翰</strong>[cite: 43]。他们说：「夫子，我们无论求你什么，愿你给我们做[cite: 43]。」（⚠️ 这里不是彼得，也不是全部十二门徒[cite: 43]）。<br>
+      耶稣问：「要我给你们做什么[cite: 43]？」他们求：在耶稣的荣耀里，<strong>一个坐在右边，一个坐在左边</strong>[cite: 43]。</div>
 
-      <div class="quiz-q">② 耶稣问他们什么？他们求什么？</div>
-      <div class="quiz-a">「要我给你们做什么？」他们求：在耶稣的荣耀里，<strong>一个坐在右边，一个坐在左边</strong>。</div>
+      <div class="quiz-q">② 耶稣如何回答？</div>
+      <div class="quiz-a">「你们不知道所求的是什么[cite: 43]。」然后问他们能不能喝祂所喝的杯、受祂所受的洗[cite: 43]。他们回答：「我们能[cite: 43]。」耶稣说他们要喝祂所喝的杯，也要受祂所受的洗；但坐在左右不是祂可以赐的，乃是为谁预备的，就赐给谁[cite: 43]。</div>
 
-      <div class="quiz-q">③ 耶稣如何回答？</div>
-      <div class="quiz-a">「你们不知道所求的是什么。我所喝的杯，你们能喝吗？我所受的洗，你们能受吗？」他们回答：「我们能。」耶稣指出他们必要喝祂的杯、受祂的洗，但坐在左右是为谁预备就赐给谁。</div>
+      <div class="quiz-q">③ 其他十个门徒听见以后怎样？</div>
+      <div class="quiz-a">听见雅各、约翰的请求，<strong>其他十个门徒就恼怒他们</strong>[cite: 43]。（⚠️ 这是一道非常典型的人物关系题：雅各约翰求位 → 其他十个门徒恼怒[cite: 43]）。</div>
 
-      <div class="quiz-q">④ 其他十个门徒听见以后怎样？</div>
-      <div class="quiz-a">🔥 <strong>那十个门徒听见，就恼怒雅各、约翰</strong>。（极高频人物关系题）</div>
-
-      <div class="section-h2">七、10:42-45 「谁为大」——第 10 章核心神学峰顶</div>
-      <p>耶稣叫他们来，说：外邦人有尊为君王的治理他们，有大臣操权管束他们。只是在你们中间不是这样：<br>
-      • <strong>「你们中间谁愿为大，就必作你们的用人；」</strong><br>
-      • <strong>「在你们中间谁愿为首，就必作众人的仆人。」</strong></p>
+      <div class="section-h2">七、10:42-45 「谁为大」——第 10 章核心经文</div>
+      <div class="quiz-a">
+        耶稣叫他们来，说：外邦人有尊为君王的治理他们，有大臣操权管束他们[cite: 43]。只是在你们中间不是这样[cite: 43]：<br>
+        • <strong>「你们中间谁愿为大，就必作你们的用人；」</strong>[cite: 43]<br>
+        • <strong>「在你们中间谁愿为首，就必作众人的仆人。」</strong>[cite: 43]<br>
+        🔥 记忆对比：外邦人的模式：为大 → 管束别人；耶稣的模式：为大 → 作众人的用人 / 仆人[cite: 43]。
+      </div>
       <div class="highlight-box" style="font-size:16px;">
-        🔥🔥🔥 <strong>马可福音 10:45 全章核心峰顶（全组必背）：</strong><br>
-        <strong>「因为人子来，并不是要受人的服事，乃是要服事人，并且要舍命作多人的赎价。」</strong>
+        🔥🔥🔥 <strong>10:45——整章的神学高峰（全组必背）：</strong><br>
+        <strong>「因为人子来，并不是要受人的服事，乃是要服事人，并且要舍命作多人的赎价。」</strong>[cite: 43]<br>
+        三个动作：<strong>不是受服事 → 乃是服事 → 舍命作赎价</strong>[cite: 43]。
       </div>
 
-      <div class="section-h2">八、10:46-52 瞎子巴底买——超高频事件</div>
-      <div class="quiz-q">① 地点在哪里？</div>
-      <div class="quiz-a">📍 <strong>耶利哥</strong>。耶稣同门徒并许多人出耶利哥的时候。</div>
+      <div class="section-h2">八、10:46-52 巴底买——最后一个超高频事件</div>
+      <div class="quiz-q">① 地点在哪里？谁坐在那里？</div>
+      <div class="quiz-a">📍 <strong>耶利哥</strong>[cite: 43]。耶稣同门徒并许多人出耶利哥的时候[cite: 43]。<br>
+      一个讨饭的瞎子，名叫<strong>巴底买</strong>，是<strong>底买的儿子</strong>[cite: 43]。（⚠️ 「巴底买」本身就是「底买的儿子」的意思；Quiz 可能分别问名字、身份、父亲[cite: 43]）。</div>
 
-      <div class="quiz-q">② 谁坐在那里？</div>
-      <div class="quiz-a">一个讨饭的瞎子，名叫<strong>巴底买</strong>，是<strong>底买的儿子</strong>。（⚠️ 「巴底买」本身就是「底买的儿子」的意思）。</div>
+      <div class="quiz-q">② 他听见谁经过？喊叫什么？众人怎么对他？</div>
+      <div class="quiz-a">听见是拿撒勒的耶稣，他就喊着说：<strong>「大卫的子孙耶稣啊，可怜我吧！」</strong>[cite: 43]<br>
+      许多人责备他，不许他作声[cite: 43]。<strong>但他越发大声喊着：「大卫的子孙哪，可怜我吧！」</strong>[cite: 43]（🔥 重点：众人阻止 → 他反而更大声[cite: 43]）。</div>
 
-      <div class="quiz-q">③ 他听见谁经过？喊叫什么？</div>
-      <div class="quiz-a">听见是拿撒勒的耶稣，就喊着说：<strong>「大卫的子孙耶稣啊，可怜我吧！」</strong>许多人责备他不许作声，<strong>他越发大声喊着</strong>：「大卫的子孙哪，可怜我吧！」</div>
+      <div class="quiz-q">③ 耶稣停下来发生什么？（动作细节！）</div>
+      <div class="quiz-a">耶稣站住，说：「叫他过来[cite: 43]。」他们就叫那瞎子，说：「放心，起来！他叫你啦[cite: 43]。」<br>
+      <strong>他就丢下衣服，跳起来，走到耶稣那里[cite: 43]。</strong>（⚠️ 「丢下衣服」是非常容易漏掉的细节[cite: 43]）。</div>
 
-      <div class="quiz-q">④ 耶稣停下来发生什么？（动作细节！）</div>
-      <div class="quiz-a">耶稣站住说：「叫他过来。」他们就叫瞎子说：「放心，起来！他叫你啦。」<br>
-      🔥 瞎子的神准动作细节：<strong>丢下衣服，跳起来，走到耶稣那里</strong>。（⚠️ 「丢下衣服」极易考）</div>
-
-      <div class="quiz-q">⑤ 耶稣问了什么？巴底买如何回答？</div>
-      <div class="quiz-a">耶稣问：「要我为你做什么？」巴底买说：<strong>「拉波尼，我要能看见。」</strong></div>
-
-      <div class="quiz-q">⑥ 结局与最后的三个动作</div>
-      <div class="quiz-a">耶稣说：「你去吧！你的信救了你了。」<br>
-      🔥 <strong>结果：立刻看见了 → 就在路上跟随耶稣</strong>。</div>
+      <div class="quiz-q">④ 耶稣问了什么？结果如何？</div>
+      <div class="quiz-a">耶稣问：「要我为你做什么[cite: 43]？」巴底买说：<strong>「拉波尼，我要能看见[cite: 43]。」</strong><br>
+      耶稣说：<strong>「你去吧！你的信救了你了[cite: 43]。」</strong><br>
+      结果：<strong>他立刻看见了，就在路上跟随耶稣[cite: 43]。</strong>（🔥 最后的三个动作：<strong>看见 → 立刻 → 跟随</strong>[cite: 43]）。</div>
     </div>
   </div>
 
-  <!-- TAB 2: 人物关系、地点、易混矩阵 -->
+  <!-- TAB 2: 图表、人物关系、地点、易混矩阵与顺序题 -->
   <div id="tab-traps" class="tab-content">
     <div class="card">
       <div class="card-title">九、第 10 章最容易混淆的「人物」</div>
       <table class="info-table">
         <thead><tr><th>人物</th><th>身份 / 动作</th></tr></thead>
         <tbody>
-          <tr><td>法利赛人</td><td>试探耶稣，问休妻是否可以</td></tr>
-          <tr><td>门徒</td><td>进屋后再问婚姻问题；责备带小孩子的人</td></tr>
-          <tr><td>小孩子</td><td>耶稣抱着、按手、祝福；作为承受神国的榜样</td></tr>
-          <tr><td>有一个人</td><td>跑来跪下问永生；从小遵守诫命；产业很多</td></tr>
-          <tr><td>彼得</td><td>说「我们已经撇下所有的跟从你了」</td></tr>
-          <tr><td>雅各、约翰</td><td>求在荣耀中坐左右；其他十门徒因此恼怒</td></tr>
-          <tr><td>其他十个门徒</td><td>听见雅各约翰的请求后恼怒他们</td></tr>
-          <tr><td>巴底买</td><td>底买的儿子、瞎子、讨饭；呼求耶稣后得看见</td></tr>
+          <tr><td>法利赛人</td><td>试探耶稣，问休妻是否可以[cite: 43]</td></tr>
+          <tr><td>门徒</td><td>进屋后再问婚姻问题；责备带小孩子的人[cite: 43]</td></tr>
+          <tr><td>小孩子</td><td>耶稣抱着、按手、祝福；作为承受神国的榜样[cite: 43]</td></tr>
+          <tr><td>有一个人</td><td>跑来跪下问永生；从小遵守诫命；产业很多[cite: 43]</td></tr>
+          <tr><td>彼得</td><td>说「我们已经撇下所有的跟从你了」[cite: 43]</td></tr>
+          <tr><td>雅各、约翰</td><td>求在荣耀中坐左右；其他十门徒因此恼怒[cite: 43]</td></tr>
+          <tr><td>其他十个门徒</td><td>听见雅各约翰的请求后恼怒他们[cite: 43]</td></tr>
+          <tr><td>巴底买</td><td>底买的儿子、瞎子、讨饭；呼求耶稣后得看见[cite: 43]</td></tr>
         </tbody>
       </table>
       <div class="trap-box">
-        <span class="trap-tag">⚠️ 竞赛纯粹性提醒</span> 「有一个人」在马可 10 章不要自行加上马太福音的「年轻」、或路加福音的「官」等描述。Bible Quiz 若明确考《马可福音》，就按马可本身的记载回答。
+        <span class="trap-tag">⚠️ 特别注意</span> 「有一个人」在马可 10 章不要自行加上马太福音的「年轻」、或路加福音的「官」等描述[cite: 43]。Bible Quiz 若明确考《马可福音》，就按马可本身的记载回答[cite: 43]。
       </div>
 
       <div class="card-title" style="margin-top:20px;">十、第 10 章「数字」与「数量」考点</div>
       <ul>
-        <li><strong>一个人</strong>跑来跪在耶稣面前问永生。</li>
-        <li><strong>十二个门徒</strong>被耶稣另外带到一边，听第三次受难预言。</li>
-        <li><strong>雅各、约翰两个人</strong>求坐左右。</li>
-        <li><strong>其他十个门徒</strong>听见后恼怒。</li>
-        <li><strong>骆驼与针眼</strong>是本章最醒目的比喻性画面。</li>
+        <li><strong>一个人</strong>跑来跪在耶稣面前问永生[cite: 43]。</li>
+        <li><strong>十二个门徒</strong>被耶稣另外带到一边，听第三次受难预言[cite: 43]。</li>
+        <li><strong>雅各、约翰两个人</strong>求坐左右[cite: 43]。</li>
+        <li><strong>其他十个门徒</strong>听见后恼怒[cite: 43]。</li>
+        <li><strong>骆驼与针眼</strong>是本章最醒目的比喻性画面[cite: 43]。</li>
       </ul>
 
-      <div class="card-title" style="margin-top:20px;">十一、第 10 章「重复出现」的核心主题</div>
-      <p>① <strong>「跟从」贯穿全章</strong>：有钱人被邀请「来跟从我」忧愁离开；巴底买最后「在路上跟随耶稣」。<br>
-      ② <strong>「要我为你做什么？」两次出现</strong>：问雅各约翰（求荣耀首位），问巴底买（我要能看见）。<br>
-      ③ <strong>「谁为大」与「作仆人」</strong>：为首的作众人用人；人子舍命作赎价。<br>
-      ④ <strong>「在前的在后，在后的在前」</strong>：有钱财不等于有优势，翻转人的世俗价值。</p>
+      <div class="card-title" style="margin-top:20px;">十一、第 10 章「重复出现」的重点</div>
+      <p>① <strong>「跟从」——贯穿全章</strong>：有钱人被邀请「来跟从我」忧愁离开；巴底买最后「就在路上跟随耶稣」[cite: 43]。（一个离开，一个跟随；漂亮的对比[cite: 43]）。<br>
+      ② <strong>「要我为你做什么？」</strong>：问雅各、约翰（求荣耀、求左右）；问巴底买（我要能看见）[cite: 43]。<br>
+      ③ <strong>「谁为大」与「作仆人」</strong>：雅各约翰追求位置 → 耶稣教导服事[cite: 43]。「为大」不是靠地位，而是靠服事[cite: 43]。<br>
+      ④ <strong>「在前的 / 在后的」</strong>：10:31「有许多在前的将要在后，在后的将要在前[cite: 43]。」翻转人的价值观[cite: 43]。</p>
 
-      <div class="card-title" style="margin-top:20px;">十二、第 10 章必考「顺序题」链条</div>
+      <div class="card-title" style="margin-top:20px;">十二、第 10 章最容易出「顺序题」的地方（闭眼复述 6 条）</div>
       <div class="highlight-box">
-        1. <strong>法利赛人问休妻</strong>：问休妻 → 摩西休书 → 心硬 → 创造 → 神所配合的不可分开<br>
-        2. <strong>小孩子事件</strong>：门徒责备 → 耶稣恼怒 → 让小孩子来 → 抱着 → 按手 → 祝福<br>
-        3. <strong>有钱人事件</strong>：跑来 → 跪下 → 问永生 → 从小遵守 → 耶稣爱他 → 变卖分给穷人 → 忧愁离开<br>
-        4. <strong>第三次受难预言</strong>：上耶路撒冷 → 祭司长文士 → 外邦人 → 戏弄吐唾沫鞭打 → 杀害 → 三天复活<br>
-        5. <strong>争大事件</strong>：雅各约翰求左右 → 十门徒恼怒 → 耶稣讲服事 → 舍命作赎价<br>
-        6. <strong>巴底买事件</strong>：呼求 → 众人责备 → 越发大声 → 耶稣叫他 → 丢下衣服跳起来 → 我要能看见 → 立刻看见跟随耶稣
+        1. <strong>法利赛人</strong> → 问休妻 → 摩西休书 → 心硬 → 创造 → 神所配合的不可分开[cite: 43]<br>
+        2. <strong>小孩子</strong> → 门徒责备 → 耶稣恼怒 → 让小孩子来 → 抱着 → 按手 → 祝福[cite: 43]<br>
+        3. <strong>有钱人</strong> → 跑来 → 跪下 → 问永生 → 从小遵守 → 耶稣爱他 → 变卖分给穷人 → 忧愁离开[cite: 43]<br>
+        4. <strong>上耶路撒冷</strong> → 第三次预言 → 祭司长文士 → 外邦人 → 戏弄吐唾沫鞭打 → 杀害 → 三天复活[cite: 43]<br>
+        5. <strong>雅各约翰求左右</strong> → 其他十门徒恼怒 → 耶稣讲服事 → 人子服事人 → 舍命作赎价[cite: 43]<br>
+        6. <strong>巴底买呼求</strong> → 众人责备 → 越发大声 → 耶稣叫他 → 丢下衣服 → 跳起来 → 我要能看见 → 立刻看见 → 跟随耶稣[cite: 43]
+      </div>
+
+      <div class="card-title" style="margin-top:20px;">十四、几个超级容易「串台」的陷阱</div>
+      <table class="info-table">
+        <thead><tr><th>容易混淆</th><th>正确记法</th></tr></thead>
+        <tbody>
+          <tr><td>法利赛人 vs 门徒</td><td>法利赛人先问休妻；进屋后门徒再问[cite: 43]</td></tr>
+          <tr><td>小孩子 vs 有钱人</td><td>小孩子要「接受/承受」神国；有钱人却因产业很多而忧愁离开[cite: 43]</td></tr>
+          <tr><td>雅各约翰 vs 其他十门徒</td><td>雅各约翰求左右；其他十个听见后恼怒[cite: 43]</td></tr>
+          <tr><td>雅各约翰 vs 巴底买</td><td>两者都遇到「要我给你做什么」，但一个求地位，一个求看见[cite: 43]</td></tr>
+          <tr><td>三次受难预言</td><td>第 10 章是第三次，而且是三次中细节最丰富的一次[cite: 43]</td></tr>
+          <tr><td>马可 vs 马太/路加的有钱人</td><td>本章按马可记「有一个人」，不要擅自加入其他福音书身份标签[cite: 43]</td></tr>
+          <tr><td>巴底买 vs 一般医治故事</td><td>巴底买不是安静等待；他被阻止后「越发大声」呼求[cite: 43]</td></tr>
+        </tbody>
+      </table>
+
+      <div class="card-title" style="margin-top:20px;">十六、🗺️ 第 10 章「地点路线」记忆</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:8px; font-size:14.5px; text-align:center;">
+        犹太境内、约旦河外 → 众人聚集、教训人 → 屋里（门徒继续问婚姻） → 有人带小孩子来 → 上路 / 往耶路撒冷（第三次预言受难） → 耶利哥 → 出耶利哥（路旁：巴底买） → 看见，在路上跟随耶稣[cite: 43]
       </div>
     </div>
   </div>
@@ -453,50 +482,50 @@
   <!-- TAB 3: 必背经文、口诀与赛前 Top 15 -->
   <div id="tab-verses" class="tab-content">
     <div class="card">
-      <div class="card-title">十三、第 10 章必须背诵经文清单</div>
+      <div class="card-title">十三、⭐ 第 10 章「必须背诵」经文清单</div>
       <p><strong>🥇 Level 1：一定要背</strong></p>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>1. 可 10:9</strong>「神所配合的，人不可分开。」</div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>2. 可 10:14</strong>「让小孩子到我这里来，不要禁止他们，因为在神国的，正是这样的人。」</div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>3. 可 10:15</strong>「我实在告诉你们，凡要承受神国的，若不像小孩子，断不能进去。」</div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>4. 可 10:21</strong>「你还缺少一件：去变卖你所有的，分给穷人，就必有财宝在天上；你还要来跟从我。」</div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>5. 可 10:27</strong>「在人是不能，在神却不然，因为神凡事都能。」</div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>6. 可 10:31</strong>「然而，有许多在前的将要在后，在后的将要在前。」</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>1. 马可 10:9</strong>「神所配合的，人不可分开。」[cite: 43]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>2. 马可 10:14</strong>「让小孩子到我这里来，不要禁止他们，因为在神国的，正是这样的人。」[cite: 43]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>3. 马可 10:15</strong>「我实在告诉你们，凡要承受神国的，若不像小孩子，断不能进去。」[cite: 43]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>4. 马可 10:21</strong>「你还缺少一件：去变卖你所有的，分给穷人，就必有财宝在天上；你还要来跟从我。」[cite: 43]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>5. 马可 10:27</strong>「在人是不能，在神却不然，因为神凡事都能。」[cite: 43]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>6. 马可 10:31</strong>「然而，有许多在前的将要在后，在后的将要在前。」[cite: 43]</div>
 
       <p><strong>🥈 Level 2：比赛非常值得背</strong></p>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>7. 可 10:38</strong>「你们不知道所求的是什么。我所喝的杯，你们能喝吗？我所受的洗，你们能受吗？」</div>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>8. 可 10:43-44</strong>「你们中间谁愿为大，就必作你们的用人；在你们中间谁愿为首，就必作众人的仆人。」</div>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>9. 可 10:45</strong>「因为人子来，并不是要受人的服事，乃是要服事人，并且要舍命作多人的赎价。」</div>
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>10. 可 10:52</strong>「你去吧！你的信救了你了。」</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>7. 马可 10:38</strong>「你们不知道所求的是什么。我所喝的杯，你们能喝吗？我所受的洗，你们能受吗？」[cite: 43]</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>8. 马可 10:43-44</strong>「你们中间谁愿为大，就必作你们的用人；在你们中间谁愿为首，就必作众人的仆人。」[cite: 43]</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>9. 马可 10:45</strong>「因为人子来，并不是要受人的服事，乃是要服事人，并且要舍命作多人的赎价。」[cite: 43]</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>10. 马可 10:52</strong>「你去吧！你的信救了你了。」[cite: 43]</div>
 
       <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
-        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 十八、马可 10 章速记总口诀：</p>
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 十八、一个「马可 10 章口诀」：</p>
         <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
-          休妻问心硬，神配合不可分；小孩子来，不可禁止，抱起按手祝福；有钱人跑来跪下，遵守诫命却舍不得产业；骆驼针眼，人不能，神凡事都能；上耶路撒冷，第三次预言受难；雅各约翰求左右，十门徒听见就恼怒；为大作仆人，为首作众人仆人；人子不是受服事，乃是服事人，舍命作赎价；耶利哥巴底买，大卫子孙越喊越大；丢下衣服跳起来，我要能看见；立刻看见，在路上跟随耶稣。
+          休妻问心硬，神配合不可分；小孩子来，不可禁止，抱起按手祝福；有钱人跑来跪下，遵守诫命却舍不得产业；骆驼针眼，人不能，神凡事都能；上耶路撒冷，第三次预言受难；雅各约翰求左右，十门徒听见就恼怒；为大作仆人，为首作众人仆人；人子不是受服事，乃是服事人，舍命作赎价；耶利哥巴底买，大卫子孙越喊越大；丢下衣服跳起来，我要能看见；立刻看见，在路上跟随耶稣[cite: 43]。
         </p>
       </div>
 
-      <div class="card-title" style="margin-top:20px;">二十、赛前抢答：第 10 章 Top 15 闪答</div>
+      <div class="card-title" style="margin-top:20px;">二十、🎯 赛前抢答：第 10 章 Top 15</div>
       <ol style="padding-left:20px; line-height:1.8;">
-        <li>谁来试探耶稣，问人休妻可以不可以？——法利赛人。</li>
-        <li>耶稣为什么说摩西准许写休书？——因为人的心硬。</li>
-        <li>耶稣关于婚姻的核心结论是什么？——神所配合的，人不可分开。</li>
-        <li>谁责备带小孩子来的人？——门徒。</li>
-        <li>耶稣对门徒的反应是什么？——恼怒。</li>
-        <li>耶稣怎样对待小孩子？——抱着他们，给他们按手，为他们祝福。</li>
-        <li>那个人问耶稣什么？——我当做什么事才可以承受永生？</li>
-        <li>他为什么忧愁离开？——因为他的产业很多。</li>
-        <li>耶稣说在人不能、在神却怎样？——凡事都能。</li>
-        <li>第三次受难预言在哪里？——马可 10:33-34。</li>
-        <li>谁求在耶稣荣耀里坐左右？——雅各、约翰。</li>
-        <li>其他十个门徒听见后怎样？——恼怒雅各、约翰。</li>
-        <li>耶稣说谁愿为大就怎样？——作众人的用人/仆人。</li>
-        <li>谁是巴底买？——底买的儿子，一个讨饭的瞎子。</li>
-        <li>巴底买最后发生什么？——立刻看见，在路上跟随耶稣。</li>
+        <li>谁来试探耶稣，问人休妻可以不可以？——法利赛人[cite: 43]。</li>
+        <li>耶稣为什么说摩西准许写休书？——因为人的心硬[cite: 43]。</li>
+        <li>耶稣关于婚姻的核心结论是什么？——神所配合的，人不可分开[cite: 43]。</li>
+        <li>谁责备带小孩子来的人？——门徒[cite: 43]。</li>
+        <li>耶稣对门徒的反应是什么？——恼怒[cite: 43]。</li>
+        <li>耶稣怎样对待小孩子？——抱着他们，给他们按手，为他们祝福[cite: 43]。</li>
+        <li>那个人问耶稣什么？——我当做什么事才可以承受永生？[cite: 43]</li>
+        <li>他为什么忧愁离开？——因为他的产业很多[cite: 43]。</li>
+        <li>耶稣说在人不能、在神却怎样？——凡事都能[cite: 43]。</li>
+        <li>第三次受难预言在哪里？——马可 10:33-34[cite: 43]。</li>
+        <li>谁求在耶稣荣耀里坐左右？——雅各、约翰[cite: 43]。</li>
+        <li>其他十个门徒听见后怎样？——恼怒雅各、约翰[cite: 43]。</li>
+        <li>耶稣说谁愿为大就怎样？——作众人的用人/仆人[cite: 43]。</li>
+        <li>谁是巴底买？——底买的儿子，一个讨饭的瞎子[cite: 43]。</li>
+        <li>巴底买最后发生什么？——立刻看见，在路上跟随耶稣[cite: 43]。</li>
       </ol>
     </div>
   </div>
 
-  <!-- TAB 4: 50 题互动全真测验 -->
+  <!-- TAB 4: 50 题互动测验 (数据完全由 mark_master_quiz_data.js 注入) -->
   <div id="tab-quiz" class="tab-content">
     <div class="dashboard">
       <div class="stat-group">
@@ -505,7 +534,8 @@
       </div>
       <div>
         <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
-        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽题</button>
+        <a href="mark_all_chapters_quiz.html" class="btn-master-link">🏆 进入全卷总考</a>
         <span class="save-status" id="save-status">💾 进度已自动保存</span>
       </div>
     </div>
@@ -513,55 +543,25 @@
   </div>
 </div>
 
+<!-- 引入中央 Master 全量题库文件 -->
+<script src="mark_master_quiz_data.js"></script>
+
 <script>
-const MASTER_QUESTION_POOL = [
-  // --- 填空题 ---
-  { id: "c10_fb1", type: "fill", title: "耶稣说：所以，神所配合的，人不可_____。", blanks: [{id:"f1_1", ans:"分开"}], desc: "可 10:9 神所配合的人不可分开。" },
-  { id: "c10_fb2", type: "fill", title: "耶稣看见就恼怒，对门徒说：让_____到我这里来，不要禁止他们。", blanks: [{id:"f2_1", ans:"小孩子"}], desc: "可 10:14 让小孩子到我这里来。" },
-  { id: "c10_fb3", type: "fill", title: "凡要承受神国的，若不像_____，断不能进去。", blanks: [{id:"f3_1", ans:"小孩子"}], desc: "可 10:15 若不像小孩子断不能进去。" },
-  { id: "c10_fb4", type: "fill", title: "耶稣看着他，就_____他，对他说：你还缺少一件：去变卖你所有的，分给_____。", blanks: [{id:"f4_1", ans:"爱"},{id:"f4_2", ans:"穷人"}], desc: "可 10:21 耶稣看着他就爱他。" },
-  { id: "c10_fb5", type: "fill", title: "耶稣说：_____穿过针的眼，比财主进神的国还容易呢。", blanks: [{id:"f5_1", ans:"骆驼"}], desc: "可 10:25 骆驼穿过针的眼。" },
-  { id: "c10_fb6", type: "fill", title: "耶稣看着他们说：在人是不能，在神却不然，因为神凡事都_____。", blanks: [{id:"f6_1", ans:"能"}], desc: "可 10:27 在神凡事都能。" },
-  { id: "c10_fb7", type: "fill", title: "谁愿为大，就必作你们的_____；在你们中间谁愿为首，就必作众人的_____。", blanks: [{id:"f7_1", ans:"用人"},{id:"f7_2", ans:"仆人"}], desc: "可 10:43-44 愿为大作仆人用人。" },
-  { id: "c10_fb8", type: "fill", title: "因为人子来，并不是要受人的服事，乃是要_____人，并且要舍命作多人的_____。", blanks: [{id:"f8_1", ans:"服事"},{id:"f8_2", ans:"赎价"}], desc: "可 10:45 舍命作多人的赎价。" },
-  { id: "c10_fb9", type: "fill", title: "出耶利哥时，有一个讨饭的瞎子，名叫_____，坐在路旁。", blanks: [{id:"f9_1", ans:"巴底买"}], desc: "可 10:46 底买的儿子巴底买。" },
-  { id: "c10_fb10", type: "fill", title: "瞎子听见是耶稣，就喊着说：_____的子孙耶稣啊，可怜我吧！", blanks: [{id:"f10_1", ans:"大卫"}], desc: "可 10:47 大卫的子孙耶稣可怜我吧。" },
+// 本页不再硬编码任何题目数组，完全通过中央题库 window.MARK_MASTER_QUESTION_POOL 动态读取第 10 章题目
+let activeQuestionSet = [];
+let activeDynamicWordPool = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch10_from_master_v1";
 
-  // --- 选择题与排序题 ---
-  { id: "c10_mc1", type: "radio", title: "法利赛人来试探耶稣，向祂提出的问题是什么？", opts: [{v:"a",t:"A. 纳税给该撒可以不可以？"},{v:"b",t:"B. 人休妻可以不可以？"},{v:"c",t:"C. 安息日掐麦穗可以不可以？"},{v:"d",t:"D. 凭什么权柄赶鬼？"}], ans: "b", desc: "可 10:2 法利赛人问人休妻可以不可以。" },
-  { id: "c10_mc2", type: "radio", title: "摩西准许写休书休妻，耶稣指出真正的根源原因是什么？", opts: [{v:"a",t:"A. 因为妇人有罪"},{v:"b",t:"B. 因为心硬"},{v:"c",t:"C. 因为律法的软弱"},{v:"d",t:"D. 因为家庭贫穷"}], ans: "b", desc: "可 10:5 因为你们的心硬，摩西写这诫命。" },
-  { id: "c10_mc3", type: "radio", title: "当有人带小孩子来要耶稣摸他们时，门徒的态度是什么？", opts: [{v:"a",t:"A. 热情接待"},{v:"b",t:"B. 责备那些带小孩子来的人"},{v:"c",t:"C. 替小孩子代祷"},{v:"d",t:"D. 抱小孩子给耶稣"}], ans: "b", desc: "可 10:13 门徒责备那些人。" },
-  { id: "c10_mc4", type: "radio", title: "耶稣看见门徒阻挡小孩子，祂的反应是：", opts: [{v:"a",t:"A. 喜悦"},{v:"b",t:"B. 恼怒"},{v:"c",t:"C. 忧愁"},{v:"d",t:"D. 叹息"}], ans: "b", desc: "可 10:14 耶稣看见就恼怒。" },
-  { id: "c10_mc5", type: "radio", title: "跑来跪在耶稣面前求问永生的人，当耶稣说出诫命时他如何回答？", opts: [{v:"a",t:"A. 「我都做不到」"},{v:"b",t:"B. 「这一切我从小都遵守了」"},{v:"c",t:"C. 「哪一条诫命最大」"},{v:"d",t:"D. 「我不明白诫命」"}], ans: "b", desc: "可 10:20 这一切我从小都遵守了。" },
-  { id: "c10_mc6", type: "radio", title: "听见变卖产业跟从主的吩咐后，那富足的人有什么反应？", opts: [{v:"a",t:"A. 欢欢喜喜照办"},{v:"b",t:"B. 脸上变了色，忧忧愁愁地走了"},{v:"c",t:"C. 当场受洗"},{v:"d",t:"D. 拿出一半财产"}], ans: "b", desc: "可 10:22 脸上变色，忧忧愁愁地走了。" },
-  { id: "c10_mc7", type: "radio", title: "第三次预言受难时，耶稣把门徒带到一边，这次特别提到的逼迫细节包括：", opts: [{v:"a",t:"A. 交给外邦人戏弄、吐唾沫、鞭打、杀害"},{v:"b",t:"B. 钉在两棵无花果树之间"},{v:"c",t:"C. 被石头打死"},{v:"d",t:"D. 流放罗马"}], ans: "a", desc: "可 10:33-34 戏弄、吐唾沫、鞭打、杀害。" },
-  { id: "c10_mc8", type: "radio", title: "西庇太的儿子雅各和约翰向耶稣求的是什么？", opts: [{v:"a",t:"A. 赐给他们降火的能力"},{v:"b",t:"B. 在荣耀里一个坐右边一个坐左边"},{v:"c",t:"C. 赐给他们管钱袋的权柄"},{v:"d",t:"D. 求能看见天开"}], ans: "b", desc: "可 10:37 一个坐在你右边，一个坐在你左边。" },
-  { id: "c10_mc9", type: "radio", title: "听见雅各和约翰的自私祈求后，其余十个门徒有什么表现？", opts: [{v:"a",t:"A. 赞同支持"},{v:"b",t:"B. 恼怒雅各和约翰"},{v:"c",t:"C. 默不做声"},{v:"d",t:"D. 替他们代求"}], ans: "b", desc: "可 10:41 那十个门徒听见就恼怒雅各、约翰。" },
-  { id: "c10_mc10", type: "radio", title: "瞎子巴底买听见耶稣叫他时，他的动作细节是：", opts: [{v:"a",t:"A. 慢慢爬过去"},{v:"b",t:"B. 丢下衣服，跳起来，走到耶稣那里"},{v:"c",t:"C. 请门徒扶他过去"},{v:"d",t:"D. 站在原地哭泣"}], ans: "b", desc: "可 10:50 丢下衣服，跳起来，走到耶稣那里。" },
-  { id: "c10_mc11", type: "radio", title: "【动作排序】瞎子巴底买得医治的过程顺序排列何者正确？<br>① 丢下衣服跳起来走到耶稣那里 ② 听见是耶稣大声喊大卫的子孙 ③ 耶稣说你的信救了你立刻看见跟随 ④ 众人责备他不许作声他越发大声", opts: [
-    {v:"a", t:"A. ② → ④ → ① → ③"},
-    {v:"b", t:"B. ④ → ② → ① → ③"},
-    {v:"c", t:"C. ② → ① → ④ → ③"},
-    {v:"d", t:"D. ① → ② → ④ → ③"}
-  ], ans: "a", desc: "呼喊(10:47) → 众人责备越发大声(10:48) → 跳起走去(10:50) → 信救了你立刻跟随(10:52)。" },
-  { id: "c10_mc12", type: "radio", title: "【顺序排序】富有的人求永生的事件顺序排列：<br>① 耶稣爱他吩咐变卖所有分给穷人 ② 脸上变色忧忧愁愁地走了 ③ 跑来跪在耶稣面前问永生 ④ 回答从小遵守诫命", opts: [
-    {v:"a", t:"A. ③ → ④ → ① → ②"},
-    {v:"b", t:"B. ④ → ③ → ① → ②"},
-    {v:"c", t:"C. ③ → ① → ④ → ②"},
-    {v:"d", t:"D. ① → ③ → ④ → ②"}
-  ], ans: "a", desc: "跑来跪下(10:17) → 从小遵守(10:20) → 耶稣爱他吩咐变卖(10:21) → 忧愁离开(10:22)。" },
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
-  // --- 是非题 ---
-  { id: "c10_tf1", type: "tf", title: "耶稣说，从起初创造的时候，神造人是造男造女，神所配合的人不可分开。", ans: "T", desc: "对。可 10:6, 9 经文完全吻合。" },
-  { id: "c10_tf2", type: "tf", title: "当门徒阻拦小孩子就近耶稣时，耶稣大为赞赏门徒维护了会堂秩序。", ans: "F", desc: "错。可 10:14 耶稣看见就恼怒。" },
-  { id: "c10_tf3", type: "tf", title: "那个求问永生的富有之人，耶稣看着他就恨他假冒为善。", ans: "F", desc: "错。可 10:21 耶稣看着他，就爱他。" },
-  { id: "c10_tf4", type: "tf", title: "耶稣宣告：在人是不能，在神却不然，因为神凡事都能。", ans: "T", desc: "对。可 10:27 经文完全吻合。" },
-  { id: "c10_tf5", type: "tf", title: "耶稣教导门徒：谁愿为大，就当操权管束别人。", ans: "F", desc: "错。可 10:43 谁愿为大，就必作你们的用人。" },
-  { id: "c10_tf6", type: "tf", title: "人子来不是要受人的服事，乃是要服事人，并且要舍命作多人的赎价。", ans: "T", desc: "对。可 10:45 经文完全吻合。" },
-  { id: "c10_tf7", type: "tf", title: "瞎子巴底买双眼得看见后，立刻欢欢喜喜回自己家里去了，不再跟从任何人。", ans: "F", desc: "错。可 10:52 瞎子立刻看见了，就在路上跟随耶稣。" }
-];
-
-const DISTRACTOR_POOL_CH10 = ["休书", "小孩子", "骆驼", "用人", "仆人", "赎价", "巴底买", "耶利哥", "大卫", "分开", "穷人", "拉波尼"];
 function generateDynamicAnswerPool(selectedQuestions) {
   const answerSet = new Set();
   selectedQuestions.forEach(q => {
@@ -572,156 +572,315 @@ function generateDynamicAnswerPool(selectedQuestions) {
       });
     }
   });
-  const shuffled = [...DISTRACTOR_POOL_CH10].sort(() => 0.5 - Math.random());
-  for (let i = 0; i < shuffled.length && answerSet.size < 20; i++) answerSet.add(shuffled[i]);
-  return Array.from(answerSet).sort(() => 0.5 - Math.random());
+
+  const distractors = ["休书", "小孩子", "骆驼", "用人", "仆人", "赎价", "巴底买", "耶利哥", "大卫", "分开", "穷人", "拉波尼"];
+  const shuffledDist = shuffleArray(distractors);
+  for (let i = 0; i < shuffledDist.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDist[i]);
+  }
+  return shuffleArray(Array.from(answerSet));
 }
 
-let activeQuestionSet = [], activeDynamicWordPool = [], activeBlankId = null;
-const STORAGE_KEY = "mark_ch10_quiz_pool_v2";
-
-function initQuiz(force = false) {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (!force && saved) {
-    try {
-      const p = JSON.parse(saved);
-      activeQuestionSet = p.questions || [];
-      activeDynamicWordPool = p.wordPool || [];
-      renderQuizUI();
-      restoreSavedAnswers(p.answers || {});
-      return;
-    } catch(e){}
+function initQuiz(forceRegenerate = false) {
+  if (!window.MARK_MASTER_QUESTION_POOL) {
+    document.getElementById("quiz-sections-container").innerHTML = 
+      "<div style='padding:20px; text-align:center; color:#dc2626;'>未检测到 mark_master_quiz_data.js 题库文件，请确保该文件在同级目录下！</div>";
+    return;
   }
-  const shuffled = [...MASTER_QUESTION_POOL].sort(() => 0.5 - Math.random());
+
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeQuestionSet = parsed.questions || [];
+      activeDynamicWordPool = parsed.wordPool || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  // 从中央题库筛选属于第 10 章 (ch === 10) 的全部题目
+  const ch10Questions = window.MARK_MASTER_QUESTION_POOL.filter(q => q.ch === 10);
+  const shuffled = shuffleArray(ch10Questions);
   const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
-  activeQuestionSet = shuffled.slice(0, 50).sort((a,b) => typeOrder[a.type] - typeOrder[b.type]);
+  activeQuestionSet = shuffled.slice(0, 50).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
   activeDynamicWordPool = generateDynamicAnswerPool(activeQuestionSet);
+
   saveQuizState({});
   renderQuizUI();
 }
-function regenerateQuiz() { if(confirm("确定要重新抽取 50 题测验吗？")) { localStorage.removeItem(STORAGE_KEY); initQuiz(true); } }
+
+function regenerateQuiz() {
+  if (confirm("确定要重新抽取第 10 章的 50 题测验吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
 function renderQuizUI() {
   const container = document.getElementById("quiz-sections-container");
   container.innerHTML = "";
+
   const groups = {
-    "fill": { title: "第一部分：填空题", desc: "请点选词库填入空格：", list: [] },
+    "fill": { title: "第一部分：填空题", desc: "请点选词库填入空格（反选输入框可清除）：", list: [] },
     "radio": { title: "第二部分：单选题与排序题", desc: "请选择正确项：", list: [] },
-    "tf": { title: "第三部分：是非题", desc: "判断正误：", list: [] }
+    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确：", list: [] }
   };
-  activeQuestionSet.forEach(q => { if(groups[q.type]) groups[q.type].list.push(q); });
-  let count = 1;
-  ["fill","radio","tf"].forEach(key => {
-    const grp = groups[key];
-    if(!grp.list.length) return;
-    const h = document.createElement("div");
-    h.className = "type-section-header";
-    h.innerHTML = `<h3 class="type-section-title">${grp.title}</h3><p class="type-section-desc">${grp.desc}</p>`;
-    container.appendChild(h);
-    if(key === "fill") {
-      const wb = document.createElement("div");
-      wb.className = "word-bank-box";
-      wb.innerHTML = `<div class="word-bank-title"><span>💡 填空题专属匹配词库 (Answer Pool)</span></div><div class="word-chips" id="word-chips-container"></div>`;
-      container.appendChild(wb);
+
+  activeQuestionSet.forEach(q => {
+    if (groups[q.type]) groups[q.type].list.push(q);
+  });
+
+  let globalQuestionCounter = 1;
+
+  ["fill", "radio", "tf"].forEach(typeKey => {
+    const grp = groups[typeKey];
+    if (grp.list.length === 0) return;
+
+    const startNum = globalQuestionCounter;
+    const endNum = globalQuestionCounter + grp.list.length - 1;
+
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 填空题专属匹配词库 (Answer Pool)</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
     }
+
     grp.list.forEach(q => {
       const item = document.createElement("div");
-      item.className = "q-item"; item.id = `card-${q.id}`;
-      if(q.type === "fill") {
-        let t = q.title;
-        q.blanks.forEach(b => { t = t.replace("_____", `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`); });
-        item.innerHTML = `<div style="font-size:15px;line-height:2.4;"><span style="color:var(--accent);font-weight:bold;margin-right:4px;">${count}.</span>${t}</div><div class="feedback" id="fb-${q.id}"></div>`;
-      } else if(q.type === "radio") {
-        let opts = `<div class="opt-group">`;
-        q.opts.forEach(o => { opts += `<label class="opt-label"><input type="radio" name="${q.id}" value="${o.v}" onchange="onUserAnswerChange()">${o.t}</label>`; });
-        opts += `</div>`;
-        item.innerHTML = `<div class="q-title"><span style="color:var(--accent);font-weight:bold;">${count}.</span> ${q.title}</div>${opts}<div class="feedback" id="fb-${q.id}"></div>`;
-      } else if(q.type === "tf") {
-        item.innerHTML = `<div class="q-title"><span style="color:var(--accent);font-weight:bold;">${count}.</span> ${q.title}</div><div class="opt-group" style="flex-direction:row;"><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label></div><div class="feedback" id="fb-${q.id}"></div>`;
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        item.innerHTML = `<div style="font-size:15px; line-height:2.4;"><span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}</div><div class="feedback" id="fb-${q.id}"></div>`;
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        let optsHtml = `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        optsHtml += `</div>`;
+        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>${optsHtml}<div class="feedback" id="fb-${q.id}"></div>`;
+      } else if (q.type === "tf") {
+        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div><div class="opt-group" style="flex-direction:row;"><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label></div><div class="feedback" id="fb-${q.id}"></div>`;
       }
+
       container.appendChild(item);
-      count++;
+      globalQuestionCounter++;
     });
   });
-  if(document.getElementById("word-chips-container")) renderWordBank();
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
   calculateAndUpdateTotals(0);
 }
+
 function renderWordBank() {
-  const c = document.getElementById("word-chips-container"); if(!c) return; c.innerHTML = "";
-  activeDynamicWordPool.forEach(w => {
-    const chip = document.createElement("span"); chip.className = "word-chip"; chip.innerText = w;
-    chip.onclick = () => insertWordToBlank(w); c.appendChild(chip);
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  activeDynamicWordPool.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
   });
 }
-function handleBlankClick(el) {
-  if(el.value){ el.value = ""; el.classList.remove("has-val"); onUserAnswerChange(); }
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
   document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
-  el.classList.add("active-blank"); activeBlankId = el.id;
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
 }
-function insertWordToBlank(w) {
-  let target = activeBlankId ? document.getElementById(activeBlankId) : null;
-  if(!target || target.value) { const b = Array.from(document.querySelectorAll(".blank-input")); target = b.find(x => !x.value); }
-  if(target){
-    target.value = w; target.classList.add("has-val"); onUserAnswerChange();
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
     const blanks = Array.from(document.querySelectorAll(".blank-input"));
-    const next = blanks.find(x => !x.value);
-    blanks.forEach(x => x.classList.remove("active-blank"));
-    if(next){ next.classList.add("active-blank"); activeBlankId = next.id; } else { target.classList.add("active-blank"); activeBlankId = target.id; }
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
   }
 }
-function onUserAnswerChange() { saveQuizState(getUserAnswers()); }
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
 function getUserAnswers() {
-  const a = {};
+  const answers = {};
   document.querySelectorAll("#quiz-sections-container input").forEach(el => {
-    if(el.type === "radio" && el.checked) a[el.name] = el.value;
-    else if(el.type === "text" && el.value) a[el.id] = el.value;
-  });
-  return a;
-}
-function saveQuizState(a) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ questions: activeQuestionSet, wordPool: activeDynamicWordPool, answers: a || getUserAnswers() }));
-  document.getElementById("save-status").innerText = "💾 进度已自动保存";
-}
-function restoreSavedAnswers(ans) {
-  Object.keys(ans).forEach(k => {
-    const el = document.getElementById(k);
-    if(el && el.type === "text"){ el.value = ans[k]; el.classList.add("has-val"); }
-    else { const rad = document.querySelector(`input[name="${k}"][value="${ans[k]}"]`); if(rad) rad.checked = true; }
-  });
-}
-function gradeQuiz() {
-  let s = 0; const tot = activeQuestionSet.length;
-  activeQuestionSet.forEach(q => {
-    const fb = document.getElementById(`fb-${q.id}`);
-    if(q.type === "radio" || q.type === "tf") {
-      const chk = document.querySelector(`input[name="${q.id}"]:checked`);
-      if(chk && chk.value === q.ans){ s++; fb.className = "feedback is-correct"; fb.innerHTML = `正确！解析：${q.desc}`; }
-      else { fb.className = "feedback is-wrong"; fb.innerHTML = `标准答案：【${q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase())}】。解析：${q.desc}`; }
-    } else if(q.type === "fill") {
-      let ok = true;
-      q.blanks.forEach(b => {
-        const el = document.getElementById(b.id);
-        const v = el ? el.value.trim() : "";
-        if(b.ans.split("|").includes(v)) { el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7"; }
-        else { ok = false; if(el){ el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; } }
-      });
-      if(ok){ s++; fb.className = "feedback is-correct"; fb.innerHTML = `正确！出处：${q.desc}`; }
-      else { fb.className = "feedback is-wrong"; fb.innerHTML = `正确答案：【${q.blanks.map(b=>b.ans.split("|")[0]).join(" / ")}】。出处：${q.desc}`; }
+    if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
     }
   });
-  calculateAndUpdateTotals(s); window.scrollTo({ top: 0, behavior: "smooth" });
+  return answers;
 }
-function calculateAndUpdateTotals(s) {
-  const tot = activeQuestionSet.length;
-  document.getElementById("total-score").innerText = `${s} / ${tot}`;
-  document.getElementById("accuracy-rate").innerText = tot > 0 ? `${Math.round((s/tot)*100)}%` : "0%";
+
+function saveQuizState(answers) {
+  const data = {
+    questions: activeQuestionSet,
+    wordPool: activeDynamicWordPool,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
 }
-function switchTab(id) {
-  document.querySelectorAll(".nav-tabs .tab-btn").forEach(b => b.classList.remove("active"));
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+  const total = activeQuestionSet.length;
+
+  activeQuestionSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "radio" || q.type === "tf") {
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。出处：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score) {
+  const total = activeQuestionSet.length;
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
   document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-  if(event && event.target) event.target.classList.add("active");
-  const t = document.getElementById("tab-" + id); if(t) t.classList.add("active");
+  
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
 }
-window.addEventListener("DOMContentLoaded", () => initQuiz());
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
 </script>
+
 </body>
 </html>
