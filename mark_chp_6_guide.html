@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>马可福音第六章 圣经比赛备战指南与测验</title>
+<title>马可福音第六章 Bible Quiz 备战指南与测验</title>
 <style>
   :root {
     --primary: #1e3a8a;
@@ -21,7 +21,7 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--text);
     background-color: var(--bg-page);
     margin: 0;
@@ -30,7 +30,6 @@
     justify-content: center;
     font-size: 15px;
   }
-
   .adaptive-container {
     width: 100%;
     max-width: 1000px;
@@ -44,6 +43,27 @@
     .adaptive-container { padding: 12px 10px 50px 10px; }
   }
 
+  .top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .btn-nav-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .btn-nav-home:hover { background: #e2e8f0; }
+
   .header {
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
     color: white;
@@ -55,7 +75,6 @@
   .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
   .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
 
-  /* 导航栏 */
   .nav-tabs {
     display: flex;
     background: #e2e8f0;
@@ -85,7 +104,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
-  /* 控制台卡片 */
   .dashboard {
     display: flex;
     justify-content: space-between;
@@ -104,33 +122,27 @@
   .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
   .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
   .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
-  
-  .btn-submit {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 9px 16px;
-    font-size: 14px;
-    font-weight: 600;
+  .btn-submit { background: var(--accent); color: white; border: none; padding: 9px 16px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; }
+  .btn-reset { background: #e2e8f0; color: #475569; border: none; padding: 9px 12px; font-size: 14px; font-weight: 600; border-radius: 8px; margin-left: 6px; cursor: pointer; }
+  .btn-master-link {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
     border-radius: 8px;
-    cursor: pointer;
-  }
-  .btn-reset {
-    background: #e2e8f0;
-    color: #475569;
-    border: none;
-    padding: 9px 12px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    border-radius: 8px;
+    text-decoration: none;
     margin-left: 6px;
-    cursor: pointer;
   }
+  .btn-master-link:hover { background: #e2e8f0; }
 
   .card {
     background: var(--card-bg);
     border-radius: 12px;
-    padding: 20px 18px;
+    padding: 22px 20px;
     margin-bottom: 20px;
     border: 1px solid var(--border);
   }
@@ -140,24 +152,17 @@
     color: var(--primary);
     border-left: 4px solid var(--accent);
     padding-left: 10px;
-    margin: 0 0 14px 0;
+    margin: 0 0 16px 0;
   }
-
   .section-h2 {
     font-size: 17px;
     font-weight: 700;
     color: var(--primary);
     background: #eff6ff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin: 20px 0 10px 0;
-    border-left: 3px solid var(--accent);
-  }
-  .section-h3 {
-    font-size: 15.5px;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 12px 0 6px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 24px 0 14px 0;
+    border-left: 4px solid var(--accent);
   }
 
   .highlight-box {
@@ -165,7 +170,7 @@
     border: 1px solid #bbf7d0;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
     color: #166534;
   }
@@ -174,8 +179,9 @@
     border: 1px solid #ffe58f;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
+    color: #92400e;
   }
   .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
 
@@ -184,23 +190,17 @@
     border: 1px solid #fca5a5;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
     color: #991b1b;
   }
 
-  .info-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14.5px;
-    margin: 10px 0;
-  }
-  .info-table th, .info-table td {
-    border: 1px solid var(--border);
-    padding: 9px 12px;
-    text-align: left;
-  }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 12px 0; }
+  .info-table th, .info-table td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; }
   .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  .quiz-q { font-weight: bold; color: #1e293b; margin-top: 10px; margin-bottom: 2px; }
+  .quiz-a { color: #334155; margin-left: 12px; margin-bottom: 8px; }
 
   .type-section-header {
     background: #f1f5f9;
@@ -212,92 +212,20 @@
   .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
   .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
 
-  /* 填空题专属词库 Pool */
-  .word-bank-box {
-    background: #eff6ff;
-    border: 2px dashed #93c5fd;
-    border-radius: 10px;
-    padding: 14px;
-    margin: 12px 0 18px 0;
-  }
-  .word-bank-title {
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--primary);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  .word-bank-box { background: #eff6ff; border: 2px dashed #93c5fd; border-radius: 10px; padding: 14px; margin: 12px 0 18px 0; }
+  .word-bank-title { font-size: 14px; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
   .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .word-chip {
-    background: #ffffff;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    transition: all 0.15s ease;
-    user-select: none;
-  }
-  .word-chip:hover, .word-chip:active {
-    background: var(--accent);
-    color: white;
-  }
+  .word-chip { background: #ffffff; border: 1.5px solid var(--accent); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: all 0.15s ease; user-select: none; }
+  .word-chip:hover, .word-chip:active { background: var(--accent); color: white; }
 
   .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
   .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
   .opt-group { display: flex; flex-direction: column; gap: 8px; }
-  .opt-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    background: #ffffff;
-  }
-  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
-
-  .blank-input {
-    border: none;
-    border-bottom: 2.5px solid #64748b;
-    background: #f1f5f9;
-    padding: 2px 8px;
-    font-size: 15px;
-    font-weight: bold;
-    color: #0f172a;
-    text-align: center;
-    margin: 0 4px;
-    border-radius: 4px 4px 0 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .blank-input:focus, .blank-input.active-blank {
-    outline: none;
-    border-bottom-color: var(--accent);
-    background: #dbeafe;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
-  }
-  .blank-input.has-val {
-    background: #e0f2fe;
-    color: #0369a1;
-    border-bottom-color: #0284c7;
-  }
-
-  .feedback {
-    display: none;
-    margin-top: 10px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-  }
+  .opt-label { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; background: #ffffff; }
+  .blank-input { border: none; border-bottom: 2.5px solid #64748b; background: #f1f5f9; padding: 2px 8px; font-size: 15px; font-weight: bold; color: #0f172a; text-align: center; margin: 0 4px; border-radius: 4px 4px 0 0; cursor: pointer; transition: all 0.2s ease; }
+  .blank-input:focus, .blank-input.active-blank { outline: none; border-bottom-color: var(--accent); background: #dbeafe; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25); }
+  .blank-input.has-val { background: #e0f2fe; color: #0369a1; border-bottom-color: #0284c7; }
+  .feedback { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; }
   .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
   .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
 
@@ -308,262 +236,306 @@
 <body>
 
 <div class="adaptive-container">
-  <!-- 顶部返回主页导航条 -->
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-    <a href="index.html" style="display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); padding: 7px 13px; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none;">🏠 返回主页</a>
+  <div class="top-navbar">
+    <a href="index.html" class="btn-nav-home">🏠 返回主页</a>
     <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
   </div>
 
   <div class="header">
-    <h1>《马可福音》第六章 备战指南与测验</h1>
-    <p>差遣门徒 ＋ 五饼二鱼 ＋ 海面行走 ＋ 50 题全真模拟测验</p>
+    <h1>📖 马可福音第 6 章 Bible Quiz 备战</h1>
+    <p>全章大地图逐节问答拆解 ＋ 50 题全真模拟赛</p>
   </div>
 
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
-    <button class="tab-btn" onclick="switchTab('traps')">🧠 易混人物与矩阵</button>
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南 (全问答)</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 人物/装备/陷阱预警</button>
     <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
-    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题全真测验</button>
   </div>
 
-  <!-- TAB 1: 备战指南大地图 -->
+  <!-- TAB 1: 完整还原的原版问答式备战讲义 -->
   <div id="tab-guide" class="tab-content active">
     <div class="card">
       <div class="card-title">一、先掌握第 6 章的「大地图」</div>
+      <p>第 6 章是非常值得重点备战的一章：人物、数字、地点、时间、装备规定和事件次序都很密集，特别容易出陷阱题[cite: 36]。</p>
+      <div class="highlight-box">
+        <strong>建议先把这条主线背熟：</strong><br>
+        拿撒勒被拒绝 → 差遣十二门徒 → 希律听见耶稣名声 → 约翰被杀 → 十二门徒回来 → 五饼二鱼喂饱五千 → 耶稣海面行走 → 革尼撒勒医治众人[cite: 36]
+      </div>
+
       <table class="info-table">
-        <thead>
-          <tr><th>经文分段</th><th>主要内容</th><th>Quiz 重要度</th></tr>
-        </thead>
+        <thead><tr><th>经文</th><th>事件</th><th>Quiz 重要度</th></tr></thead>
         <tbody>
-          <tr><td>6:1–6</td><td>耶稣回到家乡会堂教训人；众人希奇却不信</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>6:7–13</td><td>差遣十二门徒两个两个出去</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>6:14–29</td><td>希律与施洗约翰；约翰殉道被斩首</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>6:30–34</td><td>使徒回来；耶稣怜悯如羊无牧之众人</td><td>⭐⭐⭐⭐</td></tr>
-          <tr><td>6:35–44</td><td>五饼二鱼喂饱五千男人</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>6:45–52</td><td>夜里四更天耶稣在海面上行走；门徒惊慌</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>6:53–56</td><td>革尼撒勒医治众人；摸衣裳繸子得痊愈</td><td>⭐⭐⭐⭐</td></tr>
+          <tr><td>6:1-6</td><td>耶稣回到家乡，会堂教训人；众人希奇却不信</td><td>⭐⭐⭐⭐⭐[cite: 36]</td></tr>
+          <tr><td>6:7-13</td><td>差遣十二门徒两个两个出去</td><td>⭐⭐⭐⭐⭐[cite: 36]</td></tr>
+          <tr><td>6:14-29</td><td>希律与施洗约翰；约翰被杀</td><td>⭐⭐⭐⭐⭐[cite: 36]</td></tr>
+          <tr><td>6:30-34</td><td>使徒回来；耶稣怜悯如羊没有牧人的众人</td><td>⭐⭐⭐⭐[cite: 36]</td></tr>
+          <tr><td>6:35-44</td><td>五饼二鱼喂饱五千男人</td><td>⭐⭐⭐⭐⭐[cite: 36]</td></tr>
+          <tr><td>6:45-52</td><td>耶稣海面上行走；门徒惊慌</td><td>⭐⭐⭐⭐⭐[cite: 36]</td></tr>
+          <tr><td>6:53-56</td><td>革尼撒勒医治众人；摸衣裳繸子得医治</td><td>⭐⭐⭐⭐[cite: 36]</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-h2">二、6:1-6 耶稣回到自己的家乡——「希奇，却不信」</div>
+      <p>这是第 6 章第一个重要反差：耶稣在自己的家乡教训人，众人听见就希奇，却因为熟悉祂的背景而不信祂[cite: 36]。</p>
+      <div class="quiz-a">
+        • 安息日到了，耶稣在会堂里教训人[cite: 36]。<br>
+        • 众人希奇：这个人从哪里有这些事？所赐给祂的是什么智慧？祂手所做的是何等的异能[cite: 36]？<br>
+        • 众人提到祂的身份：不是那木匠吗？不是马利亚的儿子吗[cite: 36]？<br>
+        • 经文列出兄弟：<strong>雅各、约西、犹大、西门</strong>；并提到祂的姐妹[cite: 36]。<br>
+        • 耶稣说：<strong>「大凡先知，除了本地、亲属、本家之外，没有不被人尊敬的。」</strong>[cite: 36]<br>
+        • 因为他们不信，耶稣在那里不得行什么异能，只按手在几个病人身上，治好他们[cite: 36]。<br>
+        • 耶稣诧异他们不信，就往周围乡村教训人[cite: 36]。
+      </div>
+      <div class="trap-box">
+        <span class="trap-tag">⚠️ 高危陷阱</span> 不要把「众人希奇」直接等同于「众人相信」[cite: 36]。本段正是「希奇，却不信」[cite: 36]。<br>
+        <span class="trap-tag">⚠️ 人物考点</span> 耶稣的兄弟名字是「雅各、约西、犹大、西门」，不要把他们与十二使徒名单混在一起[cite: 36]。
+      </div>
+
+      <div class="section-h2">三、6:7-13 差遣十二门徒——装备规定必须逐字记</div>
+      <table class="info-table">
+        <thead><tr><th>项目</th><th>经文重点</th><th>容易错在哪里</th></tr></thead>
+        <tbody>
+          <tr><td>差遣方式</td><td>两个两个地出去[cite: 36]</td><td>不是十二个人一起出去[cite: 36]</td></tr>
+          <tr><td>权柄</td><td>赐给他们权柄，制伏污鬼[cite: 36]</td><td>不是只给医病能力[cite: 36]</td></tr>
+          <tr><td>拐杖</td><td>除了拐杖以外，什么都不要带[cite: 36]</td><td>先记「除了拐杖」[cite: 36]</td></tr>
+          <tr><td>食物</td><td>不要带食物[cite: 36]</td><td>容易漏掉[cite: 36]</td></tr>
+          <tr><td>口袋</td><td>不要带口袋里的钱[cite: 36]</td><td>不是带一点钱[cite: 36]</td></tr>
+          <tr><td>腰袋</td><td>不要带钱[cite: 36]</td><td>与口袋一起记[cite: 36]</td></tr>
+          <tr><td>鞋</td><td>只要穿鞋[cite: 36]</td><td>不是赤脚[cite: 36]</td></tr>
+          <tr><td>褂子</td><td>不要穿两件褂子[cite: 36]</td><td>重点是「两件」[cite: 36]</td></tr>
+          <tr><td>住宿</td><td>到一家，就住在那里，直到离开那里[cite: 36]</td><td>不要随意换住处[cite: 36]</td></tr>
+          <tr><td>被拒绝</td><td>离开那里，跺下脚上的尘土[cite: 36]</td><td>发生在不接待、不听他们时[cite: 36]</td></tr>
         </tbody>
       </table>
       <div class="highlight-box">
-        <strong>🔥 第6章核心主线：</strong><br>
-        拿撒勒被拒 → 差遣十二门徒 → 希律听见耶稣名声 → 约翰被杀 → 十二门徒回来 → 五饼二鱼喂饱五千 → 耶稣海面行走 → 革尼撒勒医治众人。
+        他们出去传道，叫人悔改；又赶出许多的鬼，用油抹了许多病人，治好他们[cite: 36]。<br>
+        🔥 动作链：<strong>差遣 → 悔改 → 赶鬼 → 用油抹病人 → 医治</strong>[cite: 36]。
       </div>
 
-      <div class="section-h2">第一部分：6:1–6 回到家乡——「希奇，却不信」</div>
-      <p>① <strong>场景与反应</strong>：安息日到了，耶稣在会堂里教训人。众人听见就希奇，却因熟悉祂的出身背景而厌弃祂。</p>
-      <p>② <strong>世俗身份认定</strong>：他们说：「这不是那木匠吗？不是马利亚的儿子，雅各、约西、犹大、西门的长兄吗？他妹妹们不也是在我们这里吗？」（注意：亲属兄弟名字是<strong>雅各、约西、犹大、西门</strong>）。</p>
-      <p>③ <strong>先知名言</strong>：耶稣对他们说：<strong>「大凡先知，除了本地、亲属、本家之外，没有不被人尊敬的。」</strong>（6:4）</p>
-      <p>④ <strong>结局反差</strong>：因为他们不信，耶稣在那里不得行什么异能，不过按手在几个病人身上，治好他们。耶稣也<strong>诧异他们不信</strong>。</p>
-
-      <div class="section-h2">第二部分：6:7–13 差遣十二门徒——装备规定逐字考点</div>
+      <div class="section-h2">四、6:14-29 希律与施洗约翰——人物关系题重灾区</div>
       <table class="info-table">
-        <thead><tr><th>项目</th><th>规定要求</th><th>考点警示</th></tr></thead>
+        <thead><tr><th>人物</th><th>身份 / 关键动作</th><th>必须分清</th></tr></thead>
         <tbody>
-          <tr><td><strong>差遣方式</strong></td><td>两个两个地出去</td><td>不是单独行动，也不是全员扎堆</td></tr>
-          <tr><td><strong>赐予权柄</strong></td><td>赐给他们权柄，制伏污鬼</td><td>带有属灵征战能力</td></tr>
-          <tr><td><strong>行路装备</strong></td><td><strong>除了拐杖以外，什么都不要带</strong></td><td><strong>只要穿鞋，不要带食物、口袋、腰袋里的钱，不要穿两件褂子</strong></td></tr>
-          <tr><td><strong>接待原则</strong></td><td>到一家就住在那里，直到离开</td><td>不要随意挪动住处</td></tr>
-          <tr><td><strong>被拒绝时</strong></td><td>离开时跺下脚上的尘土对他们作见证</td><td>象征断绝干系与定罪见证</td></tr>
+          <tr><td>希律</td><td>听见耶稣的名声；认为约翰从死里复活[cite: 36]</td><td>不是彼拉多[cite: 36]</td></tr>
+          <tr><td>施洗约翰</td><td>责备希律娶兄弟的妻子；被囚；最后被杀[cite: 36]</td><td>与使徒约翰分开[cite: 36]</td></tr>
+          <tr><td>希罗底</td><td>希律兄弟腓力的妻子；后来被希律娶来；恨约翰[cite: 36]</td><td>不是跳舞的女儿[cite: 36]</td></tr>
+          <tr><td>希罗底的女儿</td><td>跳舞使希律和同席的人欢喜；按母亲指示要约翰的头[cite: 36]</td><td>不要直接叫她希罗底[cite: 36]</td></tr>
+          <tr><td>腓力</td><td>希罗底原来的丈夫，也是希律的兄弟[cite: 36]</td><td>与使徒腓力分开[cite: 36]</td></tr>
         </tbody>
       </table>
-      <p>门徒出去传道叫人悔改，赶出许多鬼，<strong>用油抹了许多病人，治好他们</strong>（6:12-13）。</p>
+      <div class="notice-box">
+        🔥 次序必须记：<strong>约翰责备希律 → 希罗底怀恨 → 希律把约翰下在监里 → 希律惧怕约翰并保护他 → 希罗底借机会 → 女儿跳舞 → 希律起誓应许 → 女儿要约翰的头 → 约翰被斩首</strong>[cite: 36]。<br>
+        ⚠️ 特别容易漏：希律知道约翰是义人、圣人，就保护他；听他讲论，甚觉疑惑，却仍乐意听他[cite: 36]。
+      </div>
 
-      <div class="section-h2">第三部分：6:14–29 希律与施洗约翰之死</div>
-      <p>① <strong>希律的惊慌推断</strong>：希律王听见耶稣的名声，说：<strong>「这是我所斩的约翰，他复活了！」</strong>（有人说是以利亚，有人说是先知）。</p>
-      <p>② <strong>被囚原因</strong>：希律为他兄弟腓力的妻子<strong>希罗底</strong>娶了她；约翰曾责备希律：「你娶你兄弟的妻子是不合理的。」</p>
-      <p>③ <strong>希律的态度矛盾</strong>：希律知道约翰是<strong>义人、圣人</strong>，所以敬畏他、保护他，听他讲论甚觉困惑，却仍乐意听他。</p>
-      <p>④ <strong>生日筵席悲剧</strong>：希律过生日时，<strong>希罗底的女儿进来跳舞</strong>，希律起誓甚至愿给半壁江山。女儿按母亲指示求：<strong>「请立时把施洗约翰的头放在盘子里给我。」</strong>希律因起誓和宾客面子，随即差卫兵斩首成全。</p>
+      <div class="section-h2">五、6:30-34 十二使徒回来——「歇一歇」与「怜悯」</div>
+      <div class="quiz-a">
+        使徒聚集到耶稣那里，将一切所做的事、所传的道全告诉祂[cite: 36]。因为来往的人多，他们连吃饭也没有工夫，耶稣说：<strong>「你们来，同我暗暗地到旷野地方去歇一歇。」</strong>[cite: 36]<br>
+        他们坐船往旷野地方去；众人看见他们去，就从各城步行，甚至比他们先赶到了[cite: 36]。<br>
+        耶稣出来，看见许多的人，就<strong>怜悯他们，因为他们如同羊没有牧人一般</strong>，于是开口教训他们许多道理[cite: 36]。<br>
+        🔥 注意故事转折：原本是「让门徒歇一歇」，结果因为众人先到，耶稣看见他们就「怜悯」并教训他们[cite: 36]。
+      </div>
 
-      <div class="section-h2">第四部分：6:30–44 五饼二鱼神迹（数字与动作全部必考）</div>
-      <p>① <strong>歇息转折与牧人怜悯</strong>：使徒报告传道成果，因来往人多连吃饭都没空，耶稣带他们暗暗往旷野歇歇。然而众人步行先赶到，耶稣见大批群众，<strong>就怜悯他们，因为他们如同羊没有牧人一般</strong>，开口教训他们许多道理（6:34）。</p>
-      <p>② <strong>门徒的估算反问</strong>：天晚了门徒建议叫众人去买吃的，耶稣说「你们给他们吃吧！」门徒反问：<strong>「我们可以去买二十两银子的饼给他们吃吗？」</strong>（20两银子只是估算反问）。</p>
-      <p>③ <strong>现有点算与分组</strong>：点出只有<strong>五个饼、两条鱼</strong>。耶稣吩咐众人一帮一帮地坐在青草地上，<strong>有一百一排的，有五十一排的</strong>。</p>
-      <p>④ <strong>祝圣神圣动作链</strong>：<strong>拿五饼二鱼 → 望天祝福 → 擘开饼 → 递给门徒摆在众人面前</strong>。</p>
-      <p>⑤ <strong>神迹结局与数字</strong>：众人都吃饱了；收拾剩下的零碎装满了<strong>十二个篮子</strong>；吃饼的<strong>男人共有五千</strong>（明确指男人）。</p>
+      <div class="section-h2">六、6:35-44 五饼二鱼——数字、顺序、动作全部要背</div>
+      <table class="info-table">
+        <thead><tr><th>考点</th><th>正确资料</th></tr></thead>
+        <tbody>
+          <tr><td>时间</td><td>天已经晚了[cite: 36]</td></tr>
+          <tr><td>地点</td><td>旷野地方[cite: 36]</td></tr>
+          <tr><td>人数</td><td><strong>男人约有五千</strong>[cite: 36]</td></tr>
+          <tr><td>门徒建议</td><td>叫众人散开，往四面乡村里去自己买什么吃[cite: 36]</td></tr>
+          <tr><td>耶稣回应</td><td>「你们给他们吃吧！」[cite: 36]</td></tr>
+          <tr><td>门徒估算</td><td>「要去买二十两银子的饼给他们吃吗？」[cite: 36]</td></tr>
+          <tr><td>现有食物</td><td>五个饼，两条鱼[cite: 36]</td></tr>
+          <tr><td>分组</td><td>一帮一帮地坐在青草地上；一排一排地坐[cite: 36]</td></tr>
+          <tr><td>分排人数</td><td><strong>有一百一排的，有五十一排的</strong>[cite: 36]</td></tr>
+          <tr><td>耶稣动作</td><td><strong>拿五饼二鱼，望着天祝福，擘开饼，递给门徒，叫他们摆在众人面前</strong>[cite: 36]</td></tr>
+          <tr><td>结果</td><td>众人都吃，并且吃饱了[cite: 36]</td></tr>
+          <tr><td>剩余</td><td>收拾剩下的零碎，有<strong>十二个篮子</strong>[cite: 36]</td></tr>
+          <tr><td>人数再确认</td><td>吃饼的男人共有五千[cite: 36]</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        🔥 超高频数字：<strong>5个饼 → 2条鱼 → 5,000男人 → 12个篮子</strong>[cite: 36]。<br>
+        ⚠️ 「五千」在马可 6:44 明确说的是「男人」。不要直接回答成「总人数五千」[cite: 36]。<br>
+        ⚠️ 「二十两银子的饼」只是门徒提出的估算/反问，不是实际花费[cite: 36]。<br>
+        ⚠️ 动作顺序：<strong>坐下 → 五饼二鱼 → 望天祝福 → 擘开 → 递给门徒 → 摆在众人面前 → 众人吃饱 → 收拾零碎 → 十二篮子</strong>[cite: 36]。
+      </div>
 
-      <div class="section-h2">第五部分：6:45–56 夜走海面与革尼撒勒医治</div>
-      <p>① <strong>催促与独自祷告</strong>：耶稣随即催门徒先上船渡到<strong>伯赛大</strong>那边，自己散开众人后<strong>上山去祷告</strong>。</p>
-      <p>② <strong>四更天惊慌</strong>：到了晚上船在海中因逆风摇橹甚苦。<strong>约在夜里四更天</strong>，耶稣在海面上走往他们那里去。门徒以为是<strong>鬼怪</strong>就喊叫惊慌。</p>
-      <p>③ <strong>安抚与心硬</strong>：耶稣连忙说：<strong>「你们放心，是我，不要怕！」</strong>一上船风就住了。门徒心里十分惊奇，<strong>「因为他们不明白那分饼的事，心里还是愚顽。」</strong>（6:52）。</p>
-      <p>④ <strong>革尼撒勒的医治浪潮</strong>：靠岸革尼撒勒后众人认出祂，跑遍各处把病人抬来放在街市，<strong>求耶稣只容他们摸祂的衣裳繸子；凡摸着的人就都好了</strong>（6:56）。</p>
+      <div class="section-h2">七、6:45-52 海面上行走——时间与细节题</div>
+      <div class="quiz-a">
+        • 喂饱五千人以后，耶稣「随即」催门徒上船，先渡到伯赛大那边去，等祂叫众人散开[cite: 36]。<br>
+        • 耶稣离开他们以后，上山去祷告[cite: 36]。<br>
+        • 到了晚上，船在海中，耶稣独自在岸上[cite: 36]。<br>
+        • 耶稣看见门徒因风不顺，摇橹甚苦[cite: 36]。<br>
+        • <strong>约在夜里四更天</strong>，耶稣在海面上走，往他们那里去[cite: 36]。<br>
+        • 门徒看见祂在海面上走，<strong>以为是鬼怪</strong>，就喊叫起来[cite: 36]。<br>
+        • 耶稣连忙说：<strong>「你们放心，是我，不要怕！」</strong>[cite: 36]<br>
+        • 耶稣上了船，到他们那里，风就住了[cite: 36]。<br>
+        • 门徒心里十分惊奇，<strong>因为他们不明白那分饼的事，心里还是愚顽</strong>[cite: 36]。<br>
+        ⚠️ 高危混淆：时间是「夜里四更天」；门徒看见耶稣时「以为是鬼怪」，不是一开始就认出祂[cite: 36]。<br>
+        ⚠️ 6:52 非常重要：门徒不是没有经历神迹，而是「不明白那分饼的事，心里还是愚顽」[cite: 36]。
+      </div>
+
+      <div class="section-h2">八、6:53-56 革尼撒勒——「凡摸着的人就都好了」</div>
+      <div class="quiz-a">
+        • 渡过海，来到<strong>革尼撒勒</strong>地方，就靠了岸[cite: 36]。<br>
+        • 众人一认出耶稣，就跑遍那一带地方[cite: 36]。<br>
+        • 他们把有病的人用褥子抬到耶稣那里[cite: 36]。<br>
+        • 耶稣所到的地方，包括<strong>村中、城里、乡间</strong>，都有人把病人放在街市[cite: 36]。<br>
+        • 他们求耶稣只容他们摸祂的<strong>衣裳繸子</strong>[cite: 36]。<br>
+        • <strong>凡摸着的人就都好了</strong>[cite: 36]。<br>
+        🔥 6:56 是很适合考经文出处与填空的结尾句：「凡摸着的人就都好了。」[cite: 36]
+      </div>
     </div>
   </div>
 
-  <!-- TAB 2: 易混人物与矩阵 -->
+  <!-- TAB 2: 图表、数字与易混矩阵 -->
   <div id="tab-traps" class="tab-content">
     <div class="card">
-      <div class="card-title">🧠 第六章人物关系剖析与对比</div>
+      <div class="card-title">九、第 6 章「重复出现」与主题字眼</div>
       <table class="info-table">
-        <thead><tr><th>人物</th><th>准确身份与行为特征</th><th>极易混淆点</th></tr></thead>
+        <thead><tr><th>重复 / 主题</th><th>第6章重点</th><th>Quiz备战方式</th></tr></thead>
         <tbody>
-          <tr><td><strong>希律安提帕</strong></td><td>分封王；敬畏施洗约翰却懦弱屈服将他斩首；认为耶稣是复活的约翰。</td><td>勿与杀婴孩的大希律、使徒行传的希律亚基帕混淆。</td></tr>
-          <tr><td><strong>希罗底</strong></td><td>原是腓力的妻子，后改嫁希律；深恨约翰，利用女儿设局害死约翰。</td><td>不是亲自跳舞的人；她是跳舞女子的母亲。</td></tr>
-          <tr><td><strong>希罗底的女儿</strong></td><td>在生日席上跳舞取悦希律；按母亲指使索取约翰头颅。</td><td>不要直接称呼她为希罗底。</td></tr>
-          <tr><td><strong>腓力（希律兄弟）</strong></td><td>希罗底的前夫；希律安提帕的兄弟。</td><td>勿与使徒腓力混淆。</td></tr>
-          <tr><td><strong>施洗约翰</strong></td><td>勇敢斥责希律非法婚姻；头放在盘子里殉道。</td><td>勿与使徒约翰（雷子）混淆。</td></tr>
+          <tr><td>十二</td><td>十二门徒、十二个篮子[cite: 36]</td><td>数字题连在一起记[cite: 36]</td></tr>
+          <tr><td>两个两个</td><td>门徒两个两个出去[cite: 36]</td><td>与十二门徒一起记[cite: 36]</td></tr>
+          <tr><td>五饼二鱼</td><td>五个饼、两条鱼[cite: 36]</td><td>不要写成五鱼二饼[cite: 36]</td></tr>
+          <tr><td>五千</td><td>吃饼的男人共有五千[cite: 36]</td><td>注意「男人」[cite: 36]</td></tr>
+          <tr><td>怜悯</td><td>众人如羊没有牧人[cite: 36]</td><td>6:34必背[cite: 36]</td></tr>
+          <tr><td>吃饱</td><td>五饼二鱼事件[cite: 36]</td><td>吃饱→零碎→十二篮[cite: 36]</td></tr>
+          <tr><td>衣裳繸子</td><td>革尼撒勒医治[cite: 36]</td><td>6:56关键词[cite: 36]</td></tr>
+          <tr><td>不信 / 愚顽</td><td>家乡不信；门徒不明白分饼[cite: 36]</td><td>形成前后对照[cite: 36]</td></tr>
+          <tr><td>随即</td><td>6:45催门徒上船[cite: 36]</td><td>看到「随即」就定位上下文[cite: 36]</td></tr>
         </tbody>
       </table>
 
-      <div class="card-title" style="margin-top:20px;">🔢 第六章必考数字与时间表</div>
+      <div class="card-title" style="margin-top:20px;">十、第 6 章「地点」与「数字＋时间」清单</div>
       <table class="info-table">
-        <thead><tr><th>数字 / 概念</th><th>对应经文细节</th></tr></thead>
+        <thead><tr><th>地点</th><th>发生什么</th></tr></thead>
         <tbody>
-          <tr><td><strong>两个两个</strong></td><td>门徒受差遣外出结对传道的方式（6:7）。</td></tr>
-          <tr><td><strong>二十两银子</strong></td><td>门徒面对五千人饥饿时提出的买饼估算数值（6:37）。</td></tr>
-          <tr><td><strong>五饼二鱼</strong></td><td>祝圣前门徒找到的全部食物配额（6:38）。</td></tr>
-          <tr><td><strong>一百一排 / 五十一排</strong></td><td>五千人在青草地上就座的分组规格（6:40）。</td></tr>
-          <tr><td><strong>五千人（男人）</strong></td><td>吃饱的实际成年男子统计数量（6:44）。</td></tr>
-          <tr><td><strong>十二个篮子</strong></td><td>饱食之后收拾剩下的食物零碎装载数量（6:43）。</td></tr>
-          <tr><td><strong>夜里四更天</strong></td><td>耶稣在汹涌海面上行走走向门徒的时间（6:48）。</td></tr>
+          <tr><td>耶稣的家乡 / 会堂</td><td>教训人；众人希奇却不信[cite: 36]</td></tr>
+          <tr><td>周围乡村</td><td>耶稣在那里教训人[cite: 36]</td></tr>
+          <tr><td>旷野地方</td><td>门徒歇一歇；五饼二鱼[cite: 36]</td></tr>
+          <tr><td>山上</td><td>耶稣上山祷告[cite: 36]</td></tr>
+          <tr><td>海中 / 海面</td><td>门徒摇橹；耶稣在海面上行走[cite: 36]</td></tr>
+          <tr><td>伯赛大那边</td><td>耶稣催门徒先渡过去的方向[cite: 36]</td></tr>
+          <tr><td>革尼撒勒</td><td>靠岸后众人带病人来，摸衣裳繸子得医治[cite: 36]</td></tr>
         </tbody>
       </table>
+      <ul>
+        <li><strong>12</strong>：十二门徒；十二个篮子[cite: 36]。</li>
+        <li><strong>2</strong>：门徒两个两个出去[cite: 36]。</li>
+        <li><strong>5</strong>：五个饼[cite: 36]。</li>
+        <li><strong>2</strong>：两条鱼[cite: 36]。</li>
+        <li><strong>5,000</strong>：吃饼的男人共有五千[cite: 36]。</li>
+        <li><strong>100 / 50</strong>：一排一排地坐：一百一排、五十一排[cite: 36]。</li>
+        <li><strong>20两银子</strong>：门徒提出的买饼估算[cite: 36]。</li>
+        <li><strong>四更天</strong>：耶稣在海面上走向门徒[cite: 36]。</li>
+      </ul>
 
-      <div class="notice-box">
-        <strong>🚨 第六章十大防中招陷阱：</strong><br>
-        1. 拿撒勒家乡人听到耶稣讲道是<strong>「希奇，却不信（厌弃祂）」</strong>，不可误认为因希奇而信主。<br>
-        2. 十二门徒出发时<strong>只准带拐杖、穿鞋</strong>，其余食物、钱袋、两件褂子一律不可带。<br>
-        3. 抹油医治是差遣门徒时的特别动作：<strong>用油抹了许多病人</strong>。<br>
-        4. 希律起初对约翰非常敬重保护，深知他是<strong>义人与圣人</strong>。<br>
-        5. 在筵席跳舞的是<strong>希罗底的女儿</strong>，并非希罗底本人。<br>
-        6. 耶稣退往旷野原计划是带门徒<strong>「歇一歇」</strong>，后因怜悯羊无牧者而讲道馈食。<br>
-        7. 五饼二鱼算定吃饱的人数，经文特别注明是<strong>吃饼的「男人」共有五千</strong>。<br>
-        8. 耶稣行五饼二鱼后<strong>独自上山祷告</strong>，门徒先行渡海。<br>
-        9. 海面行走时门徒喊叫是因为<strong>以为遇到了「鬼怪」</strong>。<br>
-        10. 众人见风浪平息后依然心里愚顽，经文指出是<strong>「不明白那分饼的事」</strong>。
+      <div class="card-title" style="margin-top:20px;">十一、Bible Quiz「高难度陷阱题」预警</div>
+      <div class="trap-box">
+        • ❌ 众人听见耶稣教训后就相信。→ 错；他们希奇，却不信[cite: 36]。<br>
+        • ❌ 因为他们不信，耶稣完全不能医治任何人。→ 错；祂按手在几个病人身上，治好他们[cite: 36]。<br>
+        • ❌ 十二门徒各自单独出去。→ 错；是两个两个出去[cite: 36]。<br>
+        • ❌ 门徒可以带食物、钱和两件褂子。→ 错；6:8-9明确规定[cite: 36]。<br>
+        • ❌ 约翰被杀只是因为希律恨他。→ 不完整；希罗底怀恨，后来希律因起誓和宾客压力下令[cite: 36]。<br>
+        • ❌ 希罗底亲自跳舞并要求约翰的头。→ 错；是她的女儿跳舞，并按母亲指示提出请求[cite: 36]。<br>
+        • ❌ 五千人就是当时所有男女老幼的总人数。→ 马可6:44只明确说吃饼的男人共有五千[cite: 36]。<br>
+        • ❌ 十二篮子在经文中被解释为代表十二个门徒。→ 经文没有这样解释[cite: 36]。<br>
+        • ❌ 喂饱五千以后，耶稣与门徒一起上山。→ 错；祂催门徒先上船，自己留下来散开众人，然后独自上山祷告[cite: 36]。<br>
+        • ❌ 耶稣在白天海面上行走。→ 错；是在夜里四更天[cite: 36]。<br>
+        • ❌ 门徒看见海面上的耶稣就认出祂。→ 错；他们以为是鬼怪[cite: 36]。<br>
+        • ❌ 门徒没有经历五饼二鱼的神迹，所以才不明白。→ 错；他们亲眼经历了，却仍然不明白，心里愚顽[cite: 36]。<br>
+        • ❌ 革尼撒勒只有城里的人把病人带来。→ 错；村中、城里、乡间都有[cite: 36]。
       </div>
     </div>
   </div>
 
-  <!-- TAB 3: 必背经文与口诀 -->
+  <!-- TAB 3: 必背经文、口诀与背诵指南 -->
   <div id="tab-verses" class="tab-content">
     <div class="card">
-      <div class="card-title">第六章 8 处必须背诵经文</div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>1. 马可 6:4</strong>「耶稣对他们说：『大凡先知，除了本地、亲属、本家之外，没有不被人尊敬的。』」
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>2. 马可 6:7</strong>「耶稣叫了十二个门徒来，差遣他们两个两个地出去，也赐给他们权柄，制伏污鬼。」
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>3. 马可 6:34</strong>「耶稣出来，见有许多的人，就怜悯他们，因为他们如同羊没有牧人一般，于是开口教训他们许多道理。」
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>4. 马可 6:37</strong>「耶稣回答说：『你们给他们吃吧！』门徒说：『我们可以去买二十两银子的饼给他们吃吗？』」
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>5. 马可 6:41</strong>「耶稣拿着这五个饼，两条鱼，望着天祝福，擘开饼，递给门徒，叫他们摆在众人面前，也把那两条鱼分给众人。」
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>6. 马可 6:50</strong>「因为他们都看见了他，且甚惊慌。耶稣连忙向他们说：『你们放心，是我，不要怕！』」
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>7. 马可 6:52</strong>「这是因为他们不明白那分饼的事，心里还是愚顽。」
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;">
-        <strong>8. 马可 6:56</strong>「凡耶稣所到的地方，或村中、或城里、或乡间，他们都将病人放在街市，求耶稣只容他们摸他的衣裳繸子；凡摸着的人就都好了。」
-      </div>
+      <div class="card-title">十二、第 6 章必须背诵经文清单</div>
+      <p><strong>🥇 Level 1：建议全组背熟</strong></p>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>1. 可 6:4</strong>「大凡先知，除了本地、亲属、本家之外，没有不被人尊敬的。」[cite: 36]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>2. 可 6:7</strong>「耶稣叫了十二个门徒来，差遣他们两个两个地出去，也赐给他们权柄，制伏污鬼。」[cite: 36]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>3. 可 6:11</strong>「何处的人不接待你们，不听你们，你们离开那里的时候，就把脚上的尘土跺下去，对他们作见证。」[cite: 36]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>4. 可 6:34</strong>「耶稣出来，见有许多的人，就怜悯他们，因为他们如同羊没有牧人一般，于是开口教训他们许多道理。」[cite: 36]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>5. 可 6:37</strong>「耶稣回答说：『你们给他们吃吧！』门徒说：『我们可以去买二十两银子的饼给他们吃吗？』」[cite: 36]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>6. 可 6:41</strong>「耶稣拿着这五个饼，两条鱼，望着天祝福，擘开饼，递给门徒，叫他们摆在众人面前。」[cite: 36]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>7. 可 6:50</strong>「因为他们都看见了他，且甚惊慌。耶稣连忙向他们说：『你们放心，是我，不要怕！』」[cite: 36]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>8. 可 6:52</strong>「因为他们不明白那分饼的事，心里还是愚顽。」[cite: 36]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>9. 可 6:56</strong>「凡耶稣所到的地方，或村中、或城里、或乡间，他们都将病人放在街市，求耶稣只容他们摸他的衣裳繸子；凡摸着的人就都好了。」[cite: 36]</div>
+
+      <p><strong>🥈 Level 2：至少熟悉出处与关键词</strong></p>
+      <ul>
+        <li>6:8-9 —— 门徒出发时带什么、不带什么[cite: 36]。</li>
+        <li>6:17-18 —— 约翰为何被希律下在监里[cite: 36]。</li>
+        <li>6:20 —— 希律惧怕约翰，知道他是义人、圣人，并且保护他[cite: 36]。</li>
+        <li>6:27-28 —— 约翰被斩首，头放在盘子里给女子，女子再给母亲[cite: 36]。</li>
+        <li>6:31 —— 「你们来，同我暗暗地到旷野地方去歇一歇。」[cite: 36]</li>
+        <li>6:38 —— 「你们有多少饼？可以去看看。」[cite: 36]</li>
+        <li>6:43 —— 收拾剩下的零碎和鱼，装满了十二个篮子[cite: 36]。</li>
+        <li>6:48 —— 夜里四更天，耶稣在海面上走[cite: 36]。</li>
+        <li>6:51 —— 耶稣上了船，到他们那里，风就住了[cite: 36]。</li>
+      </ul>
 
       <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
-        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 第六章极速背诵通关口诀：</p>
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 十三、第 6 章一句话记忆：</p>
         <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
-          家乡希奇却不信，先知本处少尊荣；两个两个受差遣，只带拐杖制污鬼；希罗底恨斩先知，公义约翰盘中首；怜悯群羊无牧养，旷野草地五千男；五饼二鱼天祝福，擘开递送十二篮；四更天主海面行，放心是我莫惊慌；革尼撒勒摸繸子，大显权柄尽得医！
+          <strong>「不信的家乡 → 两个两个差遣 → 约翰被杀 → 怜悯众人 → 五饼二鱼 → 四更天海面行走 → 摸衣裳繸子得医治」</strong>[cite: 36]
         </p>
       </div>
+
+      <div class="card-title" style="margin-top:20px;">十四、建议小组这样备战第 6 章</div>
+      <ol style="padding-left:20px; line-height:1.8;">
+        <li><strong>第一轮</strong>：先背章节主线，不看细节，把7个主要事件按顺序讲出来[cite: 36]。</li>
+        <li><strong>第二轮</strong>：专攻数字——两个两个、五饼、两鱼、五千、十二篮、100/50、二十两、四更天[cite: 36]。</li>
+        <li><strong>第三轮</strong>：专攻人物——尤其希律家族与约翰；另外分清施洗约翰、使徒约翰、腓力与使徒腓力[cite: 36]。</li>
+        <li><strong>第四轮</strong>：专攻「不要带什么」——让组员闭书逐项说出6:8-9[cite: 36]。</li>
+        <li><strong>第五轮</strong>：背9段高频经文，尤其6:34、6:37、6:41、6:50、6:52[cite: 36]。</li>
+        <li><strong>第六轮</strong>：做陷阱题——重点不是只记大意，而是抓住「谁、多少、何时、哪里、先后顺序」[cite: 36]。</li>
+      </ol>
     </div>
   </div>
 
-  <!-- TAB 4: 50 题随机测验 (按题型分组) -->
+  <!-- TAB 4: 50 题互动测验 (数据由中央题库 mark_master_quiz_data.js 注入) -->
   <div id="tab-quiz" class="tab-content">
     <div class="dashboard">
       <div class="stat-group">
-        <div class="stat-box">
-          <div class="stat-val" id="total-score">0 / 50</div>
-          <div class="stat-lbl">答对题数</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-val" id="accuracy-rate">0%</div>
-          <div class="stat-lbl">正确率</div>
-        </div>
+        <div class="stat-box"><div class="stat-val" id="total-score">0 / 50</div><div class="stat-lbl">答对题数</div></div>
+        <div class="stat-box"><div class="stat-val" id="accuracy-rate">0%</div><div class="stat-lbl">正确率</div></div>
       </div>
       <div>
         <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
-        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽题</button>
+        <a href="mark_all_chapters_quiz.html" class="btn-master-link">🏆 进入全卷总考</a>
         <span class="save-status" id="save-status">💾 进度已自动保存</span>
       </div>
     </div>
-
-    <!-- 试题按题型组织呈现容器 -->
     <div id="quiz-sections-container"></div>
   </div>
 </div>
 
+<!-- 引入中央 Master 全量题库文件 -->
+<script src="mark_master_quiz_data.js"></script>
+
 <script>
-// 全量 MASTER QUESTION POOL (依据 Mark Chapter 6.docx 全面萃取的高频 50 道真实题库)
-const MASTER_QUESTION_POOL = [
-  // --- 填空题 (10 题) ---
-  { id: "fb1", type: "fill", title: "耶稣对他们说：「大凡_____，除了本地、亲属、本家之外，没有不被人尊敬的。」", blanks: [{id:"f1_1", ans:"先知"}], desc: "可 6:4 大凡先知，除了本地、亲属、本家之外，没有不被人尊敬的。" },
-  { id: "fb2", type: "fill", title: "耶稣叫了十二个门徒来，差遣他们_____地出去，也赐给他们权柄，制伏污鬼。", blanks: [{id:"f2_1", ans:"两个两个"}], desc: "可 6:7 差遣他们两个两个地出去。" },
-  { id: "fb3", type: "fill", title: "耶稣吩咐他们行路的时候，除了_____以外，什么都不要带。", blanks: [{id:"f3_1", ans:"拐杖"}], desc: "可 6:8 除了拐杖以外，什么都不要带。" },
-  { id: "fb4", type: "fill", title: "门徒出去传道，又赶出许多的鬼，用_____抹了许多病人，治好他们。", blanks: [{id:"f4_1", ans:"油"}], desc: "可 6:13 用油抹了许多病人，治好他们。" },
-  { id: "fb5", type: "fill", title: "耶稣出来，见有许多的人，就_____他们，因为他们如同羊没有牧人一般。", blanks: [{id:"f5_1", ans:"怜悯"}], desc: "可 6:34 就怜悯他们，因为他们如同羊没有牧人一般。" },
-  { id: "fb6", type: "fill", title: "门徒对耶稣说：「我们可以去买_____两银子的饼给他们吃吗？」", blanks: [{id:"f6_1", ans:"二十|20"}], desc: "可 6:37 我们可以去买二十两银子的饼给他们吃吗？" },
-  { id: "fb7", type: "fill", title: "五饼二鱼喂饱众人后，门徒收拾剩下的零碎，装满了_____个篮子。", blanks: [{id:"f7_1", ans:"十二|12"}], desc: "可 6:43 剩下的零碎装满了十二个篮子。" },
-  { id: "fb8", type: "fill", title: "约在夜里_____天，耶稣在海面上走，往他们那里去。", blanks: [{id:"f8_1", ans:"四更|四更天"}], desc: "可 6:48 约在夜里四更天，耶稣在海面上走。" },
-  { id: "fb9", type: "fill", title: "门徒甚惊慌，因为他们不明白那分饼的事，心里还是_____。", blanks: [{id:"f9_1", ans:"愚顽"}], desc: "可 6:52 因为他们不明白那分饼的事，心里还是愚顽。" },
-  { id: "fb10", type: "fill", title: "在革尼撒勒，众人求耶稣只容他们摸祂的_____；凡摸着的人就都好了。", blanks: [{id:"f10_1", ans:"衣裳繸子|衣裳"}], desc: "可 6:56 求耶稣只容他们摸他的衣裳繸子。" },
+// 本页不再硬编码任何题目数组，完全通过中央题库 window.MARK_MASTER_QUESTION_POOL 动态读取第 6 章题目
+let activeQuestionSet = [];
+let activeDynamicWordPool = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch6_from_master_v1";
 
-  // --- 选择题与排序题 (26 题) ---
-  { id: "mc1", type: "radio", title: "耶稣回到家乡在会堂里教训人，众人听见后的态度是什么？", opts: [{v:"a",t:"A. 欢喜深信"},{v:"b",t:"B. 希奇，却因出身而厌弃祂不信"},{v:"c",t:"C. 拜祂为王"},{v:"d",t:"D. 拥戴祂作拉比"}], ans: "b", desc: "可 6:2-3 众人听见就希奇，却厌弃他。" },
-  { id: "mc2", type: "radio", title: "拿撒勒乡亲指认耶稣肉身手足时，列举的四个弟兄名字不包括谁？", opts: [{v:"a",t:"A. 雅各"},{v:"b",t:"B. 约西"},{v:"c",t:"C. 犹大"},{v:"d",t:"D. 多马"}], ans: "d", desc: "可 6:3 四弟兄为雅各、约西、犹大、西门；无多马。" },
-  { id: "mc3", type: "radio", title: "因为家乡人不信，耶稣在当地行异能的情况如何？", opts: [{v:"a",t:"A. 行了极大的神迹震慑众人"},{v:"b",t:"B. 绝不给任何一人按手"},{v:"c",t:"C. 不得行什么异能，不过按手在几个病人身上治好他们"},{v:"d",t:"D. 让天降大火"}], ans: "c", desc: "可 6:5 不得行什么异能，不过按手治好几个病人。" },
-  { id: "mc4", type: "radio", title: "门徒受差遣外出布道时，以下哪件装备是耶稣明确允许带上的？", opts: [{v:"a",t:"A. 拐杖"},{v:"b",t:"B. 口袋"},{v:"c",t:"C. 腰袋里的钱"},{v:"d",t:"D. 两件褂子"}], ans: "a", desc: "可 6:8 除了拐杖以外，什么都不要带。" },
-  { id: "mc5", type: "radio", title: "门徒在何种情况下要把脚上的尘土跺下去作见证？", opts: [{v:"a",t:"A. 离开每一个村庄时"},{v:"b",t:"B. 何处的人不接待他们、不听他们时"},{v:"c",t:"C. 天黑入夜归家时"},{v:"d",t:"D. 进会堂讲道前"}], ans: "b", desc: "可 6:11 何处的人不接待你们，不听你们，离开时跺下尘土。" },
-  { id: "mc6", type: "radio", title: "希律王听见耶稣大施异能的名声，第一反应猜测祂是谁？", opts: [{v:"a",t:"A. 施洗约翰从死里复活"},{v:"b",t:"B. 先知以利亚降临"},{v:"c",t:"C. 摩西重现"},{v:"d",t:"D. 大卫的子孙"}], ans: "a", desc: "可 6:14 希律王说：这是施洗的约翰从死里复活了。" },
-  { id: "mc7", type: "radio", title: "施洗约翰当初是因为什么原因得罪了希律而被囚禁？", opts: [{v:"a",t:"A. 煽动民众拒纳罗马税赋"},{v:"b",t:"B. 责备希律娶自己兄弟腓力的妻子是不合法的"},{v:"c",t:"C. 带领群众进占圣殿"},{v:"d",t:"D. 亵渎法利赛人遗传"}], ans: "b", desc: "可 6:17-18 约翰曾说：你娶你兄弟的妻子是不合理的。" },
-  { id: "mc8", type: "radio", title: "希律起初对施洗约翰的真实情感态度是怎样的？", opts: [{v:"a",t:"A. 深恶痛绝，恨不得立刻杀之"},{v:"b",t:"B. 知道他是义人、是圣人，敬畏并保护他"},{v:"c",t:"C. 完全视其为疯癫之人"},{v:"d",t:"D. 拜他为国师"}], ans: "b", desc: "可 6:20 希律知道约翰是义人，是圣人，所以敬畏他，保护他。" },
-  { id: "mc9", type: "radio", title: "在希律生日宴席上跳舞取悦全场并最终求斩约翰头颅的是谁？", opts: [{v:"a",t:"A. 希罗底本人"},{v:"b",t:"B. 希罗底的女儿"},{v:"c",t:"C. 罗马的女使者"},{v:"d",t:"D. 宫廷的女乐师"}], ans: "b", desc: "可 6:22 希罗底的女儿进来跳舞，使希律欢喜。" },
-  { id: "mc10", type: "radio", title: "约翰的头颅被斩下后，是用什么器物盛装送给女子的？", opts: [{v:"a",t:"A. 盘子"},{v:"b",t:"B. 木盒"},{v:"c",t:"C. 绢布"},{v:"d",t:"D. 篮子"}], ans: "a", desc: "可 6:28 把头放在盘子里，拿来给女子。" },
-  { id: "mc11", type: "radio", title: "门徒传道归来后，耶稣带他们暗暗去旷野的原计划目的是什么？", opts: [{v:"a",t:"A. 叫他们歇一歇，因为连吃饭也没工夫"},{v:"b",t:"B. 闭关传授十二门徒神迹"},{v:"c",t:"C. 躲避希律王的追杀"},{v:"d",t:"D. 筹备建立新的会堂"}], ans: "a", desc: "可 6:31 你们来，同我暗暗地到旷野地方去歇一歇。" },
-  { id: "mc12", type: "radio", title: "在旷野面对饥饿人群，耶稣吩咐众人如何就座？", opts: [{v:"a",t:"A. 围成一个大圆圈"},{v:"b",t:"B. 坐在青草地上，有一百一排、五十一排的"},{v:"c",t:"C. 按照犹太支派次序分列"},{v:"d",t:"D. 站立排队依次领取"}], ans: "b", desc: "可 6:39-40 坐在青草地上，有一百一排的，有五十一排的。" },
-  { id: "mc13", type: "radio", title: "耶稣施行五饼二鱼神迹时，动作顺序完全正确的是哪一项？", opts: [
-    {v:"a", t:"A. 擘开饼 → 望天祝福 → 拿着食物 → 递给门徒"},
-    {v:"b", t:"B. 拿着五饼二鱼 → 望着天祝福 → 擘开饼 → 递给门徒摆在众人面前"},
-    {v:"c", t:"C. 递给门徒 → 门徒擘开 → 耶稣祝福 → 分给众人"},
-    {v:"d", t:"D. 望天祝福 → 递给门徒 → 众人擘开"}
-  ], ans: "b", desc: "可 6:41 拿着五饼二鱼，望着天祝福，擘开饼，递给门徒。" },
-  { id: "mc14", type: "radio", title: "经文记载吃这五饼二鱼实际饱足的人数，明确注明的是：", opts: [{v:"a",t:"A. 男女老幼共五千人"},{v:"b",t:"B. 吃饼的男人共有五千"},{v:"c",t:"C. 总计四千人"},{v:"d",t:"D. 连妇人一共五千"}], ans: "b", desc: "可 6:44 吃饼的男人共有五千。" },
-  { id: "mc15", type: "radio", title: "喂饱五千人后，耶稣催门徒先渡海，自己独自去做了什么？", opts: [{v:"a",t:"A. 回家睡觉"},{v:"b",t:"B. 上山去祷告"},{v:"c",t:"C. 进城散步"},{v:"d",t:"D. 检查剩下的篮子"}], ans: "b", desc: "可 6:46 辞别了他们，就往山上去祷告。" },
-  { id: "mc16", type: "radio", title: "门徒在风浪摇橹甚苦时看见耶稣在海面行走，他们的反应是什么？", opts: [{v:"a",t:"A. 喜乐欢呼迎接祂"},{v:"b",t:"B. 以为是鬼怪，就喊叫起来"},{v:"c",t:"C. 立即跳下海游泳"},{v:"d",t:"D. 拿起船桨防备抵抗"}], ans: "b", desc: "可 6:49 以为是鬼怪，就喊叫起来。" },
-  { id: "mc17", type: "radio", title: "耶稣走上海面看见惊慌的门徒，对他们说了什么定心安抚的话？", opts: [{v:"a",t:"A. “你们为什么胆怯？”"},{v:"b",t:"B. “你们放心，是我，不要怕！”"},{v:"c",t:"C. “你们的信心在哪里呢？”"},{v:"d",t:"D. “快快把船划过来！”"}], ans: "b", desc: "可 6:50 你们放心，是我，不要怕！" },
-  { id: "mc18", type: "radio", title: "门徒见风浪平息后心里十分惊奇，圣经指出他们惊奇的根本原因是什么？", opts: [{v:"a",t:"A. 因为他们是打鱼的懂得风向"},{v:"b",t:"B. 因为他们不明白那分饼的事，心里还是愚顽"},{v:"c",t:"C. 因为船只受损太严重"},{v:"d",t:"D. 因为天亮鸡叫了"}], ans: "b", desc: "可 6:52 这是因为他们不明白那分饼的事，心里还是愚顽。" },
-  { id: "mc19", type: "radio", title: "渡过海到革尼撒勒后，众人把患病的人放在街市，求耶稣容他们摸什么？", opts: [{v:"a",t:"A. 耶稣的手掌"},{v:"b",t:"B. 祂的衣裳繸子"},{v:"c",t:"C. 祂的鞋带"},{v:"d",t:"D. 祂的拐杖"}], ans: "b", desc: "可 6:56 求耶稣只容他们摸他的衣裳繸子。" },
-  { id: "mc20", type: "radio", title: "【差遣装备陷阱】差遣十二使徒时，下列哪一项装备是被明确禁止携带的？（多选）", opts: [{v:"a",t:"A. 食物与口袋"},{v:"b",t:"B. 腰袋里的钱"},{v:"c",t:"C. 两件褂子"},{v:"d",t:"D. 拐杖与鞋"}], ans: ["a","b","c"], desc: "可 6:8-9 明确只准带拐杖、穿鞋，禁止食物、钱及两件褂子。" },
-  { id: "mc21", type: "radio", title: "【数字陷阱】关于五饼二鱼神迹中的数字，以下组合完全正确的是哪一项？", opts: [{v:"a",t:"A. 五饼、二鱼、二千男人、十二篮"},{v:"b",t:"B. 五饼、二鱼、五千男人、十二篮"},{v:"c",t:"C. 七饼、几条小鱼、四千人、七筐"},{v:"d",t:"D. 五饼、二鱼、五千人、七篮"}], ans: "b", desc: "可 6:38-44 5饼、2鱼、5000男人、12篮子。" },
-  { id: "mc22", type: "radio", title: "【排序题】请按照家乡拿撒勒事件的发展顺序排列：<br>① 诧异他们不信，往周围乡村教训人 ② 众人希奇厌弃祂 ③ 安息日在会堂讲道 ④ 只能按手治好几个病人", opts: [{v:"a", t:"A. ③ → ② → ④ → ①"},{v:"b", t:"B. ② → ③ → ④ → ①"},{v:"c", t:"C. ③ → ④ → ② → ①"},{v:"d", t:"D. ④ → ③ → ② → ①"}], ans: "a", desc: "会堂讲道(6:2) → 众人希奇厌弃(6:3) → 治好几个病人(6:5) → 诧异不信往周围乡村(6:6)。" },
-  { id: "mc23", type: "radio", title: "【排序题】请按照施洗约翰殉道事件的发展顺序排列：<br>① 希律因誓言下令斩首 ② 约翰责备希律娶嫂 ③ 希罗底女儿生日跳舞 ④ 盘装首级交由女儿转赠母亲", opts: [{v:"a", t:"A. ② → ③ → ① → ④"},{v:"b", t:"B. ③ → ② → ① → ④"},{v:"c", t:"C. ② → ① → ③ → ④"},{v:"d", t:"D. ② → ③ → ④ → ①"}], ans: "a", desc: "约翰斥责(6:18) → 女儿跳舞(6:22) → 起誓下令(6:26) → 盘送首级(6:28)。" },
-  { id: "mc24", type: "radio", title: "【排序题】请按照五饼二鱼神迹的发展顺序排列：<br>① 擘开饼递给门徒摆在众人面前 ② 门徒提出买二十两银子的饼 ③ 拿五饼二鱼望天祝福 ④ 众人吃饱收拾十二篮零碎", opts: [{v:"a", t:"A. ② → ③ → ① → ④"},{v:"b", t:"B. ③ → ① → ② → ④"},{v:"c", t:"C. ② → ① → ③ → ④"},{v:"d", t:"D. ③ → ② → ① → ④"}], ans: "a", desc: "门徒估算(6:37) → 望天祝福(6:41) → 擘开递给(6:41) → 吃饱收十二篮(6:42-43)。" },
-  { id: "mc25", type: "radio", title: "【排序题】请按照海面行走事件的发展顺序排列：<br>① 门徒以为是鬼怪喊叫 ② 四更天耶稣海面行走往他们那里去 ③ 耶稣催门徒先上船自己上山祷告 ④ 耶稣上船风浪平息", opts: [{v:"a", t:"A. ③ → ② → ① → ④"},{v:"b", t:"B. ② → ① → ③ → ④"},{v:"c", t:"C. ③ → ① → ② → ④"},{v:"d", t:"D. ② → ③ → ① → ④"}], ans: "a", desc: "催上船上山祷告(6:45-46) → 四更天海面走(6:48) → 以为鬼怪喊叫(6:49) → 上船风息(6:51)。" },
-  { id: "mc26", type: "radio", title: "喂饱五千人后，耶稣催门徒先渡过去的目的是哪里？", opts: [{v:"a",t:"A. 迦百农"},{v:"b",t:"B. 伯赛大"},{v:"c",t:"C. 耶路撒冷"},{v:"d",t:"D. 推罗"}], ans: "b", desc: "可 6:45 催门徒上船，先渡到那边伯赛大去。" },
-
-  // --- 是非判断题 (14 题) ---
-  { id: "tf1", type: "tf", title: "耶稣在家乡拿撒勒因为众人希奇就大受感动，在当地行了全卷书最多的异能神迹。", ans: "F", desc: "错。可 6:5 因他们不信，不得行什么异能，只医治了几个病人。" },
-  { id: "tf2", type: "tf", title: "“大凡先知，除了本地、亲属、本家之外，没有不被人尊敬的”是耶稣在家乡所讲的真理。", ans: "T", desc: "对。可 6:4 经文完全吻合。" },
-  { id: "tf3", type: "tf", title: "差遣十二使徒时，耶稣要求他们全员必须同进退，不可结队分批活动。", ans: "F", desc: "错。可 6:7 明确是“两个两个地出去”。" },
-  { id: "tf4", type: "tf", title: "耶稣吩咐门徒出发时不要带口袋，也不要带钱，连脚上的鞋也必须脱去赤足行走。", ans: "F", desc: "错。可 6:9 明确吩咐“只要穿鞋”。" },
-  { id: "tf5", type: "tf", title: "门徒外出布道不仅叫人悔改、赶鬼，还用油抹了许多病人使他们得医治。", ans: "T", desc: "对。可 6:13 经文完全吻合。" },
-  { id: "tf6", type: "tf", title: "希律王当初之所以娶希罗底，是因为希罗底是他兄弟腓力的妻子。", ans: "T", desc: "对。可 6:17 希律为他兄弟腓力的妻子希罗底娶了她。" },
-  { id: "tf7", type: "tf", title: "希律起初非常憎恶施洗约翰，从不听他讲论，直接下令将其关在牢房里。", ans: "F", desc: "错。可 6:20 希律敬畏保护约翰，并乐意听他讲论。" },
-  { id: "tf8", type: "tf", title: "在希律生日宴席上跳舞索取约翰人头的是希罗底的女儿，她事先请教了母亲希罗底。", ans: "T", desc: "对。可 6:22-24 经文完全吻合。" },
-  { id: "tf9", type: "tf", title: "五饼二鱼神迹发生前，门徒实际拿出了二十两银子购买大批面饼供给民众。", ans: "F", desc: "错。可 6:37 二十两银子只是门徒提出的买饼预算反问，并非实际花费。" },
-  { id: "tf10", type: "tf", title: "五饼二鱼祝谢分发后，不仅所有人都吃饱了，捡拾零碎还装满了十二个篮子。", ans: "T", desc: "对。可 6:42-43 经文完全吻合。" },
-  { id: "tf11", type: "tf", title: "耶稣在海面上行走走向门徒的时间是在清晨破晓日出之后。", ans: "F", desc: "错。可 6:48 是在“夜里四更天”。" },
-  { id: "tf12", type: "tf", title: "门徒因见海面平息而惊奇，圣经指出是因为他们不明白那分饼的事，心里愚顽。", ans: "T", desc: "对。可 6:52 经文完全吻合。" },
-  { id: "tf13", type: "tf", title: "在革尼撒勒，众人甚至把病人放在街市上，求耶稣准他们摸祂的衣裳繸子并得医治。", ans: "T", desc: "对。可 6:56 经文完全吻合。" },
-  { id: "tf14", type: "tf", title: "五饼二鱼神迹中，吃饼的成年男人共有四千名。", ans: "F", desc: "错。可 6:44 吃饼的男人共有五千名（四千人神迹在第8章）。" }
-];
-
-// 核心优化：依据当前抽题动态生成的 Answer Pool
-const DISTRACTOR_POOL_CH6 = ["拐杖", "二十", "鞋", "两件褂子", "伯赛大", "革尼撒勒", "马利亚", "希罗底", "腓力", "四更天"];
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 function generateDynamicAnswerPool(selectedQuestions) {
   const answerSet = new Set();
@@ -576,29 +548,21 @@ function generateDynamicAnswerPool(selectedQuestions) {
     }
   });
 
-  const shuffledDistractors = shuffleArray(DISTRACTOR_POOL_CH6);
-  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 22; i++) {
-    answerSet.add(shuffledDistractors[i]);
+  const distractors = ["拐杖", "二十", "鞋", "两件褂子", "伯赛大", "革尼撒勒", "马利亚", "希罗底", "腓力", "四更天"];
+  const shuffledDist = shuffleArray(distractors);
+  for (let i = 0; i < shuffledDist.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDist[i]);
   }
-
   return shuffleArray(Array.from(answerSet));
 }
 
-let activeQuestionSet = []; 
-let activeDynamicWordPool = []; 
-let activeBlankId = null;
-const STORAGE_KEY = "mark_ch6_quiz_pool_v1";
-
-function shuffleArray(arr) {
-  const array = [...arr];
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 function initQuiz(forceRegenerate = false) {
+  if (!window.MARK_MASTER_QUESTION_POOL) {
+    document.getElementById("quiz-sections-container").innerHTML = 
+      "<div style='padding:20px; text-align:center; color:#dc2626;'>未检测到 mark_master_quiz_data.js 题库文件，请确保该文件在同级目录下！</div>";
+    return;
+  }
+
   const savedData = localStorage.getItem(STORAGE_KEY);
   if (!forceRegenerate && savedData) {
     try {
@@ -611,14 +575,11 @@ function initQuiz(forceRegenerate = false) {
     } catch(e) { console.error(e); }
   }
 
-  const shuffledPool = shuffleArray(MASTER_QUESTION_POOL);
-  const selected = shuffledPool.slice(0, 50);
-
-  // 题型分类排序：填空 -> 选择/排序 -> 是非
+  // 从中央题库筛选属于第 6 章 (ch === 6) 的全部题目
+  const ch6Questions = window.MARK_MASTER_QUESTION_POOL.filter(q => q.ch === 6);
+  const shuffled = shuffleArray(ch6Questions);
   const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
-  activeQuestionSet = selected.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
-
-  // 动态生成专属靶向词库
+  activeQuestionSet = shuffled.slice(0, 50).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
   activeDynamicWordPool = generateDynamicAnswerPool(activeQuestionSet);
 
   saveQuizState({});
@@ -626,7 +587,7 @@ function initQuiz(forceRegenerate = false) {
 }
 
 function regenerateQuiz() {
-  if (confirm("确定要重新随机抽取 50 题并刷新专属词库吗？")) {
+  if (confirm("确定要重新抽取第 6 章的 50 题测验吗？")) {
     localStorage.removeItem(STORAGE_KEY);
     initQuiz(true);
   }
@@ -637,9 +598,9 @@ function renderQuizUI() {
   container.innerHTML = "";
 
   const groups = {
-    "fill": { title: "第一部分：填空题", desc: "请参考下方专为此卷生成的词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
-    "radio": { title: "第二部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
-    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+    "fill": { title: "第一部分：填空题", desc: "请点选词库填入空格（反选输入框可清除）：", list: [] },
+    "radio": { title: "第二部分：单选题与排序题", desc: "请选择正确项：", list: [] },
+    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确：", list: [] }
   };
 
   activeQuestionSet.forEach(q => {
@@ -658,18 +619,17 @@ function renderQuizUI() {
     const secHeader = document.createElement("div");
     secHeader.className = "type-section-header";
     secHeader.innerHTML = `
-      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <h3 class="type-section-title">${grp.title}</h3>
       <p class="type-section-desc">${grp.desc}</p>
     `;
     container.appendChild(secHeader);
 
-    // 专属置顶 Answer Pool
     if (typeKey === "fill") {
       const bankCard = document.createElement("div");
       bankCard.className = "word-bank-box";
       bankCard.innerHTML = `
         <div class="word-bank-title">
-          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <span>💡 填空题专属匹配词库 (Answer Pool)</span>
           <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
         </div>
         <div class="word-chips" id="word-chips-container"></div>
@@ -688,12 +648,7 @@ function renderQuizUI() {
           const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
           fillText = fillText.replace("_____", inputHtml);
         });
-        item.innerHTML = `
-          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
-            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
-          </div>
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div style="font-size:15px; line-height:2.4;"><span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}</div><div class="feedback" id="fb-${q.id}"></div>`;
       } else if (q.type === "radio") {
         const isMulti = Array.isArray(q.ans);
         let optsHtml = `<div class="opt-group">`;
@@ -702,20 +657,9 @@ function renderQuizUI() {
           optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
         });
         optsHtml += `</div>`;
-        item.innerHTML = `
-          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
-          ${optsHtml}
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>${optsHtml}<div class="feedback" id="fb-${q.id}"></div>`;
       } else if (q.type === "tf") {
-        item.innerHTML = `
-          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
-          <div class="opt-group" style="flex-direction:row; max-width:280px;">
-            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
-            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
-          </div>
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div><div class="opt-group" style="flex-direction:row;"><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label></div><div class="feedback" id="fb-${q.id}"></div>`;
       }
 
       container.appendChild(item);
