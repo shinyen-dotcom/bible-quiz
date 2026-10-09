@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>马可福音第九章 圣经比赛备战指南与测验</title>
+<title>马可福音第九章 Bible Quiz 备战指南与测验</title>
 <style>
   :root {
     --primary: #1e3a8a;
@@ -21,7 +21,7 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--text);
     background-color: var(--bg-page);
     margin: 0;
@@ -30,7 +30,6 @@
     justify-content: center;
     font-size: 15px;
   }
-
   .adaptive-container {
     width: 100%;
     max-width: 1000px;
@@ -44,6 +43,27 @@
     .adaptive-container { padding: 12px 10px 50px 10px; }
   }
 
+  .top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .btn-nav-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .btn-nav-home:hover { background: #e2e8f0; }
+
   .header {
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
     color: white;
@@ -55,7 +75,6 @@
   .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
   .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
 
-  /* 导航栏 */
   .nav-tabs {
     display: flex;
     background: #e2e8f0;
@@ -85,7 +104,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
-  /* 控制台卡片 */
   .dashboard {
     display: flex;
     justify-content: space-between;
@@ -104,33 +122,27 @@
   .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
   .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
   .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
-  
-  .btn-submit {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 9px 16px;
-    font-size: 14px;
-    font-weight: 600;
+  .btn-submit { background: var(--accent); color: white; border: none; padding: 9px 16px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; }
+  .btn-reset { background: #e2e8f0; color: #475569; border: none; padding: 9px 12px; font-size: 14px; font-weight: 600; border-radius: 8px; margin-left: 6px; cursor: pointer; }
+  .btn-master-link {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
     border-radius: 8px;
-    cursor: pointer;
-  }
-  .btn-reset {
-    background: #e2e8f0;
-    color: #475569;
-    border: none;
-    padding: 9px 12px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    border-radius: 8px;
+    text-decoration: none;
     margin-left: 6px;
-    cursor: pointer;
   }
+  .btn-master-link:hover { background: #e2e8f0; }
 
   .card {
     background: var(--card-bg);
     border-radius: 12px;
-    padding: 20px 18px;
+    padding: 22px 20px;
     margin-bottom: 20px;
     border: 1px solid var(--border);
   }
@@ -140,24 +152,17 @@
     color: var(--primary);
     border-left: 4px solid var(--accent);
     padding-left: 10px;
-    margin: 0 0 14px 0;
+    margin: 0 0 16px 0;
   }
-
   .section-h2 {
     font-size: 17px;
     font-weight: 700;
     color: var(--primary);
     background: #eff6ff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin: 20px 0 10px 0;
-    border-left: 3px solid var(--accent);
-  }
-  .section-h3 {
-    font-size: 15.5px;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 12px 0 6px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 24px 0 14px 0;
+    border-left: 4px solid var(--accent);
   }
 
   .highlight-box {
@@ -165,7 +170,7 @@
     border: 1px solid #bbf7d0;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
     color: #166534;
   }
@@ -174,8 +179,9 @@
     border: 1px solid #ffe58f;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
+    color: #92400e;
   }
   .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
 
@@ -184,23 +190,17 @@
     border: 1px solid #fca5a5;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
     color: #991b1b;
   }
 
-  .info-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14.5px;
-    margin: 10px 0;
-  }
-  .info-table th, .info-table td {
-    border: 1px solid var(--border);
-    padding: 9px 12px;
-    text-align: left;
-  }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 12px 0; }
+  .info-table th, .info-table td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; }
   .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  .quiz-q { font-weight: bold; color: #1e293b; margin-top: 10px; margin-bottom: 2px; }
+  .quiz-a { color: #334155; margin-left: 12px; margin-bottom: 8px; }
 
   .type-section-header {
     background: #f1f5f9;
@@ -212,92 +212,20 @@
   .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
   .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
 
-  /* 填空题专属词库 Pool */
-  .word-bank-box {
-    background: #eff6ff;
-    border: 2px dashed #93c5fd;
-    border-radius: 10px;
-    padding: 14px;
-    margin: 12px 0 18px 0;
-  }
-  .word-bank-title {
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--primary);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  .word-bank-box { background: #eff6ff; border: 2px dashed #93c5fd; border-radius: 10px; padding: 14px; margin: 12px 0 18px 0; }
+  .word-bank-title { font-size: 14px; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
   .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .word-chip {
-    background: #ffffff;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    transition: all 0.15s ease;
-    user-select: none;
-  }
-  .word-chip:hover, .word-chip:active {
-    background: var(--accent);
-    color: white;
-  }
+  .word-chip { background: #ffffff; border: 1.5px solid var(--accent); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: all 0.15s ease; user-select: none; }
+  .word-chip:hover, .word-chip:active { background: var(--accent); color: white; }
 
   .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
   .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
   .opt-group { display: flex; flex-direction: column; gap: 8px; }
-  .opt-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    background: #ffffff;
-  }
-  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
-
-  .blank-input {
-    border: none;
-    border-bottom: 2.5px solid #64748b;
-    background: #f1f5f9;
-    padding: 2px 8px;
-    font-size: 15px;
-    font-weight: bold;
-    color: #0f172a;
-    text-align: center;
-    margin: 0 4px;
-    border-radius: 4px 4px 0 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .blank-input:focus, .blank-input.active-blank {
-    outline: none;
-    border-bottom-color: var(--accent);
-    background: #dbeafe;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
-  }
-  .blank-input.has-val {
-    background: #e0f2fe;
-    color: #0369a1;
-    border-bottom-color: #0284c7;
-  }
-
-  .feedback {
-    display: none;
-    margin-top: 10px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-  }
+  .opt-label { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; background: #ffffff; }
+  .blank-input { border: none; border-bottom: 2.5px solid #64748b; background: #f1f5f9; padding: 2px 8px; font-size: 15px; font-weight: bold; color: #0f172a; text-align: center; margin: 0 4px; border-radius: 4px 4px 0 0; cursor: pointer; transition: all 0.2s ease; }
+  .blank-input:focus, .blank-input.active-blank { outline: none; border-bottom-color: var(--accent); background: #dbeafe; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25); }
+  .blank-input.has-val { background: #e0f2fe; color: #0369a1; border-bottom-color: #0284c7; }
+  .feedback { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; }
   .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
   .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
 
@@ -308,282 +236,314 @@
 <body>
 
 <div class="adaptive-container">
-  <!-- 顶部返回主页导航条 -->
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-    <a href="index.html" style="display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); padding: 7px 13px; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none;">🏠 返回主页</a>
+  <div class="top-navbar">
+    <a href="index.html" class="btn-nav-home">🏠 返回主页</a>
     <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
   </div>
 
   <div class="header">
-    <h1>《马可福音》第九章 备战指南与测验</h1>
-    <p>登山变像 ＋ 祷告赶鬼 ＋ 争大之辩与小孩子 ＋ 50 题全真模拟测验[cite: 54]</p>
+    <h1>📖 马可福音第 9 章 Bible Quiz 备战</h1>
+    <p>全章大地图逐节问答拆解 ＋ 50 题全真模拟赛</p>
   </div>
 
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
-    <button class="tab-btn" onclick="switchTab('traps')">🧠 核心图表与陷阱</button>
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南 (全问答)</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 人物/地点/对比矩阵</button>
     <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
-    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题全真测验</button>
   </div>
 
-  <!-- TAB 1: 备战指南大地图 -->
+  <!-- TAB 1: 完整还原的原版问答式备战讲义 -->
   <div id="tab-guide" class="tab-content active">
     <div class="card">
       <div class="card-title">一、先掌握第 9 章的「大地图」</div>
+      <p>马可福音第 9 章可以抓成 <strong>8 个主要事件</strong>；比赛前先把这条故事线背到可以闭眼讲出来[cite: 40]：</p>
       <table class="info-table">
-        <thead>
-          <tr><th>经文段落</th><th>主要内容</th><th>Quiz 重要度</th></tr>
-        </thead>
+        <thead><tr><th>段落</th><th>内容</th><th>Quiz 重要度</th></tr></thead>
         <tbody>
-          <tr><td>9:1</td><td>神国大有能力临到的预告</td><td>⭐⭐⭐⭐[cite: 54]</td></tr>
-          <tr><td>9:2–13</td><td>登山变像＋以利亚问题</td><td>⭐⭐⭐⭐⭐[cite: 54]</td></tr>
-          <tr><td>9:14–29</td><td>山下医治被哑巴鬼附着的孩子（非用祷告）</td><td>⭐⭐⭐⭐⭐[cite: 54]</td></tr>
-          <tr><td>9:30–32</td><td>第二次预言受难与复活</td><td>⭐⭐⭐⭐⭐[cite: 54]</td></tr>
-          <tr><td>9:33–37</td><td>争论谁为大＋小孩子为榜样</td><td>⭐⭐⭐⭐⭐[cite: 54]</td></tr>
-          <tr><td>9:38–41</td><td>不敌挡我们的就是帮助我们的＋一杯水赏赐</td><td>⭐⭐⭐⭐[cite: 54]</td></tr>
-          <tr><td>9:42–48</td><td>使人跌倒的警告＋手、脚、眼的严厉对付</td><td>⭐⭐⭐⭐⭐[cite: 54]</td></tr>
-          <tr><td>9:49–50</td><td>盐、火、里头有盐彼此和睦</td><td>⭐⭐⭐⭐⭐[cite: 54]</td></tr>
+          <tr><td>9:1</td><td>神国大有能力临到的预告</td><td>⭐⭐⭐⭐[cite: 40]</td></tr>
+          <tr><td>9:2-13</td><td>登山变像＋以利亚问题</td><td>⭐⭐⭐⭐⭐[cite: 40]</td></tr>
+          <tr><td>9:14-29</td><td>山下医治被污鬼附着的孩子</td><td>⭐⭐⭐⭐⭐[cite: 40]</td></tr>
+          <tr><td>9:30-32</td><td>第二次预言受难与复活</td><td>⭐⭐⭐⭐⭐[cite: 40]</td></tr>
+          <tr><td>9:33-37</td><td>谁为大＋小孩子</td><td>⭐⭐⭐⭐⭐[cite: 40]</td></tr>
+          <tr><td>9:38-41</td><td>不敌挡我们的就是帮助我们的</td><td>⭐⭐⭐⭐[cite: 40]</td></tr>
+          <tr><td>9:42-48</td><td>使人跌倒＋手脚眼的严厉教导</td><td>⭐⭐⭐⭐⭐[cite: 40]</td></tr>
+          <tr><td>9:49-50</td><td>盐、火、彼此和睦</td><td>⭐⭐⭐⭐⭐[cite: 40]</td></tr>
         </tbody>
       </table>
       <div class="highlight-box">
-        <strong>🔥 第9章主线贯通：</strong><br>
-        神国预告 → 登山变像（摩西以利亚三座棚） → 云彩发声要听祂 → 山下孩子被摔倒 → 父亲呼求信不足求帮助 → 宣告非用祷告不能出 → 迦百农路上争谁为大 → 接待小孩子 → 奉主名赶鬼莫禁止 → 手脚眼防跌倒 → 盐与和睦！[cite: 54]
+        <strong>考试时最重要的主线：</strong><br>
+        神国预告 → 登山变像 → 以利亚问题 → 山下赶鬼 → 预言受难 → 门徒争论谁为大 → 小孩子 → 不敌挡我们的 → 不可使人跌倒 → 盐与和平[cite: 40]<br>
+        把这条线背熟，第 9 章的基本盘就稳了[cite: 40]。
       </div>
 
-      <div class="section-h2">第一部分：9:1–13 登山变像与以利亚问题</div>
-      <p>① <strong>神国预告</strong>：耶稣说站在这里的，「有人」在没尝死味以前，必要看见<strong>神的国大有能力临到</strong>（9:1）[cite: 54]。</p>
-      <p>② <strong>登山变像四要素</strong>：<strong>过了六天</strong>，耶稣带着<strong>彼得、雅各、约翰</strong>，暗暗地上了<strong>一座高山</strong>，在那里<strong>变了形象</strong>（9:2）[cite: 54]。</p>
-      <p>③ <strong>衣服放光</strong>：极其洁白，地上漂布的没有一个能漂得那样白（9:3）[cite: 54]。</p>
-      <p>④ <strong>二见证人与彼得提议</strong>：<strong>摩西、以利亚</strong>显现与耶稣说话[cite: 54]。彼得害怕不知道说什么，便说：「拉比，我们在这里真好！可以<strong>搭三座棚</strong>，一座为你，一座为摩西，一座为以利亚。」（9:4-6）[cite: 54]。</p>
-      <p>⑤ <strong>云彩发声（核心对比）</strong>：云彩遮盖，从云彩里有声音说：<strong>「这是我的爱子，你们要听他。」</strong>（9:7，注意：1:11是“你是我的爱子我喜悦你”；9:7是“这是我的爱子你们要听他”）[cite: 54]。</p>
-      <p>⑥ <strong>以利亚已来的奥秘</strong>：下山时吩咐人子未复活前不要告诉人[cite: 54]。门徒问文士为何说以利亚必须先来？耶稣说明以利亚固然先来，且<strong>以利亚已经来了，他们也任意待他</strong>（指施洗约翰的角色）（9:11-13）[cite: 54]。</p>
+      <div class="section-h2">二、9:1「神国大有能力临到」——容易和后面混在一起</div>
+      <div class="quiz-a">
+        耶稣对门徒说，在他们中间有人在没尝死味以前，必要看见：<strong>「神的国大有能力临到。」</strong>[cite: 40]<br>
+        ⚠️ <strong>Quiz 陷阱</strong>：<br>
+        • 这里不是说所有门徒都一定看见[cite: 40]。原文重点是<strong>「有人」</strong>[cite: 40]。<br>
+        • 这句话紧接在第 8 章关于跟从、舍己、背十字架的教导之后[cite: 40]。<br>
+        • 不要把 9:1 直接等同成「登山变像」而忽略它本身是一个预告；登山变像在 9:2 开始[cite: 40]。
+      </div>
 
-      <div class="section-h2">第二部分：9:14–29 山下赶逐哑巴鬼（信心与祷告）</div>
-      <p>① <strong>困局与症状</strong>：门徒被大群人和文士围着辩论[cite: 54]。一父亲求告说儿子<strong>被哑巴鬼附着</strong>，从小发作被扔在火里水里，摔倒流沫、咬牙切齿枯干（9:14-21）[cite: 54]。</p>
-      <p>② <strong>信心的试金石</strong>：父亲求「你若能作什么求你怜悯帮助」[cite: 54]。耶稣说：<strong>「你若能信，在信的人，凡事都能。」</strong>（9:23）[cite: 54]。孩子的父亲立刻立时喊着说：<strong>「我信！但我信不足，求主帮助！」</strong>（9:24）[cite: 54]。</p>
-      <p>③ <strong>权能医治与站立</strong>：斥责鬼从里头出来再不要进去[cite: 54]。孩子抽疯像死人一般，<strong>耶稣拉着他的手扶他起来，他就站起来了</strong>（9:25-27）[cite: 54]。</p>
-      <p>④ <strong>门徒赶不出的原因（必背黄金考点）</strong>：进了屋子门徒暗暗问为何不能赶出？耶稣回答：<strong>「非用祷告，这一类的鬼总不能出来。」</strong>（9:28-29）[cite: 54]。</p>
+      <div class="section-h2">三、9:2-13 登山变像——第 9 章第一超级重点</div>
+      <p>这是整章最值得做成「人物＋地点＋时间＋动作＋声音」题的部分[cite: 40]。</p>
+      <div class="quiz-q">① 时间、人物与地点：</div>
+      <div class="quiz-a">
+        <strong>六天以后</strong>，耶稣带着<strong>彼得、雅各、约翰</strong>，暗暗地领他们上了<strong>一座高山</strong>，在那里变了形像[cite: 40]。<br>
+        🔥 四个要素直接背：<strong>六天以后 → 彼得、雅各、约翰 → 高山 → 变像</strong>[cite: 40]。
+      </div>
 
-      <div class="section-h2">第三部分：9:30–37 第二次受难预言与争论谁为大</div>
-      <p>① <strong>加利利途中的受难预言</strong>：暗暗经过加利利，耶稣教训说：<strong>「人子将要被交在人手里，他们要杀害他；被杀以后，过三天他要复活。」</strong>门徒不明白又不敢问（9:30-32）[cite: 54]。</p>
-      <p>② <strong>迦百农的沉默</strong>：到了<strong>迦百农</strong>进了屋子，耶稣问路上议论什么？门徒不作声，因为他们在路上<strong>彼此争论谁为大</strong>（9:33-34）[cite: 54]。</p>
-      <p>③ <strong>天国的伟大定义</strong>：耶稣坐下叫十二门徒来，说：<strong>「若有人愿意作首先的，他必作众人末后的，作众人的用人。」</strong>（9:35）[cite: 54]。</p>
-      <p>④ <strong>小孩子与接待</strong>：领一个<strong>小孩子</strong>站在中间，抱起他说：<strong>「凡为我名接待一个像这小孩子的，就是接待我；凡接待我的，不是接待我，乃是接待那差我来的。」</strong>（9:36-37）[cite: 54]。</p>
+      <div class="quiz-q">② 耶稣的外貌发生什么变化？</div>
+      <div class="quiz-a">
+        <strong>衣服放光，极其洁白</strong>[cite: 40]。白到<strong>地上漂布的，没有一个能漂得那样白</strong>[cite: 40]。<br>
+        ⚠️ 注意：经文特别强调的是「衣服」极其洁白，不要只回答「耶稣发光」[cite: 40]。
+      </div>
 
-      <div class="section-h2">第四部分：9:38–50 宽容、罪的斩断与盐</div>
-      <p>① <strong>不可禁止</strong>：约翰报告有人奉主名赶鬼却不跟从他们，门徒便禁止他[cite: 54]。耶稣说不要禁止，<strong>「不敌挡我们的，就是帮助我们的。」</strong>又说因属基督给门徒<strong>一杯水</strong>喝的，不能不得赏赐（9:38-41）[cite: 54]。</p>
-      <p>② <strong>绝不可使人跌倒</strong>：凡使信主的一个小子跌倒的，<strong>倒不如把大磨石拴在这人的颈项上，扔在海里</strong>（9:42）[cite: 54]。</p>
-      <p>③ <strong>斩断罪的器官顺序（必背严厉训诲）</strong>：<br>
-      • 若一只<strong>手</strong>叫你跌倒，就把它砍下来（9:43）[cite: 54]；<br>
-      • 若一只<strong>脚</strong>叫你跌倒，就把它砍下来（9:45）[cite: 54]；<br>
-      • 若一只<strong>眼</strong>叫你跌倒，就把它剜出来（9:47）[cite: 54]；<br>
-      （顺序：<strong>手 → 脚 → 眼</strong>；地狱的景象是：<strong>虫是不死的，火是不灭的</strong>）[cite: 54]。</p>
-      <p>④ <strong>盐与和睦的收尾</strong>：必用火当盐腌各人；盐若失了味不能叫它再咸；<strong>「你们里头应当有盐，彼此和睦。」</strong>（9:49-50）[cite: 54]。</p>
+      <div class="quiz-q">③ 谁向他们显现？他们与耶稣谈论什么？</div>
+      <div class="quiz-a">
+        <strong>摩西、以利亚</strong>[cite: 40]。经文没有在这里说明谈话内容[cite: 40]。<br>
+        ⚠️ Quiz 不要把其他福音书或自己的解释硬塞进马可 9 章[cite: 40]。
+      </div>
+
+      <div class="quiz-q">④ 彼得说了什么？为什么这样说？</div>
+      <div class="quiz-a">
+        「拉比，我们在这里真好！可以搭三座棚，一座为你，一座为摩西，一座为以利亚。」[cite: 40]<br>
+        为什么彼得这样说？<strong>因为他不知道说什么才好；他们甚是惧怕</strong>[cite: 40]。<br>
+        🔥 三座棚：<strong>耶稣一座 + 摩西一座 + 以利亚一座</strong>（不是两座，也不是「给门徒搭棚」）[cite: 40]。
+      </div>
+
+      <div class="quiz-q">⑤ 云彩出现＋天上声音（与 1:11 深度对比）：</div>
+      <div class="quiz-a">
+        有一朵云彩来遮盖他们；从云彩里有声音：<strong>「这是我的爱子，你们要听他。」</strong>[cite: 40]<br>
+        🔥 必背关键词：<strong>云彩 → 遮盖 → 天上声音 → 爱子 → 听他</strong>[cite: 40]。
+      </div>
+      <table class="info-table">
+        <thead><tr><th>经文出处</th><th>天上发出的声音内容</th></tr></thead>
+        <tbody>
+          <tr><td>马可 1:11（受洗）</td><td>「你是我的爱子，我喜悦你。」[cite: 40]</td></tr>
+          <tr><td>马可 9:7（变像）</td><td>「这是我的爱子，你们要听他。」[cite: 40]</td></tr>
+        </tbody>
+      </table>
+      <div class="trap-box">
+        ⚠️ 两个都出现「爱子」，但后半句完全不同[cite: 40]。Bible Quiz 很容易拿这个做填空题[cite: 40]。
+      </div>
+
+      <div class="section-h2">四、9:8-13 变像以后＋以利亚问题——人物关系要分清</div>
+      <div class="quiz-a">
+        云彩过去后，他们忽然不再看见一人，只见耶稣同他们在那里[cite: 40]。<br>
+        下山的时候，耶稣吩咐他们：<strong>「人子还没有从死里复活，你们不要将所看见的告诉人。」</strong>[cite: 40]<br>
+        ⚠️ 注意顺序：上山看见摩西、以利亚 → 天上声音 → 下山 → 耶稣吩咐暂时不要说 → 门徒彼此讨论「从死里复活」是什么意思[cite: 40]。<br>
+        门徒问耶稣：「文士为什么说以利亚必须先来？」[cite: 40]<br>
+        耶稣回答的关键：<strong>「以利亚固然先来，复兴万事；经上不是指着人子说，他要受许多的苦，被人轻慢吗？」</strong>然后耶稣指出：<strong>「以利亚已经来了，他们也任意待他，正如经上所指着他的话。」</strong>[cite: 40]<br>
+        🔥 Quiz 最容易混淆：<strong>「以利亚已经来了」不要直接误答成天上显现的以利亚本身；这一段是在回答门徒关于「以利亚先来」的问题，并指向施洗约翰所预表/承担的角色</strong>[cite: 40]。9:13 的「他们任意待他」是重要细节[cite: 40]。
+      </div>
+
+      <div class="section-h2">五、9:14-29 山下赶鬼——第二超级重点</div>
+      <div class="quiz-a">
+        耶稣、彼得、雅各、约翰下山后，看见：门徒围着一大群人；文士和他们辩论[cite: 40]。众人一见耶稣，就甚希奇，跑上去问安[cite: 40]。<br>
+        耶稣问：「你们和他们辩论的是什么？」[cite: 40]<br>
+        一个人回答：<strong>他的儿子被哑巴鬼附着</strong>[cite: 40]。<br>
+        • 是「他的儿子」，不是门徒的孩子[cite: 40]。<br>
+        • 是「哑巴的鬼」；孩子的状况包括<strong>被鬼摔倒、口中流沫、咬牙切齿、身体枯干</strong>[cite: 40]。<br>
+        • 这个父亲说：<strong>孩子从小就这样</strong>[cite: 40]。<br>
+        父亲请求耶稣：「你若能作什么，求你怜悯我们，帮助我们。」[cite: 40]<br>
+        耶稣回应：<strong>「你若能信，在信的人，凡事都能。」</strong>[cite: 40]<br>
+        父亲立刻喊着说：🔥🔥🔥 <strong>「我信！但我信不足，求主帮助。」</strong>[cite: 40]<br>
+        ⚠️ 不要把「我信不足」误成「我不信」[cite: 40]。这句话的重点是：<strong>相信，却承认自己的信心软弱，求主帮助</strong>[cite: 40]。<br>
+        耶稣看见众人都跑上来，就斥责污鬼：「你这聋哑的鬼，我吩咐你从他里头出来，再不要进去。」[cite: 40]鬼喊叫，使孩子大大地抽了一阵疯，就出来了[cite: 40]。孩子好像死了一般，以致众人多半说：他是死了[cite: 40]。但<strong>耶稣拉着他的手，扶他起来，他就站起来了</strong>[cite: 40]。<br>
+        🔥 动作顺序：<strong>斥责鬼 → 鬼喊叫 → 孩子抽疯 → 像死了一样 → 耶稣拉手 → 扶起来 → 站起来</strong>[cite: 40]。
+      </div>
+
+      <div class="section-h2">六、9:28-29 为什么门徒不能赶出这个鬼？——必考</div>
+      <div class="notice-box">
+        进了屋子，门徒暗暗地问耶稣：「我们为什么不能赶出他去？」[cite: 40]<br>
+        耶稣回答：🔥🔥🔥 <strong>「非用祷告，这一类的鬼总不能出来。」</strong>[cite: 40]<br>
+        🔥 这是 9 章非常重要的「原因题」：门徒不能赶出 → 耶稣指出关键 → <strong>祷告</strong>[cite: 40]。<br>
+        ⚠️ <strong>不要只背「信心」而忘了马可 9:29 这里直接给出的答案是「祷告」</strong>[cite: 40]。
+      </div>
+
+      <div class="section-h2">七、9:30-32 第二次预言受难——数字＋顺序要背</div>
+      <div class="quiz-a">
+        耶稣和门徒离开那里，经过<strong>加利利</strong>[cite: 40]。耶稣不愿意人知道，因为祂教训门徒说：<br>
+        <strong>「人子将要被交在人手里，他们要杀害他；被杀以后，过三天他要复活。」</strong>[cite: 40]<br>
+        🔥 三个动作：<strong>被交 → 被杀 → 三天复活</strong>[cite: 40]。<br>
+        门徒却<strong>不明白这话，又不敢问祂</strong>[cite: 40]。<br>
+        ⚠️ Quiz 很喜欢问：耶稣在哪里再次教导受难？——经过加利利[cite: 40]。门徒为什么没有追问？——因为不敢问[cite: 40]。这不是第 8 章第一次预言；第 9 章是第二次明确的受难预言[cite: 40]。
+      </div>
+
+      <div class="section-h2">八、9:33-37 谁为大？——地点、问题、动作全部重要</div>
+      <div class="quiz-a">
+        他们来到：📍 <strong>迦百农</strong>[cite: 40]。<br>
+        进了屋子以后，耶稣问门徒：「你们在路上议论的是什么？」[cite: 40]<br>
+        门徒：<strong>不作声，因为他们在路上彼此争论谁为大</strong>[cite: 40]。<br>
+        耶稣坐下，叫十二个门徒来，说：<strong>「若有人愿意作首先的，他必作众人末后的，作众人的用人。」</strong>[cite: 40]<br>
+        然后耶稣领一个<strong>小孩子</strong>来，叫他站在门徒中间，又<strong>抱起他来</strong>，说：<strong>「凡为我名接待一个像这小孩子的，就是接待我；凡接待我的，不是接待我，乃是接待那差我来的。」</strong>[cite: 40]<br>
+        🔥 动作链：<strong>争论谁为大 → 耶稣问 → 门徒不作声 → 耶稣坐下教导 → 抱小孩子 → 讲接待</strong>[cite: 40]。
+      </div>
+
+      <div class="section-h2">九、9:38-41 「不敌挡我们的，就是帮助我们的」——原话考点</div>
+      <div class="quiz-a">
+        约翰告诉耶稣：他们看见一个人奉耶稣的名赶鬼，就禁止他，因为他不跟从他们[cite: 40]。<br>
+        耶稣说：「不要禁止他；因为没有人奉我的名行异能，反倒轻易毁谤我。」[cite: 40]接着是超级重要的一句：<br>
+        🔥🔥🔥 <strong>「不敌挡我们的，就是帮助我们的。」</strong>[cite: 40]<br>
+        又说：<strong>「凡因你们是属基督，给你们一杯水喝的，我实在告诉你们，他不能不得赏赐。」</strong>[cite: 40]<br>
+        ⚠️ 门徒的标准是「跟从我们」，耶稣却纠正他们[cite: 40]。「奉我的名」在这段重复出现；<strong>一杯水</strong>也是考点[cite: 40]。
+      </div>
+
+      <div class="section-h2">十、9:42-48 使人跌倒＋手脚眼——严厉对付顺序</div>
+      <div class="quiz-a">
+        耶稣先说一个非常严肃的警告：<strong>「凡使这信我的一个小子跌倒的，倒不如把大磨石拴在这人的颈项上，扔在海里。」</strong>[cite: 40]（🔥 这里不要记成普通石头：是<strong>「大磨石」</strong>[cite: 40]）。<br>
+        接下来出现三个身体部位，🔥 <strong>顺序必须背：手 → 脚 → 眼</strong>[cite: 40]：<br>
+        • 如果<strong>手</strong>叫你跌倒：<strong>砍下来</strong>[cite: 40]。<br>
+        • 如果<strong>脚</strong>叫你跌倒：<strong>砍下来</strong>[cite: 40]。<br>
+        • 如果<strong>眼</strong>叫你跌倒：<strong>剜出来</strong>[cite: 40]。<br>
+        三个段落的共同逻辑：宁可失去身体的一部分进入生命，也不要带着罪进入地狱[cite: 40]。<br>
+        🔥 「地狱」在这一段的描述组合：<strong>虫是不死的，火是不灭的</strong>[cite: 40]。
+      </div>
+
+      <div class="section-h2">十一、9:49-50 盐——结尾的关键词</div>
+      <div class="notice-box">
+        第 9 章最后突然出现「盐」[cite: 40]：「因为必用火当盐腌各人。」然后：「盐本是好的，若失了味，可用什么叫它再咸呢？」[cite: 40]<br>
+        最后的教导：🔥🔥🔥 <strong>「你们里头应当有盐，彼此和睦。」</strong>[cite: 40]<br>
+        🔥 三个关键词：<strong>盐 → 味 → 和睦</strong>[cite: 40]。第 9 章一路把门徒的关系带到：不要争大 → 不要禁止别人 → 不要使人跌倒 → 自己要有盐 → <strong>彼此和睦</strong>[cite: 40]。
+      </div>
     </div>
   </div>
 
-  <!-- TAB 2: 易混人物与矩阵 -->
+  <!-- TAB 2: 图表、人物、数字、地点与对比矩阵 -->
   <div id="tab-traps" class="tab-content">
     <div class="card">
-      <div class="card-title">🧠 第九章易混人物对比与核心数字</div>
+      <div class="card-title">十二、第 9 章最容易混淆的「人物」</div>
       <table class="info-table">
-        <thead><tr><th>对比类别</th><th>项目 A</th><th>项目 B</th><th>考点说明与防错指南</th></tr></thead>
+        <thead><tr><th>人物</th><th>在第9章的关键动作/身份</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>两次天上声音</strong></td>
-            <td>1:11（耶稣受洗）<br>「你是我的爱子，我喜悦你。」[cite: 54]</td>
-            <td>9:7（登山变像）<br>「这是我的爱子，你们要听他。」[cite: 54]</td>
-            <td>受洗是对耶稣说（我喜悦你）；变像是对三使徒说（你们要听他）[cite: 54]。</td>
-          </tr>
-          <tr>
-            <td><strong>两处天数</strong></td>
-            <td><strong>过了六天</strong>（登山变像的时间标记）[cite: 54]</td>
-            <td><strong>过三天复活</strong>（人子受害后的得胜宣告）[cite: 54]</td>
-            <td>“六天”为上山，“三天”为人子复活，切勿混搭[cite: 54]。</td>
-          </tr>
-          <tr>
-            <td><strong>使徒范围</strong></td>
-            <td><strong>三人核心组</strong>（彼得、雅各、约翰登高山）[cite: 54]</td>
-            <td><strong>十二门徒全员</strong>（山下争大、领受小孩子教训）[cite: 54]</td>
-            <td>搭棚在山上为三人；问路上议论召集的是十二使徒[cite: 54]。</td>
-          </tr>
-          <tr>
-            <td><strong>斩断部位顺序</strong></td>
-            <td><strong>手 → 脚 → 眼</strong>[cite: 54]</td>
-            <td>砍下 → 砍下 → 剜出来[cite: 54]</td>
-            <td>严格遵照顺位：手(砍) → 脚(砍) → 眼(剜)[cite: 54]。</td>
-          </tr>
+          <tr><td>耶稣</td><td>登山变像、教导门徒、赶鬼、预言受难、教导谦卑与和平[cite: 40]</td></tr>
+          <tr><td>彼得</td><td>与雅各、约翰上山；提议搭三座棚[cite: 40]</td></tr>
+          <tr><td>雅各</td><td>与彼得、约翰上山看见变像[cite: 40]</td></tr>
+          <tr><td>约翰</td><td>与彼得、雅各上山；后来单独报告有人奉耶稣名赶鬼[cite: 40]</td></tr>
+          <tr><td>摩西</td><td>山上与耶稣显现[cite: 40]</td></tr>
+          <tr><td>以利亚</td><td>山上与耶稣显现；门徒又问为什么文士说他必须先来[cite: 40]</td></tr>
+          <tr><td>门徒</td><td>赶不出鬼；争论谁为大；禁止不跟从他们的人[cite: 40]</td></tr>
+          <tr><td>孩子的父亲</td><td>求耶稣帮助；说「我信！但我信不足」[cite: 40]</td></tr>
+          <tr><td>被鬼附的孩子</td><td>从小被哑巴鬼附；被耶稣医治[cite: 40]</td></tr>
+          <tr><td>文士</td><td>在山下与门徒辩论[cite: 40]</td></tr>
+          <tr><td>不跟从门徒的人</td><td>奉耶稣的名赶鬼，被门徒禁止；耶稣却说不要禁止[cite: 40]</td></tr>
         </tbody>
       </table>
 
-      <div class="notice-box">
-        <strong>🚨 第九章十大高频失分陷阱：</strong><br>
-        1. 衣服放光的程度是<strong>「地上漂布的没有一个能漂得那样白」</strong>[cite: 54]。<br>
-        2. 彼得提议搭的三座棚是：<strong>一座给耶稣，一座给摩西，一座给以利亚</strong>（不是给门徒自己搭）[cite: 54]。<br>
-        3. 孩子的病症是<strong>「被哑巴鬼附着」</strong>，自小发作[cite: 54]。<br>
-        4. 父亲的名言是<strong>「我信！但我信不足，求主帮助」</strong>（绝非“我不信”）[cite: 54]。<br>
-        5. 门徒赶鬼失败的根本原因被耶稣点出为：<strong>「非用祷告，这一类的鬼总不能出来」</strong>[cite: 54]。<br>
-        6. 门徒争论“谁为大”发生在<strong>往迦百农的路上</strong>，耶稣问话是在<strong>进了屋子后</strong>[cite: 54]。<br>
-        7. 谁愿为首先的，就要作<strong>众人末后的，作众人的用人</strong>[cite: 54]。<br>
-        8. 宽容格言为<strong>「不敌挡我们的，就是帮助我们的」</strong>（注意“我们”的主体）[cite: 54]。<br>
-        9. 绊倒小子的惩治是：<strong>把大磨石拴在颈项上扔在海里</strong>（不是普通石头）[cite: 54]。<br>
-        10. 第九章末尾耶稣呼召人际关系的最终落脚点是：<strong>「彼此和睦」</strong>[cite: 54]。
-      </div>
+      <div class="card-title" style="margin-top:20px;">十三、第 9 章核心「数字」与「地点」考点</div>
+      <ul>
+        <li><strong>1</strong>：一个高山；一个小孩子；一杯水[cite: 40]。</li>
+        <li><strong>3</strong>：彼得、雅各、约翰；三座棚[cite: 40]。</li>
+        <li><strong>6</strong>：<strong>六天以后</strong>登山变像（明确时间标记）[cite: 40]。</li>
+        <li><strong>2</strong>：两个眼睛／两个眼睛进入地狱的对比[cite: 40]。</li>
+        <li><strong>3天</strong>：人子被杀以后，<strong>过三天复活</strong>（不要和“六天以后”混淆）[cite: 40]。</li>
+      </ul>
+      <p><strong>地点路线转换：</strong><br>
+      • <strong>高山</strong> → 变像、摩西以利亚显现、天声[cite: 40]<br>
+      • <strong>山下</strong> → 门徒赶不出鬼；文士辩论；医治孩子[cite: 40]<br>
+      • <strong>经过加利利</strong> → 耶稣第二次预言受难[cite: 40]<br>
+      • <strong>迦百农（屋里）</strong> → 门徒争论谁为大；耶稣教导[cite: 40]</p>
+
+      <div class="card-title" style="margin-top:20px;">十四、第 9 章最重要的「对比题」</div>
+      <table class="info-table">
+        <thead><tr><th>对比组</th><th>正确区分</th></tr></thead>
+        <tbody>
+          <tr><td>1:11 vs 9:7</td><td>都是「爱子」，但 1:11「我喜悦你」；9:7「你们要听他」[cite: 40]</td></tr>
+          <tr><td>六天 vs 三天</td><td>六天以后登山变像；被杀以后过三天复活[cite: 40]</td></tr>
+          <tr><td>彼得三人 vs 十二门徒</td><td>登山：彼得、雅各、约翰；谁为大：十二门徒全员[cite: 40]</td></tr>
+          <tr><td>赶鬼失败的答案</td><td>9:29 明确强调「祷告」；不要只答一般性的「信心」[cite: 40]</td></tr>
+          <tr><td>手、脚、眼</td><td>严厉对付顺序：手 → 脚 → 眼[cite: 40]</td></tr>
+          <tr><td>大磨石 vs 普通石头</td><td>使小子跌倒的人，倒不如颈项拴大磨石扔海里[cite: 40]</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- TAB 3: 必背经文与口诀 -->
+  <!-- TAB 3: 必背经文、口诀与速记 -->
   <div id="tab-verses" class="tab-content">
     <div class="card">
-      <div class="card-title">第九章 7 处必须背诵经文</div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>1. 马可 9:7</strong>「有一朵云彩来遮盖他们；也有声音从云彩里出来，说：『这是我的爱子，你们要听他。』」[cite: 54]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>2. 马可 9:23</strong>「耶稣对他说：『你若能信，在信的人，凡事都能。』」[cite: 54]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>3. 马可 9:24</strong>「孩子的父亲立时喊着说：『我信！但我信不足，求主帮助。』」[cite: 54]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>4. 马可 9:29</strong>「耶稣说：『非用祷告，这一类的鬼总不能出来。』」[cite: 54]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>5. 马可 9:35</strong>「耶稣坐下，叫十二个门徒来，说：『若有人愿意作首先的，他必作众人末后的，作众人的用人。』」[cite: 54]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>6. 马可 9:40</strong>「不敌挡我们的，就是帮助我们的。」[cite: 54]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;">
-        <strong>7. 马可 9:50</strong>「盐本是好的，若失了味，可用什么叫它再咸呢？你们里头应当有盐，彼此和睦。」[cite: 54]
-      </div>
+      <div class="card-title">十五、第 9 章必须背诵经文清单</div>
+      <p><strong>🥇 Level 1：一定要背到能接下半句</strong></p>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>1. 可 9:1</strong>「我实在告诉你们，站在这里的，有人在没尝死味以前，必要看见神的国大有能力临到。」[cite: 40]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>2. 可 9:7</strong>「这是我的爱子，你们要听他。」[cite: 40]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>3. 可 9:23</strong>「你若能信，在信的人，凡事都能。」[cite: 40]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>4. 可 9:24</strong>「我信！但我信不足，求主帮助。」[cite: 40]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>5. 可 9:29</strong>「非用祷告，这一类的鬼总不能出来。」[cite: 40]</div>
+
+      <p><strong>🥈 Level 2：强烈建议熟背</strong></p>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>6. 可 9:31</strong>「人子将要被交在人手里，他们要杀害他；被杀以后，过三天他要复活。」[cite: 40]</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>7. 可 9:35</strong>「若有人愿意作首先的，他必作众人末后的，作众人的用人。」[cite: 40]</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>8. 可 9:37</strong>「凡为我名接待一个像这小孩子的，就是接待我；凡接待我的，不是接待我，乃是接待那差我来的。」[cite: 40]</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>9. 可 9:40</strong>「不敌挡我们的，就是帮助我们的。」[cite: 40]</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>10. 可 9:42</strong>「凡使这信我的一个小子跌倒的，倒不如把大磨石拴在这人的颈项上，扔在海里。」[cite: 40]</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>11. 可 9:50</strong>「你们里头应当有盐，彼此和睦。」[cite: 40]</div>
 
       <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
-        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 第九章 30 秒通关口诀：</p>
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 十六、马可 9 章口诀速记：</p>
         <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
-          过了六天登高山，变像放光三座棚；云彩声音要听祂，下山赶鬼因祷告；父喊我信信不足，扶起哑童立复原；途中预言人子难，迦百农中争大位；抱起小孩作谦卑，不敌挡者即帮助；断手断脚断眼目，火不灭处虫不死；里头有盐持纯味，同道肢体共和睦！[cite: 54]
+          六天高山三门徒，耶稣变像摩西利亚；三座棚、云彩声：「这是爱子，你们要听他」；下山赶鬼父亲喊：「我信不足求主帮」；门徒不能因祷告；人子被交被杀，三天复活；迦百农争为大，小孩在中间；奉主名赶鬼不要禁，不敌挡就是帮助；小子不可使跌倒，大磨石扔海中；手脚眼要舍弃，虫不死火不灭；盐要有味，最后一句：彼此和睦[cite: 40]。
         </p>
       </div>
+
+      <div class="card-title" style="margin-top:20px;">十七、Top 15 快问快答闪电反射</div>
+      <ol style="padding-left:20px; line-height:1.8;">
+        <li>六天以后，谁跟耶稣上山？——彼得、雅各、约翰[cite: 40]。</li>
+        <li>山上出现哪两个人？——摩西、以利亚[cite: 40]。</li>
+        <li>彼得要搭几座棚？——三座[cite: 40]。</li>
+        <li>云彩中的声音说什么？——这是我的爱子，你们要听他[cite: 40]。</li>
+        <li>父亲怎样形容自己的信心？——我信！但我信不足，求主帮助[cite: 40]。</li>
+        <li>门徒为什么不能赶出鬼？——非用祷告，这一类的鬼总不能出来[cite: 40]。</li>
+        <li>人子被杀以后多久复活？——过三天[cite: 40]。</li>
+        <li>门徒在路上争论什么？——谁为大[cite: 40]。</li>
+        <li>谁为首先的，应当怎样？——作众人末后的、众人的用人[cite: 40]。</li>
+        <li>耶稣用什么人说明谦卑与接待？——小孩子[cite: 40]。</li>
+        <li>约翰报告什么事？——有人奉耶稣的名赶鬼，但不跟从他们[cite: 40]。</li>
+        <li>耶稣怎样评价不敌挡他们的人？——就是帮助他们[cite: 40]。</li>
+        <li>使小子跌倒的人会怎样？——倒不如把大磨石拴在颈项上扔在海里[cite: 40]。</li>
+        <li>跌倒的身体部位顺序？——手、脚、眼[cite: 40]。</li>
+        <li>第 9 章最后怎样结束？——你们里头应当有盐，彼此和睦[cite: 40]。</li>
+      </ol>
     </div>
   </div>
 
-  <!-- TAB 4: 50 题随机测验 (按题型分组) -->
+  <!-- TAB 4: 50 题互动测验 (数据由中央题库 mark_master_quiz_data.js 注入) -->
   <div id="tab-quiz" class="tab-content">
     <div class="dashboard">
       <div class="stat-group">
-        <div class="stat-box">
-          <div class="stat-val" id="total-score">0 / 50</div>
-          <div class="stat-lbl">答对题数</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-val" id="accuracy-rate">0%</div>
-          <div class="stat-lbl">正确率</div>
-        </div>
+        <div class="stat-box"><div class="stat-val" id="total-score">0 / 50</div><div class="stat-lbl">答对题数</div></div>
+        <div class="stat-box"><div class="stat-val" id="accuracy-rate">0%</div><div class="stat-lbl">正确率</div></div>
       </div>
       <div>
         <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
-        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽题</button>
+        <a href="mark_all_chapters_quiz.html" class="btn-master-link">🏆 进入全卷总考</a>
         <span class="save-status" id="save-status">💾 进度已自动保存</span>
       </div>
     </div>
-
-    <!-- 试题按题型组织呈现容器 -->
     <div id="quiz-sections-container"></div>
   </div>
 </div>
 
+<!-- 引入中央 Master 全量题库文件 -->
+<script src="mark_master_quiz_data.js"></script>
+
 <script>
-// 全量 MASTER QUESTION POOL (基于 Mark Chapter 9.docx 精编的 50 道高频实战测验题)
-const MASTER_QUESTION_POOL = [
-  // --- 填空题 (10 题) ---
-  { id: "c9_fb1", type: "fill", title: "耶稣在山上变了形像，衣服放光，极其洁白，地上_____的，没有一个能漂得那样白。", blanks: [{id:"f1_1", ans:"漂布|漂布的"}], desc: "可 9:3 地上漂布的，没有一个能漂得那样白。" },
-  { id: "c9_fb2", type: "fill", title: "有声音从云彩里出来说：「这是我的_____，你们要_____他。」", blanks: [{id:"f2_1", ans:"爱子"},{id:"f2_2", ans:"听"}], desc: "可 9:7 这是我的爱子，你们要听他。" },
-  { id: "c9_fb3", type: "fill", title: "孩子的父亲立时喊着说：「我信！但我_____不足，求主帮助。」", blanks: [{id:"f3_1", ans:"信"}], desc: "可 9:24 我信！但我信不足，求主帮助。" },
-  { id: "c9_fb4", type: "fill", title: "耶稣回答门徒赶不出鬼的原因说：「非用_____，这一类的鬼总不能出来。」", blanks: [{id:"f4_1", ans:"祷告"}], desc: "可 9:29 非用祷告，这一类的鬼总不能出来。" },
-  { id: "c9_fb5", type: "fill", title: "人子将要被交在人手里，他们要杀害他；被杀以后，过_____天他要复活。", blanks: [{id:"f5_1", ans:"三|3"}], desc: "可 9:31 被杀以后，过三天他要复活。" },
-  { id: "c9_fb6", type: "fill", title: "若有人愿意作首先的，他必作众人_____的，作众人的_____。", blanks: [{id:"f6_1", ans:"末后|末后的"},{id:"f6_2", ans:"用人"}], desc: "可 9:35 众人末后的，作众人的用人。" },
-  { id: "c9_fb7", type: "fill", title: "耶稣说：「不_____我们的，就是_____我们的。」", blanks: [{id:"f7_1", ans:"敌挡"},{id:"f7_2", ans:"帮助"}], desc: "可 9:40 不敌挡我们的，就是帮助我们的。" },
-  { id: "c9_fb8", type: "fill", title: "凡使这信我的一个小子跌倒的，倒不如把_____拴在这人的颈项上，扔在海里。", blanks: [{id:"f8_1", ans:"大磨石"}], desc: "可 9:42 倒不如把大磨石拴在这人的颈项上。" },
-  { id: "c9_fb9", type: "fill", title: "在地狱里，_____是不死的，_____是不灭的。", blanks: [{id:"f9_1", ans:"虫"},{id:"f9_2", ans:"火"}], desc: "可 9:48 在那里，虫是不死的，火是不灭的。" },
-  { id: "c9_fb10", type: "fill", title: "盐本是好的，若失了味用什么叫它再咸呢？你们里头应当有盐，彼此_____。", blanks: [{id:"f10_1", ans:"和睦"}], desc: "可 9:50 你们里头应当有盐，彼此和睦。" },
+// 本页不再硬编码任何题目数组，完全通过中央题库 window.MARK_MASTER_QUESTION_POOL 动态读取第 9 章题目
+let activeQuestionSet = [];
+let activeDynamicWordPool = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch9_from_master_v1";
 
-  // --- 选择题与排序题 (26 题) ---
-  { id: "c9_mc1", type: "radio", title: "耶稣登山变像是在发生受难预言过了几天之后？", opts: [{v:"a",t:"A. 三天"},{v:"b",t:"B. 六天"},{v:"c",t:"C. 七天"},{v:"d",t:"D. 四十天"}], ans: "b", desc: "可 9:2 过了六天，耶稣带着彼得、雅各、约翰。" },
-  { id: "c9_mc2", type: "radio", title: "耶稣暗暗带上高山亲眼目睹变像的三位门徒是：", opts: [{v:"a",t:"A. 彼得、安得烈、约翰"},{v:"b",t:"B. 彼得、雅各、约翰"},{v:"c",t:"C. 雅各、约翰、多马"},{v:"d",t:"D. 腓力、巴多罗买、马太"}], ans: "b", desc: "可 9:2 耶稣带着彼得、雅各、约翰暗暗地上了一座高山。" },
-  { id: "c9_mc3", type: "radio", title: "在山上向耶稣和三位门徒显现显荣的旧约人物是：", opts: [{v:"a",t:"A. 亚伯拉罕和大卫"},{v:"b",t:"B. 摩西和以利亚"},{v:"c",t:"C. 以诺和以利亚"},{v:"d",t:"D. 撒母耳和以赛亚"}], ans: "b", desc: "可 9:4 忽然，有以利亚同摩西向他们显现。" },
-  { id: "c9_mc4", type: "radio", title: "彼得在惊恐不知所措中提议搭几座棚？为谁搭？", opts: [{v:"a",t:"A. 两座棚，为摩西和以利亚"},{v:"b",t:"B. 三座棚，一座为耶稣，一座为摩西，一座为以利亚"},{v:"c",t:"C. 六座棚，大家各住一座"},{v:"d",t:"D. 一座大棚供大家避风"}], ans: "b", desc: "可 9:5 搭三座棚，一座为你，一座为摩西，一座为以利亚。" },
-  { id: "c9_mc5", type: "radio", title: "云彩遮盖他们时，天上有声音发出，内容是什么？", opts: [{v:"a",t:"A. 「你是我的爱子，我喜悦你。」"},{v:"b",t:"B. 「这是我的爱子，你们要听他。」"},{v:"c",t:"C. 「凡遵行神旨意的是我的母亲。」"},{v:"d",t:"D. 「你们应当悔改信福音。」"}], ans: "b", desc: "可 9:7 这是我的爱子，你们要听他。" },
-  { id: "c9_mc6", type: "radio", title: "下山的时候，耶稣禁戒门徒不要将所看见的告诉人，直到什么时候？", opts: [{v:"a",t:"A. 直到祂进耶路撒冷"},{v:"b",t:"B. 直到人子从死里复活"},{v:"c",t:"C. 直到五旬节圣灵降临"},{v:"d",t:"D. 直到门徒受差遣"}], ans: "b", desc: "可 9:9 耶稣嘱咐他们说：人子还没有从死里复活，你们不要将所看见的告诉人。" },
-  { id: "c9_mc7", type: "radio", title: "门徒询问文士为何说以利亚必须先来，耶稣指出以利亚情况如何？", opts: [{v:"a",t:"A. 以利亚绝不会再来"},{v:"b",t:"B. 以利亚已经来了，人们任意待他，正如经上指着他说的"},{v:"c",t:"C. 以利亚将在世界的末了降临"},{v:"d",t:"D. 文士的话是错谬的"}], ans: "b", desc: "可 9:13 以利亚已经来了，他们也任意待他。" },
-  { id: "c9_mc8", type: "radio", title: "耶稣与三门徒下山后，看见文士正在和留在山下的门徒做什么？", opts: [{v:"a",t:"A. 彼此擘饼"},{v:"b",t:"B. 辩论"},{v:"c",t:"C. 一同祷告"},{v:"d",t:"D. 查考摩西律法"}], ans: "b", desc: "可 9:14 见有许多人围着他们，又有文士和他们辩论。" },
-  { id: "c9_mc9", type: "radio", title: "那父亲带来的孩子被什么鬼附着？", opts: [{v:"a",t:"A. 哑巴鬼"},{v:"b",t:"B. 癫痫鬼"},{v:"c",t:"C. 瞎眼鬼"},{v:"d",t:"D. 群鬼"}], ans: "a", desc: "可 9:17 我带了我的儿子到你这里来，他被哑巴鬼附着。" },
-  { id: "c9_mc10", type: "radio", title: "孩子的父亲求耶稣说“你若能作什么求你帮助”，耶稣的回应是：", opts: [{v:"a",t:"A. 「神的心意是不可测度的」"},{v:"b",t:"B. 「你若能信，在信的人，凡事都能」"},{v:"c",t:"C. 「我肯，你洁净了吧」"},{v:"d",t:"D. 「平平安安地回去吧」"}], ans: "b", desc: "可 9:23 耶稣对他说：你若能信，在信的人，凡事都能。" },
-  { id: "c9_mc11", type: "radio", title: "听见耶稣责备污鬼后，孩子抽疯仿佛死人，耶稣如何医治使他站起？", opts: [{v:"a",t:"A. 泼凉水在脸上"},{v:"b",t:"B. 拉着他的手，扶他起来"},{v:"c",t:"C. 吩咐门徒抬回家中"},{v:"d",t:"D. 用油抹他的身体"}], ans: "b", desc: "可 9:27 但耶稣拉着他的手，扶他起来，他就站起来了。" },
-  { id: "c9_mc12", type: "radio", title: "山下的门徒赶不出那哑巴鬼，耶稣在屋里点出的根本原因是：", opts: [{v:"a",t:"A. 门徒没有背诵律法"},{v:"b",t:"B. 非用祷告，这一类的鬼总不能出来"},{v:"c",t:"C. 门徒缺乏禁食天数"},{v:"d",t:"D. 孩子的父亲未奉献"}], ans: "b", desc: "可 9:29 非用祷告，这一类的鬼总不能出来。" },
-  { id: "c9_mc13", type: "radio", title: "第二次预言受难时，门徒的真实反应是什么？", opts: [{v:"a",t:"A. 立即放声大哭"},{v:"b",t:"B. 明白过来并深信"},{v:"c",t:"C. 不明白这话，又不敢问祂"},{v:"d",t:"D. 极力劝阻耶稣"}], ans: "c", desc: "可 9:32 门徒却不明白这话，又不敢问他。" },
-  { id: "c9_mc14", type: "radio", title: "门徒在去往哪个城镇的路上争论谁为大？", opts: [{v:"a",t:"A. 伯赛大"},{v:"b",t:"B. 迦百农"},{v:"c",t:"C. 耶路撒冷"},{v:"d",t:"D. 耶利哥"}], ans: "b", desc: "可 9:33 他们来到迦百农。耶稣在屋里问他们说：你们在路上议论的是什么？" },
-  { id: "c9_mc15", type: "radio", title: "在屋里教导谁为大时，耶稣特别抱起了谁作为榜样？", opts: [{v:"a",t:"A. 彼得"},{v:"b",t:"B. 一个小孩子"},{v:"c",t:"C. 穷寡妇"},{v:"d",t:"D. 乞丐"}], ans: "b", desc: "可 9:36 于是领一个小孩子来，叫他站在门徒中间，又抱起他来。" },
-  { id: "c9_mc16", type: "radio", title: "约翰告诉耶稣他们禁止了一个人，是因为那人做了什么？", opts: [{v:"a",t:"A. 传讲虚假教义"},{v:"b",t:"B. 奉耶稣的名赶鬼，却不跟从门徒"},{v:"c",t:"C. 在安息日作工"},{v:"d",t:"D. 不肯给门徒水喝"}], ans: "b", desc: "可 9:38 我们看见一个人奉你的名赶鬼，我们就禁止他，因为他不跟从我们。" },
-  { id: "c9_mc17", type: "radio", title: "面对门徒的狭隘排他，耶稣给出的教导准则是：", opts: [{v:"a",t:"A. 「凡不入十二使徒团的一概是异端」"},{v:"b",t:"B. 「不要禁止他；因为不敌挡我们的，就是帮助我们的」"},{v:"c",t:"C. 「叫他们立刻受割礼」"},{v:"d",t:"D. 「召火从天上降下显明真伪」"}], ans: "b", desc: "可 9:39-40 不要禁止他...不敌挡我们的，就是帮助我们的。" },
-  { id: "c9_mc18", type: "radio", title: "凡因门徒是属基督，给门徒一杯什么喝的，不能不得赏赐？", opts: [{v:"a",t:"A. 新酒"},{v:"b",t:"B. 水"},{v:"c",t:"C. 橄榄油"},{v:"d",t:"D. 羊奶"}], ans: "b", desc: "可 9:41 凡因你们是属基督，给你们一杯水喝的...不能不得赏赐。" },
-  { id: "c9_mc19", type: "radio", title: "为防止叫人跌倒或自己跌倒，耶稣教导对付犯罪器官的严格顺序是：", opts: [
-    {v:"a", t:"A. 眼 → 手 → 脚"},
-    {v:"b", t:"B. 手 → 脚 → 眼"},
-    {v:"c", t:"C. 脚 → 手 → 眼"},
-    {v:"d", t:"D. 舌头 → 手 → 心"}
-  ], ans: "b", desc: "可 9:43(手砍下) → 45(脚砍下) → 47(眼剜出)。" },
-  { id: "c9_mc20", type: "radio", title: "【数字陷阱】在第 9 章登山变像的故事中，以下哪组数字完全准确？", opts: [
-    {v:"a", t:"A. 过了三天上山；搭三座棚"},
-    {v:"b", t:"B. 过了六天上山；搭三座棚"},
-    {v:"c", t:"C. 过了六天上山；搭两座棚"},
-    {v:"d", t:"D. 过了七天上山；搭三座棚"}
-  ], ans: "b", desc: "可 9:2 过了六天；可 9:5 搭三座棚。" },
-  { id: "c9_mc21", type: "radio", title: "【排序题】请按照登山变像的过程先后排序：<br>① 云彩遮盖有声音说这是我的爱子 ② 门徒忽然不见一人只见耶稣 ③ 耶稣衣服放光摩西以利亚显现 ④ 彼得提议搭三座棚", opts: [
-    {v:"a", t:"A. ③ → ④ → ① → ②"},
-    {v:"b", t:"B. ④ → ③ → ① → ②"},
-    {v:"c", t:"C. ③ → ① → ④ → ②"},
-    {v:"d", t:"D. ① → ③ → ④ → ②"}
-  ], ans: "a", desc: "变像显现(9:3-4) → 提议搭棚(9:5) → 云彩声音(9:7) → 只见耶稣(9:8)。" },
-  { id: "c9_mc22", type: "radio", title: "【排序题】请按照山下医治被鬼附孩子的事件发展排序：<br>① 父亲求告说我信但我信不足 ② 门徒暗暗问为何赶不出鬼 ③ 耶稣斥责聋哑鬼拉手扶起孩子 ④ 文士与山下门徒辩论", opts: [
-    {v:"a", t:"A. ④ → ① → ③ → ②"},
-    {v:"b", t:"B. ① → ④ → ③ → ②"},
-    {v:"c", t:"C. ④ → ③ → ① → ②"},
-    {v:"d", t:"D. ④ → ① → ② → ③"}
-  ], ans: "a", desc: "文士辩论(9:14) → 信不足呼求(9:24) → 斥责扶起(9:25-27) → 屋内发问(9:28)。" },
-  { id: "c9_mc23", type: "radio", title: "【排序题】请按照门徒争论谁为大的事件发展排序：<br>① 耶稣问路上议论什么门徒不作声 ② 耶稣抱起小孩子教训接待原则 ③ 耶稣坐下召十二门徒论首先与末后 ④ 门徒在去迦百农路上彼此争论谁为大", opts: [
-    {v:"a", t:"A. ④ → ① → ③ → ②"},
-    {v:"b", t:"B. ① → ④ → ③ → ②"},
-    {v:"c", t:"C. ④ → ③ → ① → ②"},
-    {v:"d", t:"D. ① → ③ → ④ → ②"}
-  ], ans: "a", desc: "路上争大(9:34) → 屋内发问(9:33) → 坐下训诲(9:35) → 抱小孩子(9:36)。" },
-  { id: "c9_mc24", type: "radio", title: "【全章主线大排序】请按照马可福音第 9 章事件发展次序排列：<br>A. 山下赶出哑巴鬼 B. 门徒争论谁为大与抱小孩子 C. 登山变像 D. 手脚眼防跌倒与盐", opts: [
-    {v:"a", t:"A. C → A → B → D"},
-    {v:"b", t:"B. A → C → B → D"},
-    {v:"c", t:"C. C → B → A → D"},
-    {v:"d", t:"D. C → A → D → B"}
-  ], ans: "a", desc: "变像(9:2) → 赶鬼(9:14) → 争大(9:33) → 手脚眼与盐(9:43-50)。" },
-  { id: "c9_mc25", type: "radio", title: "如果一只眼睛叫你跌倒，耶稣给出的处理决断是什么？", opts: [{v:"a",t:"A. 闭上眼"},{v:"b",t:"B. 砍下来"},{v:"c",t:"C. 剜出来"},{v:"d",t:"D. 戴上面纱"}], ans: "c", desc: "可 9:47 倘若你一只眼叫你跌倒，就去掉它（剜出来）。" },
-  { id: "c9_mc26", type: "radio", title: "第 9 章末尾，耶稣对门徒之间内部相处的劝勉总结是：", opts: [{v:"a",t:"A. 谨守安息日"},{v:"b",t:"B. 彼此和睦"},{v:"c",t:"C. 凡事谢恩"},{v:"d",t:"D. 设立监督"}], ans: "b", desc: "可 9:50 你们里头应当有盐，彼此和睦。" },
-
-  // --- 是非判断题 (14 题) ---
-  { id: "c9_tf1", type: "tf", title: "马可福音 9:1 预言站在这里的所有门徒，都在没尝死味前看见神的国大有能力临到。", ans: "F", desc: "错。经文明确说明是「有人」在没尝死味以前，非全员。" },
-  { id: "c9_tf2", type: "tf", title: "登山变像时，与耶稣同在山上显现谈论的是摩西和以利亚。", ans: "T", desc: "对。可 9:4 经文完全吻合。" },
-  { id: "c9_tf3", type: "tf", title: "彼得提议搭三座棚，是因为他心中十分清醒并有智慧的属灵计划。", ans: "F", desc: "错。可 9:6 彼得不知道说什么才好，因为他们甚是惧怕。" },
-  { id: "c9_tf4", type: "tf", title: "登山变像中云彩发出的声音是说：「这是我的爱子，你们要听他。」", ans: "T", desc: "对。可 9:7 经文完全吻合。" },
-  { id: "c9_tf5", type: "tf", title: "下山的时候，耶稣允许门徒把山上所见到的异象立刻向犹太全地大力宣告。", ans: "F", desc: "错。可 9:9 耶稣嘱咐他们：人子还没有从死里复活，不要将所看见的告诉人。" },
-  { id: "c9_tf6", type: "tf", title: "被哑巴鬼附着的孩子，从生下来懂事起，门徒就屡次轻易把他治好。", ans: "F", desc: "错。山下门徒赶不出那鬼，孩子从小屡次受苦。" },
-  { id: "c9_tf7", type: "tf", title: "孩子的父亲对耶稣呼喊说：「我信！但我信不足，求主帮助。」", ans: "T", desc: "对。可 9:24 经文完全吻合。" },
-  { id: "c9_tf8", type: "tf", title: "耶稣向门徒指明，赶出这一类顽固的污鬼，非用祷告总不能出来。", ans: "T", desc: "对。可 9:29 经文完全吻合。" },
-  { id: "c9_tf9", type: "tf", title: "第二次受难预言时，耶稣说人子被杀以后，过七天要复活。", ans: "F", desc: "错。可 9:31 明确是「过三天」他要复活。" },
-  { id: "c9_tf10", type: "tf", title: "门徒在去迦百农的路上，暗暗地彼此争论谁为大。", ans: "T", desc: "对。可 9:34 经文完全吻合。" },
-  { id: "c9_tf11", type: "tf", title: "耶稣说，若有人愿意作首先的，他就必受众人的服事。", ans: "F", desc: "错。可 9:35 他必作众人末后的，作众人的用人。" },
-  { id: "c9_tf12", type: "tf", title: "使徒约翰曾因看见有人奉主名赶鬼却不跟从门徒，就出手禁止了那人。", ans: "T", desc: "对。可 9:38 经文完全吻合。" },
-  { id: "c9_tf13", type: "tf", title: "耶稣宣告：不敌挡我们的，就是帮助我们的。", ans: "T", desc: "对。可 9:40 经文完全吻合。" },
-  { id: "c9_tf14", type: "tf", title: "耶稣说哪怕一只手叫人跌倒，也当忍耐保留，不可造成身体残缺。", ans: "F", desc: "错。可 9:43 明确教导应当砍下来，宁可缺肢体进入永生。" }
-];
-
-// 核心优化：动态精准 Answer Pool（只展示当前抽中填空题相关的词汇）
-const DISTRACTOR_POOL_CH9 = ["摩西", "以利亚", "三天", "六天", "三座棚", "迦百农", "小孩子", "一杯水", "大磨石", "用人", "绊倒", "彼得"];
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 function generateDynamicAnswerPool(selectedQuestions) {
   const answerSet = new Set();
@@ -596,29 +556,21 @@ function generateDynamicAnswerPool(selectedQuestions) {
     }
   });
 
-  const shuffledDistractors = shuffleArray(DISTRACTOR_POOL_CH9);
-  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 22; i++) {
-    answerSet.add(shuffledDistractors[i]);
+  const distractors = ["摩西", "以利亚", "三天", "六天", "三座棚", "迦百农", "小孩子", "一杯水", "大磨石", "用人", "绊倒", "彼得"];
+  const shuffledDist = shuffleArray(distractors);
+  for (let i = 0; i < shuffledDist.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDist[i]);
   }
-
   return shuffleArray(Array.from(answerSet));
 }
 
-let activeQuestionSet = []; 
-let activeDynamicWordPool = []; 
-let activeBlankId = null;
-const STORAGE_KEY = "mark_ch9_quiz_pool_v1";
-
-function shuffleArray(arr) {
-  const array = [...arr];
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 function initQuiz(forceRegenerate = false) {
+  if (!window.MARK_MASTER_QUESTION_POOL) {
+    document.getElementById("quiz-sections-container").innerHTML = 
+      "<div style='padding:20px; text-align:center; color:#dc2626;'>未检测到 mark_master_quiz_data.js 题库文件，请确保该文件在同级目录下！</div>";
+    return;
+  }
+
   const savedData = localStorage.getItem(STORAGE_KEY);
   if (!forceRegenerate && savedData) {
     try {
@@ -631,14 +583,11 @@ function initQuiz(forceRegenerate = false) {
     } catch(e) { console.error(e); }
   }
 
-  const shuffledPool = shuffleArray(MASTER_QUESTION_POOL);
-  const selected = shuffledPool.slice(0, 50);
-
-  // 题型分类排序：填空 -> 选择/排序 -> 是非
+  // 从中央题库筛选属于第 9 章 (ch === 9) 的全部题目
+  const ch9Questions = window.MARK_MASTER_QUESTION_POOL.filter(q => q.ch === 9);
+  const shuffled = shuffleArray(ch9Questions);
   const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
-  activeQuestionSet = selected.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
-
-  // 动态生成专属靶向词库
+  activeQuestionSet = shuffled.slice(0, 50).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
   activeDynamicWordPool = generateDynamicAnswerPool(activeQuestionSet);
 
   saveQuizState({});
@@ -646,7 +595,7 @@ function initQuiz(forceRegenerate = false) {
 }
 
 function regenerateQuiz() {
-  if (confirm("确定要重新随机抽取 50 题并刷新专属词库吗？")) {
+  if (confirm("确定要重新抽取第 9 章的 50 题测验吗？")) {
     localStorage.removeItem(STORAGE_KEY);
     initQuiz(true);
   }
@@ -657,9 +606,9 @@ function renderQuizUI() {
   container.innerHTML = "";
 
   const groups = {
-    "fill": { title: "第一部分：填空题", desc: "请参考下方专为此卷生成的词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
-    "radio": { title: "第二部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
-    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+    "fill": { title: "第一部分：填空题", desc: "请点选词库填入空格（反选输入框可清除）：", list: [] },
+    "radio": { title: "第二部分：单选题与排序题", desc: "请选择正确项：", list: [] },
+    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确：", list: [] }
   };
 
   activeQuestionSet.forEach(q => {
@@ -678,18 +627,17 @@ function renderQuizUI() {
     const secHeader = document.createElement("div");
     secHeader.className = "type-section-header";
     secHeader.innerHTML = `
-      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <h3 class="type-section-title">${grp.title}</h3>
       <p class="type-section-desc">${grp.desc}</p>
     `;
     container.appendChild(secHeader);
 
-    // 专属置顶 Answer Pool
     if (typeKey === "fill") {
       const bankCard = document.createElement("div");
       bankCard.className = "word-bank-box";
       bankCard.innerHTML = `
         <div class="word-bank-title">
-          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <span>💡 填空题专属匹配词库 (Answer Pool)</span>
           <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
         </div>
         <div class="word-chips" id="word-chips-container"></div>
@@ -708,12 +656,7 @@ function renderQuizUI() {
           const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
           fillText = fillText.replace("_____", inputHtml);
         });
-        item.innerHTML = `
-          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
-            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
-          </div>
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div style="font-size:15px; line-height:2.4;"><span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}</div><div class="feedback" id="fb-${q.id}"></div>`;
       } else if (q.type === "radio") {
         const isMulti = Array.isArray(q.ans);
         let optsHtml = `<div class="opt-group">`;
@@ -722,20 +665,9 @@ function renderQuizUI() {
           optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
         });
         optsHtml += `</div>`;
-        item.innerHTML = `
-          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
-          ${optsHtml}
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>${optsHtml}<div class="feedback" id="fb-${q.id}"></div>`;
       } else if (q.type === "tf") {
-        item.innerHTML = `
-          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
-          <div class="opt-group" style="flex-direction:row; max-width:280px;">
-            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
-            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
-          </div>
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div><div class="opt-group" style="flex-direction:row;"><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label></div><div class="feedback" id="fb-${q.id}"></div>`;
       }
 
       container.appendChild(item);
