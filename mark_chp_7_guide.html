@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>马可福音第七章 圣经比赛备战指南与测验</title>
+<title>马可福音第七章 Bible Quiz 备战指南与测验</title>
 <style>
   :root {
     --primary: #1e3a8a;
@@ -21,7 +21,7 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--text);
     background-color: var(--bg-page);
     margin: 0;
@@ -30,7 +30,6 @@
     justify-content: center;
     font-size: 15px;
   }
-
   .adaptive-container {
     width: 100%;
     max-width: 1000px;
@@ -44,6 +43,27 @@
     .adaptive-container { padding: 12px 10px 50px 10px; }
   }
 
+  .top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .btn-nav-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .btn-nav-home:hover { background: #e2e8f0; }
+
   .header {
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
     color: white;
@@ -55,7 +75,6 @@
   .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
   .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
 
-  /* 导航栏 */
   .nav-tabs {
     display: flex;
     background: #e2e8f0;
@@ -85,7 +104,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
-  /* 控制台卡片 */
   .dashboard {
     display: flex;
     justify-content: space-between;
@@ -104,33 +122,27 @@
   .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
   .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
   .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
-  
-  .btn-submit {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 9px 16px;
-    font-size: 14px;
-    font-weight: 600;
+  .btn-submit { background: var(--accent); color: white; border: none; padding: 9px 16px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; }
+  .btn-reset { background: #e2e8f0; color: #475569; border: none; padding: 9px 12px; font-size: 14px; font-weight: 600; border-radius: 8px; margin-left: 6px; cursor: pointer; }
+  .btn-master-link {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
     border-radius: 8px;
-    cursor: pointer;
-  }
-  .btn-reset {
-    background: #e2e8f0;
-    color: #475569;
-    border: none;
-    padding: 9px 12px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    border-radius: 8px;
+    text-decoration: none;
     margin-left: 6px;
-    cursor: pointer;
   }
+  .btn-master-link:hover { background: #e2e8f0; }
 
   .card {
     background: var(--card-bg);
     border-radius: 12px;
-    padding: 20px 18px;
+    padding: 22px 20px;
     margin-bottom: 20px;
     border: 1px solid var(--border);
   }
@@ -140,24 +152,17 @@
     color: var(--primary);
     border-left: 4px solid var(--accent);
     padding-left: 10px;
-    margin: 0 0 14px 0;
+    margin: 0 0 16px 0;
   }
-
   .section-h2 {
     font-size: 17px;
     font-weight: 700;
     color: var(--primary);
     background: #eff6ff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin: 20px 0 10px 0;
-    border-left: 3px solid var(--accent);
-  }
-  .section-h3 {
-    font-size: 15.5px;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 12px 0 6px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 24px 0 14px 0;
+    border-left: 4px solid var(--accent);
   }
 
   .highlight-box {
@@ -165,7 +170,7 @@
     border: 1px solid #bbf7d0;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
     color: #166534;
   }
@@ -174,8 +179,9 @@
     border: 1px solid #ffe58f;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
+    color: #92400e;
   }
   .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
 
@@ -184,23 +190,17 @@
     border: 1px solid #fca5a5;
     border-radius: 8px;
     padding: 12px 14px;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 14.5px;
     color: #991b1b;
   }
 
-  .info-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14.5px;
-    margin: 10px 0;
-  }
-  .info-table th, .info-table td {
-    border: 1px solid var(--border);
-    padding: 9px 12px;
-    text-align: left;
-  }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 12px 0; }
+  .info-table th, .info-table td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; }
   .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  .quiz-q { font-weight: bold; color: #1e293b; margin-top: 10px; margin-bottom: 2px; }
+  .quiz-a { color: #334155; margin-left: 12px; margin-bottom: 8px; }
 
   .type-section-header {
     background: #f1f5f9;
@@ -212,92 +212,20 @@
   .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
   .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
 
-  /* 填空题专属词库 Pool */
-  .word-bank-box {
-    background: #eff6ff;
-    border: 2px dashed #93c5fd;
-    border-radius: 10px;
-    padding: 14px;
-    margin: 12px 0 18px 0;
-  }
-  .word-bank-title {
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--primary);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  .word-bank-box { background: #eff6ff; border: 2px dashed #93c5fd; border-radius: 10px; padding: 14px; margin: 12px 0 18px 0; }
+  .word-bank-title { font-size: 14px; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
   .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .word-chip {
-    background: #ffffff;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    transition: all 0.15s ease;
-    user-select: none;
-  }
-  .word-chip:hover, .word-chip:active {
-    background: var(--accent);
-    color: white;
-  }
+  .word-chip { background: #ffffff; border: 1.5px solid var(--accent); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: all 0.15s ease; user-select: none; }
+  .word-chip:hover, .word-chip:active { background: var(--accent); color: white; }
 
   .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
   .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
   .opt-group { display: flex; flex-direction: column; gap: 8px; }
-  .opt-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    background: #ffffff;
-  }
-  .opt-label input { width: 18px; height: 18px; flex-shrink: 0; }
-
-  .blank-input {
-    border: none;
-    border-bottom: 2.5px solid #64748b;
-    background: #f1f5f9;
-    padding: 2px 8px;
-    font-size: 15px;
-    font-weight: bold;
-    color: #0f172a;
-    text-align: center;
-    margin: 0 4px;
-    border-radius: 4px 4px 0 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .blank-input:focus, .blank-input.active-blank {
-    outline: none;
-    border-bottom-color: var(--accent);
-    background: #dbeafe;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
-  }
-  .blank-input.has-val {
-    background: #e0f2fe;
-    color: #0369a1;
-    border-bottom-color: #0284c7;
-  }
-
-  .feedback {
-    display: none;
-    margin-top: 10px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-  }
+  .opt-label { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; background: #ffffff; }
+  .blank-input { border: none; border-bottom: 2.5px solid #64748b; background: #f1f5f9; padding: 2px 8px; font-size: 15px; font-weight: bold; color: #0f172a; text-align: center; margin: 0 4px; border-radius: 4px 4px 0 0; cursor: pointer; transition: all 0.2s ease; }
+  .blank-input:focus, .blank-input.active-blank { outline: none; border-bottom-color: var(--accent); background: #dbeafe; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25); }
+  .blank-input.has-val { background: #e0f2fe; color: #0369a1; border-bottom-color: #0284c7; }
+  .feedback { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; }
   .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
   .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
 
@@ -308,254 +236,342 @@
 <body>
 
 <div class="adaptive-container">
-  <!-- 顶部返回主页导航条 -->
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-    <a href="index.html" style="display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); padding: 7px 13px; border-radius: 8px; font-size: 13.5px; font-weight: 700; text-decoration: none;">🏠 返回主页</a>
+  <div class="top-navbar">
+    <a href="index.html" class="btn-nav-home">🏠 返回主页</a>
     <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
   </div>
 
   <div class="header">
-    <h1>《马可福音》第七章 备战指南与测验</h1>
-    <p>古人的遗传 ＋ 叙利非尼基妇人 ＋ 医治耳聋舌结 ＋ 50 题全真模拟测验</p>
+    <h1>📖 马可福音第 7 章 Bible Quiz 备战</h1>
+    <p>古人的遗传 ＋ 叙利非尼基妇人 ＋ 医治耳聋舌结 ＋ 50 题互动全真测验</p>
   </div>
 
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南</button>
-    <button class="tab-btn" onclick="switchTab('traps')">🧠 核心图表与陷阱</button>
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南 (全问答)</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 人物/地点/排序题</button>
     <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
-    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题随机测验</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题全真测验</button>
   </div>
 
-  <!-- TAB 1: 备战指南大地图 -->
+  <!-- TAB 1: 完整还原的问答式备战讲义 -->
   <div id="tab-guide" class="tab-content active">
     <div class="card">
       <div class="card-title">一、先掌握第 7 章的「大地图」</div>
+      <p>马可福音第七章可以分成 <strong>4 个主要事件</strong>：</p>
       <table class="info-table">
-        <thead>
-          <tr><th>经文分段</th><th>主要内容</th><th>Quiz 重要度</th></tr>
-        </thead>
+        <thead><tr><th>经文</th><th>内容</th><th>Quiz 重要度</th></tr></thead>
         <tbody>
-          <tr><td>7:1–5</td><td>法利赛人和文士质问门徒用俗手吃饭</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>7:6–23</td><td>耶稣责备人的遗传；辨析真正污秽从心里出来</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>7:24–30</td><td>叙利非尼基妇人为女儿求赶鬼医治</td><td>⭐⭐⭐⭐⭐</td></tr>
-          <tr><td>7:31–37</td><td>耶稣在加利利海医治耳聋舌结的人（以法大）</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>7:1-5</td><td>法利赛人和文士质问门徒没有洗手</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>7:6-23</td><td>耶稣责备人的遗传，说明真正污秽从心里出来</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>7:24-30</td><td>叙利非尼基妇人为女儿求医治</td><td>⭐⭐⭐⭐⭐</td></tr>
+          <tr><td>7:31-37</td><td>耶稣医治耳聋舌结的人</td><td>⭐⭐⭐⭐⭐</td></tr>
         </tbody>
       </table>
       <div class="highlight-box">
-        <strong>🔥 第7章核心主线：</strong><br>
-        洁净争议 → 人的遗传 vs 神的诫命 → 各班借口 → 从心里出来的13项污秽 → 叙利非尼基妇人的信心（碎渣） → 耳聋舌结者得医治（以法大）！
+        <strong>考试时最重要的主线：</strong><br>
+        洁净争议 → 人的遗传 vs 神的诫命 → 从心里出来的污秽 → 外邦妇人的信心 → 耳聋舌结者得医治<br>
+        把这条线背熟，第七章的骨架就稳了。<br>
+        ⚠️ 第7章是非常适合出「谁说的？为什么？在哪里？先后顺序？结果是什么？」的章节。
       </div>
 
-      <div class="section-h2">第一部分：7:1–5 法利赛人和文士的质问</div>
-      <p>① <strong>质问者身份与来源</strong>：法利赛人和几个文士从<strong>耶路撒冷</strong>来到耶稣那里[cite: 50]。</p>
-      <p>② <strong>起因细节</strong>：看见耶稣的门徒中有人用<strong>「俗手」</strong>，就是<strong>没有洗的手</strong>吃饭（注意：不是耶稣没洗手，是门徒中有人没洗手）[cite: 50]。</p>
-      <p>③ <strong>传统洗规</strong>：拘守古人的遗传，若不仔细洗手就不吃饭；从市上来若不洗浴也不吃饭；还拘守洗<strong>杯、罐、铜器</strong>等规矩[cite: 50]。</p>
-      <p>④ <strong>核心质问</strong>：「你的门徒为什么不照古人的遗传，用俗手吃饭呢？」[cite: 50]</p>
+      <div class="section-h2">二、7:1-5 法利赛人和文士——第一大考点</div>
+      <div class="quiz-q">① 谁来到耶稣那里？</div>
+      <div class="quiz-a"><strong>法利赛人和几个文士，从耶路撒冷来</strong>。<br>
+      ⚠️ 注意：不是普通群众，也不是门徒主动发问。</div>
 
-      <div class="section-h2">第二部分：7:6–23 人的遗传 vs 神的诫命 & 真正污秽</div>
-      <p>① <strong>引用以赛亚书指责假冒为善</strong>：「这百姓用嘴唇尊敬我，心却远离我。他们将人的吩咐当作道理教导人，所以拜我也是枉然。」（7:6–7）[cite: 50]</p>
-      <p>② <strong>核心论点</strong>：离弃神的诫命，拘守人的遗传；诚然是<strong>废弃神的诫命，要守自己的遗传</strong>[cite: 50]。</p>
-      <p>③ <strong>举例「各班」（Corban）</strong>：摩西说当孝敬父母，咒骂父母的必治死他[cite: 50]；他们却说人若对父母说当奉给你的已经<strong>各班</strong>（就是<strong>供献给神</strong>的意思），就可以不再奉养父母[cite: 50]！这就是承接遗传废了神的话[cite: 50]。</p>
-      <p>④ <strong>什么是真正污秽人的？</strong><br>
-      • <strong>从外面进去的</strong>（食物），不能污秽人，因为不是入心，乃是入肚腹落到茅厕里（耶稣宣布各样食物都是洁净的）[cite: 50]。<br>
-      • <strong>从里面出来的</strong>，那才能污秽人[cite: 50]！</p>
-      <p>⑤ <strong>从心里发出的 13 项恶（必背清单）</strong>：<br>
-      <strong>恶念、苟合、偷盗、凶杀、奸淫、贪婪、邪恶、诡诈、淫荡、嫉妒、谤讟、骄傲、狂妄</strong>[cite: 50]。</p>
+      <div class="quiz-q">② 他们看见什么？Quiz 常问：他们为什么责问门徒？</div>
+      <div class="quiz-a">看见耶稣的门徒中有人用<strong>俗手</strong>，就是没有洗手吃饭。<br>
+      因为他们看见门徒中有人用「俗手」吃饭。</div>
 
-      <div class="section-h2">第三部分：7:24–30 叙利非尼基妇人</div>
-      <p>① <strong>地点与隐秘</strong>：耶稣往<strong>推罗、西顿</strong>境内去，进了一家不愿意人知道，却隐藏不住[cite: 50]。</p>
-      <p>② <strong>妇人身份与恳求</strong>：妇人是<strong>希利尼人，属叙利非尼基族</strong>[cite: 50]；因小女儿被污鬼附着，便来<strong>俯伏在耶稣脚前</strong>求赶鬼[cite: 50]。</p>
-      <p>③ <strong>信心答辩</strong>：<br>
-      • 耶稣说：「让儿女们先吃饱，不好拿儿女的饼丢给狗吃。」[cite: 50]<br>
-      • 妇人回答：<strong>「主啊，不错；但是狗在桌子底下也吃孩子们的碎渣儿。」</strong>[cite: 50]</p>
-      <p>④ <strong>神迹成全</strong>：耶稣说：<strong>「因这句话，你回去吧；鬼已经离开你的女儿了。」</strong>妇人回家见小孩子躺在床上，鬼果然出去了[cite: 50]。</p>
+      <div class="quiz-q">③ 什么是「俗手」？</div>
+      <div class="quiz-a"><strong>「就是没有洗过的手。」</strong><br>
+      这里的重点不是现代卫生习惯，而是犹太人的传统礼仪。</div>
 
-      <div class="section-h2">第四部分：7:31–37 医治耳聋舌结的人</div>
-      <p>① <strong>行程路线</strong>：离了推罗境界，经过西顿，从<strong>低加波利</strong>境内来到<strong>加利利海</strong>[cite: 50]。</p>
-      <p>② <strong>被医治者</strong>：有人带着一个<strong>耳聋舌结</strong>的人来求耶稣按手[cite: 50]。</p>
-      <p>③ <strong>严谨动作链（排序必考）</strong>：<br>
-      <strong>离开众人到一边 → 用指头探他的耳朵 → 吐唾沫抹他的舌头 → 望天叹息 → 对他说：「以法大！」（翻出来就是说：「开了吧！」）</strong>[cite: 50]</p>
-      <p>④ <strong>结果与反差</strong>：耳朵开了，舌结解了，说话清楚了[cite: 50]。耶稣嘱咐他们不要告诉人，但<strong>越发嘱咐，他们越发传扬开了</strong>[cite: 50]；众人分外希奇说：<strong>「他所做的事都好，他连聋子也叫他们听见，哑巴也叫他们说话！」</strong>[cite: 50]</p>
-    </div>
-  </div>
+      <div class="quiz-q">④ 谁是「传统」的来源？</div>
+      <div class="quiz-a">法利赛人和众犹太人，拘守<strong>古人的遗传</strong>。<br>
+      ⚠️ 容易混淆：这里谈的是「古人的遗传」，不是摩西律法本身。</div>
 
-  <!-- TAB 2: 易混人物与矩阵 -->
-  <div id="tab-traps" class="tab-content">
-    <div class="card">
-      <div class="card-title">🧠 第七章核心考点速记与对比</div>
+      <div class="section-h2">三、7:3-4 「洗」的细节——Quiz 很爱考</div>
+      <p>马可特别解释犹太人的传统：<br>
+      • 若不仔细洗手，就不吃饭。<br>
+      • 从市上来，若不洗浴，也不吃饭。<br>
+      • 还有好些别的规矩要遵守。<br>
+      经文列出的对象包括：<strong>杯、罐、铜器等</strong>。</p>
+      <div class="highlight-box">
+        🔥 建议记成：<strong>洗手 → 洗浴 → 杯 → 罐 → 铜器</strong>
+      </div>
+      <div class="trap-box">
+        <span class="trap-tag">⚠️ 特别容易混淆</span><br>
+        • 不是「耶稣没有洗手」。<br>
+        • 是「门徒中有人没有洗手」。<br>
+        • 不是因为门徒不知道律法，而是法利赛人认为他们没有遵守传统。
+      </div>
+      <div class="quiz-q">⑤ 他们问耶稣什么？</div>
+      <div class="quiz-a"><strong>「你的门徒为什么不照古人的遗传，用俗手吃饭呢？」</strong><br>
+      这一问直接把第7章带入核心冲突：<strong>人的遗传 VS 神的诫命</strong>。</div>
+
+      <div class="section-h2">四、7:6-13 耶稣责备他们——「嘴唇尊敬，心却远离」</div>
+      <div class="quiz-q">① 耶稣引用以赛亚书：</div>
+      <div class="quiz-a"><strong>「这百姓用嘴唇尊敬我，心却远离我。」</strong><br>
+      然后耶稣指出：他们将人的吩咐当作道理教导人。<br>
+      🔥 关键词：<strong>嘴唇 → 心 → 人的吩咐 → 神的诫命</strong>。</div>
+
+      <div class="quiz-q">② 最重要的对比：</div>
       <table class="info-table">
-        <thead><tr><th>考点分类</th><th>关键要素</th><th>说明与陷阱警示</th></tr></thead>
+        <thead><tr><th>他们的问题</th><th>耶稣指出的真正问题</th></tr></thead>
         <tbody>
-          <tr><td><strong>争论焦点</strong></td><td>古人的遗传 vs 神的诫命</td><td>质问门徒用“俗手”（未洗手）吃饭；起因不是摩西律法而是传统[cite: 50]。</td></tr>
-          <tr><td><strong>供献遁词</strong></td><td>各班（Corban）</td><td>意思是“供献、归给神”；被传统借用逃避孝敬奉养父母之责[cite: 50]。</td></tr>
-          <tr><td><strong>外邦妇人</strong></td><td>希利尼人、属叙利非尼基族</td><td>被附的是“小女儿”[cite: 50]；关键答辩是“狗在桌子底下也吃碎渣儿”[cite: 50]；远程赶鬼[cite: 50]。</td></tr>
-          <tr><td><strong>特殊亚兰文</strong></td><td>以法大（Ephphatha）</td><td>翻出来就是说“开了吧！”专属于医治耳聋舌结者[cite: 50]。</td></tr>
-          <tr><td><strong>地理路线</strong></td><td>推罗 → 西顿 → 低加波利 → 加利利海</td><td>行程路线不可颠倒[cite: 50]。</td></tr>
+          <tr><td>拘守古人的遗传</td><td>离弃神的诫命</td></tr>
+          <tr><td>嘴唇尊敬神</td><td>心却远离神</td></tr>
+          <tr><td>人的吩咐</td><td>当作道理教导人</td></tr>
         </tbody>
       </table>
 
-      <div class="notice-box">
-        <strong>🚨 第七章高频失分陷阱：</strong><br>
-        1. 门徒被责难是因为<strong>「用俗手（没洗手）吃饭」</strong>，不是耶稣没洗手[cite: 50]。<br>
-        2. <strong>各班</strong>是指供献给神，不是人名或地名[cite: 50]。<br>
-        3. 真正污秽人的不是从外面进去的食物，而是<strong>从人心里发出的恶念等 13 项恶</strong>[cite: 50]。<br>
-        4. 叙利非尼基妇人求医时，<strong>被鬼附的是她的女儿</strong>，不是她自己[cite: 50]；耶稣并未去她家，是<strong>因她说的话</strong>鬼就离开了[cite: 50]。<br>
-        5. 医治耳聋舌结者的动作包含<strong>吐唾沫抹舌、指头探耳、望天叹息</strong>，缺一不可[cite: 50]。<br>
-        6. <strong>以法大</strong>意思是“开了吧！”，勿与第5章的“大利大古米”（闺女起来）混淆[cite: 47, 50]。
+      <div class="quiz-q">③ 耶稣举了什么例子？</div>
+      <div class="quiz-a">「各班」是：孝敬父母。但他们却说：若有人对父母说，凡我所当奉给你的，已经各班了——就是供献给神的意思。这样，他就可以不再奉养父母。<br>
+      🔥 这个例子非常重要，因为它说明：<strong>人的传统可能被用来规避神真正的诫命</strong>。</div>
+
+      <div class="section-h2">五、7:9-13 「各班」——最容易出陷阱题的词</div>
+      <div class="quiz-q">① 「各班」是什么意思？</div>
+      <div class="quiz-a"><strong>「各班」就是供献、献给神的意思</strong>。<br>
+      当一个人说自己所当奉给父母的已经「各班」了，传统实际上让他可以不再奉养父母。</div>
+
+      <div class="quiz-q">② 耶稣为什么严厉责备？</div>
+      <div class="quiz-a">🔥 <strong>「你们诚然是废弃神的诫命，要守自己的遗传。」</strong>（这一句强烈建议背）。</div>
+
+      <div class="quiz-q">③ 摩西的诫命是什么？</div>
+      <div class="quiz-a"><strong>「当孝敬父母。」</strong>并且：<strong>咒骂父母的，必要治死他</strong>。</div>
+
+      <div class="quiz-q">④ 这一段的 Quiz 核心：</div>
+      <div class="quiz-a">
+        • 神的诫命：孝敬父母。<br>
+        • 人的遗传：各班／供献。<br>
+        • 错误结果：可以不奉养父母。<br>
+        • 耶稣的结论：废弃神的诫命，守自己的遗传。<br>
+        ⚠️ <strong>不要把「各班」当成一个人物或地点。它是与供献有关的说法。</strong>
+      </div>
+
+      <div class="section-h2">六、7:14-23 真正污秽人的是什么？——全章核心</div>
+      <div class="quiz-q">① 耶稣叫众人来听：</div>
+      <div class="quiz-a">「你们都要听我的话，也要明白。」然后耶稣提出一个非常重要的原则：<br>
+      🔥🔥🔥 <strong>「从外面进去的不能污秽人，惟有从里面出来的乃能污秽人。」</strong>（这是第7章最重要的记忆点之一）。</div>
+
+      <div class="quiz-q">② 什么从外面进入？什么真正污秽人？</div>
+      <div class="quiz-a">食物。食物不是进入人心，乃是进入肚腹，最后排泄出去。<br>
+      <strong>「从人里面出来的，那才能污秽人。」</strong>所以不要只记「洗手」，要记住耶稣把问题从「外在礼仪」带到「内在的心」。</div>
+
+      <div class="section-h2">七、7:21-23 从心里出来的「恶」——必须熟记（13 项恶）</div>
+      <table class="info-table">
+        <thead><tr><th>序号</th><th>从人心里出来的恶</th><th>序号</th><th>从人心里出来的恶</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>恶念</td><td>8</td><td>诡诈</td></tr>
+          <tr><td>2</td><td>苟合</td><td>9</td><td>淫荡</td></tr>
+          <tr><td>3</td><td>偷盗</td><td>10</td><td>嫉妒</td></tr>
+          <tr><td>4</td><td>凶杀</td><td>11</td><td>谤讟</td></tr>
+          <tr><td>5</td><td>奸淫</td><td>12</td><td>骄傲</td></tr>
+          <tr><td>6</td><td>贪婪</td><td>13</td><td>狂妄</td></tr>
+          <tr><td>7</td><td>邪恶</td><td>-</td><td>-</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        🔥 比赛备战建议：不要只背「有很多恶」，要练习把 13 项按顺序说出来。<br>
+        最后的总结：<strong>「这一切的恶都是从里面出来，且能污秽人。」</strong><br>
+        ⚠️ 容易混淆：这里的「污秽」不是指手脏、器皿没洗，而是人的内心和行为被罪污秽。
+      </div>
+
+      <div class="section-h2">八、7:19「各样的食物都是洁净的」——超高频</div>
+      <p>「这是耶稣说的：<strong>『各样的食物都是洁净的。』</strong>」这句话是理解 7:1-23 的关键。</p>
+      <div class="quiz-a">
+        • 耶稣为什么说门徒没有洗手不等于被食物污秽？<br>
+        • 什么不是从外面进去而污秽人？——真正污秽人的恶是从人里面出来。<br>
+        • 耶稣关于食物的结论是什么？——<strong>各样的食物都是洁净的</strong>。<br>
+        🔥 三层结构直接背：<strong>手 → 食物 → 心</strong>。不要把第7章只记成「洗手的故事」。真正的主题是：外在传统不能代替内心顺服神。
+      </div>
+
+      <div class="section-h2">九、7:24-30 叙利非尼基妇人——第二大核心故事</div>
+      <div class="quiz-q">① 耶稣去了哪里？</div>
+      <div class="quiz-a">📍 <strong>推罗境内</strong>。耶稣进入一个屋子，不愿意人知道，却隐藏不住。</div>
+
+      <div class="quiz-q">② 谁来求耶稣？</div>
+      <div class="quiz-a">一个妇人。她是：• <strong>希利尼人</strong> • <strong>属叙利非尼基族</strong>。<br>
+      🔥 所以完整身份一定要背：<strong>希利尼人、叙利非尼基族的妇人</strong>。</div>
+
+      <div class="quiz-q">③ 她来求什么？</div>
+      <div class="quiz-a">「她的女儿被污鬼附着。」她听见耶稣，就来<strong>俯伏在祂脚前</strong>。她求耶稣赶出那鬼。</div>
+
+      <div class="section-h2">十、妇人的信心——「狗」与「碎渣」</div>
+      <div class="quiz-q">① 耶稣先怎么回答？</div>
+      <div class="quiz-a">「让儿女们先吃饱，不好拿儿女的饼丢给狗吃。」<br>
+      🔥 这里非常容易考人物对话顺序。</div>
+
+      <div class="quiz-q">② 妇人怎么回答？</div>
+      <div class="quiz-a">🔥🔥🔥 <strong>「主啊，不错；但是狗在桌子底下也吃孩子们的碎渣儿。」</strong>（这是第7章最值得背的对话之一）。</div>
+
+      <div class="quiz-q">③ 结果是什么？</div>
+      <div class="quiz-a">耶稣因她这句话，就对她说：<strong>「因这句话，你回去吧；鬼已经离开你的女儿了。」</strong><br>
+      她回到家里，就见小孩子躺在床上，鬼已经出去了。</div>
+
+      <div class="section-h2">十一、7:24-30 最容易混淆的地方</div>
+      <table class="info-table">
+        <thead><tr><th>容易混淆</th><th>正确答案</th></tr></thead>
+        <tbody>
+          <tr><td>妇人来自哪里？</td><td>推罗境内；她是希利尼人、叙利非尼基族</td></tr>
+          <tr><td>谁被鬼附？</td><td>她的女儿（妇人自己没有被鬼附）</td></tr>
+          <tr><td>她怎样来到耶稣面前？</td><td>俯伏在耶稣脚前</td></tr>
+          <tr><td>她求什么？</td><td>赶出她女儿身上的鬼</td></tr>
+          <tr><td>耶稣为什么说「因这句话」？</td><td>因妇人的回答（狗吃碎渣）</td></tr>
+          <tr><td>耶稣去她家医治吗？</td><td>没有；她回家后发现鬼已经出去</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        🔥 记忆链：<strong>推罗 → 妇人 → 希利尼人 → 叙利非尼基族 → 女儿被鬼附 → 俯伏 → 碎渣 → 因这句话 → 鬼离开</strong>
+      </div>
+
+      <div class="section-h2">十二、7:31-37 耳聋舌结的人——第三大核心故事</div>
+      <div class="quiz-q">① 耶稣经过哪里？</div>
+      <div class="quiz-a">耶稣又离了推罗的境界，经过西顿，就从低加波利境内来到加利利海。<br>
+      🔥 地点路线非常容易考：<strong>推罗 → 西顿 → 低加波利 → 加利利海</strong>。</div>
+
+      <div class="quiz-q">② 谁被带来？求什么？带到哪里？</div>
+      <div class="quiz-a">有人带着一个<strong>耳聋舌结的人</strong>来见耶稣。他们求耶稣按手在他身上。耶稣把他带到：<strong>离开众人，到一边去</strong>。</div>
+
+      <div class="section-h2">十三、耶稣医治「耳聋舌结」者——动作排序题（必背！）</div>
+      <div class="highlight-box">
+        建议按下面顺序背：<br>
+        <strong>1. 用指头探他的耳朵</strong><br>
+        <strong>2. 吐唾沫抹他的舌头</strong><br>
+        <strong>3. 望天叹息</strong><br>
+        <strong>4. 对他说：「以法大！」</strong><br>
+        <strong>5. 就是说：「开了吧！」</strong><br>
+        <strong>6. 他的耳朵就开了，舌结也解了，说话也清楚了</strong>
+      </div>
+      <div class="trap-box">
+        🔥🔥🔥 <strong>「以法大」是本段超级高频词：「以法大！就是说：『开了吧！』」</strong><br>
+        • 不是先说「开了吧」才做动作；是耶稣说「以法大」之后，才解释这个词的意思。<br>
+        • 不是只医治耳朵；他的舌结也解了。<br>
+        • 不是在人群中完成全部动作；耶稣先把他带到一边。
+      </div>
+
+      <div class="section-h2">十四、医治以后——众人的反应</div>
+      <div class="quiz-a">
+        ① 耶稣怎样嘱咐他们？<br>
+        <strong>「耶稣嘱咐他们不要告诉人。」</strong><br>
+        但是：<strong>「祂越发嘱咐他们，他们越发传扬开了。」</strong>（🔥🔥🔥 这是第7章很适合出「反差题」的地方）。<br>
+        ② 众人希奇到什么程度？<br>
+        <strong>「祂所做的事都好；祂连聋子也叫他们听见，哑巴也叫他们说话。」</strong><br>
+        ③ 反应链：<strong>耶稣嘱咐不要告诉 → 他们越发传扬 → 众人分外希奇</strong>。（这和 7:24「不愿意人知道，却隐藏不住」形成很有意思的对照）。
       </div>
     </div>
   </div>
 
-  <!-- TAB 3: 必背经文与口诀 -->
+  <!-- TAB 2: 图表、人物/地点/动作矩阵、排序题 -->
+  <div id="tab-traps" class="tab-content">
+    <div class="card">
+      <div class="card-title">十五、第 7 章最容易混淆的「人物、地点、动作」</div>
+      <table class="info-table">
+        <thead><tr><th>项目</th><th>一定要记住</th></tr></thead>
+        <tbody>
+          <tr><td>法利赛人</td><td>质问门徒为什么用俗手吃饭</td></tr>
+          <tr><td>文士</td><td>与法利赛人一起从耶路撒冷来</td></tr>
+          <tr><td>门徒</td><td>有人没有洗手就吃饭</td></tr>
+          <tr><td>妇人</td><td>希利尼人、叙利非尼基族</td></tr>
+          <tr><td>妇人的女儿</td><td>被污鬼附；不是妇人自己</td></tr>
+          <tr><td>耳聋舌结的人</td><td>有人带来求耶稣按手</td></tr>
+        </tbody>
+      </table>
+
+      <div class="card-title" style="margin-top:20px;">十六、地点速记与路线</div>
+      <table class="info-table">
+        <thead><tr><th>地点</th><th>发生什么</th></tr></thead>
+        <tbody>
+          <tr><td>耶路撒冷</td><td>法利赛人和文士从这里来</td></tr>
+          <tr><td>推罗境内</td><td>外邦妇人为女儿求医治</td></tr>
+          <tr><td>西顿</td><td>耶稣经过的路线之一</td></tr>
+          <tr><td>低加波利</td><td>耶稣从这里来到加利利海</td></tr>
+          <tr><td>加利利海</td><td>7:31路线终点；随后发生医治</td></tr>
+        </tbody>
+      </table>
+
+      <div class="card-title" style="margin-top:20px;">十七、Bible Quiz「排序题」——第 7 章一定要练</div>
+      <div class="highlight-box">
+        <strong>排序题 A：法利赛人的冲突</strong><br>
+        看见门徒没洗手 → 质问耶稣 → 耶稣引用以赛亚 → 指出人的遗传 → 举「各班」例子 → 责备他们废弃神的诫命
+      </div>
+      <div class="highlight-box">
+        <strong>排序题 B：妇人求女儿</strong><br>
+        耶稣到推罗 → 妇人听见 → 来俯伏 → 求赶鬼 → 耶稣谈儿女与狗 → 妇人回答碎渣 → 耶稣说因这句话 → 她回家 → 鬼离开
+      </div>
+      <div class="highlight-box">
+        <strong>排序题 C：耳聋舌结</strong><br>
+        有人带来 → 耶稣带到一边 → 指头探耳 → 吐唾沫抹舌 → 望天叹息 → 说「以法大」 → 耳朵开 → 舌结解 → 说话清楚 → 众人传扬
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 必背经文、口诀与自测 -->
   <div id="tab-verses" class="tab-content">
     <div class="card">
-      <div class="card-title">第七章 8 处必须背诵经文</div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>1. 马可 7:6</strong>「耶稣说：『以赛亚指着你们假冒为善之人所说的预言是不错的。如经上说：这百姓用嘴唇尊敬我，心却远离我。』」[cite: 50]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>2. 马可 7:8</strong>「你们是离弃神的诫命，拘守人的遗传。」[cite: 50]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>3. 马可 7:9</strong>「又说：『你们诚然是废弃神的诫命，要守自己的遗传。』」[cite: 50]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>4. 马可 7:15</strong>「从外面进去的不能污秽人，惟有从里面出来的乃能污秽人。」[cite: 50]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>5. 马可 7:21</strong>「因为从里面，就是从人心里，发出恶念、苟合、偷盗、凶杀、」[cite: 50]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>6. 马可 7:23</strong>「这一切的恶都是从里面出来，且能污秽人。」[cite: 50]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;">
-        <strong>7. 马可 7:28</strong>「妇人回答说：『主啊，不错；但是狗在桌子底下也吃孩子们的碎渣儿。』」[cite: 50]
-      </div>
-      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;">
-        <strong>8. 马可 7:34</strong>「望天叹息，对他说：『以法大！』就是说：『开了吧！』」[cite: 50]
-      </div>
+      <div class="card-title">十八、第 7 章「必须背诵」经文清单</div>
+      <p><strong>🥇 Level 1：一定要背</strong></p>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>1. 可 7:6</strong>「这百姓用嘴唇尊敬我，心却远离我。」</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>2. 可 7:8</strong>「你们是离弃神的诫命，拘守人的遗传。」</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>3. 可 7:9</strong>「你们诚然是废弃神的诫命，要守自己的遗传。」</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>4. 可 7:15</strong>「从外面进去的不能污秽人，惟有从里面出来的乃能污秽人。」</div>
+
+      <p><strong>🥈 Level 2：强烈建议</strong></p>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>5. 可 7:20</strong>「从人里面出来的，那才能污秽人。」</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>6. 可 7:23</strong>「这一切的恶都是从里面出来，且能污秽人。」</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>7. 可 7:28</strong>「主啊，不错；但是狗在桌子底下也吃孩子们的碎渣儿。」</div>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>8. 可 7:34</strong>「以法大！就是说：『开了吧！』」</div>
 
       <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
-        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 第七章极速背诵通关口诀：</p>
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 十九、最后冲刺：第 7 章一页口诀：</p>
         <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
-          俗手未洗起纷争，古人遗传废诫命；借口各班弃奉养，嘴唇尊敬心远离；外面入口难污秽，心出十三恶念罪；推罗妇人求逐鬼，桌下碎渣亦蒙恩；离境经由低加波，探耳抹舌以法大；哑吧说话聋人听，越发吩咐越传扬！[cite: 50]
+          洗手争议古遗传，法利赛人文士来；嘴唇尊敬心远离，人的遗传废神诫；外面进去不能污，里面出来才污秽；恶念偷盗凶杀等，十三恶念从心出；推罗妇人俯伏求，希利尼人叙利非尼基；女儿被鬼求释放，狗吃桌下碎渣儿；因她这句话得医，回家看见鬼已离；推罗西顿低加波利，加利利海遇耳聋；探耳抹舌望天叹，以法大就是开；耳朵开、舌结解，耶稣嘱咐不要传；他们越发传扬，众人分外希奇。
         </p>
+      </div>
+
+      <div class="highlight-box">
+        🎯 <strong>最后自测：</strong>看到「各班」「以法大」「碎渣」「俗手」「叙利非尼基」，能不能马上说出整段故事？如果可以，第7章基本进入比赛状态。
       </div>
     </div>
   </div>
 
-  <!-- TAB 4: 50 题随机测验 (按题型分组) -->
+  <!-- TAB 4: 50 题互动测验 (数据由中央题库 mark_master_quiz_data.js 注入) -->
   <div id="tab-quiz" class="tab-content">
     <div class="dashboard">
       <div class="stat-group">
-        <div class="stat-box">
-          <div class="stat-val" id="total-score">0 / 50</div>
-          <div class="stat-lbl">答对题数</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-val" id="accuracy-rate">0%</div>
-          <div class="stat-lbl">正确率</div>
-        </div>
+        <div class="stat-box"><div class="stat-val" id="total-score">0 / 50</div><div class="stat-lbl">答对题数</div></div>
+        <div class="stat-box"><div class="stat-val" id="accuracy-rate">0%</div><div class="stat-lbl">正确率</div></div>
       </div>
       <div>
         <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
-        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽50题</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽题</button>
+        <a href="mark_all_chapters_quiz.html" class="btn-master-link">🏆 进入全卷总考</a>
         <span class="save-status" id="save-status">💾 进度已自动保存</span>
       </div>
     </div>
-
-    <!-- 试题按题型组织呈现容器 -->
     <div id="quiz-sections-container"></div>
   </div>
 </div>
 
+<!-- 引入中央 Master 全量题库文件 -->
+<script src="mark_master_quiz_data.js"></script>
+
 <script>
-// 全量 MASTER QUESTION POOL (基于 Mark Chapter 7.docx 萃取编制的 50 道高频实战测验题)
-const MASTER_QUESTION_POOL = [
-  // --- 填空题 (10 题) ---
-  { id: "c7_fb1", type: "fill", title: "法利赛人和文士看见门徒中有人用俗手，就是没有_____手吃饭，就责问他们。", blanks: [{id:"f1_1", ans:"洗"}], desc: "可 7:2 看见门徒有人用俗手，就是没有洗的手吃饭。" },
-  { id: "c7_fb2", type: "fill", title: "经上记着说：这百姓用_____尊敬我，心却远离我。", blanks: [{id:"f2_1", ans:"嘴唇"}], desc: "可 7:6 这百姓用嘴唇尊敬我，心却远离我。" },
-  { id: "c7_fb3", type: "fill", title: "耶稣责备他们说：「你们诚然是废弃神的_____，要守自己的_____。」", blanks: [{id:"f3_1", ans:"诫命"},{id:"f3_2", ans:"遗传"}], desc: "可 7:9 废弃神的诫命，要守自己的遗传。" },
-  { id: "c7_fb4", type: "fill", title: "你们倒说，人若对父母说：凡我所当奉给你的已经成了_____（就是供献的意思），就可以不奉养父母。", blanks: [{id:"f4_1", ans:"各班"}], desc: "可 7:11 已经各班了（就是供献的意思）。" },
-  { id: "c7_fb5", type: "fill", title: "从外面进去的不能_____人，惟有从里面出来的乃能_____人。", blanks: [{id:"f5_1", ans:"污秽"},{id:"f5_2", ans:"污秽"}], desc: "可 7:15 从外面进去的不能污秽人，从里面出来的才能污秽人。" },
-  { id: "c7_fb6", type: "fill", title: "妇人回答说：「主啊，不错；但是狗在桌子底下也吃孩子们的_____儿。」", blanks: [{id:"f6_1", ans:"碎渣|碎渣儿"}], desc: "可 7:28 狗在桌子底下也吃孩子们的碎渣儿。" },
-  { id: "c7_fb7", type: "fill", title: "耶稣因她说的话就说：「因这句话，你回去吧；_____已经离开你的女儿了。」", blanks: [{id:"f7_1", ans:"鬼"}], desc: "可 7:29 因这句话，你回去吧；鬼已经离开你的女儿了。" },
-  { id: "c7_fb8", type: "fill", title: "耶稣望天叹息，对那耳聋舌结的人说：「_____！」就是说：「开了吧！」", blanks: [{id:"f8_1", ans:"以法大"}], desc: "可 7:34 对他说：以法大！就是说：开了吧！" },
-  { id: "c7_fb9", type: "fill", title: "耶稣医治了耳聋舌结的人后嘱咐他们不要告诉人，但他越发嘱咐，他们越发_____开了。", blanks: [{id:"f9_1", ans:"传扬"}], desc: "可 7:36 越发嘱咐他们，他们越发传扬开了。" },
-  { id: "c7_fb10", type: "fill", title: "众人分外希奇说：他连_____也叫他们听见，_____也叫他们说话！", blanks: [{id:"f10_1", ans:"聋子"},{id:"f10_2", ans:"哑巴"}], desc: "可 7:37 他连聋子也叫他们听见，哑巴也叫他们说话。" },
+// 本页不再硬编码任何题目数组，完全通过中央题库 window.MARK_MASTER_QUESTION_POOL 动态读取第 7 章题目
+let activeQuestionSet = [];
+let activeDynamicWordPool = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch7_from_master_v1";
 
-  // --- 选择题与排序题 (26 题) ---
-  { id: "c7_mc1", type: "radio", title: "法利赛人和文士从哪里来到耶稣那里，质问门徒洗手的规矩？", opts: [{v:"a",t:"A. 迦百农"},{v:"b",t:"B. 耶路撒冷"},{v:"c",t:"C. 拿撒勒"},{v:"d",t:"D. 罗马"}], ans: "b", desc: "可 7:1 从耶路撒冷来的法利赛人和几个文士。" },
-  { id: "c7_mc2", type: "radio", title: "法利赛人责问门徒的起因是什么？", opts: [{v:"a",t:"A. 门徒在安息日掐麦穗"},{v:"b",t:"B. 门徒用俗手（没有洗的手）吃饭"},{v:"c",t:"C. 门徒不禁食"},{v:"d",t:"D. 门徒未献各班礼物"}], ans: "b", desc: "可 7:2 看见门徒有人用俗手，就是没有洗的手吃饭。" },
-  { id: "c7_mc3", type: "radio", title: "犹太人拘守古人的遗传，经文特别列举他们洗涤的器皿不包括以下哪项？", opts: [{v:"a",t:"A. 杯"},{v:"b",t:"B. 罐"},{v:"c",t:"C. 铜器"},{v:"d",t:"D. 金冠"}], ans: "d", desc: "可 7:4 拘守洗杯、罐、铜器等规矩；无金冠。" },
-  { id: "c7_mc4", type: "radio", title: "耶稣斥责法利赛人假冒为善时，引用了旧约哪一位先知的话？", opts: [{v:"a",t:"A. 耶利米"},{v:"b",t:"B. 以赛亚"},{v:"c",t:"C. 以西结"},{v:"d",t:"D. 玛拉基"}], ans: "b", desc: "可 7:6 以赛亚指着你们假冒为善之人所说的预言是不错的。" },
-  { id: "c7_mc5", type: "radio", title: "在马可福音 7:11 中，「各班」（Corban）的准确含义是什么？", opts: [{v:"a",t:"A. 祭司的名号"},{v:"b",t:"B. 供献给神的意思"},{v:"c",t:"C. 免税的凭证"},{v:"d",t:"D. 洁净的礼仪"}], ans: "b", desc: "可 7:11 各班就是供献的意思。" },
-  { id: "c7_mc6", type: "radio", title: "耶稣指出法利赛人借着“各班”的传统，实际上废弃了哪条诫命？", opts: [{v:"a",t:"A. 不可偷盗"},{v:"b",t:"B. 当孝敬父母"},{v:"c",t:"C. 当守安息日"},{v:"d",t:"D. 不可拜偶像"}], ans: "b", desc: "可 7:10-12 借各班之说废了孝敬父母的诫命。" },
-  { id: "c7_mc7", type: "radio", title: "关于食物与洁净，耶稣宣告的根本原则是什么？", opts: [{v:"a",t:"A. 从外面进去的不能污秽人，从里面出来的才能污秽人"},{v:"b",t:"B. 未洗手吃的一律不洁净"},{v:"c",t:"C. 凡带血的不可吃"},{v:"d",t:"D. 祭过偶像的食物不能吃"}], ans: "a", desc: "可 7:15 从外面进去的不能污秽人，从里面出来的才污秽人。" },
-  { id: "c7_mc8", type: "radio", title: "马可福音 7:21-22 列举从人心里发出来的恶，共有多少项？", opts: [{v:"a",t:"A. 7 项"},{v:"b",t:"B. 10 项"},{v:"c",t:"C. 12 项"},{v:"d",t:"D. 13 项"}], ans: "d", desc: "恶念、苟合、偷盗、凶杀、奸淫、贪婪、邪恶、诡诈、淫荡、嫉妒、谤讟、骄傲、狂妄共13项。" },
-  { id: "c7_mc9", type: "radio", title: "耶稣离开巴勒斯坦核心地带，往推罗去进了一家，祂原初的心愿是怎样？", opts: [{v:"a",t:"A. 要召开大型布道会"},{v:"b",t:"B. 不愿意人知道，却隐藏不住"},{v:"c",t:"C. 要会见推罗王"},{v:"d",t:"D. 要购买外邦商品"}], ans: "b", desc: "可 7:24 进了一家，不愿意人知道，却隐藏不住。" },
-  { id: "c7_mc10", type: "radio", title: "来求耶稣赶鬼的妇人，其具体的民族和部族身份是什么？", opts: [{v:"a",t:"A. 罗马人，属加拉太族"},{v:"b",t:"B. 希利尼人，属叙利非尼基族"},{v:"c",t:"C. 撒玛利亚人"},{v:"d",t:"D. 埃及人，属以东族"}], ans: "b", desc: "可 7:26 妇人是希利尼人，属叙利非尼基族。" },
-  { id: "c7_mc11", type: "radio", title: "叙利非尼基妇人家中受苦的是谁？遭遇了什么？", opts: [{v:"a",t:"A. 她的丈夫患大麻风"},{v:"b",t:"B. 她的小女儿被污鬼附着"},{v:"c",t:"C. 她自己患血漏"},{v:"d",t:"D. 她的儿子耳聋舌结"}], ans: "b", desc: "可 7:25 她的小女儿被污鬼附着。" },
-  { id: "c7_mc12", type: "radio", title: "妇人听见耶稣说“不好拿儿女的饼丢给狗吃”后，给出了怎样绝妙的回答？", opts: [{v:"a",t:"A. “求主可怜我们也是亚伯拉罕后裔”"},{v:"b",t:"B. “主啊，不错；但是狗在桌子底下也吃孩子们的碎渣儿”"},{v:"c",t:"C. “外邦人难道不配得恩典吗”"},{v:"d",t:"D. “请为我们行一个神迹证明”"}], ans: "b", desc: "可 7:28 狗在桌子底下也吃孩子们的碎渣儿。" },
-  { id: "c7_mc13", type: "radio", title: "耶稣医治妇人的女儿时采取了什么行动？", opts: [{v:"a",t:"A. 亲自走到推罗妇人家按手"},{v:"b",t:"B. 因妇人所说的话，远程宣告鬼已经离开"},{v:"c",t:"C. 吩咐门徒抬女儿来"},{v:"d",t:"D. 给妇人一盆洁净的水带回"}], ans: "b", desc: "可 7:29 因这句话，你回去吧；鬼已经离开你的女儿了。" },
-  { id: "c7_mc14", type: "radio", title: "耶稣离开推罗境内的行进路线，经文记载的准确次序是：", opts: [{v:"a",t:"A. 推罗 → 耶路撒冷 → 加利利海"},{v:"b",t:"B. 推罗 → 经过西顿 → 从低加波利境内来到加利利海"},{v:"c",t:"C. 推罗 → 撒玛利亚 → 伯赛大"},{v:"d",t:"D. 推罗 → 拿撒勒 → 迦百农"}], ans: "b", desc: "可 7:31 离了推罗的境界，经过西顿，就从低加波利境内来到加利利海。" },
-  { id: "c7_mc15", type: "radio", title: "有人带了一个患什么疾病的人来见耶稣，求祂按手？", opts: [{v:"a",t:"A. 瞎眼跛腿"},{v:"b",t:"B. 耳聋舌结"},{v:"c",t:"C. 枯干了一只手"},{v:"d",t:"D. 患血漏十二年"}], ans: "b", desc: "可 7:32 有人带着一个耳聋舌结的人来见耶稣。" },
-  { id: "c7_mc16", type: "radio", title: "耶稣医治耳聋舌结的人之前，首先做的动作是什么？", opts: [{v:"a",t:"A. 当着全村众人大声呼喊"},{v:"b",t:"B. 领他离开众人，到一边去"},{v:"c",t:"C. 叫他在会堂当中跪下"},{v:"d",t:"D. 吩咐门徒准备小船"}], ans: "b", desc: "可 7:33 领他离开众人，到一边去。" },
-  { id: "c7_mc17", type: "radio", title: "耶稣在医治耳聋舌结者时，说了亚兰文「以法大」，这词的意思是：", opts: [{v:"a",t:"A. 起来吧！"},{v:"b",t:"B. 开了吧！"},{v:"c",t:"C. 洁净了吧！"},{v:"d",t:"D. 平安了吧！"}], ans: "b", desc: "可 7:34 以法大！就是说：开了吧！" },
-  { id: "c7_mc18", type: "radio", title: "耳聋舌结者痊愈后，群众发出怎样的总结惊叹？", opts: [{v:"a",t:"A. “他必定是以利亚从死里复活”"},{v:"b",t:"B. “他所做的事都好，连聋子也叫他们听见，哑巴也叫他们说话！”"},{v:"c",t:"C. “这人说了僭妄的话”"},{v:"d",t:"D. “他是靠鬼王赶鬼”"}], ans: "b", desc: "可 7:37 他所做的事都好，他连聋子也叫他们听见，哑巴也叫他们说话。" },
-  { id: "c7_mc19", type: "radio", title: "【身份辨析陷阱】以下哪一位人物是在第 7 章中出现的？", opts: [{v:"a",t:"A. 睚鲁"},{v:"b",t:"B. 叙利非尼基妇人"},{v:"c",t:"C. 希罗底"},{v:"d",t:"D. 利未"}], ans: "b", desc: "叙利非尼基妇人记载在第 7 章；睚鲁在第5章；利未在第2章；希罗底在第6章。" },
-  { id: "c7_mc20", type: "radio", title: "【词义陷阱】「大利大古米」与「以法大」分别出现在哪一章？含义为何？", opts: [
-    {v:"a", t:"A. 大利大古米在第5章（闺女起来）；以法大在第7章（开了吧）"},
-    {v:"b", t:"B. 大利大古米在第7章（开了吧）；以法大在第5章（闺女起来）"},
-    {v:"c", t:"C. 两者都在第7章"},
-    {v:"d", t:"D. 两者都在第5章"}
-  ], ans: "a", desc: "第5章大利大古米（闺女我吩咐你起来）；第7章以法大（开了吧）。" },
-  { id: "c7_mc21", type: "radio", title: "【动作排序】耶稣医治耳聋舌结之人的身体动作顺序何者正确？<br>① 吐唾沫抹他的舌头 ② 用指头探他的耳朵 ③ 望天叹息说以法大", opts: [
-    {v:"a", t:"A. ② → ① → ③"},
-    {v:"b", t:"B. ① → ② → ③"},
-    {v:"c", t:"C. ③ → ② → ①"},
-    {v:"d", t:"D. ② → ③ → ①"}
-  ], ans: "a", desc: "可 7:33-34 探耳朵 → 吐唾沫抹舌头 → 望天叹息说以法大。" },
-  { id: "c7_mc22", type: "radio", title: "【冲突事件排序】法利赛人关于洁净争议的辩论发展顺序为何？<br>① 耶稣引用以赛亚书斥责假冒为善 ② 耶稣指责借“各班”废弃孝敬父母诫命 ③ 文士质问为何门徒用俗手吃饭 ④ 耶稣说明十三项从心里出来的恶污秽人", opts: [
-    {v:"a", t:"A. ③ → ① → ② → ④"},
-    {v:"b", t:"B. ① → ③ → ② → ④"},
-    {v:"c", t:"C. ③ → ② → ① → ④"},
-    {v:"d", t:"D. ② → ③ → ① → ④"}
-  ], ans: "a", desc: "质问俗手(7:5) → 引用以赛亚(7:6) → 揭露各班(7:11) → 阐明心出之恶(7:21)。" },
-  { id: "c7_mc23", type: "radio", title: "【外邦妇人事件排序】叙利非尼基妇人信心的事件顺序何者正确？<br>① 妇人回答狗吃桌底碎渣 ② 耶稣说不好拿儿女的饼丢给狗 ③ 妇人俯伏求赶鬼 ④ 妇人回家见鬼已离开小孩子躺在床上", opts: [
-    {v:"a", t:"A. ③ → ② → ① → ④"},
-    {v:"b", t:"B. ② → ③ → ① → ④"},
-    {v:"c", t:"C. ③ → ① → ② → ④"},
-    {v:"d", t:"D. ① → ② → ③ → ④"}
-  ], ans: "a", desc: "俯伏求告(7:26) → 饼丢给狗(7:27) → 碎渣应答(7:28) → 回家见效(7:30)。" },
-  { id: "c7_mc24", type: "radio", title: "【全章大主线排序】请按马可福音第 7 章实际事件发生次序排列：<br>A. 叙利非尼基妇人为女儿求赶鬼 B. 法利赛人质问门徒未洗手 C. 医治耳聋舌结的人 D. 耶稣讲论从心里发出来的恶", opts: [
-    {v:"a", t:"A. B → D → A → C"},
-    {v:"b", t:"B. B → A → D → C"},
-    {v:"c", t:"C. D → B → A → C"},
-    {v:"d", t:"D. B → D → C → A"}
-  ], ans: "a", desc: "质问洗手(7:1) → 心中之恶(7:14) → 外邦妇人(7:24) → 耳聋舌结(7:31)。" },
-  { id: "c7_mc25", type: "radio", title: "耶稣说外面进去的不能污秽人，是因为食物进入哪里而不是进入心里？", opts: [{v:"a",t:"A. 口腔"},{v:"b",t:"B. 肚腹，落到茅厕里"},{v:"c",t:"C. 咽喉"},{v:"d",t:"D. 血液"}], ans: "b", desc: "可 7:19 因为不是入他的心，乃是入他的肚腹，落到茅厕里。" },
-  { id: "c7_mc26", type: "radio", title: "从人心里发出的恶，包括以下哪几项？（多选）", opts: [{v:"a",t:"A. 恶念与苟合"},{v:"b",t:"B. 偷盗与凶杀"},{v:"c",t:"C. 贪婪与诡诈"},{v:"d",t:"D. 未洗手与吃俗物"}], ans: ["a","b","c"], desc: "可 7:21-22 明确列举心中发出的恶；未洗手是法利赛人遗传非真正罪恶。" },
-
-  // --- 是非判断题 (14 题) ---
-  { id: "c7_tf1", type: "tf", title: "法利赛人和文士批评门徒没有洗手，是因为他们违反了摩西律法中明确写下的诫命。", ans: "F", desc: "错。经文明确指出他们是拘守“古人的遗传”，非摩西律法。" },
-  { id: "c7_tf2", type: "tf", title: "法利赛人从市面上回来，若不洗浴，依照他们的规矩也是不吃饭的。", ans: "T", desc: "对。可 7:4 经文完全吻合。" },
-  { id: "c7_tf3", type: "tf", title: "耶稣严厉指出，法利赛人是将人的吩咐当作道理教导人，拜神也是枉然。", ans: "T", desc: "对。可 7:7 经文完全吻合。" },
-  { id: "c7_tf4", type: "tf", title: "在犹太社会中，若有人将奉养父母的财产声称为“各班”，传统便准许他不再照顾奉养父母。", ans: "T", desc: "对。可 7:11-12 经文完全吻合。" },
-  { id: "c7_tf5", type: "tf", title: "耶稣总结说：各样的食物本质上都是污秽的，唯有透过犹太洗礼才能洁净。", ans: "F", desc: "错。可 7:19 这是说，各样的食物都是洁净的。" },
-  { id: "c7_tf6", type: "tf", title: "耶稣阐明，从人心里出来的恶才能真正污秽人。", ans: "T", desc: "对。可 7:20 从人里面出来的，那才能污秽人。" },
-  { id: "c7_tf7", type: "tf", title: "叙利非尼基妇人本身是犹太血统，只是侨居在推罗境外。", ans: "F", desc: "错。可 7:26 明确记载妇人是希利尼人，属叙利非尼基族的外邦人。" },
-  { id: "c7_tf8", type: "tf", title: "叙利非尼基妇人听见耶稣的比喻后，谦卑承认自己不配，但坚信哪怕恩典的碎渣儿也能拯救女儿。", ans: "T", desc: "对。可 7:28 经文完全吻合。" },
-  { id: "c7_tf9", type: "tf", title: "耶稣亲自跟随叙利非尼基妇人回到她家中，在床前按手把鬼赶了出去。", ans: "F", desc: "错。可 7:29-30 耶稣在原地宣告，妇人回家后见鬼已经出去了。" },
-  { id: "c7_tf10", type: "tf", title: "在低加波利境内，有人带着一个耳聋舌结的人来见耶稣，求祂按手。", ans: "T", desc: "对。可 7:31-32 经文完全吻合。" },
-  { id: "c7_tf11", type: "tf", title: "耶稣医治耳聋舌结的人时，直接在海边的大群群众面前大张旗鼓地呼喊施行神迹。", ans: "F", desc: "错。可 7:33 耶稣领他离开众人，到一边去。" },
-  { id: "c7_tf12", type: "tf", title: "「以法大」是亚兰文翻出来的音译，意思正是「开了吧！」。", ans: "T", desc: "对。可 7:34 经文完全吻合。" },
-  { id: "c7_tf13", type: "tf", title: "耳聋舌结的人得医治后，不仅耳朵开了，舌结也解了，说话也清楚了。", ans: "T", desc: "对。可 7:35 经文完全吻合。" },
-  { id: "c7_tf14", type: "tf", title: "耶稣再三嘱咐不要将神迹告诉人，众人就完全顺从守口如瓶，没有向任何人提起。", ans: "F", desc: "错。可 7:36 耶稣越发嘱咐他们，他们越发传扬开了。" }
-];
-
-// 核心优化：动态精准 Answer Pool（只展示当前抽中填空题相关的词汇）
-const DISTRACTOR_POOL_CH7 = ["摩西", "心", "肚腹", "律法", "碎渣", "恶念", "以赛亚", "儿女", "推罗", "西顿"];
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 function generateDynamicAnswerPool(selectedQuestions) {
   const answerSet = new Set();
@@ -568,29 +584,21 @@ function generateDynamicAnswerPool(selectedQuestions) {
     }
   });
 
-  const shuffledDistractors = shuffleArray(DISTRACTOR_POOL_CH7);
-  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 22; i++) {
-    answerSet.add(shuffledDistractors[i]);
+  const distractors = ["摩西", "心", "肚腹", "律法", "碎渣", "恶念", "以赛亚", "儿女", "推罗", "西顿"];
+  const shuffledDist = shuffleArray(distractors);
+  for (let i = 0; i < shuffledDist.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDist[i]);
   }
-
   return shuffleArray(Array.from(answerSet));
 }
 
-let activeQuestionSet = []; 
-let activeDynamicWordPool = []; 
-let activeBlankId = null;
-const STORAGE_KEY = "mark_ch7_quiz_pool_v1";
-
-function shuffleArray(arr) {
-  const array = [...arr];
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 function initQuiz(forceRegenerate = false) {
+  if (!window.MARK_MASTER_QUESTION_POOL) {
+    document.getElementById("quiz-sections-container").innerHTML = 
+      "<div style='padding:20px; text-align:center; color:#dc2626;'>未检测到 mark_master_quiz_data.js 题库文件，请确保该文件在同级目录下！</div>";
+    return;
+  }
+
   const savedData = localStorage.getItem(STORAGE_KEY);
   if (!forceRegenerate && savedData) {
     try {
@@ -603,14 +611,11 @@ function initQuiz(forceRegenerate = false) {
     } catch(e) { console.error(e); }
   }
 
-  const shuffledPool = shuffleArray(MASTER_QUESTION_POOL);
-  const selected = shuffledPool.slice(0, 50);
-
-  // 题型分类排序：填空 -> 选择/排序 -> 是非
+  // 从中央题库筛选属于第 7 章 (ch === 7) 的全部题目
+  const ch7Questions = window.MARK_MASTER_QUESTION_POOL.filter(q => q.ch === 7);
+  const shuffled = shuffleArray(ch7Questions);
   const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
-  activeQuestionSet = selected.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
-
-  // 动态生成专属靶向词库
+  activeQuestionSet = shuffled.slice(0, 50).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
   activeDynamicWordPool = generateDynamicAnswerPool(activeQuestionSet);
 
   saveQuizState({});
@@ -618,7 +623,7 @@ function initQuiz(forceRegenerate = false) {
 }
 
 function regenerateQuiz() {
-  if (confirm("确定要重新随机抽取 50 题并刷新专属词库吗？")) {
+  if (confirm("确定要重新抽取第 7 章的 50 题测验吗？")) {
     localStorage.removeItem(STORAGE_KEY);
     initQuiz(true);
   }
@@ -629,9 +634,9 @@ function renderQuizUI() {
   container.innerHTML = "";
 
   const groups = {
-    "fill": { title: "第一部分：填空题", desc: "请参考下方专为此卷生成的词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
-    "radio": { title: "第二部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
-    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+    "fill": { title: "第一部分：填空题", desc: "请点选词库填入空格（反选输入框可清除）：", list: [] },
+    "radio": { title: "第二部分：单选题与排序题", desc: "请选择正确项：", list: [] },
+    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确：", list: [] }
   };
 
   activeQuestionSet.forEach(q => {
@@ -650,18 +655,17 @@ function renderQuizUI() {
     const secHeader = document.createElement("div");
     secHeader.className = "type-section-header";
     secHeader.innerHTML = `
-      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <h3 class="type-section-title">${grp.title}</h3>
       <p class="type-section-desc">${grp.desc}</p>
     `;
     container.appendChild(secHeader);
 
-    // 专属置顶 Answer Pool
     if (typeKey === "fill") {
       const bankCard = document.createElement("div");
       bankCard.className = "word-bank-box";
       bankCard.innerHTML = `
         <div class="word-bank-title">
-          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <span>💡 填空题专属匹配词库 (Answer Pool)</span>
           <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
         </div>
         <div class="word-chips" id="word-chips-container"></div>
@@ -680,12 +684,7 @@ function renderQuizUI() {
           const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
           fillText = fillText.replace("_____", inputHtml);
         });
-        item.innerHTML = `
-          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
-            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
-          </div>
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div style="font-size:15px; line-height:2.4;"><span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}</div><div class="feedback" id="fb-${q.id}"></div>`;
       } else if (q.type === "radio") {
         const isMulti = Array.isArray(q.ans);
         let optsHtml = `<div class="opt-group">`;
@@ -694,20 +693,9 @@ function renderQuizUI() {
           optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
         });
         optsHtml += `</div>`;
-        item.innerHTML = `
-          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
-          ${optsHtml}
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>${optsHtml}<div class="feedback" id="fb-${q.id}"></div>`;
       } else if (q.type === "tf") {
-        item.innerHTML = `
-          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
-          <div class="opt-group" style="flex-direction:row; max-width:280px;">
-            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
-            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
-          </div>
-          <div class="feedback" id="fb-${q.id}"></div>
-        `;
+        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div><div class="opt-group" style="flex-direction:row;"><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label></div><div class="feedback" id="fb-${q.id}"></div>`;
       }
 
       container.appendChild(item);
