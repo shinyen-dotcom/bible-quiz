@@ -162,12 +162,12 @@
 <div class="adaptive-container">
   <div class="top-navbar">
     <a href="index.html" class="btn-nav-home">🏠 返回主页</a>
-    <span style="font-size: 13px; color: var(--text-muted);">马可福音全卷综合全真测试 (第1-9章)</span>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音全卷综合全真测试</span>
   </div>
 
   <div class="header">
     <h1>《马可福音》全卷综合模拟考</h1>
-    <p>范围：第 1 章 ～ 第 9 章 ｜ 300+道高频真题池 · 动态精准词库混抽 50 题</p>
+    <p>全章 Master 中央题库 · 智能混抽全真 50 题测验</p>
   </div>
 
   <div class="dashboard">
@@ -191,127 +191,24 @@
   <div id="quiz-sections-container"></div>
 </div>
 
+<!-- 引入中央 Master 全量题库文件 -->
+<script src="mark_master_quiz_data.js"></script>
+
 <script>
-// ==========================================
-// 1. 全章节配对大池 (包含第1章与第2章 14 组全部经文对子)
-// ==========================================
-const ALL_MATCHING_PAIRS = [
-  // 第 1 章 配对句 (7对)
-  { id: "c1_p1", ch: "可1", left: "耶稣责备他说：“不要作声，从这人身上出来吧！”", rightText: "污鬼叫那人抽了一阵风，大声喊叫，就出来了。" },
-  { id: "c1_p2", ch: "可1", left: "有一个长大麻风的来求耶稣，向他跪下，说：“你若肯，必能叫我洁净了。”", rightText: "耶稣动了慈心，就伸手摸他，说：“我肯，你洁净了吧！”" },
-  { id: "c1_p3", ch: "可1", left: "他传道说：“有一位在我以后来的，能力比我更大，我就是弯腰给他解鞋带也是不配的。", rightText: "我是用水给你们施洗，他却要用圣灵给你们施洗。" },
-  { id: "c1_p4", ch: "可1", left: "照这话，约翰来了，在旷野施洗，传悔改的洗礼，使罪得赦。", rightText: "犹太全地和耶路撒冷的人都出去到约翰那里，承认他们的罪，在约旦河里受他的洗。" },
-  { id: "c1_p5", ch: "可1", left: "到了迦百农，耶稣就在安息日进了会堂教训人。", rightText: "众人很希奇他的教训，因为他教训他们，正像有权柄的人，不像文士。" },
-  { id: "c1_p6", ch: "可1", left: "他从水里一上来，就看见天裂开了，圣灵仿佛鸽子降在他身上。", rightText: "又有声音从天上来，说：“你是我的爱子，我喜悦你！”" },
-  { id: "c1_p7", ch: "可1", left: "约翰下监以后，耶稣来到加利利，宣传神的福音，", rightText: "说：“日期满了，神的国近了！你们当悔改，信福音。”" },
+let activeMatchSet = []; 
+let activeOtherSet = []; 
+let activeDynamicWordPool = []; 
+let activeBlankId = null;
+const STORAGE_KEY = "mark_all_chapters_master_v1";
 
-  // 第 2 章 配对句 (7对)
-  { id: "c2_p1", ch: "可2", left: "没有人把新布缝在旧衣服上，恐怕所补上的新布带坏了旧衣服，破的就更大了；", rightText: "也没有人把新酒装在旧皮袋里，恐怕酒把皮袋裂开，酒和皮袋就都坏了；唯有把新酒装在新皮袋里。" },
-  { id: "c2_p2", ch: "可2", left: "因为人多，不得近前，就把耶稣所在的房子拆了房顶，既拆通了，", rightText: "就把瘫子连所躺卧的褥子都缒下来。耶稣见他们的信心，就对瘫子说：小子，你的罪赦了。" },
-  { id: "c2_p3", ch: "可2", left: "又对他们说：『安息日是为人设立的，人不是为安息日设立的。", rightText: "所以人子也是安息日的主。" },
-  { id: "c2_p4", ch: "可2", left: "过了些日子，耶稣又进了迦百农，人听见他在房子里，", rightText: "就有许多人聚集，甚至连门前都没有空地；耶稣就对他们讲道。" },
-  { id: "c2_p5", ch: "可2", left: "当下，约翰的门徒和法利赛人禁食，他们来问耶稣说：『约翰的门徒和法利赛人的门徒禁食，你的门徒倒不禁食，这是为什么呢？』", rightText: "耶稣对他们说：新郎和陪伴之人同在的时候，陪伴之人岂能禁食呢？新郎还同在，他们不能禁食。" },
-  { id: "c2_p6", ch: "可2", left: "耶稣经过的时候，看见亚勒腓的儿子利未坐在税关上，就对他说：你跟从我来。", rightText: "他就起来，跟从了耶稣。耶稣在利未家里坐席的时候，有好些税吏和罪人与耶稣并门徒一同坐席。" },
-  { id: "c2_p7", ch: "可2", left: "法利赛人对耶稣说：看哪，他们在安息日为什么做不可做的事呢？", rightText: "耶稣对他们说：经上记着大卫和跟从他的人缺乏、饥饿之时所做的事，你们没有念过吗？" }
-];
-
-// ==========================================
-// 2. 全量单项题库池 (完整收录第1至第9章所有填空、选择、排序、是非题)
-// ==========================================
-const ALL_SINGLE_QUESTIONS = [
-  // ---【第1-4章 填空精选】---
-  { id: "c1_fb1", type: "fill", title: "根据马可福音第一章，污鬼称耶稣是_____。", blanks: [{id:"c1_f1_1", ans:"神的圣者"}], desc: "可 1:24 乃是神的圣者。" },
-  { id: "c1_fb2", type: "fill", title: "耶稣来到加利利，宣讲神的福音说：「日期满了，神的_____近了。你们当_____，信福音！」", blanks: [{id:"c1_f2_1", ans:"国"},{id:"c1_f2_2", ans:"悔改"}], desc: "可 1:15 传道金句。" },
-  { id: "c2_fb1", type: "fill", title: "有人把瘫子连所躺的_____都缒下来；耶稣说人子在地上有_____的权柄。", blanks: [{id:"c2_f1_1", ans:"褥子"},{id:"c2_f1_2", ans:"赦罪"}], desc: "可 2:4, 10 赦罪的权柄。" },
-  { id: "c2_fb2", type: "fill", title: "「安息日是为_____设立的，人不是为安息日设立的。所以，人子也是安息日的_____。」", blanks: [{id:"c2_f2_1", ans:"人"},{id:"c2_f2_2", ans:"主"}], desc: "可 2:27-28 安息日真理。" },
-  { id: "c3_fb1", type: "fill", title: "文士诬蔑耶稣靠鬼王赶鬼，耶稣宣告：「凡亵渎_____的，却永不得赦免，乃要担当永远的罪。」", blanks: [{id:"c3_f1_1", ans:"圣灵"}], desc: "可 3:29 凡亵渎圣灵的永不得赦免。" },
-  { id: "c4_fb1", type: "fill", title: "撒种之人所撒的就是_____；撒在好地上的结实有三十倍、六十倍、_____倍。", blanks: [{id:"c4_f1_1", ans:"道"},{id:"c4_f1_2", ans:"一百"}], desc: "可 4:14, 20 撒种结实。" },
-  { id: "c4_fb2", type: "fill", title: "耶稣斥责风，向海说：「_____吧！_____吧！」风就止住大大平静了。", blanks: [{id:"c4_f2_1", ans:"住"},{id:"c4_f2_2", ans:"静"}], desc: "可 4:39 住了吧！静了吧！。" },
-
-  // ---【第5-8章 填空精选】---
-  { id: "c5_fb1", type: "fill", title: "进入猪群的污鬼使那群猪闯下山崖投海淹死，猪的数目约有_____。", blanks: [{id:"c5_f1_1", ans:"二千|2000"}], desc: "可 5:13 猪的数目约有二千。" },
-  { id: "c5_fb2", type: "fill", title: "耶稣拉着闺女的手说：「_____！」翻出来就是说：「闺女，我吩咐你起来！」", blanks: [{id:"c5_f2_1", ans:"大利大古米"}], desc: "可 5:41 大利大古米！" },
-  { id: "c6_fb1", type: "fill", title: "耶稣差遣十二使徒_____地出去，吩咐他们除了_____以外什么都不要带。", blanks: [{id:"c6_f1_1", ans:"两个两个"},{id:"c6_f1_2", ans:"拐杖"}], desc: "可 6:7-8 差遣门徒装备规定。" },
-  { id: "c6_fb2", type: "fill", title: "五饼二鱼饱足五千男人后，门徒收拾零碎装满了_____个篮子。", blanks: [{id:"c6_f2_1", ans:"十二|12"}], desc: "可 6:43 剩下装满十二个篮子。" },
-  { id: "c7_fb1", type: "fill", title: "你们借着传统的_____（就是供献给神的意思），废弃了孝敬父母的诫命。", blanks: [{id:"c7_f1_1", ans:"各班"}], desc: "可 7:11 借各班之说废了神的话。" },
-  { id: "c7_fb2", type: "fill", title: "叙利非尼基妇人回答说：「主啊，不错；但是狗在桌子底下也吃孩子们的_____儿。」", blanks: [{id:"c7_f2_1", ans:"碎渣|碎渣儿"}], desc: "可 7:28 吃孩子们的碎渣儿。" },
-  { id: "c8_fb1", type: "fill", title: "四千人吃饱神迹中，门徒手里有_____个饼，剩下的零碎收拾了_____个筐子。", blanks: [{id:"c8_f1_1", ans:"七|7"},{id:"c8_f1_2", ans:"七|7"}], desc: "可 8:5, 8 七饼剩七筐。" },
-  { id: "c8_fb2", type: "fill", title: "耶稣问门徒说：「你们说我是谁？」彼得回答说：「你是_____。」", blanks: [{id:"c8_f2_1", ans:"基督"}], desc: "可 8:29 彼得回答说：你是基督。" },
-  { id: "c8_fb3", type: "fill", title: "耶稣说：「若有人要跟从我，就当_____，背起他的_____来跟从我。」", blanks: [{id:"c8_f3_1", ans:"舍己"},{id:"c8_f3_2", ans:"十字架"}], desc: "可 8:34 舍己背十字架跟从我。" },
-
-  // ---【第9章 填空题 (完全导入自 Mark Chapter 9.docx)】---
-  { id: "c9_fb1", type: "fill", title: "耶稣在山上变了形像，衣服放光极其洁白，地上_____的，没有一个能漂得那样白。", blanks: [{id:"c9_f1_1", ans:"漂布|漂布的"}], desc: "可 9:3 地上漂布的，没有一个能漂得那样白。" },
-  { id: "c9_fb2", type: "fill", title: "有声音从云彩里出来说：「这是我的_____，你们要_____他。」", blanks: [{id:"c9_f2_1", ans:"爱子"},{id:"c9_f2_2", ans:"听"}], desc: "可 9:7 这是我的爱子，你们要听他。" },
-  { id: "c9_fb3", type: "fill", title: "孩子的父亲立时喊着说：「我信！但我_____不足，求主帮助。」", blanks: [{id:"c9_f3_1", ans:"信"}], desc: "可 9:24 我信！但我信不足，求主帮助。" },
-  { id: "c9_fb4", type: "fill", title: "耶稣回答门徒赶不出鬼的原因说：「非用_____，这一类的鬼总不能出来。」", blanks: [{id:"c9_f4_1", ans:"祷告"}], desc: "可 9:29 非用祷告，这一类的鬼总不能出来。" },
-  { id: "c9_fb5", type: "fill", title: "人子将要被交在人手里，他们要杀害他；被杀以后，过_____天他要复活。", blanks: [{id:"c9_f5_1", ans:"三|3"}], desc: "可 9:31 被杀以后，过三天他要复活。" },
-  { id: "c9_fb6", type: "fill", title: "若有人愿意作首先的，他必作众人_____的，作众人的_____。", blanks: [{id:"c9_f6_1", ans:"末后|末后的"},{id:"c9_f6_2", ans:"用人"}], desc: "可 9:35 众人末后的，作众人的用人。" },
-  { id: "c9_fb7", type: "fill", title: "耶稣说：「不_____我们的，就是_____我们的。」", blanks: [{id:"c9_f7_1", ans:"敌挡"},{id:"c9_f7_2", ans:"帮助"}], desc: "可 9:40 不敌挡我们的，就是帮助我们的。" },
-  { id: "c9_fb8", type: "fill", title: "凡使这信我的一个小子跌倒的，倒不如把_____拴在这人的颈项上，扔在海里。", blanks: [{id:"c9_f8_1", ans:"大磨石"}], desc: "可 9:42 倒不如把大磨石拴在这人的颈项上。" },
-  { id: "c9_fb9", type: "fill", title: "在地狱里，_____是不死的，_____是不灭的。", blanks: [{id:"c9_f9_1", ans:"虫"},{id:"c9_f9_2", ans:"火"}], desc: "可 9:48 在那里，虫是不死的，火是不灭的。" },
-  { id: "c9_fb10", type: "fill", title: "盐本是好的，若失了味用什么叫它再咸呢？你们里头应当有盐，彼此_____。", blanks: [{id:"c9_f10_1", ans:"和睦"}], desc: "可 9:50 你们里头应当有盐，彼此和睦。" },
-
-  // ---【第1-8章 选择/排序精选】---
-  { id: "c1_mc1", type: "radio", title: "施洗约翰穿什么衣服？吃什么食物？", opts: [{v:"a",t:"A. 穿细麻衣，吃陈设饼"},{v:"b",t:"B. 穿骆驼毛的衣服，腰束皮带，吃蝗虫与野蜜"},{v:"c",t:"C. 穿麻布长衫，吃五谷杂粮"},{v:"d",t:"D. 穿羊毛衣，吃无酵饼"}], ans: "b", desc: "可 1:6 骆驼毛衣服吃蝗虫野蜜。" },
-  { id: "c2_mc1", type: "radio", title: "一共有多少个人抬着瘫子来到耶稣面前？", opts: [{v:"a",t:"A. 两个"},{v:"b",t:"B. 三个"},{v:"c",t:"C. 四个"},{v:"d",t:"D. 五个"}], ans: "c", desc: "可 2:3 是用四个人抬来的。" },
-  { id: "c3_mc1", type: "radio", title: "法利赛人见枯手者得医治后，同哪一党的人商议除灭耶稣？", opts: [{v:"a",t:"A. 撒都该人"},{v:"b",t:"B. 希律党的人"},{v:"c",t:"C. 奋锐党"},{v:"d",t:"D. 文士"}], ans: "b", desc: "可 3:6 同希律党的人商议除灭耶稣。" },
-  { id: "c4_mc1", type: "radio", title: "撒在石头地上的种子为什么发苗最快却不能长久？", opts: [{v:"a",t:"A. 没有水"},{v:"b",t:"B. 心里没有根"},{v:"c",t:"C. 没有阳光"},{v:"d",t:"D. 被飞鸟吃了"}], ans: "b", desc: "可 4:5-6, 17 因为心里没有根，就枯干了。" },
-  { id: "c5_mc1", type: "radio", title: "管会堂的女儿得复活后，圣经特别注明她当时的年龄是：", opts: [{v:"a",t:"A. 10 岁"},{v:"b",t:"B. 12 岁"},{v:"c",t:"C. 15 岁"},{v:"d",t:"D. 18 岁"}], ans: "b", desc: "可 5:42 她已经十二岁了。" },
-  { id: "c6_mc1", type: "radio", title: "夜里四更天耶稣在海面行走，门徒甚惊慌以为是鬼怪，是因为门徒：", opts: [{v:"a",t:"A. 逆风看不清楚"},{v:"b",t:"B. 不明白那分饼的事，心里还是愚顽"},{v:"c",t:"C. 缺乏水上航行经验"},{v:"d",t:"D. 忘记带拐杖"}], ans: "b", desc: "可 6:52 不明白分饼的事心里愚顽。" },
-  { id: "c7_mc1", type: "radio", title: "在马可福音 7:11 中，「各班」（Corban）的准确含义是什么？", opts: [{v:"a",t:"A. 祭司的名号"},{v:"b",t:"B. 供献给神的意思"},{v:"c",t:"C. 免税的凭证"},{v:"d",t:"D. 洁净的礼仪"}], ans: "b", desc: "可 7:11 各班就是供献的意思。" },
-  { id: "c8_mc1", type: "radio", title: "四千人吃饱后，收拾剩下的零碎装满了什么器皿？多少个？", opts: [{v:"a",t:"A. 十二个篮子"},{v:"b",t:"B. 七个筐子"},{v:"c",t:"C. 十二个筐子"},{v:"d",t:"D. 七个盘子"}], ans: "b", desc: "可 8:8 收拾剩下的零碎，有七个筐子。" },
-  { id: "c8_mc2", type: "radio", title: "医治伯赛大瞎子时，瞎子经历第一次按手后视力状况为何？", opts: [{v:"a",t:"A. 样样看得完全清楚"},{v:"b",t:"B. 看见人好像树木并且行走"},{v:"c",t:"C. 依然一片漆黑"},{v:"d",t:"D. 只看见天上的亮光"}], ans: "b", desc: "可 8:24 看见人好像树木并且行走。" },
-
-  // ---【第9章 选择/排序题 (完全导入自 Mark Chapter 9.docx)】---
-  { id: "c9_mc1", type: "radio", title: "耶稣暗暗带上高山亲眼目睹变像的三位门徒是：", opts: [{v:"a",t:"A. 彼得、安得烈、约翰"},{v:"b",t:"B. 彼得、雅各、约翰"},{v:"c",t:"C. 雅各、约翰、多马"},{v:"d",t:"D. 腓力、巴多罗买、马太"}], ans: "b", desc: "可 9:2 耶稣带着彼得、雅各、约翰暗暗地上了一座高山。" },
-  { id: "c9_mc2", type: "radio", title: "在山上向耶稣和三位门徒显现显荣的旧约人物是：", opts: [{v:"a",t:"A. 亚伯拉罕和大卫"},{v:"b",t:"B. 摩西和以利亚"},{v:"c",t:"C. 以诺和以利亚"},{v:"d",t:"D. 撒母耳和以赛亚"}], ans: "b", desc: "可 9:4 忽然，有以利亚同摩西向他们显现。" },
-  { id: "c9_mc3", type: "radio", title: "彼得在惊恐不知所措中提议搭几座棚？为谁搭？", opts: [{v:"a",t:"A. 两座棚，为摩西和以利亚"},{v:"b",t:"B. 三座棚，一座为耶稣，一座为摩西，一座为以利亚"},{v:"c",t:"C. 六座棚，大家各住一座"},{v:"d",t:"D. 一座大棚供大家避风"}], ans: "b", desc: "可 9:5 搭三座棚，一座为你，一座为摩西，一座为以利亚。" },
-  { id: "c9_mc4", type: "radio", title: "云彩遮盖他们时，天上有声音发出，内容是什么？", opts: [{v:"a",t:"A. 「你是我的爱子，我喜悦你。」"},{v:"b",t:"B. 「这是我的爱子，你们要听他。」"},{v:"c",t:"C. 「凡遵行神旨意的是我的母亲。」"},{v:"d",t:"D. 「你们应当悔改信福音。」"}], ans: "b", desc: "可 9:7 这是我的爱子，你们要听他。" },
-  { id: "c9_mc5", type: "radio", title: "那父亲带到山下的孩子被什么鬼附着？", opts: [{v:"a",t:"A. 哑巴鬼"},{v:"b",t:"B. 癫痫鬼"},{v:"c",t:"C. 瞎眼鬼"},{v:"d",t:"D. 群鬼"}], ans: "a", desc: "可 9:17 我带了我的儿子到你这里来，他被哑巴鬼附着。" },
-  { id: "c9_mc6", type: "radio", title: "孩子的父亲求耶稣说“你若能作什么求你帮助”，耶稣的回应是：", opts: [{v:"a",t:"A. 「神的心意是不可测度的」"},{v:"b",t:"B. 「你若能信，在信的人，凡事都能」"},{v:"c",t:"C. 「我肯，你洁净了吧」"},{v:"d",t:"D. 「平平安安地回去吧」"}], ans: "b", desc: "可 9:23 耶稣对他说：你若能信，在信的人，凡事都能。" },
-  { id: "c9_mc7", type: "radio", title: "山下的门徒赶不出那哑巴鬼，耶稣在屋里点出的根本原因是：", opts: [{v:"a",t:"A. 门徒没有背诵律法"},{v:"b",t:"B. 非用祷告，这一类的鬼总不能出来"},{v:"c",t:"C. 门徒缺乏禁食天数"},{v:"d",t:"D. 孩子的父亲未奉献"}], ans: "b", desc: "可 9:29 非用祷告，这一类的鬼总不能出来。" },
-  { id: "c9_mc8", type: "radio", title: "在屋里教导谁为大时，耶稣特别抱起了谁作为谦卑榜样？", opts: [{v:"a",t:"A. 彼得"},{v:"b",t:"B. 一个小孩子"},{v:"c",t:"C. 穷寡妇"},{v:"d",t:"D. 乞丐"}], ans: "b", desc: "可 9:36 于是领一个小孩子来，叫他站在门徒中间，又抱起他来。" },
-  { id: "c9_mc9", type: "radio", title: "为防止叫人跌倒或自己跌倒，耶稣教导对付犯罪器官的严格顺序是：", opts: [
-    {v:"a", t:"A. 眼 → 手 → 脚"},
-    {v:"b", t:"B. 手 → 脚 → 眼"},
-    {v:"c", t:"C. 脚 → 手 → 眼"},
-    {v:"d", t:"D. 舌头 → 手 → 心"}
-  ], ans: "b", desc: "可 9:43(手砍下) → 45(脚砍下) → 47(眼剜出)。" },
-  { id: "c9_mc10", type: "radio", title: "【排序题】请按照登山变像的过程先后排序：<br>① 云彩遮盖有声音说这是我的爱子 ② 门徒忽然不见一人只见耶稣 ③ 耶稣衣服放光摩西以利亚显现 ④ 彼得提议搭三座棚", opts: [
-    {v:"a", t:"A. ③ → ④ → ① → ②"},
-    {v:"b", t:"B. ④ → ③ → ① → ②"},
-    {v:"c", t:"C. ③ → ① → ④ → ②"},
-    {v:"d", t:"D. ① → ③ → ④ → ②"}
-  ], ans: "a", desc: "变像显现(9:3-4) → 提议搭棚(9:5) → 云彩声音(9:7) → 只见耶稣(9:8)。" },
-  { id: "c9_mc11", type: "radio", title: "【排序题】请按照山下医治被鬼附孩子的事件发展排序：<br>① 父亲求告说我信但我信不足 ② 门徒暗暗问为何赶不出鬼 ③ 耶稣斥责聋哑鬼拉手扶起孩子 ④ 文士与山下门徒辩论", opts: [
-    {v:"a", t:"A. ④ → ① → ③ → ②"},
-    {v:"b", t:"B. ① → ④ → ③ → ②"},
-    {v:"c", t:"C. ④ → ③ → ① → ②"},
-    {v:"d", t:"D. ④ → ① → ② → ③"}
-  ], ans: "a", desc: "文士辩论(9:14) → 信不足呼求(9:24) → 斥责扶起(9:25-27) → 屋内发问(9:28)。" },
-
-  // ---【是非题精选 (包含第9章)】---
-  { id: "c1_tf1", type: "tf", title: "有一个长大麻风的来求耶稣，向他跪下说：“你若肯，必能叫我洁净了。”耶稣动了慈心，伸手摸他说：“我肯，你洁净了吧！”", ans: "T", desc: "对。可 1:40-41 经文完全吻合。" },
-  { id: "c2_tf1", type: "tf", title: "在马可福音第二章中，人是为安息日设立的，安息日不是为人设立的。", ans: "F", desc: "错。可 2:27 明确宣布：安息日是为人设立的，人不是为安息日设立的。" },
-  { id: "c3_tf1", type: "tf", title: "耶稣设立十二使徒，要他们常和自己同在，也要差他们去传道，并给他们权柄赶鬼。", ans: "T", desc: "对。可 3:14-15 经文完全吻合。" },
-  { id: "c4_tf1", type: "tf", title: "在种子自己生长的比喻中，撒种的人完全明了种子为什么能够发芽渐长。", ans: "F", desc: "错。可 4:27 明确记载“那人却不晓得如何这样”。" },
-  { id: "c5_tf1", type: "tf", title: "当管会堂家里传来女孩死讯时，耶稣对睚鲁说：“不要怕，只要信！”", ans: "T", desc: "对。可 5:36 经文完全吻合。" },
-  { id: "c6_tf1", type: "tf", title: "在希律生日宴席上跳舞索取约翰人头的是希罗底的女儿，她事先请教了母亲希罗底。", ans: "T", desc: "对。可 6:22-24 经文完全吻合。" },
-  { id: "c7_tf1", type: "tf", title: "叙利非尼基妇人本身是犹太血统，只是侨居在推罗境外。", ans: "F", desc: "错。可 7:26 明确记载妇人是希利尼人，属叙利非尼基族的外邦人。" },
-  { id: "c8_tf1", type: "tf", title: "伯赛大瞎子的眼睛在耶稣第一次按手后，就立刻样样都看得极其清楚了。", ans: "F", desc: "错。第一次按手后看见人“好像树木，并且行走”，第二次按手才完全看清。" },
-  { id: "c9_tf1", type: "tf", title: "登山变像时，与耶稣同在山上显现谈论的是摩西和以利亚。", ans: "T", desc: "对。可 9:4 经文完全吻合。" },
-  { id: "c9_tf2", type: "tf", title: "登山变像中云彩发出的声音是说：「这是我的爱子，你们要听他。」", ans: "T", desc: "对。可 9:7 经文完全吻合。" },
-  { id: "c9_tf3", type: "tf", title: "孩子的父亲对耶稣呼喊说：「我信！但我信不足，求主帮助。」", ans: "T", desc: "对。可 9:24 经文完全吻合。" },
-  { id: "c9_tf4", type: "tf", title: "第二次受难预言时，耶稣说人子被杀以后，过七天要复活。", ans: "F", desc: "错。可 9:31 明确是「过三天」他要复活。" },
-  { id: "c9_tf5", type: "tf", title: "耶稣宣告：不敌挡我们的，就是帮助我们的。", ans: "T", desc: "对。可 9:40 经文完全吻合。" }
-];
-
-// 核心优化：动态精准 Answer Pool（只展示当前抽中填空题相关的词汇）
-const DISTRACTOR_POOL = [
-  "五千", "两条鱼", "十二篮", "摩西", "大卫", "伯赛大", "以利亚", "三天半", "十两银子", 
-  "葡萄树", "箱子", "桌子", "二百", "按手", "睡着了", "二万", "迦百农", "岸上", "撒玛利亚", "鞋",
-  "三座棚", "小孩子", "一杯水", "大磨石", "用人", "绊倒", "彼得"
-];
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 function generateDynamicAnswerPool(selectedQuestions) {
   const answerSet = new Set();
@@ -324,30 +221,28 @@ function generateDynamicAnswerPool(selectedQuestions) {
     }
   });
 
-  const shuffledDistractors = shuffleArray(DISTRACTOR_POOL);
-  for (let i = 0; i < shuffledDistractors.length && answerSet.size < 22; i++) {
-    answerSet.add(shuffledDistractors[i]);
+  const globalDistractors = [
+    "加利利", "法利赛人", "文士", "安息日", "彼得", "约翰", "雅各", "施洗约翰", 
+    "圣灵", "天", "旷野", "迦百农", "褥子", "税关", "罪人", "医生成康健", 
+    "别西卜", "撒但", "道", "量器", "芥菜种", "风", "海", "群", "二千", 
+    "睚鲁", "血漏", "十二岁", "十二年", "大利大古米", "拐杖", "油", "五千", 
+    "十二篮", "四更天", "革尼撒勒", "各班", "以法大", "七筐", "基督", "舍己", 
+    "十字架", "摩西", "以利亚", "祷告", "用人", "大磨石", "虫", "火", "和睦"
+  ];
+  const shuffledDist = shuffleArray(globalDistractors);
+  for (let i = 0; i < shuffledDist.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDist[i]);
   }
-
   return shuffleArray(Array.from(answerSet));
 }
 
-let activeMatchSet = []; 
-let activeOtherSet = []; 
-let activeDynamicWordPool = []; 
-let activeBlankId = null;
-const STORAGE_KEY = "mark_all_chapters_ch1to9_v9";
-
-function shuffleArray(arr) {
-  const array = [...arr];
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 function initQuiz(forceRegenerate = false) {
+  if (!window.MARK_MASTER_QUESTION_POOL) {
+    document.getElementById("quiz-sections-container").innerHTML = 
+      "<div style='padding:20px; text-align:center; color:#dc2626;'>未检测到 mark_master_quiz_data.js 题库文件，请确保该文件在同级目录下！</div>";
+    return;
+  }
+
   const savedData = localStorage.getItem(STORAGE_KEY);
   if (!forceRegenerate && savedData) {
     try {
@@ -361,16 +256,28 @@ function initQuiz(forceRegenerate = false) {
     } catch(e) { console.error(e); }
   }
 
-  // 1. 跨章节配对池混抽 7 组对子 (严格占题号 1 - 7)
-  const shuffledPairs = shuffleArray(ALL_MATCHING_PAIRS);
-  activeMatchSet = shuffledPairs.slice(0, 7);
+  // 从中央 Master 题库中提取所有的匹配题对子
+  let allPairsPool = [];
+  window.MARK_MASTER_QUESTION_POOL.forEach(q => {
+    if (q.type === "matching" && q.pairs) {
+      q.pairs.forEach(p => {
+        allPairsPool.push({ ...p, chapterHint: `第 ${q.ch} 章` });
+      });
+    }
+  });
 
-  // 2. 从全量单题池中混抽 43 道单题 (严格占题号 8 - 50)
-  const shuffledOthers = shuffleArray(ALL_SINGLE_QUESTIONS);
+  // 随机抽取 7 组配对题
+  activeMatchSet = shuffleArray(allPairsPool).slice(0, 7);
+
+  // 从中央 Master 题库中提取所有的非匹配单题 (填空、选择、判断)
+  let allSinglePool = window.MARK_MASTER_QUESTION_POOL.filter(q => q.type !== "matching");
+  const shuffledOthers = shuffleArray(allSinglePool);
   const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
+  
+  // 随机抽取 43 道单题，按题型排序
   activeOtherSet = shuffledOthers.slice(0, 43).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
 
-  // 3. 动态精准过滤本次填空题专属匹配的 Answer Pool
+  // 动态生成专属填空词库
   activeDynamicWordPool = generateDynamicAnswerPool(activeOtherSet);
 
   saveQuizState({});
@@ -378,7 +285,7 @@ function initQuiz(forceRegenerate = false) {
 }
 
 function regenerateQuiz() {
-  if (confirm("确定要重新随机混抽 50 道跨章节测验题目（并靶向刷新专属词库）吗？")) {
+  if (confirm("确定要从全卷总题库中重新随机抽取 50 道模拟考题目吗？")) {
     localStorage.removeItem(STORAGE_KEY);
     initQuiz(true);
   }
@@ -390,66 +297,66 @@ function renderQuizUI() {
 
   let globalQuestionCounter = 1;
 
-  // ---------------- PART 1: 跨章节配对题 (第 1 - 7 题) ----------------
-  const matchSecHeader = document.createElement("div");
-  matchSecHeader.className = "type-section-header";
-  matchSecHeader.innerHTML = `
-    <h3 class="type-section-title">第一部分：跨章节配对题（第 1 - 7 题）</h3>
-    <p class="type-section-desc">已将经文跨章节随机混编。请在中间下拉框选填配对字母（右侧选项次序已随机排布）：</p>
-  `;
-  container.appendChild(matchSecHeader);
+  // ---------------- PART 1: 经文配对题 (第 1 - 7 题) ----------------
+  if (activeMatchSet.length > 0) {
+    const matchSecHeader = document.createElement("div");
+    matchSecHeader.className = "type-section-header";
+    matchSecHeader.innerHTML = `
+      <h3 class="type-section-title">第一部分：全卷经文配对题（第 1 - ${activeMatchSet.length} 题）</h3>
+      <p class="type-section-desc">从全卷各章随机抽取的经文前半句，请在下拉框中选填正确后半句的字母代号：</p>
+    `;
+    container.appendChild(matchSecHeader);
 
-  const matchItem = document.createElement("div");
-  matchItem.className = "q-item";
+    const matchItem = document.createElement("div");
+    matchItem.className = "q-item";
 
-  const letters = ["A", "B", "C", "D", "E", "F", "G"];
-  const shuffledRight = shuffleArray(activeMatchSet.map(p => ({ pairId: p.id, text: p.rightText })));
-  const targetMap = {};
-  shuffledRight.forEach((item, i) => {
-    targetMap[item.pairId] = letters[i];
-  });
+    const letters = ["A", "B", "C", "D", "E", "F", "G"];
+    const shuffledRight = shuffleArray(activeMatchSet.map(p => ({ pairId: p.id, text: p.rightText })));
+    const targetMap = {};
+    shuffledRight.forEach((item, i) => { targetMap[item.pairId] = letters[i]; });
 
-  let matchTableHtml = `
-    <div class="match-table-wrap">
-      <table class="match-table">
-        <thead>
-          <tr>
-            <th class="col-num">题号与前半段 (经文出处)</th>
-            <th class="col-input">填入字母</th>
-            <th class="col-alpha">备选项（A - G 随机顺序）</th>
-          </tr>
-        </thead>
-        <tbody>`;
+    let matchTableHtml = `
+      <div class="match-table-wrap">
+        <table class="match-table">
+          <thead>
+            <tr>
+              <th class="col-num">题号与前半段 (出处)</th>
+              <th class="col-input">选填</th>
+              <th class="col-alpha">备选后半段 (A - G 随机顺序)</th>
+            </tr>
+          </thead>
+          <tbody>`;
 
-  activeMatchSet.forEach((p, idx) => {
-    const qNum = globalQuestionCounter;
-    const correctLetter = targetMap[p.id];
-    const rightItem = shuffledRight[idx];
+    activeMatchSet.forEach((p, idx) => {
+      const qNum = globalQuestionCounter;
+      const correctLetter = targetMap[p.id];
+      const rightItem = shuffledRight[idx];
 
-    matchTableHtml += `
-      <tr>
-        <td class="col-num"><strong>${qNum}.</strong> <span style="font-size:12px; color:#2563eb; font-weight:bold;">[${p.ch}]</span> ${p.left}</td>
-        <td class="col-input">
-          <select class="match-select match-row-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
-            <option value="">-</option>
-            <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
-          </select>
-        </td>
-        <td class="col-alpha"><strong>${letters[idx]}.</strong> ${rightItem.text}</td>
-      </tr>`;
-    
-    globalQuestionCounter++;
-  });
+      matchTableHtml += `
+        <tr>
+          <td class="col-num"><strong>${qNum}.</strong> <span style="color:var(--accent); font-weight:bold;">[${p.chapterHint}]</span> ${p.left}</td>
+          <td class="col-input">
+            <select class="match-select match-row-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
+              <option value="">-</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </td>
+          <td class="col-alpha"><strong>${letters[idx]}.</strong> ${rightItem.text}</td>
+        </tr>`;
+      
+      globalQuestionCounter++;
+    });
 
-  matchTableHtml += `</tbody></table></div><div class="feedback" id="fb-matching-all"></div>`;
-  matchItem.innerHTML = matchTableHtml;
-  container.appendChild(matchItem);
+    matchTableHtml += `</tbody></table></div><div class="feedback" id="fb-matching-all"></div>`;
+    matchItem.innerHTML = matchTableHtml;
+    container.appendChild(matchItem);
+  }
 
-  // ---------------- PART 2: 剩余 43 道题目 (第 8 - 50 题) ----------------
+  // ---------------- PART 2: 单项题型部分 (填空、单选/排序、是非) ----------------
   const subGroups = {
-    "fill": { title: "第二部分：填空题", desc: "请根据下方专为此套题目匹配的词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
-    "radio": { title: "第三部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
-    "tf": { title: "第四部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+    "fill": { title: "第二部分：综合填空题", desc: "请点选下方动态词库将正确词汇填入空格：", list: [] },
+    "radio": { title: "第三部分：综合单选与排序题", desc: "请选择最符合经文原意或事件顺序的选项：", list: [] },
+    "tf": { title: "第四部分：综合是非判断题", desc: "判断下列圣经陈述是否正确：", list: [] }
   };
 
   activeOtherSet.forEach(q => {
@@ -471,13 +378,12 @@ function renderQuizUI() {
     `;
     container.appendChild(secHeader);
 
-    // 智能精准过滤后的 Answer Pool 专属呈现
     if (typeKey === "fill") {
       const bankCard = document.createElement("div");
       bankCard.className = "word-bank-box";
       bankCard.innerHTML = `
         <div class="word-bank-title">
-          <span>💡 动态精准词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <span>💡 动态精准匹配词库 (Answer Pool)</span>
           <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
         </div>
         <div class="word-chips" id="word-chips-container"></div>
@@ -490,6 +396,9 @@ function renderQuizUI() {
       item.className = "q-item";
       item.id = `card-${q.id}`;
 
+      // 附带显示属于哪一章
+      const chapterBadge = `<span style="font-size:12px; background:#eff6ff; color:#2563eb; padding:2px 6px; border-radius:4px; margin-right:6px; font-weight:bold;">第 ${q.ch} 章</span>`;
+
       if (q.type === "fill") {
         let fillText = q.title;
         q.blanks.forEach(b => {
@@ -498,7 +407,7 @@ function renderQuizUI() {
         });
         item.innerHTML = `
           <div style="font-size:15px; line-height:2.4; word-break:break-word;">
-            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${chapterBadge}${fillText}
           </div>
           <div class="feedback" id="fb-${q.id}"></div>
         `;
@@ -511,13 +420,13 @@ function renderQuizUI() {
         });
         optsHtml += `</div>`;
         item.innerHTML = `
-          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${chapterBadge}${q.title}</div>
           ${optsHtml}
           <div class="feedback" id="fb-${q.id}"></div>
         `;
       } else if (q.type === "tf") {
         item.innerHTML = `
-          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${chapterBadge}${q.title}</div>
           <div class="opt-group" style="flex-direction:row; max-width:280px;">
             <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
             <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
@@ -596,8 +505,10 @@ function onUserAnswerChange() {
 
 function getUserAnswers() {
   const answers = {};
-  document.querySelectorAll("#quiz-sections-container input").forEach(el => {
-    if (el.type === "radio" || el.type === "checkbox") {
+  document.querySelectorAll("#quiz-sections-container input, #quiz-sections-container select").forEach(el => {
+    if (el.tagName === "SELECT") {
+      if (el.value) answers[el.id] = el.value;
+    } else if (el.type === "radio" || el.type === "checkbox") {
       if (el.checked) {
         if (!answers[el.name]) {
           answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
@@ -627,7 +538,9 @@ function restoreSavedAnswers(answers) {
   Object.keys(answers).forEach(key => {
     const val = answers[key];
     const textEl = document.getElementById(key);
-    if (textEl && textEl.type === "text") {
+    if (textEl && textEl.tagName === "SELECT") {
+      textEl.value = val;
+    } else if (textEl && textEl.type === "text") {
       textEl.value = val;
       textEl.classList.add("has-val");
     } else if (Array.isArray(val)) {
@@ -645,7 +558,7 @@ function restoreSavedAnswers(answers) {
 function gradeQuiz() {
   let score = 0;
 
-  // 1. 批改跨章节配对题 (7 题)
+  // 1. 批改配对题 (7 题)
   let mOk = 0;
   let mErrs = [];
   activeMatchSet.forEach(p => {
@@ -665,15 +578,17 @@ function gradeQuiz() {
   });
 
   const fbMatch = document.getElementById("fb-matching-all");
-  if (mOk === activeMatchSet.length) {
-    fbMatch.className = "feedback is-correct";
-    fbMatch.innerHTML = `配对题 7 题全部正确！`;
-  } else {
-    fbMatch.className = "feedback is-wrong";
-    fbMatch.innerHTML = `配对题答对 ${mOk} / ${activeMatchSet.length}。错误提示：${mErrs.join("； ")}`;
+  if (fbMatch) {
+    if (mOk === activeMatchSet.length) {
+      fbMatch.className = "feedback is-correct";
+      fbMatch.innerHTML = `配对题全部正确！`;
+    } else {
+      fbMatch.className = "feedback is-wrong";
+      fbMatch.innerHTML = `配对题答对 ${mOk} / ${activeMatchSet.length}。错误提示：${mErrs.join("； ")}`;
+    }
   }
 
-  // 2. 批改其余 43 题
+  // 2. 批改其余 43 道题目
   activeOtherSet.forEach(q => {
     const fb = document.getElementById(`fb-${q.id}`);
 
@@ -721,7 +636,7 @@ function gradeQuiz() {
       } else {
         fb.className = "feedback is-wrong";
         const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
-        fb.innerHTML = `正确答案：【${correctAns}】。解析：${q.desc}`;
+        fb.innerHTML = `正确答案：【${correctAns}】。出处：${q.desc}`;
       }
     }
   });
@@ -731,9 +646,9 @@ function gradeQuiz() {
 }
 
 function calculateAndUpdateTotals(score) {
-  const total = 50;
+  const total = activeMatchSet.length + activeOtherSet.length;
   document.getElementById("total-score").innerText = `${score} / ${total}`;
-  document.getElementById("accuracy-rate").innerText = `${Math.round((score / total) * 100)}%`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
 }
 
 window.addEventListener("DOMContentLoaded", () => {
