@@ -212,6 +212,15 @@
   .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
   .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
 
+  .match-table-wrap { width: 100%; overflow-x: auto; margin-top: 10px; }
+  .match-table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; }
+  .match-table th { background: #f8fafc; padding: 10px 8px; border: 1px solid var(--border); text-align: left; }
+  .match-table td { padding: 10px 8px; border: 1px solid #e2e8f0; vertical-align: middle; line-height: 1.5; }
+  .col-num { width: 44%; }
+  .col-input { width: 12%; text-align: center; background: #f8fafc; }
+  .col-alpha { width: 44%; }
+  .match-select { width: 50px; height: 32px; text-align: center; font-size: 14px; font-weight: bold; border: 1.5px solid var(--border); border-radius: 4px; background: white; }
+
   .word-bank-box { background: #eff6ff; border: 2px dashed #93c5fd; border-radius: 10px; padding: 14px; margin: 12px 0 18px 0; }
   .word-bank-title { font-size: 14px; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
   .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -243,7 +252,7 @@
 
   <div class="header">
     <h1>📖 马可福音第 4 章 Bible Quiz 备战重点</h1>
-    <p>全章大地图逐节问答拆解 ＋ 50 题全真模拟赛</p>
+    <p>全章大地图逐节问答拆解 ＋ 50 题互动全真测验</p>
   </div>
 
   <div class="nav-tabs">
@@ -253,7 +262,7 @@
     <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题全真测验</button>
   </div>
 
-  <!-- TAB 1: 完整还原的原版问答式备战讲义 -->
+  <!-- TAB 1: 完整还原的问答式备战讲义 -->
   <div id="tab-guide" class="tab-content active">
     <div class="card">
       <div class="card-title">一、先掌握第 4 章的「大地图」</div>
@@ -504,7 +513,8 @@
 <script src="mark_master_quiz_data.js"></script>
 
 <script>
-// 本页不再硬编码任何题目数组，完全通过中央题库 window.MARK_MASTER_QUESTION_POOL 动态读取第 4 章题目
+let activeMatchSet = [];
+let activeOtherSet = [];
 let activeQuestionSet = [];
 let activeDynamicWordPool = [];
 let activeBlankId = null;
@@ -549,6 +559,8 @@ function initQuiz(forceRegenerate = false) {
   if (!forceRegenerate && savedData) {
     try {
       const parsed = JSON.parse(savedData);
+      activeMatchSet = parsed.matchPairs || [];
+      activeOtherSet = parsed.otherQuestions || [];
       activeQuestionSet = parsed.questions || [];
       activeDynamicWordPool = parsed.wordPool || [];
       renderQuizUI();
@@ -557,12 +569,17 @@ function initQuiz(forceRegenerate = false) {
     } catch(e) { console.error(e); }
   }
 
-  // 从中央题库筛选属于第 4 章 (ch === 4) 的全部题目
+  // 1. 筛选属于第 4 章 (ch === 4) 的题目
   const ch4Questions = window.MARK_MASTER_QUESTION_POOL.filter(q => q.ch === 4);
-  const shuffled = shuffleArray(ch4Questions);
+  const matchQ = ch4Questions.filter(q => q.type === "matching");
+  activeMatchSet = matchQ.length > 0 ? matchQ[0].pairs : [];
+
+  const others = shuffleArray(ch4Questions.filter(q => q.type !== "matching"));
   const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
-  activeQuestionSet = shuffled.slice(0, 50).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
-  activeDynamicWordPool = generateDynamicAnswerPool(activeQuestionSet);
+  activeOtherSet = others.slice(0, 43).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  activeQuestionSet = [...(matchQ.length > 0 ? [matchQ[0]] : []), ...activeOtherSet];
+  activeDynamicWordPool = generateDynamicAnswerPool(activeOtherSet);
 
   saveQuizState({});
   renderQuizUI();
@@ -579,26 +596,85 @@ function renderQuizUI() {
   const container = document.getElementById("quiz-sections-container");
   container.innerHTML = "";
 
-  const groups = {
-    "fill": { title: "第一部分：填空题", desc: "请点选词库填入空格（反选输入框可清除）：", list: [] },
-    "radio": { title: "第二部分：单选题与排序题", desc: "请选择正确项：", list: [] },
-    "tf": { title: "第三部分：是非判断题", desc: "判断下列说法是否正确：", list: [] }
-  };
-
-  activeQuestionSet.forEach(q => {
-    if (groups[q.type]) groups[q.type].list.push(q);
-  });
-
   let globalQuestionCounter = 1;
 
+  // 1. 配对题部分（题号 1 - 7）
+  if (activeMatchSet.length > 0) {
+    const matchSecHeader = document.createElement("div");
+    matchSecHeader.className = "type-section-header";
+    matchSecHeader.innerHTML = `
+      <h3 class="type-section-title">第一部分：经文配对题（第 1 - ${activeMatchSet.length} 题）</h3>
+      <p class="type-section-desc">在中间下拉框选填与前半句配对的字母（右侧选项次序已随机排布）：</p>
+    `;
+    container.appendChild(matchSecHeader);
+
+    const matchItem = document.createElement("div");
+    matchItem.className = "q-item";
+
+    const letters = ["A", "B", "C", "D", "E", "F", "G"];
+    const shuffledRight = shuffleArray(activeMatchSet.map(p => ({ pairId: p.id, text: p.rightText })));
+    const targetMap = {};
+    shuffledRight.forEach((item, i) => { targetMap[item.pairId] = letters[i]; });
+
+    let matchTableHtml = `
+      <div class="match-table-wrap">
+        <table class="match-table">
+          <thead>
+            <tr>
+              <th class="col-num">题号与前半段</th>
+              <th class="col-input">选填</th>
+              <th class="col-alpha">备选后半段 (A - G 随机顺序)</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+    activeMatchSet.forEach((p, idx) => {
+      const qNum = globalQuestionCounter;
+      const correctLetter = targetMap[p.id];
+      const rightItem = shuffledRight[idx];
+
+      matchTableHtml += `
+        <tr>
+          <td class="col-num"><strong>${qNum}.</strong> ${p.left}</td>
+          <td class="col-input">
+            <select class="match-select match-row-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
+              <option value="">-</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </td>
+          <td class="col-alpha"><strong>${letters[idx]}.</strong> ${rightItem.text}</td>
+        </tr>`;
+      
+      globalQuestionCounter++;
+    });
+
+    matchTableHtml += `</tbody></table></div><div class="feedback" id="fb-matching-all"></div>`;
+    matchItem.innerHTML = matchTableHtml;
+    container.appendChild(matchItem);
+  }
+
+  // 2. 其余题型部分（填空、选择/排序、是非）
+  const subGroups = {
+    "fill": { title: "第二部分：填空题", desc: "请根据下方词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
+    "radio": { title: "第三部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第四部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeOtherSet.forEach(q => {
+    if (subGroups[q.type]) subGroups[q.type].list.push(q);
+  });
+
   ["fill", "radio", "tf"].forEach(typeKey => {
-    const grp = groups[typeKey];
+    const grp = subGroups[typeKey];
     if (grp.list.length === 0) return;
+
+    const startNum = globalQuestionCounter;
+    const endNum = globalQuestionCounter + grp.list.length - 1;
 
     const secHeader = document.createElement("div");
     secHeader.className = "type-section-header";
     secHeader.innerHTML = `
-      <h3 class="type-section-title">${grp.title}</h3>
+      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
       <p class="type-section-desc">${grp.desc}</p>
     `;
     container.appendChild(secHeader);
@@ -608,7 +684,7 @@ function renderQuizUI() {
       bankCard.className = "word-bank-box";
       bankCard.innerHTML = `
         <div class="word-bank-title">
-          <span>💡 填空题专属匹配词库 (Answer Pool)</span>
+          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
           <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
         </div>
         <div class="word-chips" id="word-chips-container"></div>
@@ -627,7 +703,12 @@ function renderQuizUI() {
           const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
           fillText = fillText.replace("_____", inputHtml);
         });
-        item.innerHTML = `<div style="font-size:15px; line-height:2.4;"><span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}</div><div class="feedback" id="fb-${q.id}"></div>`;
+        item.innerHTML = `
+          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
+            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
       } else if (q.type === "radio") {
         const isMulti = Array.isArray(q.ans);
         let optsHtml = `<div class="opt-group">`;
@@ -636,9 +717,20 @@ function renderQuizUI() {
           optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
         });
         optsHtml += `</div>`;
-        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>${optsHtml}<div class="feedback" id="fb-${q.id}"></div>`;
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          ${optsHtml}
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
       } else if (q.type === "tf") {
-        item.innerHTML = `<div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div><div class="opt-group" style="flex-direction:row;"><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label><label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label></div><div class="feedback" id="fb-${q.id}"></div>`;
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="opt-group" style="flex-direction:row; max-width:280px;">
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
       }
 
       container.appendChild(item);
@@ -711,8 +803,10 @@ function onUserAnswerChange() {
 
 function getUserAnswers() {
   const answers = {};
-  document.querySelectorAll("#quiz-sections-container input").forEach(el => {
-    if (el.type === "radio" || el.type === "checkbox") {
+  document.querySelectorAll("#quiz-sections-container input, #quiz-sections-container select").forEach(el => {
+    if (el.tagName === "SELECT") {
+      if (el.value) answers[el.id] = el.value;
+    } else if (el.type === "radio" || el.type === "checkbox") {
       if (el.checked) {
         if (!answers[el.name]) {
           answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
@@ -729,6 +823,8 @@ function getUserAnswers() {
 
 function saveQuizState(answers) {
   const data = {
+    matchPairs: activeMatchSet,
+    otherQuestions: activeOtherSet,
     questions: activeQuestionSet,
     wordPool: activeDynamicWordPool,
     answers: answers || getUserAnswers()
@@ -741,7 +837,9 @@ function restoreSavedAnswers(answers) {
   Object.keys(answers).forEach(key => {
     const val = answers[key];
     const textEl = document.getElementById(key);
-    if (textEl && textEl.type === "text") {
+    if (textEl && textEl.tagName === "SELECT") {
+      textEl.value = val;
+    } else if (textEl && textEl.type === "text") {
       textEl.value = val;
       textEl.classList.add("has-val");
     } else if (Array.isArray(val)) {
@@ -758,9 +856,39 @@ function restoreSavedAnswers(answers) {
 
 function gradeQuiz() {
   let score = 0;
-  const total = activeQuestionSet.length;
 
-  activeQuestionSet.forEach(q => {
+  // 1. 批改配对题 (7 题)
+  let mOk = 0;
+  let mErrs = [];
+  activeMatchSet.forEach(p => {
+    const sel = document.getElementById("m_row_" + p.id);
+    const v = (sel.value || "").toUpperCase();
+    const expected = sel.getAttribute("data-ans");
+    if (v === expected) {
+      mOk++;
+      score++;
+      sel.style.borderColor = "#16a34a";
+      sel.style.background = "#dcfce7";
+    } else {
+      sel.style.borderColor = "#dc2626";
+      sel.style.background = "#fee2e2";
+      mErrs.push(`${p.left.slice(0, 8)}...应选【${expected}】`);
+    }
+  });
+
+  const fbMatch = document.getElementById("fb-matching-all");
+  if (fbMatch) {
+    if (mOk === activeMatchSet.length) {
+      fbMatch.className = "feedback is-correct";
+      fbMatch.innerHTML = `配对题全部正确！`;
+    } else {
+      fbMatch.className = "feedback is-wrong";
+      fbMatch.innerHTML = `配对题答对 ${mOk} / ${activeMatchSet.length}。错误提示：${mErrs.join("； ")}`;
+    }
+  }
+
+  // 2. 批改其余题目
+  activeOtherSet.forEach(q => {
     const fb = document.getElementById(`fb-${q.id}`);
 
     if (q.type === "radio" || q.type === "tf") {
@@ -817,7 +945,7 @@ function gradeQuiz() {
 }
 
 function calculateAndUpdateTotals(score) {
-  const total = activeQuestionSet.length;
+  const total = activeMatchSet.length + activeOtherSet.length;
   document.getElementById("total-score").innerText = `${score} / ${total}`;
   document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
 }
