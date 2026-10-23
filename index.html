@@ -14,7 +14,6 @@
     --bg-page: #f8fafc;
     --card-bg: #ffffff;
     --ready-badge: #10b981;
-    --pending-badge: #94a3b8;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
@@ -125,12 +124,6 @@
     border-color: var(--accent);
     box-shadow: 0 8px 18px rgba(37, 99, 235, 0.12);
   }
-  .chapter-card.is-pending {
-    background: #f8fafc;
-    border-color: #e2e8f0;
-    opacity: 0.85;
-    cursor: not-allowed;
-  }
   .chapter-header {
     display: flex;
     justify-content: space-between;
@@ -146,7 +139,6 @@
     color: white;
   }
   .badge-ready { background-color: var(--ready-badge); }
-  .badge-pending { background-color: var(--pending-badge); }
   .chapter-title { font-size: 14.5px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
   .chapter-summary { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 14px; flex-grow: 1; }
   .chapter-action {
@@ -159,7 +151,6 @@
     border-top: 1px dashed #e2e8f0;
   }
   .action-link { color: var(--accent); display: inline-flex; align-items: center; gap: 4px; }
-  .action-disabled { color: #94a3b8; }
   .footer-summary-card {
     background: #fffbe6;
     border: 1px solid #ffe58f;
@@ -176,7 +167,7 @@
 <div class="adaptive-container">
   <div class="header">
     <h1>《马可福音》圣经比赛备战中心</h1>
-    <p>单章指南 ＋ 全卷综合模拟考枢纽</p>
+    <p>第 1 至 16 章全量单章指南 ＋ 全卷综合模拟考枢纽</p>
   </div>
 
   <div class="overview-card">
@@ -185,15 +176,15 @@
       <div style="font-size: 13px; color: #475569; margin-top: 2px;">专为圣经比赛设计的结构化重点与真题训练</div>
     </div>
     <div class="overview-stats">
-      已开通模块：<strong>11 / 16</strong> 章
+      已全部上线：<strong>16 / 16</strong> 章
     </div>
   </div>
 
   <!-- 🔥 置顶综合测试入口按钮卡片 -->
   <div class="grand-quiz-banner">
     <div>
-      <div class="banner-title">🏆 综合模拟考（跨章节混抽 50 题）</div>
-      <div class="banner-desc">打破单章思维定势！随机混抽已上线章节全部重点考题</div>
+      <div class="banner-title">🏆 全卷综合模拟考（跨章节混抽 50 题）</div>
+      <div class="banner-desc">打破单章思维定势！随机混抽全书第 1 至 16 章全部重点考题</div>
     </div>
     <a href="mark_all_chapters_quiz.html" class="banner-btn">进入综合测验 →</a>
   </div>
@@ -206,16 +197,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 1 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">福音的起头与权柄的显明</div>
         <div class="chapter-summary">
-          施洗约翰传道、耶稣受洗与受试探、呼召加利利海边四门徒、迦百农赶鬼、西门岳母退热、清晨旷野祷告、洁净长大麻风者[cite: 44]。
+          施洗约翰传道、耶稣受洗与受试探、呼召加利利海边四门徒、迦百农赶鬼、西门岳母退热、清晨旷野祷告、洁净长大麻风者。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 2 章 -->
@@ -223,16 +212,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 2 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">赦罪的权柄与新旧之辩</div>
         <div class="chapter-summary">
           四人拆房顶缒下瘫子、呼召税吏利未与罪人坐席、新郎与新酒装新皮袋比喻、安息日门徒掐麦穗、大卫吃陈设饼。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 3 章 -->
@@ -240,16 +227,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 3 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">选立十二使徒与捆绑壮士</div>
         <div class="chapter-summary">
           安息日医治枯干手、海边群众备小船、设立十二使徒名单、亲属说其癫狂、文士指控别西卜、论亵渎圣灵与真正亲属。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 4 章 -->
@@ -257,16 +242,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 4 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">天国的比喻与平静风浪</div>
         <div class="chapter-summary">
           撒种的比喻（四种土壤）、灯放灯台与量器原则、种子暗中生长、芥菜种的比喻、夜间渡海平静暴风浪。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 5 章 -->
@@ -274,16 +257,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 5 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">战胜污鬼、痼疾与死亡</div>
         <div class="chapter-summary">
           格拉森赶出“群”鬼入二千猪群、患十二年血漏妇人摸衣裳得痊愈、睚鲁女儿复活（大利大古米）。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 6 章 -->
@@ -291,16 +272,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 6 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">差遣十二人与五饼二鱼</div>
         <div class="chapter-summary">
-          家乡拿撒勒遭厌弃、差遣门徒两个两个外出布道、施洗约翰殉道始末、五饼二鱼喂饱五千男人、夜里四更天海面行走[cite: 36]。
+          家乡拿撒勒遭厌弃、差遣门徒两个两个外出布道、施洗约翰殉道始末、五饼二鱼喂饱五千男人、夜里四更天海面行走。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 7 章 -->
@@ -308,16 +287,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 7 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">古人的遗传与洁净的真谛</div>
         <div class="chapter-summary">
-          洗手之辩、人遗传与神诫命、心中出的十三恶念、叙利非尼基妇人碎渣信心、低加波利开通耳聋舌结（以法大）[cite: 38]。
+          洗手之辩、人遗传与神诫命、心中出的十三恶念、叙利非尼基妇人碎渣信心、低加波利开通耳聋舌结（以法大）。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 8 章 -->
@@ -325,16 +302,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 8 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">彼得认信与受难初次预言</div>
         <div class="chapter-summary">
-          四千人吃饱（七饼七筐）、防备法利赛人与希律的酵、伯赛大渐进医治瞎子、彼得认耶稣为基督、初次预言受难、舍己背十架[cite: 41]。
+          四千人吃饱（七饼七筐）、防备法利赛人与希律的酵、伯赛大渐进医治瞎子、彼得认耶稣为基督、初次预言受难、舍己背十架。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 9 章 -->
@@ -342,16 +317,14 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 9 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">登山变像与降卑争大之训</div>
         <div class="chapter-summary">
-          高山变像见摩西以利亚、山下赶出哑巴鬼（非用祷告）、二次预言受难、门徒争论谁为大、接纳小孩子、手脚眼防跌倒与盐[cite: 40]。
+          高山变像见摩西以利亚、山下赶出哑巴鬼（非用祷告）、二次预言受难、门徒争论谁为大、接纳小孩子、手脚眼防跌倒与盐。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
     <!-- 第 10 章 -->
@@ -359,86 +332,111 @@
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 10 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">婚姻之道、少年财主与仆人服事</div>
         <div class="chapter-summary">
-          论休妻与神配合、抱小孩子祝福、有钱人求永生与骆驼针眼、第三次预言受难、雅各约翰求位与人子作赎价、耶利哥巴底买得看见[cite: 43]。
+          论休妻与神配合、抱小孩子祝福、有钱人求永生与骆驼针眼、第三次预言受难、雅各约翰求位与人子作赎价、耶利哥巴底买得看见。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
-    <!-- 第 11 章 (全新上线开通) -->
+    <!-- 第 11 章 -->
     <a href="mark_chp_11_guide.html" class="chapter-card is-active">
       <div>
         <div class="chapter-header">
           <span class="chapter-number">第 11 章</span>
-          <span class="chapter-badge badge-ready">已就绪 · 全功能</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
         </div>
         <div class="chapter-title">骑驴进京、无花果树与洁净圣殿</div>
         <div class="chapter-summary">
-          骑驴驹荣耀进城喊「和散那」、咒诅无花果树、洁净圣殿推倒兑换银钱桌（万国祷告的殿）、无花果树连根枯干论信心祷告与饶恕、质问权柄[cite: 44]。
+          骑驴驹荣耀进城喊「和散那」、咒诅无花果树、洁净圣殿推倒兑换银钱桌（万国祷告的殿）、无花果树连根枯干论信心祷告与饶恕、质问权柄。
         </div>
       </div>
-      <div class="chapter-action">
-        <span class="action-link">进入学习与 50 题测验 →</span>
-      </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
     </a>
 
-    <!-- 第 12 至 16 章待上线占位 -->
-    <div class="chapter-card is-pending">
+    <!-- 第 12 章 -->
+    <a href="mark_chp_12_guide.html" class="chapter-card is-active">
       <div>
-        <div class="chapter-header"><span class="chapter-number">第 12 章</span><span class="chapter-badge badge-pending">待上线</span></div>
+        <div class="chapter-header">
+          <span class="chapter-number">第 12 章</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
+        </div>
         <div class="chapter-title">圣殿交锋与最大的诫命</div>
-        <div class="chapter-summary">凶恶园户比喻、纳税给凯撒、辩复活、第一要紧的诫命。</div>
+        <div class="chapter-summary">
+          凶恶园户比喻（爱子被杀与房角石）、纳税给凯撒（该撒的物与神的物）、撒都该人问复活（不娶不嫁与活人的神）、第一与第二诫命、大卫称基督为主、防备文士、穷寡妇两个小钱[cite: 13, 21]。
+        </div>
       </div>
-      <div class="chapter-action"><span class="action-disabled">资料整理中</span></div>
-    </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
+    </a>
 
-    <div class="chapter-card is-pending">
+    <!-- 第 13 章 -->
+    <a href="mark_chp_13_guide.html" class="chapter-card is-active">
       <div>
-        <div class="chapter-header"><span class="chapter-number">第 13 章</span><span class="chapter-badge badge-pending">待上线</span></div>
+        <div class="chapter-header">
+          <span class="chapter-number">第 13 章</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
+        </div>
         <div class="chapter-title">橄榄山末世预言与警醒</div>
-        <div class="chapter-summary">圣殿被毁预言、大灾难预兆、人子驾云降临、务要警醒。</div>
+        <div class="chapter-summary">
+          圣殿被毁预言、橄榄山四门徒提问、谨防迷惑与战争饥荒起头、门徒受逼迫（圣灵赐话）、行毁坏可憎的与大灾难、人子驾云降临、无花果树比方、无人知那日子惟有父知、夜间四时段警醒[cite: 19]。
+        </div>
       </div>
-      <div class="chapter-action"><span class="action-disabled">资料整理中</span></div>
-    </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
+    </a>
 
-    <div class="chapter-card is-pending">
+    <!-- 第 14 章 -->
+    <a href="mark_chp_14_guide.html" class="chapter-card is-active">
       <div>
-        <div class="chapter-header"><span class="chapter-number">第 14 章</span><span class="chapter-badge badge-pending">待上线</span></div>
+        <div class="chapter-header">
+          <span class="chapter-number">第 14 章</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
+        </div>
         <div class="chapter-title">最后的晚餐与客西马尼的顺服</div>
-        <div class="chapter-summary">玉瓶膏主、设立圣餐、客西马尼祷告、犹大卖主、彼得不认主。</div>
+        <div class="chapter-summary">
+          逾越节前两日阴谋、伯大尼真哪哒香膏事件、加略人犹大出卖、预备逾越节筵席、设立圣餐（身体与立约的血）、客西马尼园三次祷告、亲嘴捉拿、公会受审、彼得鸡叫两遍前三次不认主[cite: 27]。
+        </div>
       </div>
-      <div class="chapter-action"><span class="action-disabled">资料整理中</span></div>
-    </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
+    </a>
 
-    <div class="chapter-card is-pending">
+    <!-- 第 15 章 -->
+    <a href="mark_chp_15_guide.html" class="chapter-card is-active">
       <div>
-        <div class="chapter-header"><span class="chapter-number">第 15 章</span><span class="chapter-badge badge-pending">待上线</span></div>
+        <div class="chapter-header">
+          <span class="chapter-number">第 15 章</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
+        </div>
         <div class="chapter-title">十字架上的受难与埋葬</div>
-        <div class="chapter-summary">彼拉多审讯、各各他受钉、遍地黑暗、殿幔裂开、约瑟安葬。</div>
+        <div class="chapter-summary">
+          彼拉多清早审问、释放巴拉巴、兵丁紫袍荆棘冠冕戏弄、古利奈人西门背十字架、各各他髑髅地巳初受钉、午正到申初黑暗、「我的神为什么离弃我」、幔子从上到下裂开、百夫长认信、亚利马太的约瑟安葬[cite: 30, 32]。
+        </div>
       </div>
-      <div class="chapter-action"><span class="action-disabled">资料整理中</span></div>
-    </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
+    </a>
 
-    <div class="chapter-card is-pending">
+    <!-- 第 16 章 -->
+    <a href="mark_chp_16_guide.html" class="chapter-card is-active">
       <div>
-        <div class="chapter-header"><span class="chapter-number">第 16 章</span><span class="chapter-badge badge-pending">待上线</span></div>
+        <div class="chapter-header">
+          <span class="chapter-number">第 16 章</span>
+          <span class="chapter-badge badge-ready">已上线 · 全功能</span>
+        </div>
         <div class="chapter-title">荣耀复活与向万民传福音</div>
-        <div class="chapter-summary">清晨空坟、复活显现、颁布万民大使命、主升天同行神迹。</div>
+        <div class="chapter-summary">
+          安息日后清早三妇女带香料赴空坟、右边白袍少年人宣告复活并传话彼得、复活后首先向抹大拉的马利亚显现、向低气压不信的门徒显现并责备、颁布大使命（信而受洗必然得救）、升天坐神右边、主同工同行神迹证实[cite: 28, 30]。
+        </div>
       </div>
-      <div class="chapter-action"><span class="action-disabled">资料整理中</span></div>
-    </div>
+      <div class="chapter-action"><span class="action-link">进入学习与 50 题测验 →</span></div>
+    </a>
 
   </div>
 
   <div class="footer-summary-card">
     <strong>💡 圣经竞赛全书备考策略：</strong><br>
-    建议先进入各单章指南扎实筑稳人物、动作、地点与经文出处基本盘；随后多利用顶部的「全真综合模拟考」进行 50 题混抽自测，训练临场敏锐度！
+    第 1 至 16 章单章指南与题库现已全部开通！建议通过单章逐节攻克各重点细节，再配合顶部的「全真综合模拟考」进行 50 题混抽自测，全面冲刺圣经比赛！
   </div>
 </div>
 
