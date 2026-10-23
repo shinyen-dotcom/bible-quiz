@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第十四章 Bible Quiz 备战指南与测验</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.75;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+  .adaptive-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .adaptive-container { padding: 12px 10px 50px 10px; }
+  }
+
+  .top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .btn-nav-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .btn-nav-home:hover { background: #e2e8f0; }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 24px 18px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
+
+  .nav-tabs {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    background: transparent;
+    padding: 11px 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .stat-group { display: flex; gap: 18px; align-items: center; }
+  .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  .btn-submit { background: var(--accent); color: white; border: none; padding: 9px 16px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; }
+  .btn-reset { background: #e2e8f0; color: #475569; border: none; padding: 9px 12px; font-size: 14px; font-weight: 600; border-radius: 8px; margin-left: 6px; cursor: pointer; }
+  .btn-master-link {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 6px;
+  }
+  .btn-master-link:hover { background: #e2e8f0; }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    margin: 0 0 16px 0;
+  }
+  .section-h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 24px 0 14px 0;
+    border-left: 4px solid var(--accent);
+  }
+
+  .highlight-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 14.5px;
+    color: #166534;
+  }
+  .trap-box {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 14.5px;
+    color: #92400e;
+  }
+  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
+
+  .notice-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 14.5px;
+    color: #991b1b;
+  }
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 12px 0; }
+  .info-table th, .info-table td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; }
+  .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  .quiz-q { font-weight: bold; color: #1e293b; margin-top: 10px; margin-bottom: 2px; }
+  .quiz-a { color: #334155; margin-left: 12px; margin-bottom: 8px; }
+
+  .type-section-header {
+    background: #f1f5f9;
+    border-left: 5px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 24px 0 16px 0;
+  }
+  .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
+  .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
+
+  .match-table-wrap { width: 100%; overflow-x: auto; margin-top: 10px; }
+  .match-table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; }
+  .match-table th { background: #f8fafc; padding: 10px 8px; border: 1px solid var(--border); text-align: left; }
+  .match-table td { padding: 10px 8px; border: 1px solid #e2e8f0; vertical-align: middle; line-height: 1.5; }
+  .col-num { width: 44%; }
+  .col-input { width: 12%; text-align: center; background: #f8fafc; }
+  .col-alpha { width: 44%; }
+  .match-select { width: 50px; height: 32px; text-align: center; font-size: 14px; font-weight: bold; border: 1.5px solid var(--border); border-radius: 4px; background: white; }
+
+  .word-bank-box { background: #eff6ff; border: 2px dashed #93c5fd; border-radius: 10px; padding: 14px; margin: 12px 0 18px 0; }
+  .word-bank-title { font-size: 14px; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip { background: #ffffff; border: 1.5px solid var(--accent); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: all 0.15s ease; user-select: none; }
+  .word-chip:hover, .word-chip:active { background: var(--accent); color: white; }
+
+  .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; background: #ffffff; }
+  .blank-input { border: none; border-bottom: 2.5px solid #64748b; background: #f1f5f9; padding: 2px 8px; font-size: 15px; font-weight: bold; color: #0f172a; text-align: center; margin: 0 4px; border-radius: 4px 4px 0 0; cursor: pointer; transition: all 0.2s ease; }
+  .blank-input:focus, .blank-input.active-blank { outline: none; border-bottom-color: var(--accent); background: #dbeafe; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25); }
+  .blank-input.has-val { background: #e0f2fe; color: #0369a1; border-bottom-color: #0284c7; }
+  .feedback { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="adaptive-container">
+  <div class="top-navbar">
+    <a href="index.html" class="btn-nav-home">🏠 返回主页</a>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
+  </div>
+
+  <div class="header">
+    <h1>📖 马可福音第 14 章 Bible Quiz 高手备战</h1>
+    <p>受难周核心现场逐节问答拆解 ＋ 50 题互动全真测验</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南 (全问答)</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 人物/地点/顺序题</button>
+    <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题全真测验</button>
+  </div>
+
+  <!-- TAB 1: 完整还原的高手级问答式备战讲义 -->
+  <div id="tab-guide" class="tab-content active">
+    <div class="card">
+      <div class="card-title">一、先掌握第 14 章的「大地图」与宏观结构</div>
+      <p>如果说第1章是在建立“耶稣是谁”，那么第14章就是把 Quiz 带进受难周的核心现场[cite: 27]。这一章特别适合出：人物对应、地点、时间、数字、谁说了什么、谁做了什么、前后顺序、同一句话是谁说的[cite: 27]。</p>
+      <table class="info-table">
+        <thead><tr><th>段落</th><th>核心事件</th><th>Quiz 重要度</th></tr></thead>
+        <tbody>
+          <tr><td>14:1-2</td><td>祭司长和文士商议诡计（逾越节前两日）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:3-9</td><td>伯大尼香膏事件（真哪哒香膏、打破玉瓶）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:10-11</td><td>犹大去见祭司长（十二门徒之一）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:12-16</td><td>预备逾越节（拿水罐的人、大楼）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:17-21</td><td>预告有人卖祂（同蘸手在盘子里）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:22-25</td><td>最后晚餐与设立圣餐（饼＝身体，杯＝立约的血）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:26-31</td><td>橄榄山预告跌倒（鸡叫两遍，彼得三次不认）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:32-42</td><td>客西马尼园祷告（三次睡着、阿爸父）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:43-52</td><td>犹大亲嘴捉拿（刀棒、仆人耳朵被削掉、少年人逃跑）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:53-65</td><td>公会审问（假见证各不相合、大祭司撕衣、耶稣宣称“我是”）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+          <tr><td>14:66-72</td><td>彼得三次不认主（鸡叫第二遍、想起话而痛哭）[cite: 27]</td><td>⭐⭐⭐⭐⭐[cite: 27]</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        <strong>考试时最重要的主线：</strong><br>
+        商议诡计 → 伯大尼香膏 → 犹大出卖 → 预备逾越节 → 晚餐预告 → 设立圣餐 → 橄榄山预告 → 客西马尼祷告 → 亲嘴捉拿 → 公会审问 → 彼得不认主
+      </div>
+
+      <div class="section-h2">二、14:1-16 前期铺垫：阴谋、香膏与逾越节预备</div>
+      <div class="quiz-q">① 祭司长和文士商议时的核心顾虑是什么？</div>
+      <div class="quiz-a">他们决定在逾越节和除酵节前两日用诡计杀耶稣，但明确限制作出决定：<strong>「当节的日子不可，恐怕百姓生乱。」</strong>[cite: 27]</div>
+
+      <div class="quiz-q">② 伯大尼香膏事件的细节（谁、什么香膏、多少价值、耶稣评价）？</div>
+      <div class="quiz-a">
+        • 地点：伯大尼，在<strong>长大麻风的西门家里</strong>[cite: 27]。<br>
+        • 物件：一个女人拿着一玉瓶至贵的<strong>真哪哒香膏</strong>，<strong>打破玉瓶</strong>浇在耶稣头上[cite: 27]。<br>
+        • 批评者：有人很不喜悦，认为可以卖<strong>三十多两银子</strong>周济穷人[cite: 27]。<br>
+        • 耶稣评价：是一件美事，<strong>「她是为我安葬的事把香膏预先浇在我身上」</strong>[cite: 27]。并且普天下传福音也要述说她所作的以为记念[cite: 27]。
+      </div>
+
+      <div class="quiz-q">③ 预备逾越节时的关键标记是什么？</div>
+      <div class="quiz-a">耶稣差遣两个门徒进城，吩咐他们遇见一个<strong>「拿着一瓶水」</strong>的人，就跟着他，对房主说客房在哪里，主人会指给他们一间摆设整齐的<strong>「大楼」</strong>[cite: 27]。</div>
+
+      <div class="section-h2">三、14:17-31 晚餐、圣餐与橄榄山预告</div>
+      <div class="quiz-q">① 耶稣指出谁要卖祂？</div>
+      <div class="quiz-a"><strong>「是十二个门徒中同我蘸手在盘子里的那个人。」</strong>[cite: 27]</div>
+
+      <div class="quiz-q">② 圣餐中饼和杯的具体含义：</div>
+      <div class="quiz-a">
+        • 饼：<strong>「这是我的身体。」</strong>[cite: 27]<br>
+        • 杯：<strong>「这是我立约的血，为多人流出来的。」</strong>[cite: 27]
+      </div>
+
+      <div class="quiz-q">③ 彼得不认主的精确预言是什么？</div>
+      <div class="quiz-a">耶稣在橄榄山预告众人要跌倒，并对彼得说：<strong>「就在今天，夜里鸡叫两遍以先，你要三次不认我。」</strong>彼得却极力说即使同死也总不能不认祂[cite: 27]。</div>
+
+      <div class="section-h2">四、14:32-52 客西马尼园与捉拿现场</div>
+      <div class="quiz-q">① 客西马尼园同行的三位核心门徒是谁？耶稣的祷告原话？</div>
+      <div class="quiz-a">
+        • 同行三人：<strong>彼得、雅各、约翰</strong>[cite: 27]。<br>
+        • 祷告原话：<strong>「阿爸！父啊！在你凡事都能；求你将这杯撤去。然而不要从我的意思，只要从你的意思。」</strong>[cite: 27]<br>
+        • 耶稣回来发现他们睡着了，对彼得说：「西门，你睡觉吗？不能警醒片时吗？」并警告总要警醒祷告，免得入了迷惑[cite: 27]。
+      </div>
+
+      <div class="quiz-q">② 捉拿现场的突发细节：</div>
+      <div class="quiz-a">
+        • 犹大给的暗号：<strong>亲嘴</strong>[cite: 27]。<br>
+        • 混乱事件：有一个站在那里的人拔刀，将大祭司的仆人砍了一刀，<strong>削掉了他的一个耳朵</strong>[cite: 27]（⚠️ 经文此处未点名是谁砍的）。<br>
+        • 逃跑细节：门徒都离开祂逃走了；还有一个<strong>少年人赤身披着一块麻布</strong>跟随，被抓时撇下麻布赤身逃走[cite: 27]。
+      </div>
+
+      <div class="section-h2">五、14:53-72 公会审问与彼得三次否认</div>
+      <div class="quiz-q">① 公会假见证人的共同破绽是什么？</div>
+      <div class="quiz-a">有好些人作假见证告祂，只是<strong>他们的见证各不相合</strong>[cite: 27]。面对指控，耶稣不言语，一句也不回答[cite: 27]。</div>
+
+      <div class="quiz-q">② 大祭司的核心审问与耶稣的回答：</div>
+      <div class="quiz-a">
+        大祭司问：「你是那当称颂者的儿子基督不是？」<br>
+        耶稣明确回答：<strong>「我是。你们必看见人子坐在那权能者的右边，驾着天上的云降临。」</strong>[cite: 27]<br>
+        结果大祭司撕裂衣服，众人定祂该死[cite: 27]。
+      </div>
+
+      <div class="quiz-q">③ 彼得不认主的完整结果链：</div>
+      <div class="quiz-a">
+        三次被认出（使女 → 又有人 → 旁人因他是加利利人） → 第三次发咒起誓说不认得 → <strong>立时鸡叫了第二遍</strong> → 彼得想起耶稣的话 → <strong>思想起来，就哭了</strong>[cite: 27]。
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: 人物/地点/顺序题 -->
+  <div id="tab-traps" class="tab-content">
+    <div class="card">
+      <div class="card-title">二、人物、群体与混淆点矩阵</div>
+      <table class="info-table">
+        <thead><tr><th>人物/群体</th><th>核心动作/身份</th><th>Quiz 竞赛防范注意</th></tr></thead>
+        <tbody>
+          <tr><td>祭司长和文士</td><td>商议诡计杀耶稣、公会中控告</td><td>怕百姓生乱，不在节期动手[cite: 27]</td></tr>
+          <tr><td>伯大尼的女人</td><td>打破玉瓶，真哪哒香膏浇头</td><td>为安葬预先膏主，世世代代纪念[cite: 27]</td></tr>
+          <tr><td>加略人犹大</td><td>十二门徒之一，亲嘴作暗号交耶稣</td><td>主动找祭司长，拿银子[cite: 27]</td></tr>
+          <tr><td>彼得、雅各、约翰</td><td>客西马尼同行者，但在园中三次睡着</td><td>与其余门徒有所区别[cite: 27]</td></tr>
+          <tr><td>大祭司</td><td>审问耶稣，问是否是基督，撕裂衣服</td><td>定耶稣该死[cite: 27]</td></tr>
+          <tr><td>大祭司的仆人</td><td>被削掉一个耳朵</td><td>行凶者经文未点名，不要盲目猜彼得[cite: 27]</td></tr>
+          <tr><td>少年人</td><td>赤身披麻布，被抓时撇下麻布逃走</td><td>马可福音独特细节[cite: 27]</td></tr>
+        </tbody>
+      </table>
+
+      <div class="card-title" style="margin-top:20px;">三、Bible Quiz「高难度陷阱题」预警</div>
+      <div class="trap-box">
+        • ❌ 祭司长和文士决定在逾越节当天公开逮捕耶稣。→ 错；他们说“当节的日子不可，恐怕百姓生乱”[cite: 27]。<br>
+        • ❌ 门徒预备逾越节时，跟着一个赶羊羔的人。→ 错；经文说是“拿着一瓶水”的人[cite: 27]。<br>
+        • ❌ 耶稣预言彼得会在鸡叫一遍以前三次不认主。→ 错；原话是“鸡叫两遍以先”[cite: 27]。<br>
+        • ❌ 砍掉大祭司仆人耳朵的经文明确写明是彼得干的。→ 错；经文只说“有一个站在那里的人”[cite: 27]。<br>
+        • ❌ 彼得在院子里听见鸡叫第一遍时就哭了。→ 错；是“立时鸡叫了第二遍”，彼得才想起并哭了[cite: 27]。
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 必背经文与口诀 -->
+  <div id="tab-verses" class="tab-content">
+    <div class="card">
+      <div class="card-title">四、必背经文与口诀速记</div>
+      <div class="highlight-box">
+        <strong>🥇 核心金句速记：</strong><br>
+        • 可 14:6：「由她吧！为什么难为她呢？她在我身上作的是一件美事。」[cite: 27]<br>
+        • 可 14:22：「你们拿着吃，这是我的身体。」[cite: 27]<br>
+        • 可 14:24：「这是我立约的血，为多人流出来的。」[cite: 27]<br>
+        • 可 14:36：「阿爸！父啊！在你凡事都能；求你将这杯撤去。然而不要从我的意思，只要从你的意思。」[cite: 27]<br>
+        • 可 14:62：「我是。你们必看见人子坐在那权能者的右边，驾着天上的云降临。」[cite: 27]
+      </div>
+      <div class="trap-box">
+        <span class="trap-tag">全章大纲顺口溜</span>
+        逾越两日前谋杀，伯大尼女人膏；犹大去见祭司长，三十多两香膏价；两个门徒跟水瓶，大楼预备逾越筵；同席蘸盘有人卖，饼是身体杯是血；唱诗上橄榄山，鸡叫两遍三次否；客西马尼三祷告，彼得雅各约翰睡；犹大亲嘴带刀棒，仆人耳朵被削掉；公会假证各不合，大祭司问基督否；耶稣说“我是”，人子驾云要降临；彼得院里三次否，鸡叫第二遍就哭[cite: 27]。
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: 50 题互动测验 -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="dashboard">
+      <div class="stat-group">
+        <div class="stat-box"><div class="stat-val" id="total-score">0 / 50</div><div class="stat-lbl">答对题数</div></div>
+        <div class="stat-box"><div class="stat-val" id="accuracy-rate">0%</div><div class="stat-lbl">正确率</div></div>
+      </div>
+      <div>
+        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽题</button>
+        <a href="mark_all_chapters_quiz.html" class="btn-master-link">🏆 进入全卷总考</a>
+        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+      </div>
+    </div>
+    <div id="quiz-sections-container"></div>
+  </div>
+</div>
+
+<script src="mark_master_quiz_data.js"></script>
+
+<script>
+let activeMatchSet = [];
+let activeOtherSet = [];
+let activeQuestionSet = [];
+let activeDynamicWordPool = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch14_from_master_v1";
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function generateDynamicAnswerPool(selectedQuestions) {
+  const answerSet = new Set();
+  selectedQuestions.forEach(q => {
+    if (q.type === "fill" && q.blanks) {
+      q.blanks.forEach(b => {
+        const primaryAns = b.ans.split("|")[0].trim();
+        if (primaryAns) answerSet.add(primaryAns);
+      });
+    }
+  });
+
+  const distractors = ["彼拉多", "巴拉巴", "真哪哒", "西门", "犹大", "水瓶", "大楼", "身体", "立约的血", "两", "三", "阿爸", "亲嘴", "耳朵", "假", "我是", "彼得", "加利利"];
+  const shuffledDist = shuffleArray(distractors);
+  for (let i = 0; i < shuffledDist.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDist[i]);
+  }
+  return shuffleArray(Array.from(answerSet));
+}
+
+function initQuiz(forceRegenerate = false) {
+  if (!window.MARK_MASTER_QUESTION_POOL) {
+    document.getElementById("quiz-sections-container").innerHTML = 
+      "<div style='padding:20px; text-align:center; color:#dc2626;'>未检测到 mark_master_quiz_data.js 题库文件，请确保该文件在同级目录下！</div>";
+    return;
+  }
+
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeMatchSet = parsed.matchPairs || [];
+      activeOtherSet = parsed.otherQuestions || [];
+      activeQuestionSet = parsed.questions || [];
+      activeDynamicWordPool = parsed.wordPool || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  // 1. 筛选属于第 14 章 (ch === 14) 的题目
+  const ch14Questions = window.MARK_MASTER_QUESTION_POOL.filter(q => q.ch === 14);
+  const matchQ = ch14Questions.filter(q => q.type === "matching");
+  activeMatchSet = matchQ.length > 0 ? matchQ[0].pairs : [];
+
+  const others = shuffleArray(ch14Questions.filter(q => q.type !== "matching"));
+  const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
+  activeOtherSet = others.slice(0, 43).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  activeQuestionSet = [...(matchQ.length > 0 ? [matchQ[0]] : []), ...activeOtherSet];
+  activeDynamicWordPool = generateDynamicAnswerPool(activeOtherSet);
+
+  saveQuizState({});
+  renderQuizUI();
+}
+
+function regenerateQuiz() {
+  if (confirm("确定要重新抽取第 14 章的 50 题测验吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
+function renderQuizUI() {
+  const container = document.getElementById("quiz-sections-container");
+  container.innerHTML = "";
+
+  let globalQuestionCounter = 1;
+
+  // 1. 配对题部分（题号 1 - 7）
+  if (activeMatchSet.length > 0) {
+    const matchSecHeader = document.createElement("div");
+    matchSecHeader.className = "type-section-header";
+    matchSecHeader.innerHTML = `
+      <h3 class="type-section-title">第一部分：经文配对题（第 1 - ${activeMatchSet.length} 题）</h3>
+      <p class="type-section-desc">在中间下拉框选填与前半句配对的字母（右侧选项次序已随机排布）：</p>
+    `;
+    container.appendChild(matchSecHeader);
+
+    const matchItem = document.createElement("div");
+    matchItem.className = "q-item";
+
+    const letters = ["A", "B", "C", "D", "E", "F", "G"];
+    const shuffledRight = shuffleArray(activeMatchSet.map(p => ({ pairId: p.id, text: p.rightText })));
+    const targetMap = {};
+    shuffledRight.forEach((item, i) => { targetMap[item.pairId] = letters[i]; });
+
+    let matchTableHtml = `
+      <div class="match-table-wrap">
+        <table class="match-table">
+          <thead>
+            <tr>
+              <th class="col-num">题号与前半段</th>
+              <th class="col-input">选填</th>
+              <th class="col-alpha">备选后半段 (A - G 随机顺序)</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+    activeMatchSet.forEach((p, idx) => {
+      const qNum = globalQuestionCounter;
+      const correctLetter = targetMap[p.id];
+      const rightItem = shuffledRight[idx];
+
+      matchTableHtml += `
+        <tr>
+          <td class="col-num"><strong>${qNum}.</strong> ${p.left}</td>
+          <td class="col-input">
+            <select class="match-select match-row-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
+              <option value="">-</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </td>
+          <td class="col-alpha"><strong>${letters[idx]}.</strong> ${rightItem.text}</td>
+        </tr>`;
+      
+      globalQuestionCounter++;
+    });
+
+    matchTableHtml += `</tbody></table></div><div class="feedback" id="fb-matching-all"></div>`;
+    matchItem.innerHTML = matchTableHtml;
+    container.appendChild(matchItem);
+  }
+
+  // 2. 其余题型部分（填空、选择/排序、是非）
+  const subGroups = {
+    "fill": { title: "第二部分：填空题", desc: "请根据下方词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
+    "radio": { title: "第三部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第四部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeOtherSet.forEach(q => {
+    if (subGroups[q.type]) subGroups[q.type].list.push(q);
+  });
+
+  ["fill", "radio", "tf"].forEach(typeKey => {
+    const grp = subGroups[typeKey];
+    if (grp.list.length === 0) return;
+
+    const startNum = globalQuestionCounter;
+    const endNum = globalQuestionCounter + grp.list.length - 1;
+
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
+    }
+
+    grp.list.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        item.innerHTML = `
+          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
+            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        let optsHtml = `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        optsHtml += `</div>`;
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          ${optsHtml}
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "tf") {
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="opt-group" style="flex-direction:row; max-width:280px;">
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      }
+
+      container.appendChild(item);
+      globalQuestionCounter++;
+    });
+  });
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
+  calculateAndUpdateTotals(0);
+}
+
+function renderWordBank() {
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  activeDynamicWordPool.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
+  });
+}
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
+  document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
+}
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
+  }
+}
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
+function getUserAnswers() {
+  const answers = {};
+  document.querySelectorAll("#quiz-sections-container input, #quiz-sections-container select").forEach(el => {
+    if (el.tagName === "SELECT") {
+      if (el.value) answers[el.id] = el.value;
+    } else if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
+    }
+  });
+  return answers;
+}
+
+function saveQuizState(answers) {
+  const data = {
+    matchPairs: activeMatchSet,
+    otherQuestions: activeOtherSet,
+    questions: activeQuestionSet,
+    wordPool: activeDynamicWordPool,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
+}
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.tagName === "SELECT") {
+      textEl.value = val;
+    } else if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+
+  // 1. 批改配对题 (7 题)
+  let mOk = 0;
+  let mErrs = [];
+  activeMatchSet.forEach(p => {
+    const sel = document.getElementById("m_row_" + p.id);
+    const v = (sel.value || "").toUpperCase();
+    const expected = sel.getAttribute("data-ans");
+    if (v === expected) {
+      mOk++;
+      score++;
+      sel.style.borderColor = "#16a34a";
+      sel.style.background = "#dcfce7";
+    } else {
+      sel.style.borderColor = "#dc2626";
+      sel.style.background = "#fee2e2";
+      mErrs.push(`${p.left.slice(0, 8)}...应选【${expected}】`);
+    }
+  });
+
+  const fbMatch = document.getElementById("fb-matching-all");
+  if (fbMatch) {
+    if (mOk === activeMatchSet.length) {
+      fbMatch.className = "feedback is-correct";
+      fbMatch.innerHTML = `配对题全部正确！`;
+    } else {
+      fbMatch.className = "feedback is-wrong";
+      fbMatch.innerHTML = `配对题答对 ${mOk} / ${activeMatchSet.length}。错误提示：${mErrs.join("； ")}`;
+    }
+  }
+
+  // 2. 批改其余题目
+  activeOtherSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "radio" || q.type === "tf") {
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。出处：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score) {
+  const total = activeMatchSet.length + activeOtherSet.length;
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
+</script>
+
+</body>
+</html>
