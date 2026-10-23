@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>马可福音第十三章 Bible Quiz 备战指南与测验</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --card-bg: #ffffff;
+    --correct: #15803d;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.75;
+    color: var(--text);
+    background-color: var(--bg-page);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+  }
+  .adaptive-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 25px rgba(0,0,0,0.06);
+    padding: 20px 20px 60px 20px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .adaptive-container { padding: 12px 10px 50px 10px; }
+  }
+
+  .top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .btn-nav-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .btn-nav-home:hover { background: #e2e8f0; }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 24px 18px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header h1 { margin: 0 0 6px 0; font-size: 23px; font-weight: 700; }
+  .header p { margin: 0; opacity: 0.95; font-size: 14.5px; }
+
+  .nav-tabs {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    background: transparent;
+    padding: 11px 6px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  .dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .stat-group { display: flex; gap: 18px; align-items: center; }
+  .stat-val { font-size: 19px; font-weight: bold; color: var(--accent); }
+  .stat-lbl { font-size: 12.5px; color: var(--text-muted); }
+  .save-status { font-size: 12px; color: #16a34a; font-weight: 600; display: block; margin-top: 2px; }
+  .btn-submit { background: var(--accent); color: white; border: none; padding: 9px 16px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; }
+  .btn-reset { background: #e2e8f0; color: #475569; border: none; padding: 9px 12px; font-size: 14px; font-weight: 600; border-radius: 8px; margin-left: 6px; cursor: pointer; }
+  .btn-master-link {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 6px;
+  }
+  .btn-master-link:hover { background: #e2e8f0; }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+    margin: 0 0 16px 0;
+  }
+  .section-h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 24px 0 14px 0;
+    border-left: 4px solid var(--accent);
+  }
+
+  .highlight-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 14.5px;
+    color: #166534;
+  }
+  .trap-box {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 14.5px;
+    color: #92400e;
+  }
+  .trap-tag { display: inline-block; background: #faad14; color: white; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
+
+  .notice-box {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 14.5px;
+    color: #991b1b;
+  }
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 12px 0; }
+  .info-table th, .info-table td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; }
+  .info-table th { background: #f1f5f9; font-weight: bold; color: var(--primary); }
+
+  .quiz-q { font-weight: bold; color: #1e293b; margin-top: 10px; margin-bottom: 2px; }
+  .quiz-a { color: #334155; margin-left: 12px; margin-bottom: 8px; }
+
+  .type-section-header {
+    background: #f1f5f9;
+    border-left: 5px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 24px 0 16px 0;
+  }
+  .type-section-title { font-size: 17px; font-weight: bold; color: var(--primary); margin: 0; }
+  .type-section-desc { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; }
+
+  .match-table-wrap { width: 100%; overflow-x: auto; margin-top: 10px; }
+  .match-table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; }
+  .match-table th { background: #f8fafc; padding: 10px 8px; border: 1px solid var(--border); text-align: left; }
+  .match-table td { padding: 10px 8px; border: 1px solid #e2e8f0; vertical-align: middle; line-height: 1.5; }
+  .col-num { width: 44%; }
+  .col-input { width: 12%; text-align: center; background: #f8fafc; }
+  .col-alpha { width: 44%; }
+  .match-select { width: 50px; height: 32px; text-align: center; font-size: 14px; font-weight: bold; border: 1.5px solid var(--border); border-radius: 4px; background: white; }
+
+  .word-bank-box { background: #eff6ff; border: 2px dashed #93c5fd; border-radius: 10px; padding: 14px; margin: 12px 0 18px 0; }
+  .word-bank-title { font-size: 14px; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip { background: #ffffff; border: 1.5px solid var(--accent); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.04); transition: all 0.15s ease; user-select: none; }
+  .word-chip:hover, .word-chip:active { background: var(--accent); color: white; }
+
+  .q-item { margin-bottom: 16px; padding: 16px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+  .q-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.55; }
+  .opt-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; background: #ffffff; }
+  .blank-input { border: none; border-bottom: 2.5px solid #64748b; background: #f1f5f9; padding: 2px 8px; font-size: 15px; font-weight: bold; color: #0f172a; text-align: center; margin: 0 4px; border-radius: 4px 4px 0 0; cursor: pointer; transition: all 0.2s ease; }
+  .blank-input:focus, .blank-input.active-blank { outline: none; border-bottom-color: var(--accent); background: #dbeafe; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25); }
+  .blank-input.has-val { background: #e0f2fe; color: #0369a1; border-bottom-color: #0284c7; }
+  .feedback { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; }
+  .feedback.is-correct { display: block; background: var(--correct-bg); color: var(--correct); border: 1px solid #86efac; }
+  .feedback.is-wrong { display: block; background: var(--wrong-bg); color: var(--wrong); border: 1px solid #fca5a5; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="adaptive-container">
+  <div class="top-navbar">
+    <a href="index.html" class="btn-nav-home">🏠 返回主页</a>
+    <span style="font-size: 13px; color: var(--text-muted);">马可福音圣经比赛备战平台</span>
+  </div>
+
+  <div class="header">
+    <h1>📖 马可福音第 13 章 Bible Quiz 备战</h1>
+    <p>全章大地图逐节问答拆解 ＋ 50 题互动全真测验</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('guide')">📖 备战指南 (全问答)</button>
+    <button class="tab-btn" onclick="switchTab('traps')">🧠 人物/地点/顺序题</button>
+    <button class="tab-btn" onclick="switchTab('verses')">📜 必背经文与口诀</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">✍️ 50题全真测验</button>
+  </div>
+
+  <!-- TAB 1: 完整还原的问答式备战讲义 -->
+  <div id="tab-guide" class="tab-content active">
+    <div class="card">
+      <div class="card-title">一、先掌握第 13 章的「大地图」[cite: 19]</div>
+      <p>第13章是整卷马可福音非常典型的「预言题章节」。不要只背故事，要把「谁说、对谁说、什么时候、会发生什么、不要做什么」练到自动反射[cite: 19]。</p>
+      <table class="info-table">
+        <thead><tr><th>段落</th><th>内容</th><th>Quiz 重要度</th></tr></thead>
+        <tbody>
+          <tr><td>13:1-2</td><td>圣殿将被拆毁的预言[cite: 19]</td><td>⭐⭐⭐⭐⭐[cite: 19]</td></tr>
+          <tr><td>13:3-8</td><td>橄榄山上：迷惑、战争、地震、饥荒[cite: 19]</td><td>⭐⭐⭐⭐⭐[cite: 19]</td></tr>
+          <tr><td>13:9-13</td><td>门徒受逼迫、在公会受审、圣灵帮助[cite: 19]</td><td>⭐⭐⭐⭐⭐[cite: 19]</td></tr>
+          <tr><td>13:14-23</td><td>那行毁坏可憎的＋大灾难＋假基督假先知[cite: 19]</td><td>⭐⭐⭐⭐⭐[cite: 19]</td></tr>
+          <tr><td>13:24-27</td><td>人子降临、招聚选民[cite: 19]</td><td>⭐⭐⭐⭐⭐[cite: 19]</td></tr>
+          <tr><td>13:28-31</td><td>无花果树的比喻＋这世代不会过去[cite: 19]</td><td>⭐⭐⭐⭐⭐[cite: 19]</td></tr>
+          <tr><td>13:32-37</td><td>没有人知道那日子那时辰＋警醒[cite: 19]</td><td>⭐⭐⭐⭐⭐[cite: 19]</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box">
+        <strong>考试时最重要的主线：</strong><br>
+        圣殿被拆毁 → 橄榄山预言 → 不要受迷惑 → 战争/地震/饥荒 → 门徒受逼迫 → 圣灵帮助 → 大灾难 → 假基督假先知 → 人子降临 → 招聚选民 → 无花果树 → 天地要废去但主的话不废去 → 不知道日子时辰 → 警醒[cite: 19]
+      </div>
+
+      <div class="section-h2">二、13:1-2 圣殿被拆毁——开场就是超级重点</div>
+      <div class="quiz-q">① 谁先赞叹圣殿？</div>
+      <div class="quiz-a">一个门徒对耶稣说：「夫子，请看，这是何等的石头！何等的殿宇！」（⚠️ 马可没有在 13:1 点名是哪一个门徒[cite: 19]）。</div>
+      
+      <div class="quiz-q">② 耶稣的预言是什么？</div>
+      <div class="quiz-a"><strong>「你看见这大殿宇吗？将来在这里没有一块石头留在石头上，不被拆毁了。」</strong>[cite: 19]</div>
+
+      <div class="section-h2">三、13:3-8 橄榄山预言——四个人与预兆</div>
+      <div class="quiz-q">① 谁暗暗地问耶稣？问什么问题？</div>
+      <div class="quiz-a"><strong>彼得、雅各、约翰和安得烈</strong>暗暗地问祂：「请告诉我们，什么时候有这些事？这一切事将成的时候，有什么预兆呢？」[cite: 19]<br>
+      🔥 四个人顺序必须记牢：<strong>彼得 → 雅各 → 约翰 → 安得烈</strong>[cite: 19]。</div>
+
+      <div class="quiz-q">② 耶稣的第一句警告是什么？</div>
+      <div class="quiz-a"><strong>「你们要谨慎，免得有人迷惑你们。」</strong>（13:5）[cite: 19]</div>
+
+      <div class="quiz-q">③ 战争、地震与饥荒的性质是什么？</div>
+      <div class="quiz-a">
+        • 听见打仗和打仗的风声，<strong>不要惊慌</strong>；这些事是必须有的，只是末期还没有到[cite: 19]。<br>
+        • 多处必有地震、饥荒，<strong>这些事是灾难的起头</strong>[cite: 19]。
+      </div>
+
+      <div class="section-h2">四、13:9-13 门徒受逼迫与圣灵帮助</div>
+      <div class="quiz-q">① 门徒将要面对的逼迫场景有哪些？</div>
+      <div class="quiz-a">
+        人要把你们交给<strong>公会</strong>，并且你们在<strong>会堂</strong>里要受鞭打；又为我的缘故站在<strong>诸侯与君王</strong>面前，对他们作见证[cite: 19]。<br>
+        🔥 顺序：<strong>公会 → 会堂 → 诸侯 → 君王</strong>[cite: 19]。
+      </div>
+
+      <div class="quiz-q">② 受审时谁会赐给他们当说的话？</div>
+      <div class="quiz-a">不要预先思虑说什么；到那时候，赐给你们什么话，你们就说什么；说话的不是你们，乃是<strong>圣灵</strong>[cite: 19]。</div>
+
+      <div class="quiz-q">③ 最终的应许是什么？</div>
+      <div class="quiz-a">「你们要为我的名被众人恨恶，<strong>惟有忍耐到底的必然得救</strong>。」（13:13）[cite: 19]</div>
+
+      <div class="section-h2">五、13:14-23 那行毁坏可憎的与大灾难</div>
+      <div class="quiz-q">① 面对大灾难，具体的逃难指示是什么？</div>
+      <div class="quiz-a">
+        • 在犹太的应当<strong>逃到山上</strong>[cite: 19]。<br>
+        • 在房上的，<strong>不要下来，也不要进去拿家里的东西</strong>[cite: 19]。<br>
+        • 在田里的，<strong>也不要回去取衣裳</strong>[cite: 19]。<br>
+        • 怀孕的和奶孩子的有祸了；应当祈求叫这些事<strong>不在冬天临到</strong>[cite: 19]。
+      </div>
+
+      <div class="quiz-q">② 为什么主会减少那日子？假基督会做什么？</div>
+      <div class="quiz-a">
+        • 若不是主减少那日子，凡有血气的总没有一个得救的；只是为主的<strong>选民</strong>，祂将那日子减少了[cite: 19]。<br>
+        • 假基督、假先知要起来，显<strong>神迹奇事</strong>，倘若能行，就把选民迷惑了，所以要<strong>谨慎</strong>[cite: 19]。
+      </div>
+
+      <div class="section-h2">六、13:24-27 人子降临与招聚选民</div>
+      <div class="quiz-q">① 灾难之后的天文异象有哪些？</div>
+      <div class="quiz-a"><strong>日头要变黑了，月亮也不放光，众星要从天上坠落，天势都要震动</strong>[cite: 19]。</div>
+
+      <div class="quiz-q">② 人子降临与选民招聚的细节：</div>
+      <div class="quiz-a">
+        「他们要看见<strong>人子有大能力、大荣耀，驾云降临</strong>。」[cite: 19]<br>
+        人子要差遣使者，把祂的选民<strong>从四方，从地极直到天边</strong>，都招聚了来[cite: 19]。
+      </div>
+
+      <div class="section-h2">七、13:28-31 无花果树的比喻与主话语的永恒</div>
+      <div class="quiz-q">① 无花果树的比喻说明什么？</div>
+      <div class="quiz-a">当树枝<strong>发嫩长叶</strong>的时候，就知道<strong>夏天近了</strong>；看见这些事渐渐成就，也该知道人子近了，正在门口[cite: 19]。</div>
+
+      <div class="quiz-q">② 绝对不变的真理是什么？</div>
+      <div class="quiz-a">
+        「我实在告诉你们，<strong>这世代还没有过去，这些事要全都成就</strong>。」（13:30）[cite: 19]<br>
+        「<strong>天地要废去，我的话却不能废去</strong>。」（13:31）[cite: 19]
+      </div>
+
+      <div class="section-h2">八、13:32-37 没有人知道那日子那时辰——全章结尾与警醒</div>
+      <div class="quiz-q">① 谁知道那日子那时辰？</div>
+      <div class="quiz-a">
+        「但那日子，那时辰，<strong>没有人知道，连天上的使者也不知道，子也不知道，惟有父知道</strong>。」（13:32）[cite: 19]
+      </div>
+
+      <div class="quiz-q">② 家主比喻与四个夜间时段：</div>
+      <div class="quiz-a">
+        家主离开本家，交权柄给仆人，又吩咐看门的警醒。不知道家主什么时候来：或<strong>晚上，或半夜，或鸡叫，或早晨</strong>[cite: 19]。<br>
+        最后耶稣对<strong>众人</strong>发出的总命令：<strong>「要警醒！」</strong>（13:37）[cite: 19]
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: 图表、数字与易混矩阵 -->
+  <div id="tab-traps" class="tab-content">
+    <div class="card">
+      <div class="card-title">九、第 13 章核心对比与矩阵</div>
+      <table class="info-table">
+        <thead><tr><th>核心概念</th><th>经文对应重点</th><th>Quiz 备战防范</th></tr></thead>
+        <tbody>
+          <tr><td>四个人提问</td><td>彼得、雅各、约翰、安得烈</td><td>不要漏掉安得烈[cite: 19]</td></tr>
+          <tr><td>受逼迫四场景</td><td>公会 → 会堂 → 诸侯 → 君王</td><td>注意顺序及圣灵赐话[cite: 19]</td></tr>
+          <tr><td>逃难禁忌</td><td>房上莫下、田里莫回取衣裳</td><td>考查细节反应[cite: 19]</td></tr>
+          <tr><td>季节预兆</td><td>无花果树枝子发嫩长叶 → 夏天</td><td>不要误记成开花[cite: 19]</td></tr>
+          <tr><td>谁知道时间</td><td>惟有父知道（天使与子皆不知）</td><td>必考填空题[cite: 19]</td></tr>
+          <tr><td>夜间四时段</td><td>晚上、半夜、鸡叫、早晨</td><td>家主回来可能的时刻[cite: 19]</td></tr>
+        </tbody>
+      </table>
+
+      <div class="card-title" style="margin-top:20px;">十、Bible Quiz「高难度陷阱题」预警</div>
+      <div class="trap-box">
+        • ❌ 门徒赞叹圣殿时，彼得直接说出了殿宇的宏伟。→ 错；马可 13:1 明确是一个门徒，没有点名彼得[cite: 19]。<br>
+        • ❌ 战争与地震发生时，代表末期已经立刻到了。→ 错；耶稣说“这是灾难的起头，末期还没有到”[cite: 19]。<br>
+        • ❌ 门徒受审时需要提前精心准备辩词。→ 错；说话的不是门徒，乃是圣灵[cite: 19]。<br>
+        • ❌ 耶稣说无花果树开花时就知道夏天近了。→ 错；经文原话是“枝子发嫩长叶的时候”[cite: 19]。<br>
+        • ❌ 天上的使者和人子都知道末日具体的时间。→ 错；子也不知道，惟有父知道[cite: 19]。
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 必背经文、口诀与背诵指南 -->
+  <div id="tab-verses" class="tab-content">
+    <div class="card">
+      <div class="card-title">十一、第 13 章必须背诵经文清单</div>
+      <p><strong>🥇 Level 1：建议全组背熟</strong></p>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>1. 可 13:5</strong>「你们要谨慎，免得有人迷惑你们。」[cite: 19]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>2. 可 13:13</strong>「你们要为我的名被众人恨恶，惟有忍耐到底的必然得救。」[cite: 19]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>3. 可 13:31</strong>「天地要废去，我的话却不能废去。」[cite: 19]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:8px;"><strong>4. 可 13:32</strong>「但那日子，那时辰，没有人知道，连天上的使者也不知道，子也不知道，惟有父知道。」[cite: 19]</div>
+      <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; margin-bottom:14px;"><strong>5. 可 13:37</strong>「我对你们所说的话，也是对众人说：要警醒！」[cite: 19]</div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:10px; margin-bottom:14px;">
+        <p style="font-size:15px; font-weight:bold; color:#166534; margin:0 0 6px 0;">🎯 十二、第 13 章一句话口诀：</p>
+        <p style="font-size:14px; color:#15803d; margin:0; line-height:1.65;">
+          <strong>「圣殿石头全拆毁，四门徒橄榄山问；谨慎防迷惑战争，公会君王圣灵语；毁坏可憎逃山上，人子降临四方聚；无花果树夏近了，惟有父知那时辰；晚上半夜鸡叫早，众人警醒切莫睡。」</strong>[cite: 19]
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: 50 题互动测验 (数据由中央题库 mark_master_quiz_data.js 注入) -->
+  <div id="tab-quiz" class="tab-content">
+    <div class="dashboard">
+      <div class="stat-group">
+        <div class="stat-box"><div class="stat-val" id="total-score">0 / 50</div><div class="stat-lbl">答对题数</div></div>
+        <div class="stat-box"><div class="stat-val" id="accuracy-rate">0%</div><div class="stat-lbl">正确率</div></div>
+      </div>
+      <div>
+        <button class="btn-submit" onclick="gradeQuiz()">核对答案</button>
+        <button class="btn-reset" onclick="regenerateQuiz()">🔀 重新抽题</button>
+        <a href="mark_all_chapters_quiz.html" class="btn-master-link">🏆 进入全卷总考</a>
+        <span class="save-status" id="save-status">💾 进度已自动保存</span>
+      </div>
+    </div>
+    <div id="quiz-sections-container"></div>
+  </div>
+</div>
+
+<!-- 引入中央 Master 全量题库文件 -->
+<script src="mark_master_quiz_data.js"></script>
+
+<script>
+let activeMatchSet = [];
+let activeOtherSet = [];
+let activeQuestionSet = [];
+let activeDynamicWordPool = [];
+let activeBlankId = null;
+const STORAGE_KEY = "mark_ch13_from_master_v1";
+
+function shuffleArray(arr) {
+  const array = [...arr];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function generateDynamicAnswerPool(selectedQuestions) {
+  const answerSet = new Set();
+  selectedQuestions.forEach(q => {
+    if (q.type === "fill" && q.blanks) {
+      q.blanks.forEach(b => {
+        const primaryAns = b.ans.split("|")[0].trim();
+        if (primaryAns) answerSet.add(primaryAns);
+      });
+    }
+  });
+
+  const distractors = ["拆毁", "约翰", "安得烈", "忍耐", "废去", "父", "迷惑", "四方", "警醒", "圣灵", "夏天", "逃", "选民", "放光"];
+  const shuffledDist = shuffleArray(distractors);
+  for (let i = 0; i < shuffledDist.length && answerSet.size < 22; i++) {
+    answerSet.add(shuffledDist[i]);
+  }
+  return shuffleArray(Array.from(answerSet));
+}
+
+function initQuiz(forceRegenerate = false) {
+  if (!window.MARK_MASTER_QUESTION_POOL) {
+    document.getElementById("quiz-sections-container").innerHTML = 
+      "<div style='padding:20px; text-align:center; color:#dc2626;'>未检测到 mark_master_quiz_data.js 题库文件，请确保该文件在同级目录下！</div>";
+    return;
+  }
+
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!forceRegenerate && savedData) {
+    try {
+      const parsed = JSON.parse(savedData);
+      activeMatchSet = parsed.matchPairs || [];
+      activeOtherSet = parsed.otherQuestions || [];
+      activeQuestionSet = parsed.questions || [];
+      activeDynamicWordPool = parsed.wordPool || [];
+      renderQuizUI();
+      restoreSavedAnswers(parsed.answers || {});
+      return;
+    } catch(e) { console.error(e); }
+  }
+
+  // 1. 筛选属于第 13 章 (ch === 13) 的题目
+  const ch13Questions = window.MARK_MASTER_QUESTION_POOL.filter(q => q.ch === 13);
+  const matchQ = ch13Questions.filter(q => q.type === "matching");
+  activeMatchSet = matchQ.length > 0 ? matchQ[0].pairs : [];
+
+  const others = shuffleArray(ch13Questions.filter(q => q.type !== "matching"));
+  const typeOrder = { "fill": 1, "radio": 2, "tf": 3 };
+  activeOtherSet = others.slice(0, 43).sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
+  activeQuestionSet = [...(matchQ.length > 0 ? [matchQ[0]] : []), ...activeOtherSet];
+  activeDynamicWordPool = generateDynamicAnswerPool(activeOtherSet);
+
+  saveQuizState({});
+  renderQuizUI();
+}
+
+function regenerateQuiz() {
+  if (confirm("确定要重新抽取第 13 章的 50 题测验吗？")) {
+    localStorage.removeItem(STORAGE_KEY);
+    initQuiz(true);
+  }
+}
+
+function renderQuizUI() {
+  const container = document.getElementById("quiz-sections-container");
+  container.innerHTML = "";
+
+  let globalQuestionCounter = 1;
+
+  // 1. 配对题部分（题号 1 - 7）
+  if (activeMatchSet.length > 0) {
+    const matchSecHeader = document.createElement("div");
+    matchSecHeader.className = "type-section-header";
+    matchSecHeader.innerHTML = `
+      <h3 class="type-section-title">第一部分：经文配对题（第 1 - ${activeMatchSet.length} 题）</h3>
+      <p class="type-section-desc">在中间下拉框选填与前半句配对的字母（右侧选项次序已随机排布）：</p>
+    `;
+    container.appendChild(matchSecHeader);
+
+    const matchItem = document.createElement("div");
+    matchItem.className = "q-item";
+
+    const letters = ["A", "B", "C", "D", "E", "F", "G"];
+    const shuffledRight = shuffleArray(activeMatchSet.map(p => ({ pairId: p.id, text: p.rightText })));
+    const targetMap = {};
+    shuffledRight.forEach((item, i) => { targetMap[item.pairId] = letters[i]; });
+
+    let matchTableHtml = `
+      <div class="match-table-wrap">
+        <table class="match-table">
+          <thead>
+            <tr>
+              <th class="col-num">题号与前半段</th>
+              <th class="col-input">选填</th>
+              <th class="col-alpha">备选后半段 (A - G 随机顺序)</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+    activeMatchSet.forEach((p, idx) => {
+      const qNum = globalQuestionCounter;
+      const correctLetter = targetMap[p.id];
+      const rightItem = shuffledRight[idx];
+
+      matchTableHtml += `
+        <tr>
+          <td class="col-num"><strong>${qNum}.</strong> ${p.left}</td>
+          <td class="col-input">
+            <select class="match-select match-row-select" id="m_row_${p.id}" data-ans="${correctLetter}" onchange="onUserAnswerChange()">
+              <option value="">-</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </td>
+          <td class="col-alpha"><strong>${letters[idx]}.</strong> ${rightItem.text}</td>
+        </tr>`;
+      
+      globalQuestionCounter++;
+    });
+
+    matchTableHtml += `</tbody></table></div><div class="feedback" id="fb-matching-all"></div>`;
+    matchItem.innerHTML = matchTableHtml;
+    container.appendChild(matchItem);
+  }
+
+  // 2. 其余题型部分（填空、选择/排序、是非）
+  const subGroups = {
+    "fill": { title: "第二部分：填空题", desc: "请根据下方词库填入空格（点击词汇填入，点击输入框反选清除）：", list: [] },
+    "radio": { title: "第三部分：单选、多选与排序题", desc: "请点按正确选项：", list: [] },
+    "tf": { title: "第四部分：是非判断题", desc: "判断下列说法是否正确（√ 正确，× 错误）：", list: [] }
+  };
+
+  activeOtherSet.forEach(q => {
+    if (subGroups[q.type]) subGroups[q.type].list.push(q);
+  });
+
+  ["fill", "radio", "tf"].forEach(typeKey => {
+    const grp = subGroups[typeKey];
+    if (grp.list.length === 0) return;
+
+    const startNum = globalQuestionCounter;
+    const endNum = globalQuestionCounter + grp.list.length - 1;
+
+    const secHeader = document.createElement("div");
+    secHeader.className = "type-section-header";
+    secHeader.innerHTML = `
+      <h3 class="type-section-title">${grp.title}（第 ${startNum} - ${endNum} 题）</h3>
+      <p class="type-section-desc">${grp.desc}</p>
+    `;
+    container.appendChild(secHeader);
+
+    if (typeKey === "fill") {
+      const bankCard = document.createElement("div");
+      bankCard.className = "word-bank-box";
+      bankCard.innerHTML = `
+        <div class="word-bank-title">
+          <span>💡 填空题专属匹配词库 (Answer Pool)：点击词汇填入，点击输入框反选清除</span>
+          <button style="border:none; background:#dbeafe; color:var(--accent); border-radius:4px; padding:3px 8px; font-size:12px; cursor:pointer;" onclick="renderWordBank()">🔀 打乱词库</button>
+        </div>
+        <div class="word-chips" id="word-chips-container"></div>
+      `;
+      container.appendChild(bankCard);
+    }
+
+    grp.list.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "q-item";
+      item.id = `card-${q.id}`;
+
+      if (q.type === "fill") {
+        let fillText = q.title;
+        q.blanks.forEach(b => {
+          const inputHtml = `<input type="text" class="blank-input" id="${b.id}" data-ans="${b.ans}" readonly onclick="handleBlankClick(this)">`;
+          fillText = fillText.replace("_____", inputHtml);
+        });
+        item.innerHTML = `
+          <div style="font-size:15px; line-height:2.4; word-break:break-word;">
+            <span style="color:var(--accent); font-weight:bold; margin-right:4px;">${globalQuestionCounter}.</span>${fillText}
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "radio") {
+        const isMulti = Array.isArray(q.ans);
+        let optsHtml = `<div class="opt-group">`;
+        q.opts.forEach(opt => {
+          const inputType = isMulti ? "checkbox" : "radio";
+          optsHtml += `<label class="opt-label"><input type="${inputType}" name="${q.id}" value="${opt.v}" onchange="onUserAnswerChange()"> ${opt.t}</label>`;
+        });
+        optsHtml += `</div>`;
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          ${optsHtml}
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      } else if (q.type === "tf") {
+        item.innerHTML = `
+          <div class="q-title"><span style="color:var(--accent); font-weight:bold;">${globalQuestionCounter}.</span> ${q.title}</div>
+          <div class="opt-group" style="flex-direction:row; max-width:280px;">
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="T" onchange="onUserAnswerChange()"> √ 正确</label>
+            <label class="opt-label" style="flex:1;"><input type="radio" name="${q.id}" value="F" onchange="onUserAnswerChange()"> × 错误</label>
+          </div>
+          <div class="feedback" id="fb-${q.id}"></div>
+        `;
+      }
+
+      container.appendChild(item);
+      globalQuestionCounter++;
+    });
+  });
+
+  if (document.getElementById("word-chips-container")) {
+    renderWordBank();
+  }
+
+  calculateAndUpdateTotals(0);
+}
+
+function renderWordBank() {
+  const container = document.getElementById("word-chips-container");
+  if (!container) return;
+  container.innerHTML = "";
+  activeDynamicWordPool.forEach(word => {
+    const chip = document.createElement("span");
+    chip.className = "word-chip";
+    chip.innerText = word;
+    chip.onclick = () => insertWordToBlank(word);
+    container.appendChild(chip);
+  });
+}
+
+function handleBlankClick(inputEl) {
+  if (inputEl.value) {
+    inputEl.value = "";
+    inputEl.classList.remove("has-val");
+    onUserAnswerChange();
+  }
+  document.querySelectorAll(".blank-input").forEach(b => b.classList.remove("active-blank"));
+  inputEl.classList.add("active-blank");
+  activeBlankId = inputEl.id;
+}
+
+function insertWordToBlank(word) {
+  let target = null;
+  if (activeBlankId) {
+    target = document.getElementById(activeBlankId);
+  }
+  if (!target || target.value) {
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    target = blanks.find(b => !b.value);
+  }
+
+  if (target) {
+    target.value = word;
+    target.classList.add("has-val");
+    onUserAnswerChange();
+
+    const blanks = Array.from(document.querySelectorAll(".blank-input"));
+    const nextEmpty = blanks.find(b => !b.value);
+    blanks.forEach(b => b.classList.remove("active-blank"));
+    if (nextEmpty) {
+      nextEmpty.classList.add("active-blank");
+      activeBlankId = nextEmpty.id;
+    } else {
+      activeBlankId = target.id;
+      target.classList.add("active-blank");
+    }
+  }
+}
+
+function onUserAnswerChange() {
+  saveQuizState(getUserAnswers());
+}
+
+function getUserAnswers() {
+  const answers = {};
+  document.querySelectorAll("#quiz-sections-container input, #quiz-sections-container select").forEach(el => {
+    if (el.tagName === "SELECT") {
+      if (el.value) answers[el.id] = el.value;
+    } else if (el.type === "radio" || el.type === "checkbox") {
+      if (el.checked) {
+        if (!answers[el.name]) {
+          answers[el.name] = el.type === "checkbox" ? [el.value] : el.value;
+        } else if (Array.isArray(answers[el.name])) {
+          answers[el.name].push(el.value);
+        }
+      }
+    } else if (el.type === "text") {
+      if (el.value) answers[el.id] = el.value;
+    }
+  });
+  return answers;
+}
+
+function saveQuizState(answers) {
+  const data = {
+    matchPairs: activeMatchSet,
+    otherQuestions: activeOtherSet,
+    questions: activeQuestionSet,
+    wordPool: activeDynamicWordPool,
+    answers: answers || getUserAnswers()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById("save-status").innerText = "💾 进度已自动保存 (" + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ")";
+}
+
+function restoreSavedAnswers(answers) {
+  Object.keys(answers).forEach(key => {
+    const val = answers[key];
+    const textEl = document.getElementById(key);
+    if (textEl && textEl.tagName === "SELECT") {
+      textEl.value = val;
+    } else if (textEl && textEl.type === "text") {
+      textEl.value = val;
+      textEl.classList.add("has-val");
+    } else if (Array.isArray(val)) {
+      val.forEach(v => {
+        const chk = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (chk) chk.checked = true;
+      });
+    } else {
+      const rad = document.querySelector(`input[name="${key}"][value="${val}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+}
+
+function gradeQuiz() {
+  let score = 0;
+
+  // 1. 批改配对题 (7 题)
+  let mOk = 0;
+  let mErrs = [];
+  activeMatchSet.forEach(p => {
+    const sel = document.getElementById("m_row_" + p.id);
+    const v = (sel.value || "").toUpperCase();
+    const expected = sel.getAttribute("data-ans");
+    if (v === expected) {
+      mOk++;
+      score++;
+      sel.style.borderColor = "#16a34a";
+      sel.style.background = "#dcfce7";
+    } else {
+      sel.style.borderColor = "#dc2626";
+      sel.style.background = "#fee2e2";
+      mErrs.push(`${p.left.slice(0, 8)}...应选【${expected}】`);
+    }
+  });
+
+  const fbMatch = document.getElementById("fb-matching-all");
+  if (fbMatch) {
+    if (mOk === activeMatchSet.length) {
+      fbMatch.className = "feedback is-correct";
+      fbMatch.innerHTML = `配对题全部正确！`;
+    } else {
+      fbMatch.className = "feedback is-wrong";
+      fbMatch.innerHTML = `配对题答对 ${mOk} / ${activeMatchSet.length}。错误提示：${mErrs.join("； ")}`;
+    }
+  }
+
+  // 2. 批改其余题目
+  activeOtherSet.forEach(q => {
+    const fb = document.getElementById(`fb-${q.id}`);
+
+    if (q.type === "radio" || q.type === "tf") {
+      let isCorrect = false;
+      if (Array.isArray(q.ans)) {
+        const checked = Array.from(document.querySelectorAll(`input[name="${q.id}"]:checked`)).map(e => e.value);
+        if (checked.length === q.ans.length && q.ans.every(v => checked.includes(v))) {
+          isCorrect = true;
+        }
+      } else {
+        const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (checked && checked.value === q.ans) {
+          isCorrect = true;
+        }
+      }
+      
+      if (isCorrect) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！解析：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const ansTxt = Array.isArray(q.ans) ? q.ans.join(", ").toUpperCase() : (q.ans === "T" ? "√ 正确" : (q.ans === "F" ? "× 错误" : q.ans.toUpperCase()));
+        fb.innerHTML = `标准答案：【${ansTxt}】。解析：${q.desc}`;
+      }
+    } else if (q.type === "fill") {
+      let fillOk = true;
+      q.blanks.forEach(b => {
+        const el = document.getElementById(b.id);
+        const userVal = (el ? el.value.trim() : "");
+        const validAns = b.ans.split("|").map(s => s.trim());
+        if (validAns.includes(userVal)) {
+          el.style.borderBottomColor = "#16a34a"; el.style.background = "#dcfce7";
+        } else {
+          fillOk = false;
+          if (el) { el.style.borderBottomColor = "#dc2626"; el.style.background = "#fee2e2"; }
+        }
+      });
+
+      if (fillOk) {
+        score++;
+        fb.className = "feedback is-correct";
+        fb.innerHTML = `正确！出处：${q.desc}`;
+      } else {
+        fb.className = "feedback is-wrong";
+        const correctAns = q.blanks.map(b => b.ans.split("|")[0]).join(" / ");
+        fb.innerHTML = `正确答案：【${correctAns}】。出处：${q.desc}`;
+      }
+    }
+  });
+
+  calculateAndUpdateTotals(score);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function calculateAndUpdateTotals(score) {
+  const total = activeMatchSet.length + activeOtherSet.length;
+  document.getElementById("total-score").innerText = `${score} / ${total}`;
+  document.getElementById("accuracy-rate").innerText = total > 0 ? `${Math.round((score / total) * 100)}%` : `0%`;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  
+  if (event && event.target) event.target.classList.add("active");
+  const targetTab = document.getElementById("tab-" + tabId);
+  if (targetTab) targetTab.classList.add("active");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initQuiz();
+});
+</script>
+
+</body>
+</html>
